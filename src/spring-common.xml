@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans   
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+           http://www.springframework.org/schema/tx      
+           http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost/db_blog"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value=""></property>
+	</bean>
+	
+
+   <!-- LocalContainerEntityManagerFactoryBean spring配置jpa的三种方式之一，适用于所有环境的FactoryBean
+                           ，能全面控制EntityManagerFactory配置 -->
+   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+       <property name="dataSource" ref="dataSource"/>
+       <!-- 设定为自动扫描，spring新特性，有了packagesToScan，我们不再需要自己动手去实现实体类的扫描了 -->
+       <property name="packagesToScan" value="com.entity"/>
+       <property name="jpaVendorAdapter">
+           <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+               <property name="showSql" value="true"/>
+               <!-- generateDdl= true表示自动生成DDL-->
+               <property name="generateDdl" value="true" />
+               <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+           </bean>
+       </property>
+    </bean>
+    
+    <!-- 定义事务管理器  --> 
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+   
+    <!-- 注解扫描 -->
+    <context:component-scan base-package="com" />  
+  
+     <!--对@Transactional这个注解进行的驱动，这是基于注解的方式使用事务配置声明，这样在具体应用中可以指定对哪些方法使用事务。 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+   
+</beans>
