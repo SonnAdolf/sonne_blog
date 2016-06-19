@@ -37,8 +37,10 @@ public class MySpaceController
 		//获取登录用户
 		Principal userPrincipal =
 				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
-        Page<Article> page = articleService.getArticlesByUsername(userPrincipal.getUsername(), pageInfo);
+		String userName = userPrincipal.getUsername();
+        Page<Article> page = articleService.getArticlesByUsername(userName, pageInfo);
        	model.addAttribute("page",page);
+       	model.addAttribute("userName",userName);
         return "mySpace";
     }
 }

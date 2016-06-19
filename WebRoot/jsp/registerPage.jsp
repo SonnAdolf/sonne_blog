@@ -9,7 +9,7 @@ String imgPath = basePath + "image/";
 <html>
       <head>
              <title>日向blog</title>
-             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+             <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/main.css" media="all" />
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              

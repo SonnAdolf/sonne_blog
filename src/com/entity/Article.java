@@ -26,9 +26,7 @@ public class Article
 	/*文章内容*/
 	private String content;
 	
-	/*作者*/
-//	private User author;
-	
+	/*作者名*/
 	private String authorName;
 	
 	@Id
