@@ -18,7 +18,7 @@ String imgPath = basePath + "image/";
              </div>
               <div id = "article_list">
                           <c:forEach items="${page.content}" var="article" >
-                                  <span id = "title">${article.title}</span>
+                                  <span id = "title"><a href = "/RiXiang_blog/article/show.form?id=${article.id}">${article.title}</a></span>
                                   <span id = "author">author：${article.authorName}</span><br> 
                                   <!-- <p>文章内容： ${article.content}</p> -->   
                           </c:forEach>     

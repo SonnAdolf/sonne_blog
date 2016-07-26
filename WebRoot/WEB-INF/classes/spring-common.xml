@@ -26,7 +26,7 @@
    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
        <property name="dataSource" ref="dataSource"/>
        <!-- 设定为自动扫描，spring新特性，有了packagesToScan，我们不再需要自己动手去实现实体类的扫描了 -->
-       <property name="packagesToScan" value="com.entity"/>
+       <property name="packagesToScan" value="sonn.entity"/>
        <property name="jpaVendorAdapter">
            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                <property name="showSql" value="true"/>
@@ -43,7 +43,7 @@
 	</bean>
    
     <!-- 注解扫描 -->
-    <context:component-scan base-package="com" />  
+    <context:component-scan base-package="sonn" />  
   
      <!--对@Transactional这个注解进行的驱动，这是基于注解的方式使用事务配置声明，这样在具体应用中可以指定对哪些方法使用事务。 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
