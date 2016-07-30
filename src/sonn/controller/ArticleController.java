@@ -27,11 +27,12 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
 * @ClassName: ArticleController 
-* @Description: 文章controller代码
-* @author 无名
+* @Description: ArticleController
+* @author sonn
 * @date 2016-3-25 2016-05-15 write article func 
-*         2016-05-21保存文章内容到服务器目录
-*         2016.07.30写文章页面添加对个人空间的链接
+*       2016-05-21 save the contents of articles in server context.
+*       2016.07.30 add links form myspace to write article page
+*                        and from show article page to ...
 * @version 1.0
  */
 @Controller
@@ -105,8 +106,14 @@ public class ArticleController
         return jo;
     }
     
+    /**
+     * Select the article by the id, and show it at the jsp page.
+     *
+     * @param  HttpServletRequest request, Integer id, Model model
+     * @return the jsp page
+     */
     @RequestMapping(value = "/show", method = RequestMethod.GET)
-    public String show(Integer id,Model model) throws Exception
+    public String show(HttpServletRequest request, Integer id, Model model) throws Exception
     {
     	if(null == id)
     	{
@@ -114,6 +121,14 @@ public class ArticleController
     	}
 		Article article = articleService.find(id,Article.class);
 		article = getArticleOfContentByUrl(article);
+		
+		HttpSession session = request.getSession();
+		//get login user
+		Principal userPrincipal =
+				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
+		String userName = userPrincipal.getUsername();
+		
+       	model.addAttribute("userName",userName);
     	model.addAttribute("article",article);
         return "showArticlePage";
     }
