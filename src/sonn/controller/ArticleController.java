@@ -28,9 +28,10 @@ import com.alibaba.fastjson.JSONObject;
 /**
 * @ClassName: ArticleController 
 * @Description: 文章controller代码
-* @author 王宇 
+* @author 无名
 * @date 2016-3-25 2016-05-15 write article func 
 *         2016-05-21保存文章内容到服务器目录
+*         2016.07.30写文章页面添加对个人空间的链接
 * @version 1.0
  */
 @Controller
@@ -62,8 +63,14 @@ public class ArticleController
     }
     
     @RequestMapping(value = "/writeArticlePage", method = RequestMethod.GET)
-    public String writeArticlePage(PageInfo pageInfo,Model model) throws Exception
+    public String writeArticlePage(HttpServletRequest request,PageInfo pageInfo,Model model) throws Exception
     {
+		HttpSession session = request.getSession();
+		//获取登录用户
+		Principal userPrincipal =
+				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
+		String userName = userPrincipal.getUsername();
+       	model.addAttribute("userName",userName);
         return "writeArticlePage";
     }
     
