@@ -10,9 +10,10 @@ import java.io.IOException;
 
 /**
 * @ClassName: IOUtill 
-* @Description: I/O工具类
-* @author 无名
-* @date 2016-5-20 下午9:00:18 
+* @Description: I/O utils
+* @author sonn
+* @date 2016-5-20 21:00:18
+*       2016-07-31 debug,loop wrong when read article by url.  
 * @version 1.0
  */
 public final class IOUtill 
@@ -59,11 +60,10 @@ public final class IOUtill
 			try
 			{
 				String line = br.readLine();
-				content += line;
 				while(line != null)
 				{
-					line = br.readLine();
 					content += line;
+					line = br.readLine();
 				} 
 			}catch (IOException ex) {
 				ex.printStackTrace();

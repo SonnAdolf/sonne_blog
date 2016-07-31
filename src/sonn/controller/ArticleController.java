@@ -42,17 +42,24 @@ public class ArticleController
     @Resource(name = "articleServiceImpl")
     private ArticleService articleService;
     
+    /**
+     * Get all articles, and show them at the main page.
+     *
+     * @param  HttpServletRequest request, PageInfo pageInfo, Model model
+     * @return the jsp page
+     */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(HttpServletRequest request,PageInfo pageInfo,
     		                   Model model) throws Exception
     {
+    	pageInfo.setEveryPage(2);
     	Page<Article> page = articleService.findPage(pageInfo,Article.class);
     	List<Article> articleList = page.getContent();
     	page.setContent(getArticleListOfContentByUrl(articleList));
     	model.addAttribute("page",page);
     	
 		HttpSession session = request.getSession();
-		//获取登录用户
+		//get login user
 		Principal userPrincipal =
 				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
 		if(null != userPrincipal)

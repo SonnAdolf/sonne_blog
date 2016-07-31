@@ -10,7 +10,7 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/main.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/main00.css" media="all" />
       </head>
       <body>
              <div id="scene"> 
