@@ -89,6 +89,10 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 						 pageInfo.getCurrentPage());
 			}
 		}
+		else
+		{
+			pageInfo.setCurrentPage(1);
+		}
 		list = getPagedQueryList(criteriaQuery,pageInfo);
 		return new Page<T>(list, total, pageInfo);
 	}
