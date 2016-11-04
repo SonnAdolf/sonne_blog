@@ -7,13 +7,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
 * @ClassName: CaptchaUtil 
@@ -24,6 +22,10 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  */
 public final class CaptchaUtil
 {
+    static{
+        System.setProperty("java.awt.headless", "true");
+    }
+    
 	private CaptchaUtil(){}
 	
 	/*
@@ -99,8 +101,8 @@ public final class CaptchaUtil
 
 		// 转成JPEG格式
 		ServletOutputStream out = response.getOutputStream();
-		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-		encoder.encode(bi);
+		ImageIO.write(bi, "JPEG", out); 
+
 		out.flush();
 	}
 }

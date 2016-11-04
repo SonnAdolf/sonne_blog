@@ -10,7 +10,7 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/main.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/fixed_background.css" media="all" />
       </head>
       <body>
              <div id="scene"> 
@@ -21,7 +21,8 @@ String imgPath = basePath + "image/";
                                   <span id = "title"><a href = "/RiXiang_blog/article/show.form?id=${article.id}">${article.title}</a></span>
                                   <span id = "author">author：${article.authorName}</span><br> 
                                   <!-- <p>文章内容： ${article.content}</p> -->   
-                          </c:forEach>     
+                          </c:forEach>  
+                    <div id = "page_select">   
                                                                     共${page.pageInfo.totalCount}条纪录，当前第${page.pageInfo.currentPage}/${page.pageInfo.totalPage}页，每页${page.pageInfo.everyPage}条纪录
                           <c:choose>
                                     <c:when test = "${page.pageInfo.hasPrePage}">
@@ -43,6 +44,7 @@ String imgPath = basePath + "image/";
                                                                                                                                             尾页
                                      </c:otherwise>
                           </c:choose>
+                     </div>
 			  </div>
 
               <div id="col_right">

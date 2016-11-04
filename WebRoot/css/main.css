@@ -4,11 +4,12 @@
 body {background: url(../image/blue_background.gif) repeat-x;}
 #scene { float: left;width: 77em; height: 16em; }
 #scene img {width: 77em; height: 16em; }
-#article_list{float:left;display: inline; width: 106.7em;height:33.8em; background-color:black; color:white;}
-#article_block{width:90em; height:12.5em; color:white; }
+#article_list{float:left;display: inline; width: 106.7em;background-color:black; color:white;}
+#article_block{width:90em;  color:white; }
+#page_select{position:fixed; bottom:0;}
 #register_page{float:left;display: inline; width: 106.7em; height: 32em;background-color:black; color:white;}
 #login_page{float:left;display: inline; width: 106.7em; height: 32em;background-color:black; color:white;}
-#col_right { display: inline; width: 29.6em;}
+#col_right { display: inline; width: 29.6em; }
 
 #menu h2 { font: 1.8em verdana; line-height: 2.2em; color: #656565;}
 #menu ul { border-top: 1px solid #e5e5e5; list-style-position: inside; list-style-type: none; }
