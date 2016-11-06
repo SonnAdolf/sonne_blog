@@ -10,7 +10,7 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/main.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/register.css" media="all" />
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              
               <script type="text/javascript">
@@ -21,6 +21,7 @@ String imgPath = basePath + "image/";
                                 if(data.success)
                                {
                                      alert("Register SUCCESS"+" " + data.returnMessage);
+                                     location.href = "/RiXiang_blog/space/list.form";
                                }
                                else
                                {
@@ -28,33 +29,24 @@ String imgPath = basePath + "image/";
                                 }
                           });   
                  });  
-
-                          /*
-                            $.ajax({    
-                                   url:"submit.form",
-                                   type:"post",
-                                   contentType: "application/json",
-                                   dataType:"json", 
-                                   success:function(data)
-                                   {
-                                         alert("成功");
-                                   },
-                                   error:function(data)
-                                   {
-                                         alert("fuck jquery");
-                                   }
-                               });
-                     */
-
                </script>
       </head>
       <body>
-             <div id="scene"> 
-                  <img src="<%=imgPath%>mainPageBanner.png" ALT=""/> 
-             </div>
+              <div id="col_left">
+                    <div id="menu">
+                          <h2>Sonne Blog</h2>
+                          <ul>
+                              <li><a href ="/RiXiang_blog/login/show.form">Login</a></li>
+                              <li><a href ="">Register</a></li>
+                              <li><a href ="/RiXiang_blog/article/list.form">Blog List</a></li>
+                          </ul>
+                    </div>
+              </div>
               <div id = "register_page">
                      <form id="registerForm" action="submit.form" method="post">
-                              Welcome to 日向blog！
+                              Cowards die many times before their deaths.<br>
+                               ---Julius Caesar
+                              
                             <table>
                                    <tr>
 				                        <th>username</th>
@@ -84,15 +76,5 @@ String imgPath = basePath + "image/";
                      </form>       
 			  </div>
 
-              <div id="col_right">
-                    <div id="menu">
-                          <h2>主页导航</h2>
-                          <ul>
-                              <li><a href ="/RiXiang_blog/login/show.form">Login</a></li>
-                              <li><a href ="">Register</a></li>
-                              <li><a href ="/RiXiang_blog/article/list.form">Blog List</a></li>
-                          </ul>
-                    </div>
-              </div>
       </body>
 </html>

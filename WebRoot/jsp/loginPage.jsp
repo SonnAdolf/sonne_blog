@@ -10,7 +10,7 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/fixed_background.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/login.css" media="all" />
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              
               <script type="text/javascript">
@@ -38,9 +38,16 @@ String imgPath = basePath + "image/";
                </script>
       </head>
       <body>
-             <div id="scene"> 
-                  <img src="<%=imgPath%>mainPageBanner.png" ALT=""/> 
-             </div>
+              <div id="col_left">
+                    <div id="menu">
+                          <h2>主页导航</h2>
+                          <ul>
+                              <li><a href ="/RiXiang_blog/login/show.form">Login</a></li>
+                              <li><a href ="/RiXiang_blog/register/show.form">Register</a></li>
+                              <li><a href ="/RiXiang_blog/article/list.form">Blog List</a></li>
+                          </ul>
+                    </div>
+              </div>
               <div id = "login_page">
                      <form id="loginForm" action="login.form" method="post">
                             Welcome to 日向blog！
@@ -73,16 +80,5 @@ String imgPath = basePath + "image/";
                             </table>
                      </form>       
 			  </div>
-
-              <div id="col_right">
-                    <div id="menu">
-                          <h2>主页导航</h2>
-                          <ul>
-                              <li><a href ="/RiXiang_blog/login/show.form">Login</a></li>
-                              <li><a href ="/RiXiang_blog/register/show.form">Register</a></li>
-                              <li><a href ="/RiXiang_blog/article/list.form">Blog List</a></li>
-                          </ul>
-                    </div>
-              </div>
       </body>
 </html>

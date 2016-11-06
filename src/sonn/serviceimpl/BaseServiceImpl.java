@@ -59,4 +59,16 @@ public class BaseServiceImpl<T> implements BaseService<T>
 		baseDao.persist(entity);
 	}
 
+	@Transactional
+	public void delete(Integer id, Class<T> clazz) {
+		delete(baseDao.find(id, clazz));
+	}
+
+	@Transactional
+	public void delete(T entity) {
+		baseDao.remove(entity);
+	}
+
+
+	
 }

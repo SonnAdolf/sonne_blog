@@ -53,4 +53,22 @@ public interface BaseService<T>
 	 */
 	T find(Integer id,Class<T> clazz);
 
+
+	/**
+	 * 删除实体对象
+	 * 
+	 * @param id
+	 *            ID
+	 */
+	void delete(Integer id, Class<T> clazz);
+
+
+	/**
+	 * 删除实体对象
+	 * 
+	 * @param entity
+	 *            实体对象
+	 */
+	void delete(T entity);
+
 }

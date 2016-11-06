@@ -52,7 +52,7 @@ public class ArticleController
     public String list(HttpServletRequest request,PageInfo pageInfo,
     		                   Model model) throws Exception
     {
-    	pageInfo.setEveryPage(2);
+    	pageInfo.setEveryPage(6);
     	Page<Article> page = articleService.findPage(pageInfo,Article.class);
     	List<Article> articleList = page.getContent();
     	page.setContent(getArticleListOfContentByUrl(articleList));
@@ -80,6 +80,20 @@ public class ArticleController
 		String userName = userPrincipal.getUsername();
        	model.addAttribute("userName",userName);
         return "writeArticlePage";
+    }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean delete(HttpServletRequest request,int id) throws Exception
+    {
+		JSONObject jo = new JSONObject();
+		if(id <= 0 || null == articleService.find(id, Article.class)) 
+		{
+			return false;
+		}
+		articleService.delete(id, Article.class);
+		MessageUtil.setSimpleIsSuccessJSON(jo, true);
+        return true;
     }
     
     @RequestMapping(value = "/writeArticle", method = RequestMethod.POST)

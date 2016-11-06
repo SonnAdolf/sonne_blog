@@ -12,23 +12,19 @@ String imgPath = basePath + "image/";
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/main.css" media="all" />
-                           <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
+              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              
               <script type="text/javascript">
-                /*  $().ready(function()
+                  $().ready(function()
                   {     
                          $('#articleForm').ajaxForm(function(data)
                          {  
                                if(data.success)
                                {
-                                     alert("add article SUCCESS");
+                                     location.href = "/RiXiang_blog/space/list.form";
                                }
-                               else
-                               {
-                                     alert("add article FAIL");
-                                }
                           });   
-                 });  */
+                 }); 
                </script>
       </head>
       <body>

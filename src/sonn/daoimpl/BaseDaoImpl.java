@@ -208,4 +208,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 		Assert.notNull(entity);
 		entityManager.persist(entity);
 	}
+	
+	public void remove(T entity) {
+		if (entity != null) {
+			entityManager.remove(entity);
+		}
+	}
+	
 }

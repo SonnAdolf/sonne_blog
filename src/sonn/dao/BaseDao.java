@@ -47,4 +47,12 @@ public interface BaseDao<T>
 	 * @return 实体对象，若不存在则返回null
 	 */
 	T find(Integer id,Class<T> clazz);
+
+	/**
+	 * 移除实体对象
+	 * 
+	 * @param entity
+	 *            实体对象
+	 */
+	void remove(T entity);
 }

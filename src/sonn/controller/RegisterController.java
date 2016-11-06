@@ -1,8 +1,12 @@
 package sonn.controller;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +17,7 @@ import sonn.entity.User;
 import sonn.message.bean.SimpleBackMessage;
 import sonn.service.UserService;
 import sonn.util.MessageUtil;
+import sonn.util.Principal;
 import sonn.util.StringUtill;
 
 import com.alibaba.fastjson.JSONObject;
@@ -28,6 +33,7 @@ import com.alibaba.fastjson.JSONObject;
 @RequestMapping("/register")
 public class RegisterController
 {
+	
     @Resource(name = "userServiceImpl")
     private UserService userService;
     
@@ -37,24 +43,48 @@ public class RegisterController
         return "registerPage";
     }
     
+    private boolean isContainsChinese(String str)
+    {
+        String regEx = "[\u4e00-\u9fa5]";
+    	Pattern pat = Pattern.compile(regEx);
+    	Matcher matcher = pat.matcher(str);
+    	boolean flg = false;
+    	if (matcher.find())    {
+    		flg = true;
+    	}
+    	return flg;
+    }
+    
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject submit(User user,String repassword) throws Exception
+    public JSONObject submit(HttpServletRequest request,
+    		User user,String repassword) throws Exception
     {
+    	HttpSession session = request.getSession();
 		JSONObject jo = new JSONObject();	
-    	SimpleBackMessage registerMessage = checkUserInfor(user,repassword);
+    	SimpleBackMessage registerMessage 
+    					= checkUserInfor(user,repassword,session);
     	MessageUtil.setJSONObject(jo,registerMessage);
     	if(!registerMessage.isSuccess())
     	{
             return jo;
     	}
 		userService.save(user);
+    	session.setAttribute(User.PRINCIPAL_ATTRIBUTE_NAME,
+	              new Principal(user.getId(),user.getUsername()));
         return jo;
     }
     
-    private SimpleBackMessage checkUserInfor(User user,String repassword)
+    private SimpleBackMessage checkUserInfor(User user,
+    					String repassword,HttpSession session)
     {
     	SimpleBackMessage backMessage = new SimpleBackMessage();
+    	Object sessionMsg = session.getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
+    	if(null != sessionMsg) {
+    		MessageUtil.setSimpleBackMessage(backMessage,
+    						false, "Please logout before registering.");
+    		return backMessage;    		
+    	}
     	if(null == user||StringUtill.isStringEmpty(user.getPassword())
     			||StringUtill.isStringEmpty(user.getUsername()))
     	{
@@ -66,6 +96,12 @@ public class RegisterController
     		MessageUtil.setSimpleBackMessage(backMessage, false, 
     				              "Please reinput your password!");
     		return backMessage;
+    	}
+    	if(isContainsChinese(user.getUsername())) 
+    	{
+    		MessageUtil.setSimpleBackMessage(backMessage, false, 
+	                "Please use English Name!");
+    		return backMessage;    		
     	}
     	List<User> users = userService.findByUserName(user.getUsername());
     	if(!users.isEmpty())

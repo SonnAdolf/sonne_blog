@@ -10,19 +10,10 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/fixed_background.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/show_article.css" media="all" />
       </head>
       <body>
-             <div id="scene"> 
-                  <img src="<%=imgPath%>mainPageBanner.png" ALT=""/> 
-             </div>
-              <div id = "article_list">
-                                  <span id = "title">${article.title}</span>
-                                  <span id = "author">author：${article.authorName}</span><br> 
-                                     <p>文章内容： ${article.content}</p>
-			  </div>
-
-              <div id="col_right">
+              <div id="col_left">
                     <div id="menu">
                           <h2>主页导航</h2>
                           <ul>
@@ -34,5 +25,12 @@ String imgPath = basePath + "image/";
                           </ul>
                     </div>
               </div>
+              <div id = "article_list">
+                                  <span id = "article_title">${article.title}</span>
+                                  <span id = "author">author：${article.authorName}</span><br> 
+                                     <p>文章内容： ${article.content}</p>
+			  </div>
+
+
       </body>
 </html>
