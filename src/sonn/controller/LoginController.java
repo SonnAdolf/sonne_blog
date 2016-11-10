@@ -27,8 +27,8 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * 
 * @ClassName: LoginController 
-* @Description:Login CONTROLLER类
-* @author 无名
+* @Description:Login CONTROLLER
+* @author sonne
 * @date 2016-4-25 下午2:52:03 2016-05-02 具体编码 2016-05-07验证码相关
 * @version 1.0
  */
@@ -91,7 +91,7 @@ public class LoginController
     }
     
     /*
-     * 检查输入信息
+     * check the messages inputed.
      */
     private SimpleBackMessage checkInput(SimpleBackMessage backMessage,
     		                     User user,String captcha)
@@ -111,7 +111,7 @@ public class LoginController
     }
     
     /*
-     * 检查验证码
+     * check the captcha.
      */
     private SimpleBackMessage checkCaptcha(SimpleBackMessage backMessage,
     		              String captcha,HttpSession session)
@@ -131,7 +131,7 @@ public class LoginController
     }
     
     /**
-     * 检查用户名
+     * check the username.
      */
     private SimpleBackMessage CheckUserNameAndPassword(SimpleBackMessage backMessage,User user)
     {

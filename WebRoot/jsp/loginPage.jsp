@@ -10,10 +10,12 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+             <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/login.css" media="all" />
-              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
-              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              
-              <script type="text/javascript">
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>
+             <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/js/bootstrap.min.js"></script>              
+             <script type="text/javascript">
                $().ready(function()
                {     
                          $('#loginForm').ajaxForm(function(data)
@@ -38,47 +40,62 @@ String imgPath = basePath + "image/";
                </script>
       </head>
       <body>
-              <div id="col_left">
-                    <div id="menu">
-                          <h2>主页导航</h2>
-                          <ul>
-                              <li><a href ="/RiXiang_blog/login/show.form">Login</a></li>
-                              <li><a href ="/RiXiang_blog/register/show.form">Register</a></li>
-                              <li><a href ="/RiXiang_blog/article/list.form">Blog List</a></li>
-                          </ul>
-                    </div>
-              </div>
-              <div id = "login_page">
-                     <form id="loginForm" action="login.form" method="post">
-                            Welcome to 日向blog！
-                            <table>
-                                   <tr>
-				                        <th>username</th>
-				                        <td>
-				                             <input type="text" name="username" class="text" maxlength="20" />
-				                        </td>
-			                       </tr>
-			                        <tr>
-			                             <th>password</th>
-				                         <td>
-					                          <input type="password" id="password" name="password" class="text" maxlength="20" />
-				                        </td>
-		                        	</tr>
-		                        	 <tr>
-			                              <th>captcha</th>
-			                              <td>
-			                                    <input type="text" id="captcha" name="captcha" class="text" maxlength="10" />
-			                                    <img id="captchaImage"  src="captcha.form"/>
-			                              </td>
-			                       </tr>
-		                        	<tr>
-				                         <th>&nbsp;</th>
-				                          <td>
-					                           <input type="submit" id="loginButton" class="button" value="LOGIN" />
-				                         </td>
-			                       </tr>
-                            </table>
-                     </form>       
-			  </div>
+       		<div class="container">
+            	<div class="container">
+        			<h1>Hello Sonne Blog</h1>
+    			</div>
+    			<nav class="navbar navbar-inverse">
+   				  <div class="navbar-header">
+    			    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu" aria-expanded="false">
+       				     <span class="sr-only">Toggle navigation</span>
+         				 <span class="icon-bar"></span>
+            			 <span class="icon-bar"></span>
+            			 <span class="icon-bar"></span>
+        			</button>
+       				 <a class="navbar-brand" href="/RiXiang_blog/article/list.form">主页</a>
+    			</div>
+            		<div class="navbar-collapse">
+                		<ul class="nav navbar-nav">
+                    		<li class="active"><a href="#">登录</a></li>
+                    		<li><a href="/RiXiang_blog/register/show.form">注册</a></li>
+                		</ul>
+            		</div>
+        		</nav>
+        		
+        		   <div id="content" class="row-fluid">
+        			   <div id="login" class="col-md-9">
+            			   <h4>日向博客，每日新，日日新，强者自强，战斗不息！</h4>
+	
+						   <form id="loginForm" action="login.form" method="post">
+   							     <div class="form-group">
+   						  		   <span class="glyphicon glyphicon-user"></span>
+    					            <input type="text" id="username" name="username" placeholder="Enter email">
+    				            </div>
+  				               <div class="form-group">
+      				             <span class="glyphicon glyphicon-lock"></span>
+                                  <input type="password" id="password" name="password" placeholder="Password">
+                               </div>
+                              <div class="form-group">
+                                 <span class="glyphicon glyphicon-check"></span>
+                                   <input type="text" id="captcha" name="captcha" placeholder="Enter captcha">
+                                  <img id="captchaImage"  src="captcha.form"/>
+                               </div>
+    
+                                <button type="submit" class="btn btn-default">Submit</button>
+                             </form>
+                        </div>
+                         <div id="poem" class="col-md-3">
+                                 <br/>
+                                 <br/>
+                                 <br/>
+                                 <p> 我们生活在漫漫寒夜 </p>
+                                 <p>人生好似长途旅行</p>
+                                  <p>仰望天空寻找方向</p>
+                                  <p>天际却无引路的明星</p>
+                                  <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp----《茫茫黑夜漫游》</p>
+                        </div>
+            </div>
+       </div>
+    		
       </body>
 </html>

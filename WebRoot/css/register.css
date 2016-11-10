@@ -1,34 +1,25 @@
 body 
 {
-	background-image:url(../image/register_background.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-attachment: fixed;
+	background-color: black;
 }
 
 
-#col_left 
-{
-	width:15%;
-	height:75%;
-	float:left;
-	margin-left:10%; 
-	margin-top:200px; 
-	margin-right:10px;
-	background-color: #ffffff;
-	border: 1px solid black;
-	filter:alpha(opacity=60);
-	opacity:0.6;
-}
-
-
-#register_page 
+#register
 { 
-	float:left;
-	width:30%;
-	margin-top:200px;
 	background-color:#ffffff;
 	border: 1px solid black;
+	padding: 80px;
 	filter:alpha(opacity=60);
 	opacity:0.6;
+}
+
+#poem
+{
+	font-family: KaiTi;
+	color:white;
+}
+
+h1
+{
+	color:white;
 }

@@ -1,14 +1,11 @@
 body 
 {
-	background-image:url(../image/sonn_background.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-attachment: fixed;
-	width:100%
+	background-color:#9999FF;
 }
 
 #col_left 
 {
+	padding:2px;
 	width:15%;
 	height:75%;
 	float:left;
@@ -22,6 +19,7 @@ body
 }
 #article_list 
 { 
+	padding:5px;
 	float:left;
 	width:60%;
 	margin-top:200px;
@@ -34,6 +32,7 @@ body
 .title
 {
 	font-weight:900;
+	font-family: KaiTi;
 }
 .author{}
 #title

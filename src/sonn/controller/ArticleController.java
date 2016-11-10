@@ -28,11 +28,12 @@ import com.alibaba.fastjson.JSONObject;
 /**
 * @ClassName: ArticleController 
 * @Description: ArticleController
-* @author sonn
+* @author sonne
 * @date 2016-3-25 2016-05-15 write article func 
 *       2016-05-21 save the contents of articles in server context.
 *       2016.07.30 add links form myspace to write article page
 *                        and from show article page to ...
+*       2016.11   article delete function.
 * @version 1.0
  */
 @Controller
@@ -42,7 +43,7 @@ public class ArticleController
     @Resource(name = "articleServiceImpl")
     private ArticleService articleService;
     
-    /**
+    /*
      * Get all articles, and show them at the main page.
      *
      * @param  HttpServletRequest request, PageInfo pageInfo, Model model
@@ -74,7 +75,7 @@ public class ArticleController
     public String writeArticlePage(HttpServletRequest request,PageInfo pageInfo,Model model) throws Exception
     {
 		HttpSession session = request.getSession();
-		//获取登录用户
+		//get the user who logins
 		Principal userPrincipal =
 				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
 		String userName = userPrincipal.getUsername();
@@ -82,6 +83,16 @@ public class ArticleController
         return "writeArticlePage";
     }
     
+    /*
+    * @Title: delete 
+    * @Description: delete article function.
+    * @param @param request
+    * @param @param id
+    * @param @return
+    * @param @throws Exception    设定文件 
+    * @return boolean    返回类型 
+    * @throws
+     */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public boolean delete(HttpServletRequest request,int id) throws Exception

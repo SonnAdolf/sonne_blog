@@ -23,7 +23,6 @@ String imgPath = basePath + "image/";
                     
                     function button_Click_1(btn){
 	  					var delete_id = btn.id;
-	  					alert(delete_id);
 	  					url = "http://localhost:8888/RiXiang_blog/article/delete.form?id=" + delete_id 
 	  					oAjax.open('POST', url, true);
 	  					oAjax.send();
@@ -41,15 +40,19 @@ String imgPath = basePath + "image/";
                </script>
       </head>
       <body>
+      		  <div id = "title">
+              <h4 class = "title">不 要 低 头<br><br>王 冠 会 掉
+                    <br></h4>
+              </div>
               <div id="col_left">
                     <div id="menu">
-                          <h2>Sonne Blog</h2>
+                          <h2>日   向</h2>
                           <ul>
-                              <li><a href ="/RiXiang_blog/login/show.form">Login</a></li>
-                              <li><a href ="/RiXiang_blog/register/show.form">Register</a></li>
-                              <li><a href ="/RiXiang_blog/article/list.form">Blog List</a></li>
-                              <li><c:if test="${!empty userName}"><a href ="">Myspace - ${userName}</a></c:if></li>
-                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/article/writeArticlePage.form">Write Article</a></c:if></li>
+                              <li><a href ="/RiXiang_blog/login/show.form">登录</a></li>
+                              <li><a href ="/RiXiang_blog/register/show.form">注册</a></li>
+                              <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
+                              <li><c:if test="${!empty userName}"><a href ="">个人空间 - ${userName}</a></c:if></li>
+                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></c:if></li>
                           </ul>
                     </div>
               </div>
@@ -63,8 +66,8 @@ String imgPath = basePath + "image/";
                                                                     共${page.pageInfo.totalCount}条纪录，当前第${page.pageInfo.currentPage}/${page.pageInfo.totalPage}页，每页${page.pageInfo.everyPage}条纪录
                           <c:choose>
                                     <c:when test = "${page.pageInfo.hasPrePage}">
-                                     			<a href="list.form?currentPage=1">首页</a>
-				                                <a href="list.form?currentPage=${page.pageInfo.currentPage-1}">上一页</a>
+                                     			<a href="<%=basePath %>space/list.form?currentPage=1">首页</a>
+				                                <a href="<%=basePath %>space/list.form?currentPage=${page.pageInfo.currentPage-1}">上一页</a>
                                     </c:when>
                                     <c:otherwise>
                                            		   首页
@@ -73,8 +76,8 @@ String imgPath = basePath + "image/";
                           </c:choose>
                           <c:choose>
                                      <c:when test = "${page.pageInfo.hasNextPage}">
-                                                <a href="list.form?currentPage=${page.pageInfo.currentPage+1}">下一页</a> 
-				                                <a href="list.form?currentPage=${page.pageInfo.totalPage}">尾页</a>
+                                                <a href="<%=basePath %>space/list.form?currentPage=${page.pageInfo.currentPage+1}">下一页</a> 
+				                                <a href="<%=basePath %>space/list.form?currentPage=${page.pageInfo.totalPage}">尾页</a>
                                      </c:when>
                                      <c:otherwise>
                                                                                                                                           下一页

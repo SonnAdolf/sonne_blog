@@ -24,8 +24,8 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
 * @ClassName: RegisterController 
-* @Description: Register CONTROLLER类
-* @author 无名
+* @Description: Register CONTROLLER
+* @author sonne
 * @date 2016-4-25 下午2:54:41 2016-05-01返回注册提示信息
 * @version 1.0
  */

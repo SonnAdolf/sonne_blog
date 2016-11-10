@@ -13,15 +13,21 @@ String imgPath = basePath + "image/";
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/show_article.css" media="all" />
       </head>
       <body>
+      		  <div id = "title">
+              <h4 class = "title">你是我的半截的诗 <br><br>
+                                                                                                  不许别人更改一个字    ---海子<br>
+                                                                                             
+                    <br></h4>
+              </div>
               <div id="col_left">
                     <div id="menu">
-                          <h2>主页导航</h2>
+                          <h2>日   向</h2>
                           <ul>
-                              <li><a href ="/RiXiang_blog/login/show.form">Login</a></li>
-                              <li><a href ="/RiXiang_blog/register/show.form">Register</a></li>
-                              <li><a href ="">Blog List</a></li>
-                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/space/list.form">Myspace - ${userName}</a></c:if></li>
-                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/article/writeArticlePage.form">Write Article</a></c:if></li>
+                              <li><a href ="/RiXiang_blog/login/show.form">登录</a></li>
+                              <li><a href ="/RiXiang_blog/register/show.form">注册</a></li>
+                              <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
+                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/space/list.form">个人空间 - ${userName}</a></c:if></li>
+                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></c:if></li>
                           </ul>
                     </div>
               </div>

@@ -1,6 +1,6 @@
 body 
 {
-	background-image:url(../image/myspace_background.jpeg);
+	background-image:url(../image/sonn_background.jpg);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-attachment: fixed;
@@ -9,6 +9,7 @@ body
 
 #col_left 
 {
+	padding:2px;
 	width:15%;
 	height:75%;
 	float:left;
@@ -20,8 +21,10 @@ body
 	filter:alpha(opacity=60);
 	opacity:0.6;
 }
+
 #article_list 
 { 
+	padding:5px;
 	float:left;
 	width:60%;
 	margin-top:200px;
@@ -34,14 +37,17 @@ body
 .title
 {
 	font-weight:900;
+	font-family: KaiTi;
 }
 .author{}
+
 #title
 { 
 	position:absolute;
   	left:130px;
     top:75px;
  }
+ 
 h4.title
 {
 	font-style:oblique;

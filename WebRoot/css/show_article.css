@@ -9,6 +9,7 @@ body
 
 #col_left 
 {
+	padding:2px;
 	width:15%;
 	height:75%;
 	float:left;
@@ -34,7 +35,9 @@ body
 .title
 {
 	font-weight:900;
+	font-family: KaiTi;
 }
+ 
 .author{}
 #title
 { 

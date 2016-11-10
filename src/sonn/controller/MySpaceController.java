@@ -19,8 +19,8 @@ import sonn.util.Principal;
 
 /**
 * @ClassName: MySpaceController 
-* @Description: 个人空间
-* @author 无名
+* @Description: personal space
+* @author sonne
 * @date 2016-5-21 下午6:38:00 
 * @version 1.0
  */
