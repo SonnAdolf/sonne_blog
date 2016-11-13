@@ -40,6 +40,15 @@ public interface BaseDao<T>
 	void persist(T entity);
 	
 	/**
+	 * 合并实体对象
+	 * 
+	 * @param entity
+	 *            实体对象
+	 * @return 实体对象
+	 */
+	T merge(T entity);
+	
+	/**
 	 * 查找实体对象
 	 * 
 	 * @param id

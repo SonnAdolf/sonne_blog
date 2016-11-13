@@ -14,7 +14,7 @@ String imgPath = basePath + "image/";
       </head>
       <body>
       		  <div id = "title">
-              <h4 class = "title">只有刚强的人，才有神圣的意志<br>凡是战斗的人，才能取得胜利
+              <h4 class = "title">断 剑 重 铸 之 日<br>骑 士 归 来 之 时
                     <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp----歌德</h4>
 
@@ -33,9 +33,9 @@ String imgPath = basePath + "image/";
               <div id = "article_list">
                           <c:forEach items="${page.content}" var="article" >
                               <div id = "article_block">
-                                  <span class = "title">${article.title}</span>
+                                  <span class = "title"><a href="<%=basePath %>article/showFromMainPage.form?id=${article.id}">${article.title}</a></span>
                                   <span class = "author">author：${article.authorName}</span><br> 
-                                     <p> ${article.content}</p>
+                                     <p> ${article.summary}</p>
                                </div>
                                <p>------------------------------------------------------------------------------------- </p>
                           </c:forEach>     

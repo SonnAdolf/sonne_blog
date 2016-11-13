@@ -21,9 +21,9 @@ String imgPath = basePath + "image/";
                          oAjax = new ActiveXObject('Microsoft.XMLHTTP');
                     }
                     
-                    function button_Click_1(btn){
+                    function button_Click_1(btn) {
 	  					var delete_id = btn.id;
-	  					url = "http://localhost:8888/RiXiang_blog/article/delete.form?id=" + delete_id 
+	  					url = "<%=basePath %>article/delete.form?id=" + delete_id 
 	  					oAjax.open('POST', url, true);
 	  					oAjax.send();
    					    oAjax.onreadystatechange = function(){  
@@ -36,6 +36,12 @@ String imgPath = basePath + "image/";
           						  }
        						 }
    						 };
+                     } 
+                     
+                     function button_Click_2(btn) {
+	  					var edit_id = btn.id;
+	  					url = "<%=basePath %>article/editInit.form?id=" + edit_id 
+	  					window.location.href="<%=basePath %>article/editInit.form?id=" + edit_id; 
                      } 
                </script>
       </head>
@@ -59,7 +65,8 @@ String imgPath = basePath + "image/";
               <div id = "article_list">
                           <c:forEach items="${page.content}" var="article" >
                                   <span id = "article_title"><a href = "/RiXiang_blog/article/show.form?id=${article.id}">${article.title}</a></span>
-                                  <button type="button" id=${article.id} onclick="button_Click_1(this)">delete</button><br> 
+                                  <button type="button" id=${article.id} onclick="button_Click_1(this)">删除</button>
+                                  <button type="button" id=${article.id} onclick="button_Click_2(this)">编辑</button><br> 
                                   <!-- <p>文章内容： ${article.content}</p> -->   
                           </c:forEach>  
                     <div id = "page_select">   

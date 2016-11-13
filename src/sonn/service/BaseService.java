@@ -42,6 +42,16 @@ public interface BaseService<T>
 	 *            实体对象
 	 */
 	void save(T entity);
+
+
+	/**
+	 * 更新实体对象
+	 * 
+	 * @param entity
+	 *            实体对象
+	 * @return 实体对象
+	 */
+	T update(T entity);
 	
 	/**
 	* @Title: find 

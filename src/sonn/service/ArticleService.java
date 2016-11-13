@@ -13,6 +13,7 @@ import sonn.util.Principal;
 /**
  * @author 无名
  * @date 2016.04.21
+ *       2016-11-11 article summary
  * @description:文章service接口
  */
 public interface ArticleService extends BaseService<Article>
@@ -24,6 +25,11 @@ public interface ArticleService extends BaseService<Article>
 	 */
 	public String getArticleUrl(Article article,HttpServletRequest request,
 			                                         Principal userPrincipal);
+	/*
+	 * get the url of summary
+	 */
+	public String getSummaryUrl(Article article, HttpServletRequest request, 
+			                                        Principal userPrincipal);
 	
 	/*
 	 * 根据用户名查找文章

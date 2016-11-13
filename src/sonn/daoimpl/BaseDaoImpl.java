@@ -209,6 +209,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 		entityManager.persist(entity);
 	}
 	
+	public T merge(T entity) {
+		Assert.notNull(entity);
+		return entityManager.merge(entity);
+	}
+	
 	public void remove(T entity) {
 		if (entity != null) {
 			entityManager.remove(entity);

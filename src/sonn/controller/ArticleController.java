@@ -34,6 +34,8 @@ import com.alibaba.fastjson.JSONObject;
 *       2016.07.30 add links form myspace to write article page
 *                        and from show article page to ...
 *       2016.11   article delete function.
+*       2016-11-11 article summary
+*       2016-11-13 article edit
 * @version 1.0
  */
 @Controller
@@ -56,7 +58,7 @@ public class ArticleController
     	pageInfo.setEveryPage(6);
     	Page<Article> page = articleService.findPage(pageInfo,Article.class);
     	List<Article> articleList = page.getContent();
-    	page.setContent(getArticleListOfContentByUrl(articleList));
+    	page.setContent(getArticleListOfSummaryByUrl(articleList));
     	model.addAttribute("page",page);
     	
 		HttpSession session = request.getSession();
@@ -89,23 +91,105 @@ public class ArticleController
     * @param @param request
     * @param @param id
     * @param @return
-    * @param @throws Exception    设定文件 
-    * @return boolean    返回类型 
+    * @param @throws Exception    
+    * @return boolean  
     * @throws
      */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public boolean delete(HttpServletRequest request,int id) throws Exception
     {
-		JSONObject jo = new JSONObject();
-		if(id <= 0 || null == articleService.find(id, Article.class)) 
+		Article db_article = articleService.find(id, Article.class);
+		if(id <= 0 || null == db_article) 
 		{
 			return false;
 		}
 		articleService.delete(id, Article.class);
-		MessageUtil.setSimpleIsSuccessJSON(jo, true);
+		//delete the local files
+		IOUtill.delete(db_article.getArticleAddr());
+		IOUtill.delete(db_article.getSummaryAddr());
         return true;
     }
+    
+    @RequestMapping(value = "/editInit", method = RequestMethod.GET)
+    public String editInit(HttpServletRequest request,Integer id, Model model) throws Exception
+    {
+    	if(null == id)
+    	{
+    		return "error";
+    	}
+		Article article =  articleService.find(id, Article.class);
+		if(null == articleService.find(id, Article.class)) 
+		{
+			return "error";
+		}
+		article = getArticleOfContentByUrl(article);
+    	model.addAttribute("article",article);
+        return "editArticlePage";
+    }
+    
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean edit(HttpServletRequest request,Article article, String articleContent, Model model) throws Exception
+    {
+    	String c = request.getParameter("articleContent");
+		Article db_article =  articleService.find(article.getId(), Article.class);
+		if (db_article == null) 
+		{
+			return false;
+		}
+		
+		// only the title may be edited on the db 
+		// and if the title changed content and summary urls will be changed too.
+		if (!db_article.getTitle().equals(article.getTitle()))
+		{
+			HttpSession session = request.getSession();
+			Principal userPrincipal =
+					(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
+			//get new urls
+			String articleUrl = 
+					articleService.getArticleUrl(article, request, userPrincipal);	
+			String summaryUrl = 
+					articleService.getSummaryUrl(article, request, userPrincipal);
+			article.setArticleAddr(articleUrl);
+			article.setSummaryAddr(summaryUrl);
+			articleService.update(article);
+		}
+		
+		// history problem, former version donot have a summary 
+		if (db_article.getSummaryAddr() == null || db_article.getSummaryAddr().equals(""))
+		{
+			HttpSession session = request.getSession();
+			Principal userPrincipal =
+					(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);	
+			String summaryUrl = 
+					articleService.getSummaryUrl(article, request, userPrincipal);	
+			article.setSummaryAddr(summaryUrl);
+			articleService.update(article);
+		}
+		
+		// then update the local file of content and summary
+		// first delete 
+		IOUtill.delete(db_article.getArticleAddr());
+		IOUtill.delete(db_article.getSummaryAddr());
+		
+		// rewrite content
+		IOUtill.writeByUrl(article.getArticleAddr(), articleContent);
+		// rewrite summary
+		// remove all the tags of HTML
+		String summary = StringUtill.removeTag(articleContent);
+		//get the summary of article
+		if(summary.length() > 300) 
+		{
+			summary = summary.substring(0, 300);
+		}
+		//write the summary string on the local file
+		IOUtill.writeByUrl(article.getSummaryAddr(), summary);
+		
+        return true;
+    }
+    
     
     @RequestMapping(value = "/writeArticle", method = RequestMethod.POST)
     @ResponseBody
@@ -132,13 +216,26 @@ public class ArticleController
 		//向指定目录下存储文章内容
 		IOUtill.writeByUrl(articleUrl,articleContent);
 		
+		String summaryUrl = 
+				articleService.getSummaryUrl(article, request, userPrincipal);
+		//remove all the tags of HTML
+		String summary = StringUtill.removeTag(articleContent);
+		article.setSummaryAddr(summaryUrl);
+		//get the summary of article
+		if(summary.length() > 300) 
+		{
+			summary = summary.substring(0, 300);
+		}
+		//write the summary string on the local file
+		IOUtill.writeByUrl(summaryUrl, summary);
+		
 		articleService.save(article);
 		
 		MessageUtil.setSimpleIsSuccessJSON(jo, true);
         return jo;
     }
     
-    /**
+    /*
      * Select the article by the id, and show it at the jsp page.
      *
      * @param  HttpServletRequest request, Integer id, Model model
@@ -166,10 +263,27 @@ public class ArticleController
     }
     
     /*
-     * 数据库里保存的是文章路径，将从数据库里查询到的文章list（只有文章路径，不含文章内容）
-     * 转化为包含文章内容的文章list（依据路径读取文章内容）
+     * show a article's content by clicking the url from main page.
+     *
+     * @param  HttpServletRequest request, Integer id, Model model
+     * @return the jsp page
      */
-    private List<Article> getArticleListOfContentByUrl(List<Article> articleList)
+    @RequestMapping(value = "/showFromMainPage", method = RequestMethod.GET)
+    public String showFromMainPage(HttpServletRequest request, Integer id, Model model) throws Exception
+    {
+    	if(null == id)
+    	{
+    		return "error";
+    	}
+		Article article = articleService.find(id,Article.class);
+		article = getArticleOfContentByUrl(article);
+		
+    	model.addAttribute("article",article);
+        return "showArticlePage";
+    }
+    
+
+    private List<Article> getArticleListOfSummaryByUrl(List<Article> articleList)
     {
     	List<Article> newArtiList = new ArrayList<Article>();
     	Article article = new Article();
@@ -181,14 +295,14 @@ public class ArticleController
     		{
     			break;
     		}
-    		url = article.getArticleAddr();
+    		url = article.getSummaryAddr();
     		if(StringUtill.isStringEmpty(url))
     		{
-    			article.setContent("");
+    			article.setSummary("");
     		}
     		else
     		{
-        		article.setContent(IOUtill.readByUrl(url));
+        		article.setSummary(IOUtill.readByUrl(url));
     		}
     		newArtiList.add(article);
     	}

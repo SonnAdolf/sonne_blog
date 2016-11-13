@@ -9,10 +9,11 @@ import sonn.annotation.IsValidString;
 
 
 /**
- * @author 无名
+ * @author sonne
  * @date 2016.04.21  2016-5-1添加主键生成策略
  *       2016-05-15改变存储user到username
- * @description:文章实体类
+ *       2016-11-11 article summary
+ * @description:article entity class
  */
 @Entity
 public class Article 
@@ -20,17 +21,23 @@ public class Article
 	/*id*/
 	private int id;
 	
-	/*标题*/
+	/*title*/
 	@IsValidString
 	private String title;
 	
-	/*文章路径*/
+	/*article path*/
 	private String articleAddr;
 	
-	/*文章内容*/
+	/*the local path of the summary*/
+	private String summaryAddr;
+
+	/*content of the article*/
 	private String content;
 	
-	/*作者名*/
+	/*article summary*/
+	private String summary;
+
+	/*name of the author*/
 	private String authorName;
 	
 	@Id
@@ -55,14 +62,26 @@ public class Article
 		this.title = title;
 	}
 	
-	public String getArticleAddr() {
+	public String getArticleAddr() 
+	{
 		return articleAddr;
 	}
 
-	public void setArticleAddr(String articleAddr) {
+	public void setArticleAddr(String articleAddr) 
+	{
 		this.articleAddr = articleAddr;
 	}
 
+	public String getSummaryAddr()
+	{
+		return summaryAddr;
+	}
+
+	public void setSummaryAddr(String summaryAddr)
+	{
+		this.summaryAddr = summaryAddr;
+	}
+	
 	public String getAuthorName()
 	{
 		return authorName;
@@ -73,12 +92,25 @@ public class Article
 		this.authorName = authorName;
 	}
 
-	public String getContent() {
+	public String getContent() 
+	{
 		return content;
 	}
 
-	public void setContent(String content) {
+	public void setContent(String content) 
+	{
 		this.content = content;
+	}
+	
+	
+	public String getSummary() 
+	{
+		return summary;
+	}
+
+	public void setSummary(String summary)
+	{
+		this.summary = summary;
 	}
 	
 }

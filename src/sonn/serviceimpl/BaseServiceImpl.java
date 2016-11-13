@@ -58,6 +58,11 @@ public class BaseServiceImpl<T> implements BaseService<T>
 	{
 		baseDao.persist(entity);
 	}
+	
+	@Transactional
+	public T update(T entity) {
+		return baseDao.merge(entity);
+	}
 
 	@Transactional
 	public void delete(Integer id, Class<T> clazz) {

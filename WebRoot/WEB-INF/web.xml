@@ -38,7 +38,7 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  <!-- 
+
   <filter>      
   <filter-name>myFilter</filter-name>      
   <filter-class>sonn.filter.MyFilter</filter-class>      
@@ -47,7 +47,7 @@
 <filter-name>myFilter</filter-name>     
 <url-pattern>/*</url-pattern>      
 </filter-mapping> 
- -->   
+
      <welcome-file-list>
           <welcome-file>/article/list.form</welcome-file>
       </welcome-file-list>
