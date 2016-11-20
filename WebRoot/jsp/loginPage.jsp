@@ -58,13 +58,14 @@ String imgPath = basePath + "image/";
                 		<ul class="nav navbar-nav">
                     		<li class="active"><a href="#">登录</a></li>
                     		<li><a href="/RiXiang_blog/register/show.form">注册</a></li>
+                    		<li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
                 		</ul>
             		</div>
         		</nav>
         		
         		   <div id="content" class="row-fluid">
         			   <div id="login" class="col-md-9">
-            			   <h4>日向博客，每日新，日日新，强者自强，战斗不息！</h4>
+            			   <h4>日向博客，你的精神家园</h4>
 	
 						   <form id="loginForm" action="login.form" method="post">
    							     <div class="form-group">

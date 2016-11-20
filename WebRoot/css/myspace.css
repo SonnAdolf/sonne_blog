@@ -1,10 +1,10 @@
 body 
 {
-	background-image:url(../image/sonn_background.jpg);
+	background-image:url(../image/myspace_background.jpg);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-attachment: fixed;
-	width:100%
+	width:100%;
 }
 
 #col_left 

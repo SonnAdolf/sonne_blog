@@ -14,9 +14,8 @@ String imgPath = basePath + "image/";
       </head>
       <body>
       		  <div id = "title">
-              <h4 class = "title">断 剑 重 铸 之 日<br>骑 士 归 来 之 时
-                    <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp----歌德</h4>
+              <h4 class = "title">断 剑 重 铸 之 日<br><br>骑 士 归 来 之 时
+                    <br></h4>
 
               </div>
               <div id="col_left">
@@ -27,6 +26,7 @@ String imgPath = basePath + "image/";
                               <li><a href ="/RiXiang_blog/register/show.form">注册</a></li>
                               <li><a href ="">主页</a></li>
                               <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人空间 - ${userName}</a></li></c:if>
+                              <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
                           </ul>
                     </div>
               </div>

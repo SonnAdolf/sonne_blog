@@ -52,6 +52,7 @@ String imgPath = basePath + "image/";
                 		<ul class="nav navbar-nav">
                     		<li class="active"><a href="#">注册</a></li>
                     		<li><a href="/RiXiang_blog/login/show.form">登录</a></li>
+                    		<li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
                 		</ul>
             		</div>
         		</nav>

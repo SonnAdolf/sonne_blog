@@ -50,6 +50,7 @@ String imgPath = basePath + "image/";
                               <li><a href ="/RiXiang_blog/register/show.form">Register</a></li>
                               <li><a href ="/RiXiang_blog/article/list.form">Blog List</a></li>
                               <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/space/list.form">Myspace - ${userName}</a></c:if></li>
+                              <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
                           </ul>
                     </div>
               </div>

@@ -28,6 +28,7 @@ String imgPath = basePath + "image/";
                               <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
                              <c:if test="${!empty userName}"> <li><a href ="/RiXiang_blog/space/list.form">个人空间 - ${userName}</a></li></c:if>
                               <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
+                              <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
                           </ul>
                     </div>
               </div>

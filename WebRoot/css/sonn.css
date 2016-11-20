@@ -1,6 +1,10 @@
 body 
 {
-	background-color:#9999FF;
+	background-image:url(../image/sonn_background.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+	width:100%;
 }
 
 #col_left 
