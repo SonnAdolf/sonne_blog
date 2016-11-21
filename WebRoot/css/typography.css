@@ -1,0 +1,50 @@
+body {
+  font-size: 76%;
+  font-family: "Helvetica","Arial",sans-serif;
+}
+body * {
+  font-size: 1em;
+}
+a {
+  font-weight: bold;
+  text-decoration: none;
+}
+#navigation {
+  font-family: "Lucida Grande","Helvetica","Arial",sans-serif;
+}
+#navigation a {
+  text-decoration: none;
+  font-weight: bold;
+}
+#content {
+  line-height: 1.8em;
+}
+#content p {
+  margin: 1em 0;
+}
+h1 {
+  font-family: "Georgia","Times New Roman",sans-serif;
+  font: 2.4em normal;
+}
+h2 {
+  font-family: "Georgia","Times New Roman",sans-serif;
+  font: 1.8em normal;
+  margin-top: 1em;
+}
+h3 {
+  font-family: "Georgia","Times New Roman",sans-serif;
+  font: 1.4em normal;
+  margin-top: 1em;
+}
+#imagegallery li {
+  list-style-type: none;
+}
+dt {
+  margin-right: 1em;
+}
+dd {
+  margin-right: 3em;
+}
+textarea {
+  font-family: "Helvetica","Arial",sans-serif;
+}
