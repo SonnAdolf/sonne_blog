@@ -2,14 +2,16 @@ package sonn.dao;
 
 import java.util.List;
 
+import sonn.Order;
 import sonn.util.Page;
 import sonn.util.PageInfo;
 
 
 /**
- * @author 无名
+ * @author sonne
  * @date 2016.04.22
- * @description:dao基类
+ * @description:dao base class
+ *             2016-11-27 order
  */
 public interface BaseDao<T>
 {
@@ -21,7 +23,7 @@ public interface BaseDao<T>
 	* @return List<T>    返回类型 
 	* @throws
 	 */
-	List<T> findList(Class<T> clazz);
+	List<T> findList(Class<T> clazz, List<Order> orders);
 	/**
 	 * 查找实体对象分页
 	 * 
@@ -29,7 +31,7 @@ public interface BaseDao<T>
 	 *            分页信息
 	 * @return 实体对象分页
 	 */
-	Page<T> findPage(PageInfo pageInfo,Class<T> clazz);
+	Page<T> findPage(PageInfo pageInfo,Class<T> clazz, List<Order> orders);
 	
 	/**
 	 * 持久化实体对象

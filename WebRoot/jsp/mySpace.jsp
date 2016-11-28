@@ -54,8 +54,7 @@ String imgPath = basePath + "image/";
                     <div id="menu">
                           <h2>日   向</h2>
                           <ul>
-                              <li><a href ="/RiXiang_blog/login/show.form">登录</a></li>
-                              <li><a href ="/RiXiang_blog/register/show.form">注册</a></li>
+                              <li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li>
                               <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
                               <li><c:if test="${!empty userName}"><a href ="">个人空间 - ${userName}</a></c:if></li>
                               <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></c:if></li>

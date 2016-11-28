@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import sonn.Order;
 import sonn.dao.BaseDao;
 import sonn.service.BaseService;
 import sonn.util.Page;
@@ -36,9 +37,9 @@ public class BaseServiceImpl<T> implements BaseService<T>
 	}
 	
 	@Override
-	public Page<T> findPage(PageInfo pageInfo,Class<T> clazz) 
+	public Page<T> findPage(PageInfo pageInfo,Class<T> clazz, List<Order> orders) 
 	{
-		return baseDao.findPage(pageInfo,clazz);
+		return baseDao.findPage(pageInfo, clazz, orders);
 	}
 
 	/**
@@ -49,9 +50,9 @@ public class BaseServiceImpl<T> implements BaseService<T>
 	* @see sonn.service.BaseService#findList(java.lang.Class)
 	 */
 	@Override
-	public List<T> findList(Class<T> clazz) 
+	public List<T> findList(Class<T> clazz, List<Order> orders) 
 	{
-		return baseDao.findList(clazz);
+		return baseDao.findList(clazz, orders);
 	}
 	
 	public void save(T entity)

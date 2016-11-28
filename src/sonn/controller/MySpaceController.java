@@ -37,7 +37,7 @@ public class MySpaceController
 		HttpSession session = request.getSession();
 		//获取登录用户
 		Principal userPrincipal =
-				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
+				(Principal) session.getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
 		pageInfo.setEveryPage(12);
 		String userName = userPrincipal.getUsername();
         Page<Article> page = articleService.getArticlesByUsername(userName, pageInfo);

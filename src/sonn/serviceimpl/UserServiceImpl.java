@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sonn.dao.UserDao;
 import sonn.entity.User;
 import sonn.service.UserService;
+import sonn.util.StringUtill;
 
 
 /**
@@ -39,4 +40,31 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 		return userDao.findByUserName(username);
 	}
 
+    /** 
+     * check the passwd
+     * 1 at least length = 6 
+     * 2 begin with the letter
+     * 3 contains special characters 
+     * 4 contains numbers
+     * @param pwd 
+     * @return 
+     */  
+    public boolean validPwd(String pwd)
+    {  
+        if(StringUtill.isStringEmpty(pwd)){  
+            return false;  
+        }  
+        if(pwd.length() < 6)
+        {  
+            return false;  
+        }  
+        if(pwd.matches("^[a-zA-z](.*)") &&
+        		pwd.matches("(.*)[-`=\\\\\\[\\];',./~!@#$%^&*()_+|{}:\"<>?]+(.*)")
+        		&& pwd.matches("(.*)\\d+(.*)"))
+        {  
+            return true;  
+        }  
+        return false;  
+    }  
+    
 }

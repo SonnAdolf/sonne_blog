@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +30,7 @@ import com.alibaba.fastjson.JSONObject;
 * @ClassName: LoginController 
 * @Description:Login CONTROLLER
 * @author sonne
-* @date 2016-4-25 ����2:52:03 2016-05-02 ������� 2016-05-07��֤�����
+* @date 2016-4-25 下午2:52:03 2016-05-02 具体编码 2016-05-07验证码相关
 * @version 1.0
  */
 @Controller
@@ -98,13 +99,13 @@ public class LoginController
     {
     	if(StringUtill.isStringEmpty(captcha))
     	{
-    		MessageUtil.setSimpleBackMessage(backMessage, false, "Please input captcha!");
+    		MessageUtil.setSimpleBackMessage(backMessage, false, "请输入验证码!( ¯ □ ¯ )");
     		return backMessage;
     	}
     	if(null == user||StringUtill.isStringEmpty(user.getPassword())
     			||StringUtill.isStringEmpty(user.getUsername()))
     	{
-    		MessageUtil.setSimpleBackMessage(backMessage, false, "Input Wrong!");
+    		MessageUtil.setSimpleBackMessage(backMessage, false, "输入错误!( ¯ □ ¯ )");
     		return backMessage;
     	}
     	return backMessage;
@@ -119,13 +120,25 @@ public class LoginController
     	String captchaInSession = (String) session.getAttribute("randomString");
     	if(StringUtill.isStringEmpty(captchaInSession))
     	{
-    		MessageUtil.setSimpleBackMessage(backMessage, false,"System captcha error");
+    		MessageUtil.setSimpleBackMessage(backMessage, false,"请输入验证码 ( ¯ □ ¯ ) ");
     		return backMessage;
     	}
-    	if(!captchaInSession.equals(captcha))
+//    	if(!captchaInSession.equals(captcha))
+//    	{
+//    		MessageUtil.setSimpleBackMessage(backMessage, false,"验证码错了 …(⊙_⊙;)…⊙﹏⊙‖∣°( ¯ □ ¯ )");
+//    		return backMessage;
+//    	}
+    	char c_input;
+    	char c_ssesion;
+    	for (int i = 0; i < captchaInSession.length(); i++)
     	{
-    		MessageUtil.setSimpleBackMessage(backMessage, false,"Captcha wrong");
-    		return backMessage;
+    		c_input = captcha.charAt(i);
+    		c_ssesion = captchaInSession.charAt(i);
+    		if(c_ssesion != c_input && c_input != Character.toLowerCase(c_ssesion))
+    		{
+        		MessageUtil.setSimpleBackMessage(backMessage, false,"验证码错了 …(⊙_⊙;)…⊙﹏⊙‖∣°( ¯ □ ¯ )");
+        		return backMessage;
+    		}
     	}
     	return backMessage;
     }
@@ -139,18 +152,20 @@ public class LoginController
     	if(users.isEmpty())
     	{
     		MessageUtil.setSimpleBackMessage(backMessage, false, 
-    				                "This username doesn't exist!");
+    				                "用户名不存在!‘(*>﹏<*)′ （°ο°）~ @");
     		return backMessage;
     	}
     	User userFromDB = users.get(0);
-    	if(!userFromDB.getPassword().equals(user.getPassword()))
+    	// for compatible with the old version, here md5 or not
+    	if(!userFromDB.getPassword().equals(user.getPassword())
+    			&& !userFromDB.getPassword().equals(DigestUtils.md5Hex(user.getPassword())))
     	{
     		MessageUtil.setSimpleBackMessage(backMessage, false, 
-	                "Password is wrong!");
+	                "密码错误!（°ο°）~ @");
     		return backMessage;
     	}
     	MessageUtil.setSimpleBackMessage(backMessage, true, 
-    			             "Welcome to RiXiangBlog!");
+    			             "欢迎来到日向博客!(^_^)∠※ 送你一束花 。");
 		return backMessage;
     }
 }

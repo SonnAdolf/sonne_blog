@@ -11,31 +11,25 @@ String imgPath = basePath + "image/";
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
-             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/login.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/passwd.css" media="all" />
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>
              <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/js/bootstrap.min.js"></script>              
              <script type="text/javascript">
                $().ready(function()
                {     
-                         $('#loginForm').ajaxForm(function(data)
+                         $('#passwdForm').ajaxForm(function(data)
                          {  
                                if(data.success)
                                {
-                                     alert("登录成功："+" " + data.returnMessage);
+                                     alert("修改密码成功"+" " + data.returnMessage);
                                      location.href = "/RiXiang_blog/space/list.form"; 
                                }
                                else
                                {
-                                     alert("登录失败："+" " + data.returnMessage);
+                                     alert("修改密码失败"+" " + data.returnMessage);
                                 }
                           });  
-                          
-                         // 更换验证码
-	                     $('#captchaImage').click(function() 
-	                     {
-		                     $('#captchaImage').attr("src", "captcha.form?timestamp=" + (new Date()).valueOf());
-	                     }); 
                  });  
                </script>
       </head>
@@ -56,8 +50,8 @@ String imgPath = basePath + "image/";
     			</div>
             		<div class="navbar-collapse">
                 		<ul class="nav navbar-nav">
-                    		<li class="active"><a href="#">登录</a></li>
-                    		<li><a href="/RiXiang_blog/register/show.form">注册</a></li>
+                    		<li class="active"><a href="#">修改密码</a></li>
+                    		<li><a href ="/RiXiang_blog/space/list.form">个人空间</a></li>
                     		<li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
                     		<li><a href ="/RiXiang_blog/sonne/sonne.form">作者-博客开发记录</a></li>
                 		</ul>
@@ -65,23 +59,22 @@ String imgPath = basePath + "image/";
         		</nav>
         		
         		   <div id="content" class="row-fluid">
-        			   <div id="login" class="col-md-9">
+        			   <div id="passwd" class="col-md-9">
             			   <h4>日向博客，你的精神家园</h4>
 	
-						   <form id="loginForm" action="login.form" method="post">
-   							     <div class="form-group">
-   						  		   <span class="glyphicon glyphicon-user"></span>
-    					            <input type="text" id="username" name="username" placeholder="Enter email">
-    				            </div>
+						   <form id="passwdForm" action="change.form" method="post">
   				               <div class="form-group">
       				             <span class="glyphicon glyphicon-lock"></span>
-                                  <input type="password" id="password" name="password" placeholder="Password">
+                                                                                          旧密码：<input type="password" id="password" name="password" placeholder="Password">
                                </div>
-                              <div class="form-group">
-                                 <span class="glyphicon glyphicon-check"></span>
-                                   <input type="text" id="captcha" name="captcha" placeholder="Enter captcha">
-                                  <img id="captchaImage"  src="captcha.form"/>
+  				               <div class="form-group">
+      				             <span class="glyphicon glyphicon-lock"></span>
+                                                                                            新密码：<input type="password" id="newPassword" name="newPassword" placeholder="Password">
                                </div>
+  				               <div class="form-group">
+      				             <span class="glyphicon glyphicon-lock"></span>
+                                                                                              重新输入：<input type="password" id="rePassword" name="rePassword" placeholder="Password">
+                               </div>      
     
                                 <button type="submit" class="btn btn-default">Submit</button>
                              </form>
@@ -90,11 +83,10 @@ String imgPath = basePath + "image/";
                                  <br/>
                                  <br/>
                                  <br/>
-                                 <p> 我们生活在漫漫寒夜 </p>
-                                 <p>人生好似长途旅行</p>
-                                  <p>仰望天空寻找方向</p>
-                                  <p>天际却无引路的明星</p>
-                                  <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp----《茫茫黑夜漫游》</p>
+                                 <p>  千万不要忘记： </p>
+                                 <p> 我们飞翔得越高</p>
+                                  <p>我们在那些不能飞翔的人眼中的形象越是渺小</p>
+                                  <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp----尼采</p>
                         </div>
             </div>
        </div>

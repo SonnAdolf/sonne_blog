@@ -1,6 +1,8 @@
 package sonn.daoimpl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
@@ -17,6 +19,8 @@ import javax.persistence.criteria.Selection;
 
 import org.springframework.util.Assert;
 
+import sonn.Order;
+import sonn.Order.Direction;
 import sonn.dao.BaseDao;
 import sonn.util.Page;
 import sonn.util.PageInfo;
@@ -25,9 +29,10 @@ import sonn.util.PageUtil;
 
 /**
 * @ClassName: BaseDaoImpl 
-* @Description: dao父类
-* @author 无名
-* @date 2016-4-22  2016-05-21findPage逻辑错误修改
+* @Description: dao base class
+* @author sonne
+* @date 2016-4-22  2016-05-21findPage logical error fix
+*                  2016-11-27 order
 * @version 1.0
 * @param <T>
  */
@@ -50,23 +55,54 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 	}
 	
 	@Override
-	public List<T> findList(Class<T> clazz)
+	public List<T> findList(Class<T> clazz, List<Order> orders)
 	{
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(clazz);
+		Assert.notNull(criteriaQuery);
+		Assert.notNull(criteriaQuery.getSelection());
+		Assert.notEmpty(criteriaQuery.getRoots());
 		Root<T> root = criteriaQuery.from(clazz);
+		addOrders(criteriaQuery, orders);
 		criteriaQuery.select(root);
 		Predicate restrictions = criteriaBuilder.conjunction();
 		criteriaQuery.where(restrictions);
 		return entityManager.createQuery(criteriaQuery).setFlushMode(FlushModeType.COMMIT).getResultList();
 	}
 
+	private void addOrders(CriteriaQuery<T> criteriaQuery, List<Order> orders) {
+		if (criteriaQuery == null || orders == null || orders.isEmpty()) {
+			return;
+		}
+		Root<T> root = getRoot(criteriaQuery);
+		if (root == null) {
+			return;
+		}
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		List<javax.persistence.criteria.Order> orderList = new ArrayList<javax.persistence.criteria.Order>();
+		if (!criteriaQuery.getOrderList().isEmpty()) {
+			orderList.addAll(criteriaQuery.getOrderList());
+		}
+		for (Order order : orders) {
+			if (order.getDirection() == Direction.asc) {
+				orderList.add(criteriaBuilder.asc(root.get(order.getProperty())));
+			} else if (order.getDirection() == Direction.desc) {
+				orderList.add(criteriaBuilder.desc(root.get(order.getProperty())));
+			}
+		}
+		criteriaQuery.orderBy(orderList);
+	}
+	
 	@Override
-	public Page<T> findPage(PageInfo pageInfo,Class<T> clazz) 
+	public Page<T> findPage(PageInfo pageInfo,Class<T> clazz, List<Order> orders) 
 	{
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(clazz);
 		criteriaQuery.select(criteriaQuery.from(clazz));
+		Assert.notNull(criteriaQuery);
+		Assert.notNull(criteriaQuery.getSelection());
+		Assert.notEmpty(criteriaQuery.getRoots());
+		addOrders(criteriaQuery, orders);
 		return findPage(criteriaQuery, pageInfo,clazz);
 	}
 	
@@ -108,15 +144,6 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
         return list;
 	}
 	
-//	protected long count(CriteriaQuery<T> criteriaQuery,Class<T> clazz) 
-//	{
-//		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-//		CriteriaQuery<Long> countCriteriaQuery = criteriaBuilder.createQuery(Long.class);
-//		Root<T> countRoot = countCriteriaQuery.from(clazz);
-//		countCriteriaQuery.select(criteriaBuilder.count(countRoot));
-//		return entityManager.createQuery(countCriteriaQuery).setFlushMode(FlushModeType.COMMIT).getSingleResult();
-//	}
-	
 	protected long count(CriteriaQuery<T> criteriaQuery,Class<T> clazz) 
 	{
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -148,7 +175,8 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 	{
 		if (criteriaQuery != null && criteriaQuery.getRoots() != null && clazz != null)
 		{
-			for (Root<?> root : criteriaQuery.getRoots()) 
+			Set<Root<?>> set = criteriaQuery.getRoots();
+			for (Root<?> root : set) 
 			{
 				if (clazz.equals(root.getJavaType()))
 				{

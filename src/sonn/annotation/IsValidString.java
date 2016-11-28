@@ -47,7 +47,8 @@ public @interface IsValidString
 			{
 				return true;
 			}
-			if(strValue.contains("<"))
+			if(strValue.contains("<") || strValue.contains(">")
+					|| strValue.contains("=") || strValue.contains("'") || strValue.contains("\""))
 			{
 				return false;
 			}

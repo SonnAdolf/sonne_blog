@@ -23,4 +23,6 @@ public interface UserService extends BaseService<User>
 	* @throws
 	 */
 	public List<User> findByUserName(String username);
+	
+    public boolean validPwd(String pwd);
 }

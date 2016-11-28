@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-    <title>Jay Skript And The Domsters: Photos</title>
+    <title>Sonn Blog</title>
     <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>css/basic.css" />
     <script type="text/javascript" src="<%=basePath %>js/global.js"></script>
     <script type="text/javascript" src="<%=basePath %>js/photos.js"></script>

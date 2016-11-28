@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebRoot/jsp/snakeGame.jsp=UTF-8
+encoding//src/sonn/controller/LoginController.java=UTF-8
+encoding//src/sonn/controller/PasswdController.java=UTF-8
+encoding//src/sonn/controller/RegisterController.java=UTF-8

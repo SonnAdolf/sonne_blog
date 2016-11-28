@@ -1,6 +1,7 @@
 package sonn.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sonn.Order;
 import sonn.entity.Article;
 import sonn.entity.User;
 import sonn.service.ArticleService;
@@ -36,6 +38,8 @@ import com.alibaba.fastjson.JSONObject;
 *       2016.11   article delete function.
 *       2016-11-11 article summary
 *       2016-11-13 article edit
+*       2016-11-27 order or list
+*       2016-11-28 add date
 * @version 1.0
  */
 @Controller
@@ -56,7 +60,10 @@ public class ArticleController
     		                   Model model) throws Exception
     {
     	pageInfo.setEveryPage(6);
-    	Page<Article> page = articleService.findPage(pageInfo,Article.class);
+    	List<Order> orders = new ArrayList<Order>();
+		Order order = new Order("id", Order.Direction.desc);
+    	orders.add(order);
+    	Page<Article> page = articleService.findPage(pageInfo,Article.class, orders);
     	List<Article> articleList = page.getContent();
     	page.setContent(getArticleListOfSummaryByUrl(articleList));
     	model.addAttribute("page",page);
@@ -133,7 +140,6 @@ public class ArticleController
     @ResponseBody
     public boolean edit(HttpServletRequest request,Article article, String articleContent, Model model) throws Exception
     {
-    	String c = request.getParameter("articleContent");
 		Article db_article =  articleService.find(article.getId(), Article.class);
 		if (db_article == null) 
 		{
@@ -228,6 +234,9 @@ public class ArticleController
 		}
 		//write the summary string on the local file
 		IOUtill.writeByUrl(summaryUrl, summary);
+		
+		Date date = new Date();
+		article.setDate(date);
 		
 		articleService.save(article);
 		

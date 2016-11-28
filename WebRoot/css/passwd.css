@@ -1,0 +1,27 @@
+
+body 
+{
+	background-color: black;
+}
+
+
+#passwd
+{ 
+	background-color:#ffffff;
+	border: 1px solid black;
+	padding: 80px;
+	filter:alpha(opacity=60);
+	opacity:0.6;
+}
+
+#poem
+{
+	font-family: KaiTi;
+	color:white;
+}
+
+h1
+{
+	color:white;
+}
+

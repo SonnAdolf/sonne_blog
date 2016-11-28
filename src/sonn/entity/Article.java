@@ -1,9 +1,15 @@
 package sonn.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import sonn.annotation.IsValidString;
 
@@ -13,6 +19,8 @@ import sonn.annotation.IsValidString;
  * @date 2016.04.21  2016-5-1添加主键生成策略
  *       2016-05-15改变存储user到username
  *       2016-11-11 article summary
+ *       2016-11-25 check by annotation
+ *       2016-11-28 add date
  * @description:article entity class
  */
 @Entity
@@ -22,7 +30,9 @@ public class Article
 	private int id;
 	
 	/*title*/
+	@NotNull
 	@IsValidString
+	@Length(min=1, max=40)
 	private String title;
 	
 	/*article path*/
@@ -38,7 +48,14 @@ public class Article
 	private String summary;
 
 	/*name of the author*/
+	@NotNull
+	@IsValidString
+	@Length(min=1, max=20)
 	private String authorName;
+	
+	/*date of article*/
+	@DateTimeFormat(pattern = "yyyy-MM-dd") 
+	private Date date;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -112,5 +129,14 @@ public class Article
 	{
 		this.summary = summary;
 	}
-	
+
+	public Date getDate() 
+	{
+		return date;
+	}
+
+	public void setDate(Date date) 
+	{
+		this.date = date;
+	}
 }

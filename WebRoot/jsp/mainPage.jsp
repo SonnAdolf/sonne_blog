@@ -1,5 +1,6 @@
 <%@page pageEncoding="utf-8" contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -34,8 +35,8 @@ String imgPath = basePath + "image/";
               <div id = "article_list">
                           <c:forEach items="${page.content}" var="article" >
                               <div id = "article_block">
-                                  <span class = "title"><a href="<%=basePath %>article/showFromMainPage.form?id=${article.id}">${article.title}</a></span>
-                                  <span class = "author">author：${article.authorName}</span><br> 
+                                  <span class = "title"><a href="<%=basePath %>article/showFromMainPage.form?id=${article.id}">${article.title}</a></span>&nbsp
+                                  <span class = "author">作者：${article.authorName}</span>&nbsp&nbsp<span class = "date">日期：${fn:substring(article.date,0,16)}</span><br> 
                                      <p> ${article.summary}</p>
                                </div>
                                <p>------------------------------------------------------------------------------------- </p>
