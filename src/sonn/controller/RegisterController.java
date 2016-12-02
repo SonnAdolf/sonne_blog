@@ -98,7 +98,7 @@ public class RegisterController
     	}	
     	if(!userService.validPwd(user.getPassword()))
     	{
-    		MessageUtil.setSimpleBackMessage(backMessage, false, "你需要一个更复杂的密码 (至少六位，包含字母，数字，特殊字符，且必须以字母开头)( ^_^ )? ");
+    		MessageUtil.setSimpleBackMessage(backMessage, false, "密码至少六位(╯#-_-)╯~~~~~~~~~~~~~~~~~╧═╧  ");
     		return backMessage;   		
     	}
     	if(StringUtill.isStringEmpty(repassword))

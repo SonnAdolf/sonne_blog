@@ -1,7 +1,11 @@
 package sonn.controller;
 
 import java.io.IOException;
+import java.security.Key;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -11,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +26,9 @@ import sonn.service.UserService;
 import sonn.util.CaptchaUtil;
 import sonn.util.MessageUtil;
 import sonn.util.Principal;
+import sonn.util.RSAUtils;
 import sonn.util.StringUtill;
+import sun.misc.BASE64Encoder;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -31,6 +38,7 @@ import com.alibaba.fastjson.JSONObject;
 * @Description:Login CONTROLLER
 * @author sonne
 * @date 2016-4-25 下午2:52:03 2016-05-02 具体编码 2016-05-07验证码相关
+*      2016-12-01 rsa
 * @version 1.0
  */
 @Controller
@@ -41,9 +49,30 @@ public class LoginController
     private UserService userService;
     
     @RequestMapping(value = "/show", method = RequestMethod.GET)
-    public String show()throws Exception
+    public String show(HttpServletRequest request, Model model)throws Exception
     {
+		HttpSession session = request.getSession();
+    	// rsa key pair
+    	Map<String, Object> map = RSAUtils.genKeyPair();
+    	RSAPublicKey publicKey =  (RSAPublicKey) map.get("RSAPublicKey");
+    	RSAPrivateKey privateKey = (RSAPrivateKey)map.get("RSAPrivateKey");
+    	String strPublicKey = getKeyString(publicKey);
+    	String strPrivateKey = getKeyString(privateKey);
+    	// public key send to client
+    	model.addAttribute("publicKey",strPublicKey);
+    	// private key save in session
+    	session.setAttribute("PRIVATE_KEY", strPrivateKey);
         return "loginPage";
+    }
+    
+    /**
+     * 得到密钥字符串（经过base64编码）
+     * @return
+     */
+    private String getKeyString(Key key) throws Exception {
+          byte[] keyBytes = key.getEncoded();
+          String s = (new BASE64Encoder()).encode(keyBytes);
+          return s;
     }
     
     @RequestMapping(value = "/captcha", method = RequestMethod.GET)
@@ -83,7 +112,7 @@ public class LoginController
     	{
     		return backMessage;
     	}
-    	backMessage = CheckUserNameAndPassword(backMessage,user);
+    	backMessage = CheckUserNameAndPassword(backMessage,user,session);
     	if(!backMessage.isSuccess())
     	{
     		return backMessage;
@@ -146,7 +175,7 @@ public class LoginController
     /**
      * check the username.
      */
-    private SimpleBackMessage CheckUserNameAndPassword(SimpleBackMessage backMessage,User user)
+    private SimpleBackMessage CheckUserNameAndPassword(SimpleBackMessage backMessage,User user,HttpSession session)
     {
     	List<User> users = userService.findByUserName(user.getUsername());
     	if(users.isEmpty())
@@ -156,9 +185,14 @@ public class LoginController
     		return backMessage;
     	}
     	User userFromDB = users.get(0);
+    	
+    	// get private key from session
+    	String PRIVATE_KSY = (String) session.getAttribute("PRIVATE_KEY");
+    	String passwd = RSAUtils.decryptDataOnJava(user.getPassword(), PRIVATE_KSY);
+    	
     	// for compatible with the old version, here md5 or not
-    	if(!userFromDB.getPassword().equals(user.getPassword())
-    			&& !userFromDB.getPassword().equals(DigestUtils.md5Hex(user.getPassword())))
+    	if(!userFromDB.getPassword().equals(passwd)
+    			&& !userFromDB.getPassword().equals(DigestUtils.md5Hex(passwd)))
     	{
     		MessageUtil.setSimpleBackMessage(backMessage, false, 
 	                "密码错误!（°ο°）~ @");

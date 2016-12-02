@@ -10,6 +10,7 @@ import sonn.entity.User;
 * @Description: User service接口
 * @author 无名
 * @date 2016-3-25 
+*        2016-11-27  check passwd's complexity
 * @version 1.0
  */
 public interface UserService extends BaseService<User>

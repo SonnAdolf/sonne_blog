@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 当时学习编程，纯属兴趣。记得那时常常感到迷茫，有一天在图书馆闲逛，不经意间翻起一本又厚又旧的C语言书（大胡子鬼佬写的）。
                  当时就觉得，woow，cool~ 然后就这样学起了编程。</p>
       <p>所以，我学的第一门编程语言是C语言~除此之外，我还学了些现在基本用不上的东西，例如算法和数据结构还有汇编语言。
-                  总体上，我大学学到的并不多。因为自学艰难，还走了很多弯路，大三时又感情受伤，堕落了两年。
+                  总体上，我大学学到的并不多。因为自学艰难，还走了很多弯路，大三时又遇到些挫折，堕落了两年。
                   整个大学学的东西和计算机专业的学生相比，真是差距不小。但也算是入门了，并打下了一点基础。</p>
        <p>我是快毕业时才开始学java，当时靠着撇脚的技术，勉强找到一份工作，写了许多现在想起来相当丑陋的程序。
                  总之，我的技术大部分还是在工作中摸索到的。在实践和挫折中成长到现在已经快一年半了。</p>
@@ -43,6 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          是我自我修炼的四个训练场。</p>
         <p>我的github:https://github.com/SonnAdolf</p>
         <p>我的csdn:http://blog.csdn.net/sonnadolf</p>
+		<img src="<%=basePath %>image/blog_history/books.jpg" alt="Sonne Blog" /><br>
     </div>
     <audio controls="controls" autoplay="autoplay" height="100" width="100">
   		  <source src="<%=basePath %>music/Main Title.mp3" type="audio/mp3" />

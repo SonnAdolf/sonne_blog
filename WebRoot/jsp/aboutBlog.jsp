@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
 <body>
   <div id="header">
-    <img src="<%=basePath %>image/logo.gif" alt="Jay Skript and the Domsters" />
+    <img src="<%=basePath %>image/logo.gif" alt="Sonne Blog" />
   </div>
   <div id="navigation">
     <ul>
@@ -33,6 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		springmvc + hibernate框架搭建。<br>
 		2016.04.21<br>
 		日向blog首页。<br>
+		<img src="<%=basePath %>image/blog_history/begin.jpg" alt="Sonne Blog" /><br>
 		2016.04.24<br>
 		分页实现。<br>
 		2016.04.30<br>
@@ -41,11 +42,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		MySQL主键自增长设置。<br>
 		2016.05.07<br>
 		登录验证码实现。<br>
+		<img src="<%=basePath %>image/blog_history/captcha.png" alt="Sonne Blog" /><br>
 		2016.05.15<br>
 		日向blog，添加了fckeditor。有了写文章的功能。<br>
+		<img src="<%=basePath %>image/blog_history/article.png" alt="Sonne Blog" /><br>
 		2016.05.21<br>
 		日向blog做了一番新的总结，第一版完成在即。<br>
 		日向blog个人空间功能完成了一部分。<br>
+		<img src="<%=basePath %>image/blog_history/plan.png" alt="Sonne Blog" /><br>
 		2016.06.19<br>
 		添加登陆跳转个人空间功能，html charset由utf-8改为gb2312。<br>
 		个人空间文章列表，点击文章标题跳转到文章页面。<br>
@@ -54,11 +58,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		2016.07.30<br>
 		添加个人空间向写文章页面的跳转，反之亦然。<br>
 		设置每页只显示两篇文章。这样更好布局。<br>
+		<img src="<%=basePath %>image/blog_history/kid.png" alt="Sonne Blog" /><br>
 		2016.07.31
 		修改一个bug，根据url读文章最后一行显示null。while循环写错，导致多读了一行。<br>
 		主页，文章list，显示的每个文章设置为一个div。<br>
 		2016.10.18<br>
 		新的博客主页页面。<br>
+		<img src="<%=basePath %>image/blog_history/new.png" alt="Sonne Blog" /><br>
 		2016.10.19 - 2016.10.26<br>
 		服务器部署项目成功。<br>
 		加入对aticle表为空的判断。<br>
@@ -73,15 +79,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		初步写出了登录、注册页面。<br>
 		2016.11.08<br>
 		研究了下bootstrap，做出了响应式的登录注册页。质的飞跃。<br>
+		<img src="<%=basePath %>image/blog_history/bootstrap.jpg" alt="Sonne Blog" /><br>
 		2016.11.09<br>
 		继续修饰页面，把主页坑爹的背景图干掉了。<br>
 		将分页相对路径换为绝对路径，免得手机端跳页报404.<br>
 		2016.11.11<br>
 		实现文章主页显示摘要功能。<br>
+		<img src="<%=basePath %>image/blog_history/mainpage.jpg" alt="Sonne Blog" /><br>
 		2016.11.13<br>
 		实现文章编辑功能。<br>
 		2016.11.19<br>
 		做出贪吃蛇游戏页面。<br>
+		<img src="<%=basePath %>image/blog_history/snake.jpg" alt="Sonne Blog" /><br>
+		2016.11.20<br>
+		个人及日向博客介绍页面（代码借鉴了《js dom编程艺术》一书）。<br>
+		2016.11.27<br>
+		密码修改，密码复杂度校验，密码数据库加密，<br>
+		dao层jpa函数实现数据库端查询排序，实现主页显示新文章在前，旧文章在后。<br>
+		2016.11.28<br>
+		验证码不区分大小写，文章添加日期字段。<br>
+		2016.12.01<br>
+		rsa前后端密码传输加密，前端表单提交参数校验。<br>
+		
     </div>
     <audio controls="controls" autoplay="autoplay" height="100" width="100">
   		  <source src="<%=basePath %>music/Flower Dance.mp3" type="audio/mp3" />

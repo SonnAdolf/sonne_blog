@@ -12,19 +12,33 @@ String imgPath = basePath + "image/";
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/fixed_background.css" media="all" />
-              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
-              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              
-              <script type="text/javascript">
-                  $().ready(function()
-                  {     
-                         $('#articleForm').ajaxForm(function(data)
-                         {  
-                               if(data.success)
-                               {
-                                     location.href = "/RiXiang_blog/space/list.form";
-                               }
-                          });   
-                 }); 
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-1.3.1.js"></script>
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery.form.js"></script>    
+             <script type="text/javascript">
+ 			  $(document).ready(function() { 
+				  $('#articleForm').ajaxForm({ 
+			             dataType:      'json',
+						 beforeSubmit:  validate,   
+						 success:       successFunc
+			   	  }); 
+		       });
+			   function validate(formData, jqForm, options) {
+			       for(var i=0; i < formData.length; i++) {
+			        	if(!formData[i].value) {
+			        		return false;
+			        	}
+			        } 
+			        var queryString = $.param(formData);
+                    return true; 
+				}
+				function successFunc(data) {
+					if (data.success) {
+						location.href = "/RiXiang_blog/space/list.form";
+					}
+					else {
+						alert(data.info);
+					}
+				}
                </script>
       </head>
       <body>
@@ -35,10 +49,11 @@ String imgPath = basePath + "image/";
                    <h2>添加文章</h2>
                    <form id="articleForm" action="writeArticle.form" method="post">
                                <label>标题：</label>
-                              <input type="text" name="title" /><br>
+                              <input type="text" name="title" style="height:25px;width:150px;"/><br>
                                <label>内容：</label>
                                <FCK:editor instanceName="articleContent" basePath="/fckeditor" toolbarSet="myToolbar" height="400"></FCK:editor>
-                              <input name="提交" type="submit" class="button" value="提交" />
+                               &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                               <input name="提交" type="submit" class="button" style="height:30px;width:100px;background:black;color:white" value="写完了（￣ c￣）y" />
                   </form>
 			  </div>
 

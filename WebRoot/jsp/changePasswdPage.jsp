@@ -16,21 +16,46 @@ String imgPath = basePath + "image/";
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>
              <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/js/bootstrap.min.js"></script>              
              <script type="text/javascript">
-               $().ready(function()
-               {     
-                         $('#passwdForm').ajaxForm(function(data)
-                         {  
-                               if(data.success)
-                               {
-                                     alert("修改密码成功"+" " + data.returnMessage);
-                                     location.href = "/RiXiang_blog/space/list.form"; 
-                               }
-                               else
-                               {
-                                     alert("修改密码失败"+" " + data.returnMessage);
-                                }
-                          });  
-                 });  
+   			  $(document).ready(function() { 
+				  $('#passwdForm').ajaxForm({ 
+			             dataType:      'json',
+						 beforeSubmit:  validate,   
+						 success:       successFunc
+			   	  });
+		       });
+			   function validate(formData, jqForm, options) {
+			        if (!formData[0].value) {
+			        	   alert("旧密码不能为空！！(;¬_¬) ( ´◔ ‸◔`) (눈_눈) ( ∙̆ .̯ ∙̆ ) (;￢д￢) (“▔□▔)");
+			        	   return false;
+			        }
+			        if (!formData[1].value) {
+			               alert("新密码不能为空！！π__π T.T ε(┬┬＿┬┬)3 ╥﹏╥ ┬＿┬ (╥╯^╰╥)");
+			               return false;
+			        }
+			        if (!formData[2].value) {
+			        	   alert("请再次输入密码！！ ԅ(¯﹃¯ԅ) （¯﹃¯）");
+			               return false;
+			        }
+			        if (formData[1].value != formData[2].value) {
+			               alert("两次密码输入不一致!!(,,•́ . •̀,,) (๑•́ ₃•̀๑) (๑•́ ₃ •̀),,Ծ‸Ծ,,");
+			               return false;
+			        }
+			        if (formData[1].value.length < 6) {
+			               alert("密码长度至少6位!!  (:3[▓▓] (:3[▓▓▓▓▓▓▓▓▓] (¦3[▓▓]");
+			               return false;
+			        }
+			        var queryString = $.param(formData);
+                    return true; 
+				}
+				function successFunc(data) {
+					if (data.success) {
+                         alert("修改密码成功"+" " + data.returnMessage);
+                         location.href = "/RiXiang_blog/space/list.form"; 
+					}
+					else {
+						alert("修改密码失败"+" " + data.returnMessage);
+					}
+				} 
                </script>
       </head>
       <body>

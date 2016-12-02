@@ -18,6 +18,7 @@ import sonn.util.StringUtill;
 * @Description: User service实现类
 * @author 无名
 * @date 2016-3-25
+*       2016-11-27  check passwd's complexity
 * @version 1.0
  */
 @Transactional
@@ -58,13 +59,13 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         {  
             return false;  
         }  
-        if(pwd.matches("^[a-zA-z](.*)") &&
-        		pwd.matches("(.*)[-`=\\\\\\[\\];',./~!@#$%^&*()_+|{}:\"<>?]+(.*)")
-        		&& pwd.matches("(.*)\\d+(.*)"))
-        {  
-            return true;  
-        }  
-        return false;  
+//        if(pwd.matches("^[a-zA-z](.*)") &&
+//        		pwd.matches("(.*)[-`=\\\\\\[\\];',./~!@#$%^&*()_+|{}:\"<>?]+(.*)")
+//        		&& pwd.matches("(.*)\\d+(.*)"))
+//        {  
+//            return true;  
+//        }  
+        return true;  
     }  
     
 }

@@ -14,8 +14,8 @@ String imgPath = basePath + "image/";
       </head>
       <body>
       		  <div id = "title">
-              <h4 class = "title">你是我的半截的诗 <br><br>
-                                                                                                  不许别人更改一个字    ---海子<br>
+              <h4 class = "title">倘若你迷失在黑暗之中， <br><br>
+                                                                                                  除了前行别无他法。<br>
                                                                                              
                     <br></h4>
               </div>

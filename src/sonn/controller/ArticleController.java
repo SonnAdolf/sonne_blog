@@ -205,7 +205,8 @@ public class ArticleController
 		JSONObject jo = new JSONObject();
 		if(null == article || StringUtill.isStringEmpty(articleContent))
 		{
-			MessageUtil.setSimpleIsSuccessJSON(jo, false);
+			jo.put("success", false);
+			jo.put("info", "ÎÄÕÂÄÚÈİÎª¿Õ");
 	        return jo;
 		}
 		HttpSession session = request.getSession();
