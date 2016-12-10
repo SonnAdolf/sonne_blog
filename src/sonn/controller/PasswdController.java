@@ -2,7 +2,6 @@ package sonn.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sonn.entity.User;
 import sonn.service.UserService;
-import sonn.util.Principal;
 import sonn.util.StringUtill;
 
 import com.alibaba.fastjson.JSONObject;
@@ -70,11 +68,7 @@ public class PasswdController
 			   "你需要一个更复杂的密码 (至少六位，包含字母，数字，特殊字符，且必须以字母开头)..@_@|||||..");
 			return jo;  		
     	}
-		HttpSession session = request.getSession();
-		// get the user loged in
-		Principal userPrincipal =
-				(Principal) session.getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
-		String username = userPrincipal.getUsername();
+    	String username = userService.getUsernameFromSession(request);
 		User user = userService.findByUserName(username).get(0);
 		// for compatible with the old version, here md5 or not
 		if (!user.getPassword().equals(DigestUtils.md5Hex(password)) 

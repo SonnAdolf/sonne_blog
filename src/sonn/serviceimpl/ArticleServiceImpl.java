@@ -12,7 +12,6 @@ import sonn.entity.Article;
 import sonn.service.ArticleService;
 import sonn.util.Page;
 import sonn.util.PageInfo;
-import sonn.util.Principal;
 
 
 /**
@@ -45,10 +44,10 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article> implements Arti
 	 * 返回article该存储的路径   
 	 */
 	@Override
-	public String getArticleUrl(Article article, HttpServletRequest request, Principal userPrincipal)
+	public String getArticleUrl(Article article, HttpServletRequest request, String username)
 	{
 		String basePath = "d:\\apache-tomcat-7.0.52\\article\\";
-		String articleUrl = basePath + userPrincipal.getUsername()+"\\"
+		String articleUrl = basePath + username +"\\"
 		                                    + article.getTitle() + ".txt";
 		return articleUrl;
 	}
@@ -57,10 +56,10 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article> implements Arti
 	 * get the url of the summary
 	 */
 	@Override
-	public String getSummaryUrl(Article article, HttpServletRequest request, Principal userPrincipal)
+	public String getSummaryUrl(Article article, HttpServletRequest request,String username)
 	{
 		String basePath = "d:\\apache-tomcat-7.0.52\\summary\\";
-		String summaryUrl = basePath + userPrincipal.getUsername()+"\\"
+		String summaryUrl = basePath + username+"\\"
 		                                    + article.getTitle() + ".txt";
 		return summaryUrl;
 	}

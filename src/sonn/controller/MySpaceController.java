@@ -2,7 +2,6 @@ package sonn.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import sonn.entity.Article;
-import sonn.entity.User;
 import sonn.service.ArticleService;
+import sonn.service.UserService;
 import sonn.util.Page;
 import sonn.util.PageInfo;
-import sonn.util.Principal;
 
 
 /**
@@ -28,21 +26,20 @@ import sonn.util.Principal;
 @RequestMapping("/space")
 public class MySpaceController 
 {
+    @Resource(name = "userServiceImpl")
+    private UserService userService;
+    
     @Resource(name = "articleServiceImpl")
     private ArticleService articleService;
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String mySpace(HttpServletRequest request,PageInfo pageInfo,Model model) throws Exception
     {
-		HttpSession session = request.getSession();
-		//获取登录用户
-		Principal userPrincipal =
-				(Principal) session.getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
+    	String username = userService.getUsernameFromSession(request);
 		pageInfo.setEveryPage(12);
-		String userName = userPrincipal.getUsername();
-        Page<Article> page = articleService.getArticlesByUsername(userName, pageInfo);
+        Page<Article> page = articleService.getArticlesByUsername(username, pageInfo);
        	model.addAttribute("page",page);
-       	model.addAttribute("userName",userName);
+       	model.addAttribute("userName",username);
         return "mySpace";
     }
 }

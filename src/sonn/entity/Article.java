@@ -1,11 +1,15 @@
 package sonn.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -27,6 +31,8 @@ import sonn.annotation.IsValidString;
 public class Article 
 {
 	/*id*/
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	/*title*/
@@ -46,6 +52,9 @@ public class Article
 	
 	/*article summary*/
 	private String summary;
+	
+	@OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private List<Comment> comments;
 
 	/*name of the author*/
 	@NotNull
@@ -57,8 +66,6 @@ public class Article
 	@DateTimeFormat(pattern = "yyyy-MM-dd") 
 	private Date date;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getId()
 	{
 		return id;
@@ -139,4 +146,13 @@ public class Article
 	{
 		this.date = date;
 	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
 }

@@ -1,6 +1,5 @@
 * { margin: 0; padding: 0; border-width: 0; font-size: 10px; }
 * * {font-size: 1em; }
-.container{position:relative;}
 body {background: url(../image/blue_background.gif) repeat-x;}
 #scene { float: left;width: 77em; height: 16em; }
 #scene img {width: 77em; height: 16em; }
@@ -18,3 +17,15 @@ body {background: url(../image/blue_background.gif) repeat-x;}
 
 #title {color:red;}
 #author {color:green;}
+
+#articleContent {
+	height: 400px;
+	/*max-height: 500px;*/
+}
+.container {
+	color:black;
+	background: white;
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+}

@@ -14,6 +14,8 @@ import java.io.IOException;
 * @author sonn
 * @date 2016-5-20 21:00:18
 *       2016-07-31 debug,loop wrong when read article by url.  
+*       2016-12-06 use wangEditor, to correctly read and show codes.
+*                  change the function readByUrl(String url)
 * @version 1.0
  */
 public final class IOUtill 
@@ -63,6 +65,8 @@ public final class IOUtill
 				while(line != null)
 				{
 					content += line;
+					// 2016-12-06
+					content += "\n";
 					line = br.readLine();
 				} 
 				// 13 Nov
@@ -156,4 +160,48 @@ public final class IOUtill
 				return deleteDirectory(fileName);
 		}
 	}
+
+   public static void delFolder(String folderPath) {
+	   try {
+		   delAllFile(folderPath);
+		   String filePath = folderPath;
+		   filePath = filePath.toString();
+		   java.io.File myFilePath = new java.io.File(filePath);
+		   myFilePath.delete(); //и╬ЁЩ©унд╪Ч╪п
+		   } catch (Exception e) {
+			   e.printStackTrace(); 
+			}
+	   }
+
+	 /*
+	  * delet all files from a directory,but not the directory
+	  */
+	 public static boolean delAllFile(String path) {
+		 boolean flag = false;
+	     File file = new File(path);
+	     if (!file.exists()) {
+	        return flag;
+	     }
+	     if (!file.isDirectory()) {
+	        return flag;
+	     }
+	     String[] tempList = file.list();
+	     File temp = null;
+	     for (int i = 0; i < tempList.length; i++) {
+	         if (path.endsWith(File.separator)) {
+	            temp = new File(path + tempList[i]);
+	         } else {
+	            temp = new File(path + File.separator + tempList[i]);
+	         }
+	        if (temp.isFile()) {
+	            temp.delete();
+	        }
+	        if (temp.isDirectory()) {
+	            delAllFile(path + "/" + tempList[i]);
+	            delFolder(path + "/" + tempList[i]);
+	            flag = true;
+	        }
+	     }
+	     return flag;
+	  }
 }

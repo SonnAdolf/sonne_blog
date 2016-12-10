@@ -3,6 +3,8 @@ package sonn.serviceimpl;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sonn.dao.UserDao;
 import sonn.entity.User;
 import sonn.service.UserService;
+import sonn.util.Principal;
 import sonn.util.StringUtill;
 
 
@@ -19,6 +22,7 @@ import sonn.util.StringUtill;
 * @author ÎÞÃû
 * @date 2016-3-25
 *       2016-11-27  check passwd's complexity
+*       2016-12-4   getUsernameFromSession
 * @version 1.0
  */
 @Transactional
@@ -67,5 +71,19 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 //        }  
         return true;  
     }  
+    
+	public String getUsernameFromSession(HttpServletRequest request) {
+    	// get username from session
+		HttpSession session = request.getSession();
+		//get the user who logins
+		Principal userPrincipal =
+				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
+		if (userPrincipal == null)
+			return null;
+		String userName = userPrincipal.getUsername();
+		if (StringUtill.isStringEmpty(userName))
+			return null;	
+		return userName;
+	}
     
 }

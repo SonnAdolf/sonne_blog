@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sonn.Order;
 import sonn.entity.Article;
-import sonn.entity.User;
+import sonn.entity.Comment;
 import sonn.service.ArticleService;
+import sonn.service.CommentService;
+import sonn.service.UserService;
 import sonn.util.IOUtill;
 import sonn.util.MessageUtil;
 import sonn.util.Page;
 import sonn.util.PageInfo;
-import sonn.util.Principal;
 import sonn.util.StringUtill;
 
 import com.alibaba.fastjson.JSONObject;
@@ -40,6 +40,7 @@ import com.alibaba.fastjson.JSONObject;
 *       2016-11-13 article edit
 *       2016-11-27 order or list
 *       2016-11-28 add date
+*       2016-12-07 sort the comments
 * @version 1.0
  */
 @Controller
@@ -48,6 +49,12 @@ public class ArticleController
 {
     @Resource(name = "articleServiceImpl")
     private ArticleService articleService;
+    
+    @Resource(name = "userServiceImpl")
+    private UserService userService;
+    
+    @Resource(name = "commentServiceImpl")
+    private CommentService commentService;
     
     /*
      * Get all articles, and show them at the main page.
@@ -67,15 +74,10 @@ public class ArticleController
     	List<Article> articleList = page.getContent();
     	page.setContent(getArticleListOfSummaryByUrl(articleList));
     	model.addAttribute("page",page);
-    	
-		HttpSession session = request.getSession();
-		//get login user
-		Principal userPrincipal =
-				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
-		if(null != userPrincipal)
+    	String username = userService.getUsernameFromSession(request);
+		if(null != username)
 		{
-			String userName = userPrincipal.getUsername();
-	    	model.addAttribute("userName",userName);
+	    	model.addAttribute("userName",username);
 		}
         return "mainPage";
     }
@@ -83,12 +85,8 @@ public class ArticleController
     @RequestMapping(value = "/writeArticlePage", method = RequestMethod.GET)
     public String writeArticlePage(HttpServletRequest request,PageInfo pageInfo,Model model) throws Exception
     {
-		HttpSession session = request.getSession();
-		//get the user who logins
-		Principal userPrincipal =
-				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
-		String userName = userPrincipal.getUsername();
-       	model.addAttribute("userName",userName);
+    	String username = userService.getUsernameFromSession(request);
+       	model.addAttribute("userName",username);
         return "writeArticlePage";
     }
     
@@ -150,14 +148,12 @@ public class ArticleController
 		// and if the title changed content and summary urls will be changed too.
 		if (!db_article.getTitle().equals(article.getTitle()))
 		{
-			HttpSession session = request.getSession();
-			Principal userPrincipal =
-					(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
+			String username = userService.getUsernameFromSession(request);
 			//get new urls
 			String articleUrl = 
-					articleService.getArticleUrl(article, request, userPrincipal);	
+					articleService.getArticleUrl(article, request, username);	
 			String summaryUrl = 
-					articleService.getSummaryUrl(article, request, userPrincipal);
+					articleService.getSummaryUrl(article, request, username);
 			article.setArticleAddr(articleUrl);
 			article.setSummaryAddr(summaryUrl);
 			articleService.update(article);
@@ -166,11 +162,9 @@ public class ArticleController
 		// history problem, former version donot have a summary 
 		if (db_article.getSummaryAddr() == null || db_article.getSummaryAddr().equals(""))
 		{
-			HttpSession session = request.getSession();
-			Principal userPrincipal =
-					(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);	
+			String username = userService.getUsernameFromSession(request);
 			String summaryUrl = 
-					articleService.getSummaryUrl(article, request, userPrincipal);	
+					articleService.getSummaryUrl(article, request, username);	
 			article.setSummaryAddr(summaryUrl);
 			articleService.update(article);
 		}
@@ -209,13 +203,10 @@ public class ArticleController
 			jo.put("info", "文章内容为空");
 	        return jo;
 		}
-		HttpSession session = request.getSession();
-		Principal userPrincipal =
-				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
-		article.setAuthorName(userPrincipal.getUsername());
+		String username = userService.getUsernameFromSession(request);
+		article.setAuthorName(username);
 
-		String articleUrl = 
-				articleService.getArticleUrl(article, request, userPrincipal);
+		String articleUrl = articleService.getArticleUrl(article, request, username);
 
 		//数据库中存储文章路径
 		article.setArticleAddr(articleUrl);
@@ -224,7 +215,7 @@ public class ArticleController
 		IOUtill.writeByUrl(articleUrl,articleContent);
 		
 		String summaryUrl = 
-				articleService.getSummaryUrl(article, request, userPrincipal);
+				articleService.getSummaryUrl(article, request, username);
 		//remove all the tags of HTML
 		String summary = StringUtill.removeTag(articleContent);
 		article.setSummaryAddr(summaryUrl);
@@ -261,14 +252,12 @@ public class ArticleController
 		Article article = articleService.find(id,Article.class);
 		article = getArticleOfContentByUrl(article);
 		
-		HttpSession session = request.getSession();
-		//get login user
-		Principal userPrincipal =
-				(Principal) session. getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
-		String userName = userPrincipal.getUsername();
+		String username = userService.getUsernameFromSession(request);
 		
-       	model.addAttribute("userName",userName);
+		List<Comment> comments = article.getComments();
+       	model.addAttribute("userName",username);
     	model.addAttribute("article",article);
+    	model.addAttribute("comments",comments);
         return "showArticlePage";
     }
     
@@ -287,8 +276,13 @@ public class ArticleController
     	}
 		Article article = articleService.find(id,Article.class);
 		article = getArticleOfContentByUrl(article);
-		
+		System.out.println(article.getContent());
+		// sort the comments
+		List<Comment> comments = commentService.sort(article.getComments());
+		String username = userService.getUsernameFromSession(request);
     	model.addAttribute("article",article);
+    	model.addAttribute("userName",username);
+    	model.addAttribute("comments",comments);
         return "showArticlePage";
     }
     

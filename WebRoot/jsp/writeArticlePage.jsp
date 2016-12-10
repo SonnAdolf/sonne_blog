@@ -12,8 +12,10 @@ String imgPath = basePath + "image/";
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/fixed_background.css" media="all" />
-             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-1.3.1.js"></script>
-             <script type="text/javascript" src="<%=basePath %>Jquery/jquery.form.js"></script>    
+              <link rel="stylesheet" type="text/css" href="<%=basePath %>wangEditor/dist/css/wangEditor.min.css">
+              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
+              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>   
+             <script type="text/javascript" src="<%=basePath %>wangEditor/dist/js/wangEditor.js"></script>
              <script type="text/javascript">
  			  $(document).ready(function() { 
 				  $('#articleForm').ajaxForm({ 
@@ -21,13 +23,82 @@ String imgPath = basePath + "image/";
 						 beforeSubmit:  validate,   
 						 success:       successFunc
 			   	  }); 
+   
+       	          var editor = new wangEditor('articleContent');
+
+                   // 上传图片
+                  editor.config.uploadImgUrl = '/upload';
+                  editor.config.uploadParams = {
+                      // token1: 'abcde',
+                      // token2: '12345'
+                  };
+                  editor.config.uploadHeaders = {
+                      // 'Accept' : 'text/x-json'
+                   }
+                  // editor.config.uploadImgFileName = 'myFileName';
+
+                   // 隐藏网络图片
+                   // editor.config.hideLinkImg = true;
+
+                   // 表情显示项
+                   editor.config.emotionsShow = 'value';
+                   editor.config.emotions = {
+                      'default': {
+                          title: '默认',
+                          data: './emotions.data'
+                       },
+                      'weibo': {
+                          title: '微博表情',
+                      data: [
+                         {
+                             icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
+                             value: '[草泥马]'    
+                          },
+                         {
+                              icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
+                              value: '[神马]'    
+                         },
+                         {
+                              icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
+                              value: '[浮云]'    
+                         },
+                         {
+                               icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
+                               value: '[给力]'    
+                         },
+                         {
+                               icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
+                               value: '[围观]'    
+                          },
+                         {
+                                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
+                                value: '[威武]'
+                         }
+                       ]
+                      }
+                   };
+
+                  // onchange 事件
+                  editor.onchange = function () {
+                       console.log(this.$txt.html());
+                   };
+                   editor.create();
 		       });
+		       
+		       
 			   function validate(formData, jqForm, options) {
 			       for(var i=0; i < formData.length; i++) {
 			        	if(!formData[i].value) {
+			        	    if(i==0) {
+			        	        alert("标题不能为空");
+			        	    }
+			        	    if (i==1) {
+			        	        alert("内容不能为空");
+			        	    }
 			        		return false;
 			        	}
 			        } 
+			        
 			        var queryString = $.param(formData);
                     return true; 
 				}
@@ -51,7 +122,10 @@ String imgPath = basePath + "image/";
                                <label>标题：</label>
                               <input type="text" name="title" style="height:25px;width:150px;"/><br>
                                <label>内容：</label>
-                               <FCK:editor instanceName="articleContent" basePath="/fckeditor" toolbarSet="myToolbar" height="400"></FCK:editor>
+  				               <div id="editor-container" class="container">
+                                   <textarea id="articleContent" name="articleContent" style="display:none;">
+                                   </textarea> 
+                               </div>
                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                <input name="提交" type="submit" class="button" style="height:30px;width:100px;background:black;color:white" value="写完了（￣ c￣）y" />
                   </form>

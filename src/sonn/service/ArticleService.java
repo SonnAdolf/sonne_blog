@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import sonn.entity.Article;
 import sonn.util.Page;
 import sonn.util.PageInfo;
-import sonn.util.Principal;
 
 
 /**
@@ -24,12 +23,12 @@ public interface ArticleService extends BaseService<Article>
 	 * 返回article该存储的路径
 	 */
 	public String getArticleUrl(Article article,HttpServletRequest request,
-			                                         Principal userPrincipal);
+			                                         String username);
 	/*
 	 * get the url of summary
 	 */
 	public String getSummaryUrl(Article article, HttpServletRequest request, 
-			                                        Principal userPrincipal);
+			                                       String username);
 	
 	/*
 	 * 根据用户名查找文章

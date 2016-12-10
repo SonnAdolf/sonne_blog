@@ -1,8 +1,6 @@
 package sonn.controller;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -43,19 +41,6 @@ public class RegisterController
     public String show()throws Exception
     {
         return "registerPage";
-    }
-    
-    private boolean isContainsChinese(String str)
-    {
-        String regEx = "[\u4e00-\u9fa5]";
-    	Pattern pat = Pattern.compile(regEx);
-    	Matcher matcher = pat.matcher(str);
-    	boolean flg = false;
-    	if (matcher.find())   
-    	{
-    		flg = true;
-    	}
-    	return flg;
     }
     
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
@@ -107,7 +92,7 @@ public class RegisterController
     				              "请再次输入你的密码( ^_^ )? !");
     		return backMessage;
     	}
-    	if(isContainsChinese(user.getUsername())) 
+    	if(StringUtill.isContainsChinese(user.getUsername())) 
     	{
     		MessageUtil.setSimpleBackMessage(backMessage, false, 
 	                "请使用英文名!..@_@|||||..");
