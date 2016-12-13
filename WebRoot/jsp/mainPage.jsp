@@ -35,26 +35,6 @@ String imgPath = basePath + "image/";
 					          <br>
 							  <img id="pic_left" src="<%=basePath %>image/walker.jpg" alt/>
 							  <br><br>
-							  <!--
-                              Gather ye rosebuds while ye may,<br>
-                              Old time is still a-flying:<br>
-                              And this same flower that smiles today<br>
-                              Tomorrow will be dying<br>
-                              The glorious lamp of heaven, the sun,<br>
-                              The higher hes a-getting,<br>
-                              The sooner will his race be run,<br>
-                              And nearer he""s to setting.<br>
-                              That age is best which is the first,<br>
-                              When youth and blood are warmer;<br>
-                              But being spent, the worse, and worst<br>
-                              Times still succeed the former.<br>
-                              Then be nor coy, but use your time,<br>
-                              And while ye may, go marry:<br>
-                              For having lost but once your prime,<br>
-                              You may for ever tarry.<br>
-							  黑夜给了我黑色的眼睛<br>
-							  而我却用他寻找光明						
-							  -->
 							  我是否该写一首悲伤的歌<br>
 							  在你睡觉的时候唱给你听<br>
 							  我是否该写一首哀怨的歌<br>

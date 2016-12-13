@@ -1,5 +1,6 @@
 <%@page pageEncoding="utf-8" contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -46,33 +47,53 @@ String imgPath = basePath + "image/";
                </script>
       </head>
       <body>
-      		  <div id = "title">
-              <h4 class = "title">不 要 低 头<br><br>王 冠 会 掉
-                    <br></h4>
+			  <div id="sonn_title">
+					<p id="main_word">断剑重铸之日，骑士归来之时</p>   
+			  </div>
+
+		    <div id="header">
+		      	 <div id="navigator">
+		      		<ul id="navList">
+		                 <li><font>日   向  博  客&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</font></li>
+		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
+		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
+		                 <li><a href ="">主页</a></li>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${userName}</a></li></c:if>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${userName}</a></li></c:if>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
+		                 <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
+		                 <li><a href ="/RiXiang_blog/sonne/sonne.form">作者-博客开发记录</a></li>
+		           	</ul>
+		         </div>
+		     </div>
+              <div id = "h_pic">
+                   <!--if the pic's path is empty,use the default path. -->
+                   <c:choose>
+  	                    <c:when test="${!empty h_pic_path}">
+  	           	              <img src="<%=basePath %>${h_pic_path }" alt/>
+  	                    </c:when>
+  	                    <c:otherwise>
+  	           	              <img src="<%=basePath %>${defulat_path}" alt/>
+  	                     </c:otherwise>
+                    </c:choose>
+					<br>
+                    &nbsp&nbsp&nbsp<a href = "/RiXiang_blog/head/show.form">上传头像</a>
               </div>
-              <div id="col_left">
-                    <div id="menu">
-                          <h2>日   向</h2>
-                          <ul>
-                              <li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li>
-                              <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
-                              <li><c:if test="${!empty userName}"><a href ="">个人主页- ${userName}</a></c:if></li>
-                              <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${userName}</a></li></c:if>
-                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></c:if></li>
-                              <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-                              <li><a href ="/RiXiang_blog/sonne/sonne.form">作者-博客开发记录</a></li>
-                          </ul>
-                    </div>
-              </div>
-              <div id = "article_list">
-                          <c:forEach items="${page.content}" var="article" >
-                                  <span id = "article_title"><a href = "/RiXiang_blog/article/show.form?id=${article.id}">${article.title}</a></span>
-                                  <button type="button" id=${article.id} onclick="button_Click_1(this)">删除</button>
-                                  <button type="button" id=${article.id} onclick="button_Click_2(this)">编辑</button><br> 
-                                  <!-- <p>文章内容： ${article.content}</p> -->   
-                          </c:forEach>  
+              <div id = "main_page" class="main_page">
+                       <div id="article_lst">
+			                 <c:forEach items="${page.content}" var="article" >
+						            <div id="article_block" class="article_block">
+                                        <span id = "article_title"><a href = "/RiXiang_blog/article/show.form?id=${article.id}">${article.title}</a></span>
+                                        <div id="button">
+										     <button type="button" id=${article.id} onclick="button_Click_1(this)">删除</button>
+                                              <button type="button" id=${article.id} onclick="button_Click_2(this)">编辑</button><br> 
+                                               <!-- <p>文章内容： ${article.content}</p> -->   
+									    </div>
+							        </div>
+                             </c:forEach>
+                         </div>							 
                     <div id = "page_select">   
-                                                                    共${page.pageInfo.totalCount}条纪录，当前第${page.pageInfo.currentPage}/${page.pageInfo.totalPage}页，每页${page.pageInfo.everyPage}条纪录
+                           共${page.pageInfo.totalCount}条纪录，当前第${page.pageInfo.currentPage}/${page.pageInfo.totalPage}页，每页${page.pageInfo.everyPage}条纪录
                           <c:choose>
                                     <c:when test = "${page.pageInfo.hasPrePage}">
                                      			<a href="<%=basePath %>space/list.form?currentPage=1">首页</a>

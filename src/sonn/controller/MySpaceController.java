@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import sonn.entity.Article;
+import sonn.entity.User;
 import sonn.service.ArticleService;
 import sonn.service.UserService;
+import sonn.util.IOUtill;
 import sonn.util.Page;
 import sonn.util.PageInfo;
 
@@ -20,6 +22,7 @@ import sonn.util.PageInfo;
 * @Description: personal space
 * @author sonne
 * @date 2016-5-21 下午6:38:00 
+*       2016-12-13 上传头像功能暂时合入个人主页
 * @version 1.0
  */
 @Controller
@@ -36,10 +39,24 @@ public class MySpaceController
     public String mySpace(HttpServletRequest request,PageInfo pageInfo,Model model) throws Exception
     {
     	String username = userService.getUsernameFromSession(request);
+    	
 		pageInfo.setEveryPage(12);
         Page<Article> page = articleService.getArticlesByUsername(username, pageInfo);
        	model.addAttribute("page",page);
        	model.addAttribute("userName",username);
+       	
+		User user = userService.findByUserName(username).get(0);
+		// if the user didnot upload his picture,the path is null
+		String h_pic_path = null;
+		if (null != user.getH_pic_path()) {
+			h_pic_path = IOUtill.getRelativePath(user.getH_pic_path());
+		}
+		else {
+			model.addAttribute("defulat_path", "h_pics/default.jpg");
+		}
+		
+		model.addAttribute("h_pic_path", h_pic_path);
+       	
         return "mySpace";
     }
 }
