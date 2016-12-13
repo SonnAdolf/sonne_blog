@@ -83,6 +83,7 @@ public class HpicController {
     					}
     					// uodate user of mysql db
     					User user = userService.findByUserName(username).get(0);
+    					path = IOUtill.getRelativePath(path);
     					user.setH_pic_path(path);
     					userService.update(user);
     				}

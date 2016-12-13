@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -65,6 +66,9 @@ public class Article
 	/*date of article*/
 	@DateTimeFormat(pattern = "yyyy-MM-dd") 
 	private Date date;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	private User author;
 	
 	public int getId()
 	{
@@ -153,6 +157,14 @@ public class Article
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 	
 }

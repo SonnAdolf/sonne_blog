@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sonn.Order;
 import sonn.entity.Article;
 import sonn.entity.Comment;
+import sonn.entity.User;
 import sonn.service.ArticleService;
 import sonn.service.CommentService;
 import sonn.service.UserService;
@@ -28,295 +29,298 @@ import sonn.util.StringUtill;
 import com.alibaba.fastjson.JSONObject;
 
 /**
-* @ClassName: ArticleController 
-* @Description: ArticleController
-* @author sonne
-* @date 2016-3-25 2016-05-15 write article func 
-*       2016-05-21 save the contents of articles in server context.
-*       2016.07.30 add links form myspace to write article page
-*                        and from show article page to ...
-*       2016.11   article delete function.
-*       2016-11-11 article summary
-*       2016-11-13 article edit
-*       2016-11-27 order or list
-*       2016-11-28 add date
-*       2016-12-07 sort the comments
-* @version 1.0
+ * @ClassName: ArticleController
+ * @Description: ArticleController
+ * @author sonne
+ * @date 2016-3-25 
+ *       2016-05-15 write article func 
+ *       2016-05-21 save the contents of  articles in server context. 
+ *       2016.07.30 add links form myspace to write  article page and from show article page to ... 
+ *       2016.11 article delete function.
+ *       2016-11-11 article summary 
+ *       2016-11-13 article edit 
+ *       2016-11-27 order or list 2016-11-28 add date 
+ *       2016-12-07 sort the comments
+ *       2016-12-11 check if the article already exits when write a new article
+ * @version 1.0
  */
 @Controller
 @RequestMapping("/article")
-public class ArticleController 
-{
-    @Resource(name = "articleServiceImpl")
-    private ArticleService articleService;
-    
-    @Resource(name = "userServiceImpl")
-    private UserService userService;
-    
-    @Resource(name = "commentServiceImpl")
-    private CommentService commentService;
-    
-    /*
-     * Get all articles, and show them at the main page.
-     *
-     * @param  HttpServletRequest request, PageInfo pageInfo, Model model
-     * @return the jsp page
-     */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(HttpServletRequest request,PageInfo pageInfo,
-    		                   Model model) throws Exception
-    {
-    	pageInfo.setEveryPage(6);
-    	List<Order> orders = new ArrayList<Order>();
+public class ArticleController {
+	@Resource(name = "articleServiceImpl")
+	private ArticleService articleService;
+
+	@Resource(name = "userServiceImpl")
+	private UserService userService;
+
+	@Resource(name = "commentServiceImpl")
+	private CommentService commentService;
+
+	/*
+	 * Get all articles, and show them at the main page.
+	 * 
+	 * @param HttpServletRequest request, PageInfo pageInfo, Model model
+	 * 
+	 * @return the jsp page
+	 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(HttpServletRequest request, PageInfo pageInfo,
+			Model model) throws Exception {
+		pageInfo.setEveryPage(6);
+		List<Order> orders = new ArrayList<Order>();
 		Order order = new Order("id", Order.Direction.desc);
-    	orders.add(order);
-    	Page<Article> page = articleService.findPage(pageInfo,Article.class, orders);
-    	List<Article> articleList = page.getContent();
-    	page.setContent(getArticleListOfSummaryByUrl(articleList));
-    	model.addAttribute("page",page);
-    	String username = userService.getUsernameFromSession(request);
-		if(null != username)
-		{
-	    	model.addAttribute("userName",username);
+		orders.add(order);
+		Page<Article> page = articleService.findPage(pageInfo, Article.class,
+				orders);
+		List<Article> articleList = page.getContent();
+		page.setContent(getArticleListOfSummaryByUrl(articleList));
+		model.addAttribute("page", page);
+		String username = userService.getUsernameFromSession(request);
+		if (null != username) {
+			model.addAttribute("userName", username);
 		}
-        return "mainPage";
-    }
-    
-    @RequestMapping(value = "/writeArticlePage", method = RequestMethod.GET)
-    public String writeArticlePage(HttpServletRequest request,PageInfo pageInfo,Model model) throws Exception
-    {
-    	String username = userService.getUsernameFromSession(request);
-       	model.addAttribute("userName",username);
-        return "writeArticlePage";
-    }
-    
-    /*
-    * @Title: delete 
-    * @Description: delete article function.
-    * @param @param request
-    * @param @param id
-    * @param @return
-    * @param @throws Exception    
-    * @return boolean  
-    * @throws
-     */
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    @ResponseBody
-    public boolean delete(HttpServletRequest request,int id) throws Exception
-    {
+		return "mainPage";
+	}
+
+	@RequestMapping(value = "/writeArticlePage", method = RequestMethod.GET)
+	public String writeArticlePage(HttpServletRequest request,
+			PageInfo pageInfo, Model model) throws Exception {
+		String username = userService.getUsernameFromSession(request);
+		model.addAttribute("userName", username);
+		return "writeArticlePage";
+	}
+
+	/*
+	 * @Title: delete
+	 * 
+	 * @Description: delete article function.
+	 * 
+	 * @param @param request
+	 * 
+	 * @param @param id
+	 * 
+	 * @param @return
+	 * 
+	 * @param @throws Exception
+	 * 
+	 * @return boolean
+	 * 
+	 * @throws
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean delete(HttpServletRequest request, int id) throws Exception {
 		Article db_article = articleService.find(id, Article.class);
-		if(id <= 0 || null == db_article) 
-		{
+		if (id <= 0 || null == db_article) {
 			return false;
 		}
 		articleService.delete(id, Article.class);
-		//delete the local files
+		// delete the local files
 		IOUtill.delete(db_article.getArticleAddr());
 		IOUtill.delete(db_article.getSummaryAddr());
-        return true;
-    }
-    
-    @RequestMapping(value = "/editInit", method = RequestMethod.GET)
-    public String editInit(HttpServletRequest request,Integer id, Model model) throws Exception
-    {
-    	if(null == id)
-    	{
-    		return "error";
-    	}
-		Article article =  articleService.find(id, Article.class);
-		if(null == articleService.find(id, Article.class)) 
-		{
+		return true;
+	}
+
+	@RequestMapping(value = "/editInit", method = RequestMethod.GET)
+	public String editInit(HttpServletRequest request, Integer id, Model model)
+			throws Exception {
+		if (null == id) {
+			return "error";
+		}
+		Article article = articleService.find(id, Article.class);
+		if (null == articleService.find(id, Article.class)) {
 			return "error";
 		}
 		article = getArticleOfContentByUrl(article);
-    	model.addAttribute("article",article);
-        return "editArticlePage";
-    }
-    
+		model.addAttribute("article", article);
+		return "editArticlePage";
+	}
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    @ResponseBody
-    public boolean edit(HttpServletRequest request,Article article, String articleContent, Model model) throws Exception
-    {
-		Article db_article =  articleService.find(article.getId(), Article.class);
-		if (db_article == null) 
-		{
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean edit(HttpServletRequest request, Article article,
+			String articleContent, Model model) throws Exception {
+		Article db_article = articleService
+				.find(article.getId(), Article.class);
+		if (db_article == null) {
 			return false;
 		}
-		
-		// only the title may be edited on the db 
-		// and if the title changed content and summary urls will be changed too.
-		if (!db_article.getTitle().equals(article.getTitle()))
-		{
+
+		// only the title may be edited on the db
+		// and if the title changed content and summary urls will be changed
+		// too.
+		if (!db_article.getTitle().equals(article.getTitle())) {
 			String username = userService.getUsernameFromSession(request);
-			//get new urls
-			String articleUrl = 
-					articleService.getArticleUrl(article, request, username);	
-			String summaryUrl = 
-					articleService.getSummaryUrl(article, request, username);
+			// get new urls
+			String articleUrl = articleService.getArticleUrl(article, request,
+					username);
+			String summaryUrl = articleService.getSummaryUrl(article, request,
+					username);
 			article.setArticleAddr(articleUrl);
 			article.setSummaryAddr(summaryUrl);
 			articleService.update(article);
 		}
-		
-		// history problem, former version donot have a summary 
-		if (db_article.getSummaryAddr() == null || db_article.getSummaryAddr().equals(""))
-		{
+
+		// history problem, former version donot have a summary
+		if (db_article.getSummaryAddr() == null
+				|| db_article.getSummaryAddr().equals("")) {
 			String username = userService.getUsernameFromSession(request);
-			String summaryUrl = 
-					articleService.getSummaryUrl(article, request, username);	
+			String summaryUrl = articleService.getSummaryUrl(article, request,
+					username);
 			article.setSummaryAddr(summaryUrl);
 			articleService.update(article);
 		}
-		
+
 		// then update the local file of content and summary
-		// first delete 
+		// first delete
 		IOUtill.delete(db_article.getArticleAddr());
 		IOUtill.delete(db_article.getSummaryAddr());
-		
+
 		// rewrite content
 		IOUtill.writeByUrl(article.getArticleAddr(), articleContent);
 		// rewrite summary
 		// remove all the tags of HTML
 		String summary = StringUtill.removeTag(articleContent);
-		//get the summary of article
-		if(summary.length() > 300) 
-		{
+		// get the summary of article
+		if (summary.length() > 300) {
 			summary = summary.substring(0, 300);
 		}
-		//write the summary string on the local file
+		// write the summary string on the local file
 		IOUtill.writeByUrl(article.getSummaryAddr(), summary);
-		
-        return true;
-    }
-    
-    
-    @RequestMapping(value = "/writeArticle", method = RequestMethod.POST)
-    @ResponseBody
-    public JSONObject submit(HttpServletRequest request,Article article,
-    		                             String articleContent) throws Exception
-    {
+
+		return true;
+	}
+
+	@RequestMapping(value = "/writeArticle", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject submit(HttpServletRequest request, Article article,
+			String articleContent) throws Exception {
 		JSONObject jo = new JSONObject();
-		if(null == article || StringUtill.isStringEmpty(articleContent))
-		{
+		if (null == article || StringUtill.isStringEmpty(articleContent)) {
 			jo.put("success", false);
 			jo.put("info", "文章内容为空");
-	        return jo;
+			return jo;
+		}
+		if (StringUtill.isStringEmpty(article.getTitle())) {
+			jo.put("success", false);
+			jo.put("info", "文章题目不可为空");
+			return jo;
 		}
 		String username = userService.getUsernameFromSession(request);
+
+		String articleUrl = articleService.getArticleUrl(article, request,
+				username);
+
+		// check if the file already exists
+		if (IOUtill.isFileExits(articleUrl)) {
+			jo.put("success", false);
+			jo.put("info", "您已经写过同样题目文章");
+			return jo;
+		}
+		
+		User user = userService.findByUserName(username).get(0);
+		article.setAuthor(user);
+		
 		article.setAuthorName(username);
-
-		String articleUrl = articleService.getArticleUrl(article, request, username);
-
-		//数据库中存储文章路径
+		// 数据库中存储文章路径
 		article.setArticleAddr(articleUrl);
-		
-		//向指定目录下存储文章内容
-		IOUtill.writeByUrl(articleUrl,articleContent);
-		
-		String summaryUrl = 
-				articleService.getSummaryUrl(article, request, username);
-		//remove all the tags of HTML
+
+		// 向指定目录下存储文章内容
+		IOUtill.writeByUrl(articleUrl, articleContent);
+
+		String summaryUrl = articleService.getSummaryUrl(article, request,
+				username);
+		// remove all the tags of HTML
 		String summary = StringUtill.removeTag(articleContent);
 		article.setSummaryAddr(summaryUrl);
-		//get the summary of article
-		if(summary.length() > 300) 
-		{
+		// get the summary of article
+		if (summary.length() > 300) {
 			summary = summary.substring(0, 300);
 		}
-		//write the summary string on the local file
+		// write the summary string on the local file
 		IOUtill.writeByUrl(summaryUrl, summary);
-		
+
 		Date date = new Date();
 		article.setDate(date);
-		
+
 		articleService.save(article);
-		
+
 		MessageUtil.setSimpleIsSuccessJSON(jo, true);
-        return jo;
-    }
-    
-    /*
-     * Select the article by the id, and show it at the jsp page.
-     *
-     * @param  HttpServletRequest request, Integer id, Model model
-     * @return the jsp page
-     */
-    @RequestMapping(value = "/show", method = RequestMethod.GET)
-    public String show(HttpServletRequest request, Integer id, Model model) throws Exception
-    {
-    	if(null == id)
-    	{
-    		return "error";
-    	}
-		Article article = articleService.find(id,Article.class);
+		return jo;
+	}
+
+	/*
+	 * Select the article by the id, and show it at the jsp page.
+	 * 
+	 * @param HttpServletRequest request, Integer id, Model model
+	 * 
+	 * @return the jsp page
+	 */
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public String show(HttpServletRequest request, Integer id, Model model)
+			throws Exception {
+		if (null == id) {
+			return "error";
+		}
+		Article article = articleService.find(id, Article.class);
 		article = getArticleOfContentByUrl(article);
-		
+
 		String username = userService.getUsernameFromSession(request);
-		
+
 		List<Comment> comments = article.getComments();
-       	model.addAttribute("userName",username);
-    	model.addAttribute("article",article);
-    	model.addAttribute("comments",comments);
-        return "showArticlePage";
-    }
-    
-    /*
-     * show a article's content by clicking the url from main page.
-     *
-     * @param  HttpServletRequest request, Integer id, Model model
-     * @return the jsp page
-     */
-    @RequestMapping(value = "/showFromMainPage", method = RequestMethod.GET)
-    public String showFromMainPage(HttpServletRequest request, Integer id, Model model) throws Exception
-    {
-    	if(null == id)
-    	{
-    		return "error";
-    	}
-		Article article = articleService.find(id,Article.class);
+		model.addAttribute("userName", username);
+		model.addAttribute("article", article);
+		model.addAttribute("comments", comments);
+		return "showArticlePage";
+	}
+
+	/*
+	 * show a article's content by clicking the url from main page.
+	 * 
+	 * @param HttpServletRequest request, Integer id, Model model
+	 * 
+	 * @return the jsp page
+	 */
+	@RequestMapping(value = "/showFromMainPage", method = RequestMethod.GET)
+	public String showFromMainPage(HttpServletRequest request, Integer id,
+			Model model) throws Exception {
+		if (null == id) {
+			return "error";
+		}
+		Article article = articleService.find(id, Article.class);
 		article = getArticleOfContentByUrl(article);
-		System.out.println(article.getContent());
 		// sort the comments
 		List<Comment> comments = commentService.sort(article.getComments());
 		String username = userService.getUsernameFromSession(request);
-    	model.addAttribute("article",article);
-    	model.addAttribute("userName",username);
-    	model.addAttribute("comments",comments);
-        return "showArticlePage";
-    }
-    
+		model.addAttribute("article", article);
+		model.addAttribute("userName", username);
+		model.addAttribute("comments", comments);
+		return "showArticlePage";
+	}
 
-    private List<Article> getArticleListOfSummaryByUrl(List<Article> articleList)
-    {
-    	List<Article> newArtiList = new ArrayList<Article>();
-    	Article article = new Article();
-    	String url;
-    	for(int i = 0; i < articleList.size(); i++ )
-    	{
-    		article = articleList.get(i);
-    		if(null == article)
-    		{
-    			break;
-    		}
-    		url = article.getSummaryAddr();
-    		if(StringUtill.isStringEmpty(url))
-    		{
-    			article.setSummary("");
-    		}
-    		else
-    		{
-        		article.setSummary(IOUtill.readByUrl(url));
-    		}
-    		newArtiList.add(article);
-    	}
-    	return newArtiList;
-    }
-    
-    private Article getArticleOfContentByUrl(Article article)
-    {
-    	article.setContent(IOUtill.readByUrl(article.getArticleAddr()));
-    	return article;
-    }
-    
+	private List<Article> getArticleListOfSummaryByUrl(List<Article> articleList) {
+		List<Article> newArtiList = new ArrayList<Article>();
+		Article article = new Article();
+		String url;
+		for (int i = 0; i < articleList.size(); i++) {
+			article = articleList.get(i);
+			if (null == article) {
+				break;
+			}
+			url = article.getSummaryAddr();
+			if (StringUtill.isStringEmpty(url)) {
+				article.setSummary("");
+			} else {
+				article.setSummary(IOUtill.readByUrl(url));
+			}
+			newArtiList.add(article);
+		}
+		return newArtiList;
+	}
+
+	private Article getArticleOfContentByUrl(Article article) {
+		article.setContent(IOUtill.readByUrl(article.getArticleAddr()));
+		return article;
+	}
+
 }

@@ -117,11 +117,11 @@ String imgPath = basePath + "image/";
                   <img src="<%=imgPath%>mainPageBanner.png" ALT=""/> 
              </div>
               <div id = "article_list">
-                   <h2>添加文章</h2>
+                   <br>
                    <form id="articleForm" action="writeArticle.form" method="post">
                                <label>标题：</label>
                               <input type="text" name="title" style="height:25px;width:150px;"/><br>
-                               <label>内容：</label>
+                               <br>
   				               <div id="editor-container" class="container">
                                    <textarea id="articleContent" name="articleContent" style="display:none;">
                                    </textarea> 

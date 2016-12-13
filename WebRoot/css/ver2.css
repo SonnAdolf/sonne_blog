@@ -1,0 +1,61 @@
+body 
+{
+	background-image:url(../image/sonn_background.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+	width:100%;
+}
+
+#col_left 
+{
+	padding:2px;
+	width:15%;
+	height:75%;
+	float:left;
+	margin-left:10%; 
+	margin-top:200px; 
+	margin-right:10px;
+	background-color: #ffffff;
+	border: 1px solid black;
+	filter:alpha(opacity=60);
+	opacity:0.6;
+}
+#article_list 
+{ 
+	padding:5px;
+	float:left;
+	width:60%;
+	margin-top:200px;
+	background-color:#ffffff;
+	border: 1px solid black;
+	filter:alpha(opacity=60);
+	opacity:0.6;
+}
+
+.h_pic{
+	float:left;
+	height:48px;
+	width:48px;
+	margin-top: 3px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+}
+
+.title {
+	font-weight:900;
+	font-family: KaiTi;
+}
+
+.author{}
+#title
+{ 
+	position:absolute;
+  	left:130px;
+    top:75px;
+ }
+h4.title
+{
+	font-style:oblique;
+	font-weight:900;
+}

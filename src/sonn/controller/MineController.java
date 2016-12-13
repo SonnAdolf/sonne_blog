@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import sonn.entity.User;
 import sonn.service.UserService;
+import sonn.util.IOUtill;
 import sonn.util.PageInfo;
 
 @Controller
@@ -27,20 +28,13 @@ public class MineController {
 		// if the user didnot upload his picture,the path is null
 		String h_pic_path = null;
 		if (null != user.getH_pic_path()) {
-			h_pic_path = getRelativePath(user.getH_pic_path());
+			h_pic_path = IOUtill.getRelativePath(user.getH_pic_path());
 		}
 		else {
 			model.addAttribute("defulat_path", "h_pics/default.jpg");
 		}
 		model.addAttribute("h_pic_path", h_pic_path);
 		return "minePage";
-	}
-	
-	private String getRelativePath(String path) {
-		String[] str_arr = path.split("/");
-		int len = str_arr.length;
-		String relativePath = str_arr[len-3] + "/" + str_arr[len-2] + "/" + str_arr[len-1];
-		return relativePath;
 	}
 }
 

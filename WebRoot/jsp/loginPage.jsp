@@ -58,6 +58,7 @@ String imgPath = basePath + "image/";
 						location.href = "/RiXiang_blog/space/list.form"; 
 					}
 					else {
+					    $("#password").val("");
 						alert("登录失败："+" " + data.returnMessage);
 					}
 				}
@@ -123,6 +124,5 @@ String imgPath = basePath + "image/";
                         </div>
             </div>
        </div>
-    		
       </body>
 </html>

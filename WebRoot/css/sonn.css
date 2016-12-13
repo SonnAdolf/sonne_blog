@@ -1,52 +1,161 @@
-body 
-{
-	background-image:url(../image/sonn_background.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-attachment: fixed;
-	width:100%;
+body {
+	background-color:#FFFFCC;
 }
 
-#col_left 
-{
-	padding:2px;
-	width:15%;
-	height:75%;
-	float:left;
-	margin-left:10%; 
-	margin-top:200px; 
-	margin-right:10px;
-	background-color: #ffffff;
-	border: 1px solid black;
-	filter:alpha(opacity=60);
-	opacity:0.6;
-}
-#article_list 
-{ 
-	padding:5px;
-	float:left;
-	width:60%;
-	margin-top:200px;
-	background-color:#ffffff;
-	border: 1px solid black;
-	filter:alpha(opacity=60);
-	opacity:0.6;
+#header{
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1030;
+    margin-bottom: 18px;
+    overflow: visible;
+    background-color: #2C2C2C;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+    clear: both;
+    content: "";
+    padding-right: 5px;
 }
 
-.title
-{
+#navigator {
+    left: 0;
+    right: 0;
+    margin: 0 0 0 0;
+    position: relative;
+}
+
+/* ul */
+#navList {
+    list-style: none outside none;
+    display: block;
+    float: left;
+    left: 0;
+    right: 0;
+    margin: 0 10px 0 0;
+    position: relative;
+}
+
+#navList li {
+    border-bottom: 2px solid;
+}
+
+#navList li {
+    float: left;
+    line-height: 18px;
+}
+
+#navList a:link {
+	text-decoration:none;
+    color: #999999;
+    line-height: 19px;
+    padding: 8px 10px 8px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    display: block;
+}
+
+#navList a:visited {
+	text-decoration:none;
+    color: #999999;
+    line-height: 19px;
+    padding: 8px 10px 8px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    display: block;
+}
+
+#navList a:hover {
+	text-decoration:underline;
+	color:red;
+    line-height: 19px;
+    padding: 8px 10px 8px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    display: block;
+}
+
+#navList a:active {
+	text-decoration:underline;
+	color:red;
+    line-height: 19px;
+    padding: 8px 10px 8px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    display: block;
+}
+
+#navList font {
+    color: white;
+    line-height: 19px;
+    padding: 8px 10px 8px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    display: block;	
+}
+
+#poem_left {
+	margin-top:30px;
+	float:left;
+	height:100%;
+	width:25%;
+	line-height: 30px;
+	text-align: center;
+	/*font-style:oblique;*/
+	/*font-family:Tahoma;*/
+	font-family:KaiTi;
+	font-weight:bold;
+}
+
+#pic_left {
+	height:200px;
+	width: 150px;
+}
+
+#article_list { 
+	float:left;
+	width:65%;
+	margin-top:20px;
+	border-left: 1px solid #aaa;
+	padding:13px 0px 0px 13px;
+}
+
+#article_block {
+	padding-bottom:5px;
+	border-bottom:1px solid #aaa;
+	/*设置div最小高度为70px,若高于70px自动调整*/
+	height:auto!important;
+	min-height:70px;
+}
+
+.article_content {
+	margin-bottom:0px;
+}
+
+#author_date {
+	/*author和date右对齐*/
+	float:right;
+	font-family:Microsoft YaHei;
+	color:#989898;
+}
+
+.h_pic{
+	float:left;
+	height:48px;
+	width:48px;
+	margin-top: 3px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+}
+
+.title {
 	font-weight:900;
 	font-family: KaiTi;
 }
-.author{}
-#title
-{ 
-	position:absolute;
-  	left:130px;
-    top:75px;
- }
-h4.title
-{
-	font-style:oblique;
-	font-weight:900;
+
+.title a {
+		text-decoration:none;
+}
+
+#footer {
+	float:right;
+}
+
+.page_txt {
+	/*翻页信息右对齐*/
+	font-family:MingLiU;
 }

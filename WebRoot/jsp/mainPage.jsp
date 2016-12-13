@@ -13,57 +13,100 @@ String imgPath = basePath + "image/";
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/sonn.css" media="all" />
       </head>
-      <body>
-      		  <div id = "title">
-              <h4 class = "title">断 剑 重 铸 之 日<br><br>骑 士 归 来 之 时
-                    <br></h4>
+      <body>              
+		    <div id="header">
+		      	 <div id="navigator">
+		      		<ul id="navList">
+		                 <li><font>日   向  博  客&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</font></li>
+		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
+		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
+		                 <li><a href ="">主页</a></li>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${userName}</a></li></c:if>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${userName}</a></li></c:if>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
+		                 <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
+		                 <li><a href ="/RiXiang_blog/sonne/sonne.form">作者-博客开发记录</a></li>
+		           	</ul>
+		         </div>
+		     </div>
+			 <div id="poem_left">
+				  <p>
+				       <poem>
+					          <br>
+							  <img id="pic_left" src="<%=basePath %>image/walker.jpg" alt/>
+							  <br><br>
+							  <!--
+                              Gather ye rosebuds while ye may,<br>
+                              Old time is still a-flying:<br>
+                              And this same flower that smiles today<br>
+                              Tomorrow will be dying<br>
+                              The glorious lamp of heaven, the sun,<br>
+                              The higher hes a-getting,<br>
+                              The sooner will his race be run,<br>
+                              And nearer he""s to setting.<br>
+                              That age is best which is the first,<br>
+                              When youth and blood are warmer;<br>
+                              But being spent, the worse, and worst<br>
+                              Times still succeed the former.<br>
+                              Then be nor coy, but use your time,<br>
+                              And while ye may, go marry:<br>
+                              For having lost but once your prime,<br>
+                              You may for ever tarry.<br>
+							  黑夜给了我黑色的眼睛<br>
+							  而我却用他寻找光明						
+							  -->
+							  我是否该写一首悲伤的歌<br>
+							  在你睡觉的时候唱给你听<br>
+							  我是否该写一首哀怨的歌<br>
+							  在你伤心的时候唱给你听<br>
 
-              </div>
-              <div id="col_left">
-                    <div id="menu">
-                          <h2>日   向</h2>
-                          <ul>
-                              <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
-                              <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
-                              <li><a href ="">主页</a></li>
-                              <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${userName}</a></li></c:if>
-                              <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${userName}</a></li></c:if>
-                              <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-                              <li><a href ="/RiXiang_blog/sonne/sonne.form">作者-博客开发记录</a></li>
-                          </ul>
-                    </div>
-              </div>
+					   </poem>
+				  </p>
+			 </div>
               <div id = "article_list">
                           <c:forEach items="${page.content}" var="article" >
                               <div id = "article_block">
-                                  <span class = "title"><a href="<%=basePath %>article/showFromMainPage.form?id=${article.id}">${article.title}</a></span>&nbsp
-                                  <span class = "author">作者：${article.authorName}</span>&nbsp&nbsp<span class = "date">日期：${fn:substring(article.date,0,16)}</span><br> 
-                                     <p> ${article.summary}</p>
+                                  <p class="article_content"> 
+							       	   <span class = "title"><a href="<%=basePath %>article/showFromMainPage.form?id=${article.id}">${article.title}</a></span><br>
+                                  	    <c:choose>
+										     <c:when test="${empty article.author || empty article.author.h_pic_path }">
+										             <img class="h_pic" src="<%=basePath %>h_pics/default.jpg" alt>
+										     </c:when>
+		                                     <c:otherwise>
+			                                        <img class="h_pic" src="<%=basePath %>${article.author.h_pic_path }" alt>
+	                                         </c:otherwise>
+	                                    </c:choose>
+										${article.summary}<br>
+										 <div id = "author_date"> by ${article.authorName}&nbsp&nbsp${fn:substring(article.date,0,16)}</div>
+								  </p>
+								 
                                </div>
-                               <p>------------------------------------------------------------------------------------- </p>
-                          </c:forEach>     
-                                                                    共${page.pageInfo.totalCount}条纪录，当前第${page.pageInfo.currentPage}/${page.pageInfo.totalPage}页，每页${page.pageInfo.everyPage}条纪录
-                          <c:choose>
-                                    <c:when test = "${page.pageInfo.hasPrePage}">
-                                     			<a href="<%=basePath %>article/list.form?currentPage=1">首页</a>
-				                                <a href="<%=basePath %>article/list.form?currentPage=${page.pageInfo.currentPage-1}">上一页</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                           		   首页
-				                                                                                          上一页
-                                    </c:otherwise>
-                          </c:choose>
-                          <c:choose>
-                                     <c:when test = "${page.pageInfo.hasNextPage}">
-                                                <a href="<%=basePath %>article/list.form?currentPage=${page.pageInfo.currentPage+1}">下一页</a> 
-				                                <a href="<%=basePath %>article/list.form?currentPage=${page.pageInfo.totalPage}">尾页</a>
-                                     </c:when>
-                                     <c:otherwise>
-                                                                                                                                          下一页
-                                                                                                                                            尾页
-                                     </c:otherwise>
-                          </c:choose>
-			  </div>
+                         </c:forEach>     
+						 <div id="footer">
+                                <font class="page_txt">
+										          共${page.pageInfo.totalCount}条纪录，当前第${page.pageInfo.currentPage}/${page.pageInfo.totalPage}页，每页${page.pageInfo.everyPage}条纪录</font>
+                                <c:choose>
+                                          <c:when test = "${page.pageInfo.hasPrePage}">
+                                           			<a class="page_txt" href="<%=basePath %>article/list.form?currentPage=1">首页</a>
+				                                      <a class="page_txt" href="<%=basePath %>article/list.form?currentPage=${page.pageInfo.currentPage-1}">上一页</a>
+                                          </c:when>
+                                          <c:otherwise>
+                                                 		   <font class="page_txt">首页
+				                                                                 上一页</font>
+                                          </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                           <c:when test = "${page.pageInfo.hasNextPage}">
+                                                      <a class="page_txt" href="<%=basePath %>article/list.form?currentPage=${page.pageInfo.currentPage+1}">下一页</a> 
+				                                      <a class="page_txt" href="<%=basePath %>article/list.form?currentPage=${page.pageInfo.totalPage}">尾页</a>
+                                           </c:when>
+                                           <c:otherwise>
+                                                      <font class="page_txt">下一页
+                                                        尾页</font>
+                                           </c:otherwise>
+                                </c:choose>
+						</div>
+            </div>
 
       </body>
 </html>
