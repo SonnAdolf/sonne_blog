@@ -112,6 +112,8 @@
 	margin-top:20px;
 	border-left: 1px solid #aaa;
 	padding:13px 0px 0px 13px;
+	/*if the letters overflow the div,hide*/
+	overflow:hidden;
 }
 
 #article_block {

@@ -10,10 +10,17 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+             
+     	     <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+             <meta name="apple-mobile-web-app-capable" content="yes">
+             <meta name="apple-mobile-web-app-status-bar-style" content="black">
+             <meta name="format-detection" content="telephone=no">
+             
+             
              <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/login.css" media="all" />
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-1.3.1.js"></script>
-              <script type="text/javascript" src="<%=basePath %>Jquery/jquery.form.js"></script>   
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery.form.js"></script>   
              <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/js/bootstrap.min.js"></script>
              <script type="text/javascript" src="<%=basePath %>js/jsencrypt.min.js"></script>              
              <script type="text/javascript">
@@ -66,52 +73,34 @@ String imgPath = basePath + "image/";
       </head>
       <body>
        		<div class="container">
-            	<div class="container">
-        			<h1>Hello Sonne Blog</h1>
-    			</div>
-    			<nav class="navbar navbar-inverse">
-   				  <div class="navbar-header">
-    			    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu" aria-expanded="false">
-       				     <span class="sr-only">Toggle navigation</span>
-         				 <span class="icon-bar"></span>
-            			 <span class="icon-bar"></span>
-            			 <span class="icon-bar"></span>
-        			</button>
-       				 <a class="navbar-brand" href="/RiXiang_blog/article/list.form">主页</a>
-    			</div>
-            		<div class="navbar-collapse">
-                		<ul class="nav navbar-nav">
-                    		<li class="active"><a href="#">登录</a></li>
-                    		<li><a href="/RiXiang_blog/register/show.form">注册</a></li>
-                    		<li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-                    		<li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
-                		</ul>
-            		</div>
-        		</nav>
-        		
+                 <div id="back_way">
+            	    <a href ="/RiXiang_blog/article/list.form">返回主页</a>
+                 </div>
         		   <div id="content" class="row-fluid">
-        			   <div id="login" class="col-md-9">
+        		             <img src="<%=basePath %>image/cat.jpg" alt/>
+        			          <h4>Sign in to SonneBlog</h4>
+
             			   <h4>日向博客，你的精神家园</h4>
-	
 						   <form id="loginForm" action="login.form" method="post">
-   							     <div class="form-group">
-   						  		   <span class="glyphicon glyphicon-user"></span>
-    					            <input type="text" id="username" name="username" placeholder="Enter email">
+   							     <div id = "usr_name"  class="form-group">
+    					                 用户名 <input type="text" id="username" name="username" placeholder="Username">
     				            </div>
-  				               <div class="form-group">
-      				             <span class="glyphicon glyphicon-lock"></span>
-                                  <input type="password" id="password" name="password" placeholder="Password">
+  				               <div id = "passwd"  class="form-group">
+                                         密码 <input type="password" id="password" name="password" placeholder="Password">
                                </div>
            					  <textarea  style="display:none" id="pubkey" rows="15" cols="65">${publicKey}</textarea>
-                              <div class="form-group">
-                                 <span class="glyphicon glyphicon-check"></span>
-                                   <input type="text" id="captcha" name="captcha" placeholder="Enter captcha">
-                                  <img id="captchaImage"  src="captcha.form"/>
+                              <div id = "captcha"  class="form-group">
+                                          验证码 <input type="text" id="captcha" name="captcha" placeholder="Enter captcha">
                                </div>
-    
-                                <button id="submitbtn" name="submitbtn" class="btn btn-default">Submit</button>
-                             </form>
-                        </div>
+    						  <div id = "captcha_img"  class="form-group">
+							         <img id="captchaImage"  src="captcha.form"/>
+							  </div>
+	                                
+	                          <div id="submit_btn"  class="form-group">
+                                <button id="submitbtn" name="submitbtn" class="btn-primary btn-block">Submit</button>
+							  </div>
+                           </form>
+				    <!--
                          <div id="poem" class="col-md-3">
                                  <br/>
                                  <br/>
@@ -122,7 +111,10 @@ String imgPath = basePath + "image/";
                                  <p>天际却无引路的明星</p>
                                  <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp----《茫茫黑夜漫游》</p>
                         </div>
+					-->
             </div>
+
        </div>
+       
       </body>
 </html>
