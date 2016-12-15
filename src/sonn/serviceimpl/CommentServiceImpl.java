@@ -39,7 +39,7 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment> implements Comm
 			int min = i;
 			for(int j = i + 1; j < commentsLength; j++)
 			{
-				if(comments.get(j).getDate().after(comments.get(min).getDate())) 
+				if(comments.get(j).getDate().before(comments.get(min).getDate())) 
 				{
 					min = j;
 				}
@@ -48,6 +48,12 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment> implements Comm
 			comments.set(min, comments.get(i));
 			comments.set(i, tmp);
 		}
+		
+		//ÉèÖÃÆÀÂÛÂ¥²ã
+		for (int n = 0; n < commentsLength; n++) {
+			comments.get(n).setFloor(n + 1);
+		}
+		
 		return comments;
 	}
 	

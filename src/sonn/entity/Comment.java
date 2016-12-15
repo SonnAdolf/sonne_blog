@@ -41,6 +41,9 @@ public class Comment {
 	/* name of the author */
 	private String authorName;
 	
+	/* ÆÀÂÛÂ¥²ã*/
+	private int floor;
+	
 	/* quote other comment */
 //	@OneToOne(fetch = FetchType.LAZY)
 //	private Comment quote;
@@ -83,6 +86,14 @@ public class Comment {
 
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
+	}
+
+	public int getFloor() {
+		return floor;
+	}
+
+	public void setFloor(int floor) {
+		this.floor = floor;
 	}
 
 //	public Comment getQuote() {

@@ -234,6 +234,10 @@ String imgPath = basePath + "image/";
             }
             return true;
         },
+        pause: function(){
+          clearInterval(Snake.timer);
+          this.paint();
+        },
         //重新开始
         restart: function(){
             if(this.timer){

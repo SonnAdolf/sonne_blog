@@ -1,5 +1,6 @@
 package sonn.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -59,6 +60,7 @@ public class RegisterController
     	}
     	// using md5 to set the passwd
     	user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+    	user.setBlog_date(new Date());
 		userService.save(user);
     	session.setAttribute(User.PRINCIPAL_ATTRIBUTE_NAME,
 	              new Principal(user.getId(),user.getUsername()));

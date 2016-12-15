@@ -28,7 +28,6 @@ public class Page<T>
 		{
 		    this.content.addAll(content);
 		}
-	    
 		this.total = total;
 		this.pageInfo = pageInfo;
 	}

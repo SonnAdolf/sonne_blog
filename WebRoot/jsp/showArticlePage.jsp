@@ -94,7 +94,17 @@ String imgPath = basePath + "image/";
 				}
 				function successFunc(data) {
 					if (data.success) {
-						window.location.reload();
+					    var old_url = window.location.href;
+					    var index = old_url.search("currentPage"); 
+					    if (index != -1) {
+					        //若当前不是第一页，则评论成功后跳转到第一页
+					    	str_to_replace = old_url.substring(index, old_url.length);
+					    	new_url = old_url.replace(str_to_replace, "");
+					    	location.href = new_url;
+					    } else {
+					        //若当前是第一页，则评论成功后刷新当前页
+					    	window.location.reload();
+					    }
 					}
 					else {
 						alert(data.msg);
@@ -114,7 +124,7 @@ String imgPath = basePath + "image/";
 			  			<c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${userName}</a></li></c:if>
 			  			<c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
 			  			<li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-			  			<li><a href ="/RiXiang_blog/sonne/sonne.form">作者-博客开发记录</a></li>
+			  			<li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
 			  		</ul>
 			  	</div>
 			  </div>
@@ -123,12 +133,36 @@ String imgPath = basePath + "image/";
                     <p> ${article.content}</p>
                     <div id = "author">by：${article.authorName}</div> <br> <br> <br>
 					<div class="comment">
-                          <c:forEach items="${comments}" var="comment" >
+                          <c:forEach items="${comments_page.content}" var="comment">
 								<div class="comment_box">
-                                    <span class = "date">&nbsp${fn:substring(comment.date,0,16)}</span> &nbsp&nbsp<span class = "author">${comment.authorName}</span><br> 
+                                    <span class = "date">#${comment.floor}楼  &nbsp${fn:substring(comment.date,0,16)}</span> &nbsp&nbsp<span class = "author">${comment.authorName}</span><br> 
                                      <p>${comment.content}</p>
-								</div>
-                          </c:forEach> 
+								</div>                          
+                          </c:forEach>
+                          
+                        <div id = "page_select">   
+                           共${comments_page.pageInfo.totalCount}条纪录，当前第${comments_page.pageInfo.currentPage}/${comments_page.pageInfo.totalPage}页，每页${comments_page.pageInfo.everyPage}条纪录
+                             <c:choose>
+                                    <c:when test = "${comments_page.pageInfo.hasPrePage}">
+                                     			<a href="<%=basePath %>article/show.form?id=${article_id}&currentPage=1">首页</a>
+				                                <a href="<%=basePath %>article/show.form?id=${article_id}&currentPage=${comments_page.pageInfo.currentPage-1}">上一页</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                           		   首页
+				                                                                                          上一页
+                                    </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                     <c:when test = "${comments_page.pageInfo.hasNextPage}">
+                                                <a href="<%=basePath %>article/show.form?id=${article_id}&currentPage=${comments_page.pageInfo.currentPage+1}">下一页</a> 
+				                                <a href="<%=basePath %>article/show.form?id=${article_id}&currentPage=${comments_page.pageInfo.totalPage}">尾页</a>
+                                     </c:when>
+                                     <c:otherwise>
+                                                                                                                                          下一页
+                                                                                                                                            尾页
+                                     </c:otherwise>
+                            </c:choose>
+                        </div>
                          <p>写评论：</p>
                          <form id="commentForm" action="/RiXiang_blog/comment/writeComment.form" method="post">
 

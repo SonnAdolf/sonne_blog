@@ -25,7 +25,7 @@ String imgPath = basePath + "image/";
 		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${userName}</a></li></c:if>
 		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
 		                 <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-		                 <li><a href ="/RiXiang_blog/sonne/sonne.form">作者-博客开发记录</a></li>
+		                 <li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
 		           	</ul>
 		         </div>
 		     </div>
@@ -47,7 +47,7 @@ String imgPath = basePath + "image/";
                           <c:forEach items="${page.content}" var="article" >
                               <div id = "article_block">
                                   <p class="article_content"> 
-							       	   <span class = "title"><a href="<%=basePath %>article/showFromMainPage.form?id=${article.id}">${article.title}</a></span><br>
+							       	   <span class = "title"><a href="<%=basePath %>article/show.form?id=${article.id}">${article.title}</a></span><br>
                                   	    <c:choose>
 										     <c:when test="${empty article.author || empty article.author.h_pic_path }">
 										             <img class="h_pic" src="<%=basePath %>h_pics/default.jpg" alt>

@@ -15,6 +15,7 @@ import sonn.service.UserService;
 import sonn.util.IOUtill;
 import sonn.util.Page;
 import sonn.util.PageInfo;
+import sonn.util.TimeUtils;
 
 
 /**
@@ -23,6 +24,7 @@ import sonn.util.PageInfo;
 * @author sonne
 * @date 2016-5-21 下午6:38:00 
 *       2016-12-13 上传头像功能暂时合入个人主页
+*       2016-12-14 获取用户注册多久
 * @version 1.0
  */
 @Controller
@@ -56,7 +58,19 @@ public class MySpaceController
 		}
 		
 		model.addAttribute("h_pic_path", h_pic_path);
-       	
+		model.addAttribute("username", user.getUsername());
+		
+		// 获取用户注册多久
+		int[] arr = TimeUtils.getHowLongFromNow(user.getBlog_date());
+		String blog_age = "";
+		if (arr[0] != 0) {
+			blog_age = blog_age + Integer.toString(arr[0]) + "年";
+		}
+		if (arr[1] != 0) {
+			blog_age = blog_age + Integer.toString(arr[1]) + "个月";
+		}
+		
+		model.addAttribute("blog_age", blog_age);      	
         return "mySpace";
     }
 }

@@ -24,6 +24,7 @@ import sonn.util.IOUtill;
 import sonn.util.MessageUtil;
 import sonn.util.Page;
 import sonn.util.PageInfo;
+import sonn.util.PageUtil;
 import sonn.util.StringUtill;
 
 import com.alibaba.fastjson.JSONObject;
@@ -256,33 +257,55 @@ public class ArticleController {
 	 * 
 	 * @return the jsp page
 	 */
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public String show(HttpServletRequest request, Integer id, Model model)
-			throws Exception {
-		if (null == id) {
-			return "error";
-		}
-		Article article = articleService.find(id, Article.class);
-		article = getArticleOfContentByUrl(article);
-
-		String username = userService.getUsernameFromSession(request);
-
-		List<Comment> comments = article.getComments();
-		model.addAttribute("userName", username);
-		model.addAttribute("article", article);
-		model.addAttribute("comments", comments);
-		return "showArticlePage";
-	}
+//	@RequestMapping(value = "/show", method = RequestMethod.GET)
+//	public String show(HttpServletRequest request, Integer id, Integer currentPage,Model model)
+//			throws Exception {
+//		if (null == id) {
+//			return "error";
+//		}
+//		Article article = articleService.find(id, Article.class);
+//		article = getArticleOfContentByUrl(article);
+//
+//		String username = userService.getUsernameFromSession(request);
+//
+//		// sort the comments
+//		List<Comment> comments = commentService.sort(article.getComments());
+//		model.addAttribute("article", article);
+//		model.addAttribute("userName", username);
+//		model.addAttribute("article_id", id);
+//		
+//		if (currentPage == null || currentPage <= 0) {
+//			currentPage = 1;
+//		}
+//		int totalSize = comments.size();
+//		PageInfo pageInfo = PageUtil.createPage(10, comments.size(), currentPage);
+//		int beginIndex = pageInfo.getBeginIndex();
+//		long totalNum = pageInfo.getTotalCount();
+//		int everyPage = pageInfo.getEveryPage();
+//		if (totalNum - beginIndex < everyPage) {
+//			comments = comments.subList(beginIndex, (int) totalNum);
+//		}else {
+//			comments = comments.subList(beginIndex, beginIndex + everyPage); 
+//		}
+//
+//		// 评论分页
+//		Page<Comment> comments_page = 
+//				new Page<Comment>(comments, totalSize, pageInfo);
+//		
+//		model.addAttribute("comments_page", comments_page);
+//		
+//		return "showArticlePage";
+//	}
 
 	/*
-	 * show a article's content by clicking the url from main page.
+	 * Select the article by the id, and show it at the jsp page.
 	 * 
 	 * @param HttpServletRequest request, Integer id, Model model
 	 * 
 	 * @return the jsp page
 	 */
-	@RequestMapping(value = "/showFromMainPage", method = RequestMethod.GET)
-	public String showFromMainPage(HttpServletRequest request, Integer id,
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public String showFromMainPage(HttpServletRequest request, Integer id, Integer currentPage,
 			Model model) throws Exception {
 		if (null == id) {
 			return "error";
@@ -294,7 +317,27 @@ public class ArticleController {
 		String username = userService.getUsernameFromSession(request);
 		model.addAttribute("article", article);
 		model.addAttribute("userName", username);
-		model.addAttribute("comments", comments);
+		model.addAttribute("article_id", id);
+		
+		if (currentPage == null || currentPage <= 0) {
+			currentPage = 1;
+		}
+		int totalSize = comments.size();
+		PageInfo pageInfo = PageUtil.createPage(10, comments.size(), currentPage);
+		int beginIndex = pageInfo.getBeginIndex();
+		long totalNum = pageInfo.getTotalCount();
+		int everyPage = pageInfo.getEveryPage();
+		if (totalNum - beginIndex < everyPage) {
+			comments = comments.subList(beginIndex, (int) totalNum);
+		}else {
+			comments = comments.subList(beginIndex, beginIndex + everyPage); 
+		}
+
+		// 评论分页
+		Page<Comment> comments_page = 
+				new Page<Comment>(comments, totalSize, pageInfo);
+		
+		model.addAttribute("comments_page", comments_page);
 		return "showArticlePage";
 	}
 

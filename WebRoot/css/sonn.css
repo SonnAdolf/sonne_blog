@@ -1,4 +1,4 @@
-body {
+﻿body {
 	background-color:#FFFFCC;
 }
 
@@ -117,7 +117,7 @@ body {
 #article_block {
 	padding-bottom:5px;
 	border-bottom:1px solid #aaa;
-	/*设置div最小高度为70px,若高于70px自动调整*/
+	/*璁剧疆div鏈�皬楂樺害涓�0px,鑻ラ珮浜�0px鑷姩璋冩暣*/
 	height:auto!important;
 	min-height:70px;
 }
@@ -127,7 +127,6 @@ body {
 }
 
 #author_date {
-	/*author和date右对齐*/
 	float:right;
 	font-family:Microsoft YaHei;
 	color:#989898;
@@ -156,6 +155,5 @@ body {
 }
 
 .page_txt {
-	/*翻页信息右对齐*/
 	font-family:MingLiU;
 }

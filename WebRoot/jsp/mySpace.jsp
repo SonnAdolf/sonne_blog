@@ -62,7 +62,7 @@ String imgPath = basePath + "image/";
 		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${userName}</a></li></c:if>
 		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
 		                 <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-		                 <li><a href ="/RiXiang_blog/sonne/sonne.form">作者-博客开发记录</a></li>
+		                 <li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
 		           	</ul>
 		         </div>
 		     </div>
@@ -77,7 +77,9 @@ String imgPath = basePath + "image/";
   	                     </c:otherwise>
                     </c:choose>
 					<br>
-                    &nbsp&nbsp&nbsp<a href = "/RiXiang_blog/head/show.form">上传头像</a>
+                    &nbsp&nbsp&nbsp<a href = "/RiXiang_blog/head/show.form">上传头像</a><br>
+                    &nbsp&nbsp&nbsp博名:${username }<br>
+                    &nbsp&nbsp&nbsp博龄:${blog_age }
               </div>
               <div id = "main_page" class="main_page">
                        <div id="article_lst">

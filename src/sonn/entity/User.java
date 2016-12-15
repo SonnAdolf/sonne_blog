@@ -1,5 +1,7 @@
 package sonn.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import sonn.annotation.IsValidString;
 
@@ -17,6 +20,7 @@ import sonn.annotation.IsValidString;
 * @date 2016-3-25 2016-5-1添加主键生成策略
 *       2016-11-25 check by annotation
 *       2016-12-04 path of h_pic
+*       2016-12-14 add the date of registering sonne blog
 * @version 1.0
  */
 @Entity
@@ -41,6 +45,10 @@ public class User
 	@IsValidString
 	@Length(min=1, max=200)	
 	private String h_pic_path;
+	
+	/*date of registering sonne blog*/
+	@DateTimeFormat(pattern = "yyyy-MM-dd") 
+	private Date blog_date;
 	
 	/* "身份信息"参数名称 */
 	public static final String PRINCIPAL_ATTRIBUTE_NAME 
@@ -84,6 +92,14 @@ public class User
 
 	public void setH_pic_path(String h_pic_path) {
 		this.h_pic_path = h_pic_path;
+	}
+
+	public Date getBlog_date() {
+		return blog_date;
+	}
+
+	public void setBlog_date(Date blog_date) {
+		this.blog_date = blog_date;
 	}
 	
 }
