@@ -7,8 +7,8 @@ Supported features：register,login,write articles with pictures and code,user's
 
 支持的功能：注册、登录、写文章可配插图和代码、用户头像、文章评论功能等等..
 
-temporary address of sonne_blog：http://123.207.230.31/RiXiang_blog/
+temporary address of sonne_blog：http://118.89.29.170/RiXiang_blog/
 
-日向博客暂时的地址：http://123.207.230.31/RiXiang_blog/
+日向博客暂时的地址：http://118.89.29.170/RiXiang_blog/
 
 
