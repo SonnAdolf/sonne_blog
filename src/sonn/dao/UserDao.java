@@ -7,8 +7,8 @@ import sonn.entity.User;
 
 /**
 * @ClassName: UserDao 
-* @Description: User dao½Ó¿Ú
-* @author ÍõÓî 
+* @Description: User dao interface
+* @author sonne
 * @date 2016-3-25
 * @version 1.0
  */

@@ -1,5 +1,9 @@
 package sonn.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +11,9 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.DiskFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,15 +23,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sonn.Order;
 import sonn.entity.Article;
 import sonn.entity.Comment;
+import sonn.entity.Message;
 import sonn.entity.User;
 import sonn.service.ArticleService;
 import sonn.service.CommentService;
+import sonn.service.MessageService;
 import sonn.service.UserService;
 import sonn.util.IOUtill;
 import sonn.util.MessageUtil;
 import sonn.util.Page;
 import sonn.util.PageInfo;
 import sonn.util.PageUtil;
+import sonn.util.Principal;
 import sonn.util.StringUtill;
 
 import com.alibaba.fastjson.JSONObject;
@@ -35,16 +45,18 @@ import com.alibaba.fastjson.JSONObject;
  * @author sonne
  * @date 2016-3-25 
  *       2016-05-15 write article func 
- *       2016-05-21 save the contents of  articles in server context. 
- *       2016.07.30 add links form myspace to write  article page and from show article page to ... 
- *       2016.11 article delete function.
+ *       2016-05-21 save the contents of articles in server context. 
+ *       2016.07.30 add links form myspace to write article page and from show article page to ... 
+ *       2016.11 article delete function. 
  *       2016-11-11 article summary 
  *       2016-11-13 article edit 
  *       2016-11-27 order or list 2016-11-28 add date 
  *       2016-12-07 sort the comments
  *       2016-12-11 check if the article already exits when write a new article
+ *       2016-12-23 show messages of usr logined from home page.
  * @version 1.0
  */
+@SuppressWarnings("deprecation")
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
@@ -56,6 +68,9 @@ public class ArticleController {
 
 	@Resource(name = "commentServiceImpl")
 	private CommentService commentService;
+	
+    @Resource(name = "messageServiceImpl")
+    private MessageService messageService;
 
 	/*
 	 * Get all articles, and show them at the main page.
@@ -76,9 +91,13 @@ public class ArticleController {
 		List<Article> articleList = page.getContent();
 		page.setContent(getArticleListOfSummaryByUrl(articleList));
 		model.addAttribute("page", page);
-		String username = userService.getUsernameFromSession(request);
-		if (null != username) {
+		
+		Principal pipal = userService.getUserPrincipalFromSession(request);
+		if (null != pipal) {
+			String username = pipal.getUsername();
 			model.addAttribute("userName", username);
+			if (messageService.hasMsg(userService.find(pipal.getId(),User.class)))
+				model.addAttribute("has_new_msg", "has_new_msg");	
 		}
 		return "mainPage";
 	}
@@ -139,12 +158,20 @@ public class ArticleController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean edit(HttpServletRequest request, Article article,
+	public JSONObject edit(HttpServletRequest request, Article article,
 			String articleContent, Model model) throws Exception {
+		JSONObject jo = new JSONObject();
 		Article db_article = articleService
 				.find(article.getId(), Article.class);
 		if (db_article == null) {
-			return false;
+			jo.put("success", false);
+			jo.put("info", "该id文章不存在");
+			return jo;
+		}
+		if (StringUtill.isStringEmpty(articleContent)) {
+			jo.put("success", false);
+			jo.put("info", "文章内容不能为空");
+			return jo;
 		}
 
 		// only the title may be edited on the db
@@ -188,8 +215,9 @@ public class ArticleController {
 		}
 		// write the summary string on the local file
 		IOUtill.writeByUrl(article.getSummaryAddr(), summary);
-
-		return true;
+		jo.put("success", true);
+		jo.put("info", "修改成功");
+		return jo;
 	}
 
 	@RequestMapping(value = "/writeArticle", method = RequestMethod.POST)
@@ -218,10 +246,10 @@ public class ArticleController {
 			jo.put("info", "您已经写过同样题目文章");
 			return jo;
 		}
-		
+
 		User user = userService.findByUserName(username).get(0);
 		article.setAuthor(user);
-		
+
 		article.setAuthorName(username);
 		// 数据库中存储文章路径
 		article.setArticleAddr(articleUrl);
@@ -257,56 +285,9 @@ public class ArticleController {
 	 * 
 	 * @return the jsp page
 	 */
-//	@RequestMapping(value = "/show", method = RequestMethod.GET)
-//	public String show(HttpServletRequest request, Integer id, Integer currentPage,Model model)
-//			throws Exception {
-//		if (null == id) {
-//			return "error";
-//		}
-//		Article article = articleService.find(id, Article.class);
-//		article = getArticleOfContentByUrl(article);
-//
-//		String username = userService.getUsernameFromSession(request);
-//
-//		// sort the comments
-//		List<Comment> comments = commentService.sort(article.getComments());
-//		model.addAttribute("article", article);
-//		model.addAttribute("userName", username);
-//		model.addAttribute("article_id", id);
-//		
-//		if (currentPage == null || currentPage <= 0) {
-//			currentPage = 1;
-//		}
-//		int totalSize = comments.size();
-//		PageInfo pageInfo = PageUtil.createPage(10, comments.size(), currentPage);
-//		int beginIndex = pageInfo.getBeginIndex();
-//		long totalNum = pageInfo.getTotalCount();
-//		int everyPage = pageInfo.getEveryPage();
-//		if (totalNum - beginIndex < everyPage) {
-//			comments = comments.subList(beginIndex, (int) totalNum);
-//		}else {
-//			comments = comments.subList(beginIndex, beginIndex + everyPage); 
-//		}
-//
-//		// 评论分页
-//		Page<Comment> comments_page = 
-//				new Page<Comment>(comments, totalSize, pageInfo);
-//		
-//		model.addAttribute("comments_page", comments_page);
-//		
-//		return "showArticlePage";
-//	}
-
-	/*
-	 * Select the article by the id, and show it at the jsp page.
-	 * 
-	 * @param HttpServletRequest request, Integer id, Model model
-	 * 
-	 * @return the jsp page
-	 */
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public String showFromMainPage(HttpServletRequest request, Integer id, Integer currentPage,
-			Model model) throws Exception {
+	public String showFromMainPage(HttpServletRequest request, Integer id,
+			Integer currentPage, Model model) throws Exception {
 		if (null == id) {
 			return "error";
 		}
@@ -318,27 +299,68 @@ public class ArticleController {
 		model.addAttribute("article", article);
 		model.addAttribute("userName", username);
 		model.addAttribute("article_id", id);
-		
+
 		if (currentPage == null || currentPage <= 0) {
 			currentPage = 1;
 		}
 		int totalSize = comments.size();
-		PageInfo pageInfo = PageUtil.createPage(10, comments.size(), currentPage);
+		PageInfo pageInfo = PageUtil.createPage(10, comments.size(),
+				currentPage);
 		int beginIndex = pageInfo.getBeginIndex();
 		long totalNum = pageInfo.getTotalCount();
 		int everyPage = pageInfo.getEveryPage();
 		if (totalNum - beginIndex < everyPage) {
 			comments = comments.subList(beginIndex, (int) totalNum);
-		}else {
-			comments = comments.subList(beginIndex, beginIndex + everyPage); 
+		} else {
+			comments = comments.subList(beginIndex, beginIndex + everyPage);
 		}
 
 		// 评论分页
-		Page<Comment> comments_page = 
-				new Page<Comment>(comments, totalSize, pageInfo);
-		
+		Page<Comment> comments_page = new Page<Comment>(comments, totalSize,
+				pageInfo);
+
 		model.addAttribute("comments_page", comments_page);
 		return "showArticlePage";
+	}
+
+	@RequestMapping(value = "/article_imgs", method = RequestMethod.POST)
+	@ResponseBody
+	public String article_imgs(HttpServletRequest request) throws Exception {
+		@SuppressWarnings("deprecation")
+		String username = userService.getUsernameFromSession(request);
+		String fileName = "";
+
+		DiskFileUpload diskFileUpload = new DiskFileUpload();
+		try {
+			@SuppressWarnings({ "unchecked", "deprecation" })
+			List<FileItem> list = diskFileUpload.parseRequest(request);
+
+			for (FileItem fileItem : list) {
+				String path = getPathFromSession(username, request);
+				fileName = new String(fileItem.getName().getBytes(),
+						"utf-8");
+				String localPicPath = path + "\\" + fileName;
+				File picFile = new File(localPicPath);
+				picFile.createNewFile();
+				InputStream ins = fileItem.getInputStream();
+				OutputStream ous = new FileOutputStream(picFile);
+				try {
+					byte[] buffer = new byte[1024];
+					int len = 0;
+					while ((len = ins.read(buffer)) > -1)
+						ous.write(buffer, 0, len);
+				} finally {
+					ous.close();
+					ins.close();
+				}
+			}
+		} catch (FileUploadException e) {
+			return "";
+		}
+		String WEB_PATH = getWebBasePath(username, request) + "article_pics/" + username
+				+ "/" + fileName;
+		// return the path of picture
+		return WEB_PATH;
 	}
 
 	private List<Article> getArticleListOfSummaryByUrl(List<Article> articleList) {
@@ -366,4 +388,23 @@ public class ArticleController {
 		return article;
 	}
 
+	private String getPathFromSession(String username,
+			HttpServletRequest request) {
+		// the path of the user to save the pics
+		String basePath = request.getSession().getServletContext()
+				.getRealPath("/");
+		String path = basePath + "article_pics\\" + username;
+		File file = new File(path);
+		if (!file.exists() && !file.isDirectory()) {
+			file.mkdirs();
+		}
+		return path;
+	}
+
+	private String getWebBasePath(String username, HttpServletRequest request) {
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName()
+				+ ":" + request.getServerPort() + path + "/";
+		return basePath;
+	}
 }

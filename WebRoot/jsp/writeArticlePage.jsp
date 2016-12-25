@@ -24,21 +24,21 @@ String imgPath = basePath + "image/";
 						 success:       successFunc
 			   	  }); 
    
-       	          var editor = new wangEditor('articleContent');
+       	          var editor = new wangEditor('editor-trigger');
 
                    // 上传图片
-                  editor.config.uploadImgUrl = '/upload';
+                  editor.config.uploadImgUrl = '/RiXiang_blog/article/article_imgs.form';
                   editor.config.uploadParams = {
                       // token1: 'abcde',
                       // token2: '12345'
                   };
                   editor.config.uploadHeaders = {
                       // 'Accept' : 'text/x-json'
-                   }
+                  }
                   // editor.config.uploadImgFileName = 'myFileName';
 
                    // 隐藏网络图片
-                   // editor.config.hideLinkImg = true;
+                    editor.config.hideLinkImg = true;
 
                    // 表情显示项
                    editor.config.emotionsShow = 'value';
@@ -123,7 +123,7 @@ String imgPath = basePath + "image/";
                               <input type="text" name="title" style="height:25px;width:150px;"/><br>
                                <br>
   				               <div id="editor-container" class="container">
-                                   <textarea id="articleContent" name="articleContent" style="display:none;">
+                                   <textarea id="editor-trigger" name="articleContent">
                                    </textarea> 
                                </div>
                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

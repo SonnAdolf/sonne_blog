@@ -21,7 +21,7 @@ String imgPath = basePath + "image/";
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/login.css" media="all" />
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-1.3.1.js"></script>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery.form.js"></script>   
-             <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/js/bootstrap.min.js"></script>
+             <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
              <script type="text/javascript" src="<%=basePath %>js/jsencrypt.min.js"></script>              
              <script type="text/javascript">
   			  $(document).ready(function() { 
@@ -97,7 +97,7 @@ String imgPath = basePath + "image/";
 							  </div>
 	                                
 	                          <div id="submit_btn"  class="form-group">
-                                <button id="submitbtn" name="submitbtn" class="btn-primary btn-block">Submit</button>
+                                <button id="submitbtn" name="submitbtn" class="btn-primary btn-block">登录</button>
 							  </div>
                            </form>
 				    <!--

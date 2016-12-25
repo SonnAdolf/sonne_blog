@@ -1,12 +1,20 @@
 package sonn.util;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
  * @ClassName: IOUtill
@@ -14,18 +22,20 @@ import java.io.IOException;
  * @author sonn
  * @date 2016-5-20 21:00:18 2016-07-31 debug,loop wrong when read article by
  *       url. 2016-12-06 use wangEditor, to correctly read and show codes.
- *       change the function readByUrl(String url)
- *       2016-12-11 add the function public static boolean isFileExits(String url);
+ *       change the function readByUrl(String url) 2016-12-11 add the function
+ *       public static boolean isFileExits(String url); 2016-12-18 add the
+ *       function to rename the file
  * @version 1.0
  */
 public final class IOUtill {
 	private IOUtill() {
 	}
-	
+
 	public static String getRelativePath(String path) {
 		String[] str_arr = path.split("/");
 		int len = str_arr.length;
-		String relativePath = str_arr[len-3] + "/" + str_arr[len-2] + "/" + str_arr[len-1];
+		String relativePath = str_arr[len - 3] + "/" + str_arr[len - 2] + "/"
+				+ str_arr[len - 1];
 		return relativePath;
 	}
 
@@ -191,4 +201,85 @@ public final class IOUtill {
 		}
 		return flag;
 	}
+
+	/*
+	 * rename the file
+	 */
+	public static void renameFile(String path, String oldname, String newname) {
+		if (!oldname.equals(newname)) {// 新的文件名和以前文件名不同时,才有必要进行重命名
+			File oldfile = new File(path + "/" + oldname);
+			File newfile = new File(path + "/" + newname);
+			if (!oldfile.exists()) {
+				return;// 重命名文件不存在
+			}
+			if (newfile.exists())// 若在该目录下已经有一个文件和新文件名相同，则不允许重命名
+				System.out.println(newname + "已经存在！");
+			else {
+				oldfile.renameTo(newfile);
+			}
+		} else {
+			System.out.println("新文件名和旧文件名相同...");
+		}
+	}
+
+	/**
+	 * compress the picture with the width and height given or the rate
+	 */
+	public static void reduceImg(String imgsrc, String imgdist, int widthdist,
+			int heightdist, Float rate) {
+		try {
+			File srcfile = new File(imgsrc);
+			// 检查文件是否存在
+			if (!srcfile.exists()) {
+				return;
+			}
+			// 如果rate不为空说明是按比例压缩
+			if (rate != null && rate > 0) {
+				// 获取文件高度和宽度
+				int[] results = getImgWidth(srcfile);
+				if (results == null || results[0] == 0 || results[1] == 0) {
+					return;
+				} else {
+					widthdist = (int) (results[0] * rate);
+					heightdist = (int) (results[1] * rate);
+				}
+			}
+			// 开始读取文件并进行压缩
+			Image src = javax.imageio.ImageIO.read(srcfile);
+			BufferedImage tag = new BufferedImage((int) widthdist,
+					(int) heightdist, BufferedImage.TYPE_INT_RGB);
+
+			tag.getGraphics().drawImage(
+					src.getScaledInstance(widthdist, heightdist,
+							Image.SCALE_SMOOTH), 0, 0, null);
+
+			FileOutputStream out = new FileOutputStream(imgdist);
+			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+			encoder.encode(tag);
+			out.close();
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * get the width and height of the picture
+	 */
+	public static int[] getImgWidth(File file) {
+		InputStream is = null;
+		BufferedImage src = null;
+		int result[] = { 0, 0 };
+		try {
+			is = new FileInputStream(file);
+			src = javax.imageio.ImageIO.read(is);
+			result[0] = src.getWidth(null); // 得到源图宽
+			result[1] = src.getHeight(null); // 得到源图高
+			is.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

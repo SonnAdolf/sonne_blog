@@ -100,7 +100,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		验证码不区分大小写，文章添加日期字段。<br>
 		2016.12.01<br>
 		rsa前后端密码传输加密，前端表单提交参数校验。<br>
-		
+		2016.12.04<br>
+                     实现头像上传功能。<br>
+        <img src="<%=basePath %>image/blog_history/profilePicImp0.png" alt="Sonne Blog" /><br>
+        <img src="<%=basePath %>image/blog_history/profilePicImp1.png" alt="Sonne Blog" /><br>             
+		2016.12.05<br>
+                      评论功能初步。<br>
+        <img src="<%=basePath %>image/blog_history/first_comment.png" alt="Sonne Blog" /><br>    
+        2016.12.06 - 07<br>
+                      引入git上开源的wangEditor取代之前的fckeditor，功能强大太多，还解决了很多之前的问题。现在可以插入代码了。<br>
+        2016.12.10<br>
+                      页面升级，从文章显示开始。<br>
+         <img src="<%=basePath %>image/blog_history/new_show_article.png" alt="Sonne Blog" /><br>              
+        2016.12.11<br>
+                      实现主页显示用户头像。<br>
+        <img src="<%=basePath %>image/blog_history/show_profile_pic_from_main_page.png" alt="Sonne Blog" /><br>              
+        2016.12.12<br>
+                     实现新首页。<br>
+        <img src="<%=basePath %>image/blog_history/new_main_page.png" alt="Sonne Blog" /><br>
+        2016.12.13<br>
+                     实现新的个人主页。<br>
+        <img src="<%=basePath %>image/blog_history/new_person_space.png" alt="Sonne Blog" /><br>
+        2016.12.14<br>
+                     评论区如愿以偿实现了分页，并得以显示楼层数。写了个求时间差的函数，加了个用户注册日期字段，得以求得用户日向博客“博龄”。<br>
+        <img src="<%=basePath %>image/blog_history/comments_pages.png" alt="Sonne Blog" /><br>    
+        <img src="<%=basePath %>image/blog_history/blog_age.png" alt="Sonne Blog" /><br>    
+        2016.12.15<br>
+                     新的登录页。pc端居中显示，手机端刚好铺满整个屏幕。达到了我心目中期待的“完美”。<br>
+       <img src="<%=basePath %>image/blog_history/new_login_page0.jpg" alt="Sonne Blog" /><br>
+       <img src="<%=basePath %>image/blog_history/new_login_page1.jpg" alt="Sonne Blog" /><br>
+        2016.12.17<br>
+                      实现写文章插入图片。<br>
+        2016.12.25<br>
+                      初步实现消息提醒机制。<br>
+        <img src="<%=basePath %>image/blog_history/msg.png" alt="Sonne Blog" /><br>
     </div>
     <audio controls="controls" autoplay="autoplay" height="100" width="100">
   		  <source src="<%=basePath %>music/Flower Dance.mp3" type="audio/mp3" />

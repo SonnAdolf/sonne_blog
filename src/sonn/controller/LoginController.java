@@ -1,7 +1,6 @@
 package sonn.controller;
 
 import java.io.IOException;
-import java.security.Key;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.List;
@@ -28,7 +27,6 @@ import sonn.util.MessageUtil;
 import sonn.util.Principal;
 import sonn.util.RSAUtils;
 import sonn.util.StringUtill;
-import sun.misc.BASE64Encoder;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -56,23 +54,13 @@ public class LoginController
     	Map<String, Object> map = RSAUtils.genKeyPair();
     	RSAPublicKey publicKey =  (RSAPublicKey) map.get("RSAPublicKey");
     	RSAPrivateKey privateKey = (RSAPrivateKey)map.get("RSAPrivateKey");
-    	String strPublicKey = getKeyString(publicKey);
-    	String strPrivateKey = getKeyString(privateKey);
+    	String strPublicKey = userService.getKeyString(publicKey);
+    	String strPrivateKey = userService.getKeyString(privateKey);
     	// public key send to client
     	model.addAttribute("publicKey",strPublicKey);
     	// private key save in session
     	session.setAttribute("PRIVATE_KEY", strPrivateKey);
         return "loginPage";
-    }
-    
-    /**
-     * 得到密钥字符串（经过base64编码）
-     * @return
-     */
-    private String getKeyString(Key key) throws Exception {
-          byte[] keyBytes = key.getEncoded();
-          String s = (new BASE64Encoder()).encode(keyBytes);
-          return s;
     }
     
     @RequestMapping(value = "/captcha", method = RequestMethod.GET)
@@ -95,8 +83,9 @@ public class LoginController
     	{
             return jo;
     	}
+    	String usr_name = user.getUsername();
     	session.setAttribute(User.PRINCIPAL_ATTRIBUTE_NAME,
-    			              new Principal(user.getId(),user.getUsername()));
+    			   new Principal(userService.findByUserName(usr_name).get(0).getId(),usr_name));
         return jo;
     }
     

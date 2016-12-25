@@ -11,6 +11,7 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+             <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/sonn.css" media="all" />
       </head>
       <body>              
@@ -21,8 +22,19 @@ String imgPath = basePath + "image/";
 		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
 		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
 		                 <li><a href ="">主页</a></li>
+		         		 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li></c:if>
 		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${userName}</a></li></c:if>
-		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${userName}</a></li></c:if>
+		                 <c:if test="${!empty userName}">
+		                      <li>
+		                             <a href ="/RiXiang_blog/mine/show.form">
+		                                                                                               个人空间 - ${userName}
+		                                  <c:if test="${!empty has_new_msg}">
+		                 	                   <span id="msg_prompt" class="glyphicon glyphicon-bell">
+		                 	                   </span>
+		                 	             </c:if>
+		                            </a>
+		                 	 </li>
+		                </c:if>
 		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
 		                 <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
 		                 <li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>

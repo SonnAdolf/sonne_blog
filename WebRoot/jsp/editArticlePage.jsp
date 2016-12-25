@@ -23,22 +23,22 @@ String imgPath = basePath + "image/";
 						 beforeSubmit:  validate,   
 						 success:       successFunc
 			   	  }); 
-   
-       	          var editor = new wangEditor('articleContent');
+
+       	          var editor = new wangEditor('editor-trigger');
 
                    // 上传图片
-                  editor.config.uploadImgUrl = '/upload';
+                  editor.config.uploadImgUrl = '/RiXiang_blog/article/article_imgs.form';
                   editor.config.uploadParams = {
                       // token1: 'abcde',
                       // token2: '12345'
                   };
                   editor.config.uploadHeaders = {
                       // 'Accept' : 'text/x-json'
-                   }
+                  }
                   // editor.config.uploadImgFileName = 'myFileName';
 
                    // 隐藏网络图片
-                   // editor.config.hideLinkImg = true;
+                    editor.config.hideLinkImg = true;
 
                    // 表情显示项
                    editor.config.emotionsShow = 'value';
@@ -103,8 +103,11 @@ String imgPath = basePath + "image/";
                     return true; 
 				}
 				function successFunc(data) {
-					if (data) {
+					if (data.success) {
 						location.href = "/RiXiang_blog/space/list.form";
+					}
+					else {
+						alert(data.info);
 					}
 				}
                </script>
@@ -121,7 +124,7 @@ String imgPath = basePath + "image/";
                               <br>
                                
   				               <div id="editor-container" class="container">
-                                   <textarea id="articleContent" name="articleContent" style="display:none;">
+                                   <textarea id="editor-trigger" name="articleContent" style="display:none;">
                                             ${article.content}
                                    </textarea> 
                                </div>

@@ -14,7 +14,8 @@ String imgPath = basePath + "image/";
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/passwd.css" media="all" />
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>
-             <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/js/bootstrap.min.js"></script>              
+             <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/js/bootstrap.min.js"></script>    
+             <script type="text/javascript" src="<%=basePath %>js/jsencrypt.min.js"></script>           
              <script type="text/javascript">
    			  $(document).ready(function() { 
 				  $('#passwdForm').ajaxForm({ 
@@ -44,6 +45,19 @@ String imgPath = basePath + "image/";
 			               alert("密码长度至少6位!!  (:3[▓▓] (:3[▓▓▓▓▓▓▓▓▓] (¦3[▓▓]");
 			               return false;
 			        }
+			        // 加密密码
+			        var oldPassword = formData[0].value;
+                    var newPassword = formData[1].value; 
+                    var rePassword = formData[2].value; 
+			        var encrypt = new JSEncrypt();
+                    keyValue=$("#pubkey").val();
+                    encrypt.setPublicKey(keyValue); 
+                    var oldPassword = encrypt.encrypt(oldPassword);
+                    var newPassword = encrypt.encrypt(newPassword); 
+                    var rePassword = encrypt.encrypt(rePassword); 
+                    formData[0].value = oldPassword;  
+                    formData[1].value = newPassword;
+                    formData[2].value = rePassword;
 			        var queryString = $.param(formData);
                     return true; 
 				}
@@ -53,6 +67,9 @@ String imgPath = basePath + "image/";
                          location.href = "/RiXiang_blog/space/list.form"; 
 					}
 					else {
+				      	$("#oldPassword").val("");
+				      	$("#newPassword").val("");
+				      	$("#rePassword").val("");
 						alert("修改密码失败"+" " + data.returnMessage);
 					}
 				} 
@@ -100,7 +117,7 @@ String imgPath = basePath + "image/";
       				             <span class="glyphicon glyphicon-lock"></span>
                                                                                               重新输入：<input type="password" id="rePassword" name="rePassword" placeholder="Password">
                                </div>      
-    
+                                <textarea  style="display:none" id="pubkey" rows="15" cols="65">${publicKey}</textarea>
                                 <button type="submit" class="btn btn-default">Submit</button>
                              </form>
                         </div>

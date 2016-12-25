@@ -1,5 +1,6 @@
 package sonn.serviceimpl;
 
+import java.security.Key;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import sonn.entity.User;
 import sonn.service.UserService;
 import sonn.util.Principal;
 import sonn.util.StringUtill;
+import sun.misc.BASE64Encoder;
 
 
 /**
@@ -23,6 +25,7 @@ import sonn.util.StringUtill;
 * @date 2016-3-25
 *       2016-11-27  check passwd's complexity
 *       2016-12-4   getUsernameFromSession
+*       2016-12-23 getUserPrincipalFromSession
 * @version 1.0
  */
 @Transactional
@@ -84,6 +87,32 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 		if (StringUtill.isStringEmpty(userName))
 			return null;	
 		return userName;
+	}
+	
+    /**
+     * µÃµ½ÃÜÔ¿×Ö·û´®£¨¾­¹ýbase64±àÂë£©
+     * @return
+     */
+    public String getKeyString(Key key) {
+          byte[] keyBytes = key.getEncoded();
+          String s = (new BASE64Encoder()).encode(keyBytes);
+          return s;
+    }
+
+    /**
+    * @Title: getUserPrincipalFromSession 
+    * @Description: get the Pricipal class(id and name) of usr from session
+    * @param @param request
+    * @param @return    
+    * @return Principal    
+    * @throws
+     */
+	@Override
+	public Principal getUserPrincipalFromSession(HttpServletRequest request) {
+    	// get username from session
+		HttpSession session = request.getSession();
+		//get the user who logins
+		return (Principal)session.getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
 	}
     
 }

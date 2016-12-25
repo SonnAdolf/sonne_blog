@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -68,8 +67,13 @@ public class HpicController {
     					String fileName = new String(fileItem.getName().getBytes(),"utf-8");
     					// because one user only have one h_pic, delete the folder's pic
     					IOUtill.delAllFile(path);
-    					path = path + "/" + fileName;
-    					File picFile = new File(path);
+    					
+    					// because every usr only has one profile picture 
+    					// so that picture can use a default name of '1.jpg'
+    					String pathOfDefaultName = path + "/" + "1.jpg";
+    					
+    					String localPicPath = path + "/" + fileName;
+    					File picFile = new File(localPicPath);
     					picFile.createNewFile();
     					InputStream ins = fileItem.getInputStream();
     					OutputStream ous = new FileOutputStream(picFile);
@@ -82,9 +86,16 @@ public class HpicController {
     						ous.close();
     						ins.close();
     					}
+    					
+    					// change the profile picture's name of local path
+    					IOUtill.renameFile(path, fileName, "1.jpg");
+    					
+    					// compress the picture.
+    					IOUtill.reduceImg(pathOfDefaultName, pathOfDefaultName, 200, 200, null);
+    					
     					// uodate user of mysql db
     					User user = userService.findByUserName(username).get(0);
-    					path = IOUtill.getRelativePath(path);
+    					path = IOUtill.getRelativePath(pathOfDefaultName);
     					user.setH_pic_path(path);
     					userService.update(user);
     				}

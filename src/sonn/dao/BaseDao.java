@@ -2,6 +2,8 @@ package sonn.dao;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaQuery;
+
 import sonn.Order;
 import sonn.util.Page;
 import sonn.util.PageInfo;
@@ -32,6 +34,9 @@ public interface BaseDao<T>
 	 * @return 实体对象分页
 	 */
 	Page<T> findPage(PageInfo pageInfo,Class<T> clazz, List<Order> orders);
+	
+	public Page<T> findPage(CriteriaQuery<T> criteriaQuery,PageInfo pageInfo,
+			Class<T> clazz, List<Order> orders); 
 	
 	/**
 	 * 持久化实体对象

@@ -1,7 +1,10 @@
 package sonn.controller;
 
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +22,7 @@ import sonn.message.bean.SimpleBackMessage;
 import sonn.service.UserService;
 import sonn.util.MessageUtil;
 import sonn.util.Principal;
+import sonn.util.RSAUtils;
 import sonn.util.StringUtill;
 
 import com.alibaba.fastjson.JSONObject;
@@ -28,6 +33,7 @@ import com.alibaba.fastjson.JSONObject;
 * @author sonne
 * @date 2016-4-25 下午2:54:41 2016-05-01返回注册提示信息
 *       2016-11-27  check passwd's complexity
+*       2016-12-20  Password Encryption
 * @version 1.0
  */
 @Controller
@@ -39,8 +45,19 @@ public class RegisterController
     private UserService userService;
     
     @RequestMapping(value = "/show", method = RequestMethod.GET)
-    public String show()throws Exception
+    public String show(HttpServletRequest request, Model model)throws Exception
     {
+		HttpSession session = request.getSession();
+    	// rsa key pair
+    	Map<String, Object> map = RSAUtils.genKeyPair();
+    	RSAPublicKey publicKey =  (RSAPublicKey) map.get("RSAPublicKey");
+    	RSAPrivateKey privateKey = (RSAPrivateKey)map.get("RSAPrivateKey");
+    	String strPublicKey = userService.getKeyString(publicKey);
+    	String strPrivateKey = userService.getKeyString(privateKey);
+    	// public key send to client
+    	model.addAttribute("publicKey",strPublicKey);
+    	// private key save in session
+    	session.setAttribute("PRIVATE_KEY", strPrivateKey);
         return "registerPage";
     }
     
@@ -77,13 +94,20 @@ public class RegisterController
     						false, "注册前请先退出.( ^_^ )? ");
     		return backMessage;    		
     	}
+    	
     	if(null == user||StringUtill.isStringEmpty(user.getPassword())
     			||StringUtill.isStringEmpty(user.getUsername()))
     	{
     		MessageUtil.setSimpleBackMessage(backMessage, false, "输入有误!( ^_^ )? ");
     		return backMessage;
     	}	
-    	if(!userService.validPwd(user.getPassword()))
+    	
+    	// get private key from session
+    	String PRIVATE_KSY = (String) session.getAttribute("PRIVATE_KEY");
+    	String passwd = RSAUtils.decryptDataOnJava(user.getPassword(), PRIVATE_KSY);
+    	repassword = RSAUtils.decryptDataOnJava(repassword, PRIVATE_KSY);
+    	
+    	if(!userService.validPwd(passwd))
     	{
     		MessageUtil.setSimpleBackMessage(backMessage, false, "密码至少六位(╯#-_-)╯~~~~~~~~~~~~~~~~~╧═╧  ");
     		return backMessage;   		
@@ -107,7 +131,7 @@ public class RegisterController
     				                "该名称已被使用!..@_@|||||..");
     		return backMessage;
     	}
-    	if(!user.getPassword().equals(repassword))
+    	if(!passwd.equals(repassword))
     	{
     		MessageUtil.setSimpleBackMessage(backMessage, false,
     				          "两次输入密码相同!..@_@|||||..");

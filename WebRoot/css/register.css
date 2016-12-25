@@ -1,25 +1,71 @@
-body 
-{
-	background-color: black;
+
+body {
+	margin:0;     
+	padding:0;  
+	width:100%;  
+    height:100%;  
+    background-color:#e0ffff;
 }
 
-
-#register
-{ 
-	background-color:#ffffff;
-	border: 1px solid black;
-	padding: 80px;
-	filter:alpha(opacity=60);
-	opacity:0.6;
+#hi_sonne {
 }
 
-#poem
-{
+#content {
+	position:relative;
+	top:100px;
+	/*placed at middle*/
+	text-align:center;
+	margin:0 auto;
+	font-family: KaiTi;
+	width:300px;
+	background-color:#ffebcd;
+	padding:2px;
+	/*Ô²½Ç±ß¾à*/
+	border:2px solid;
+	border-radius:15px;
+	/* Old Firefox */
+	-moz-border-radius:25px; 
+}
+
+#back_way a:link {
+	text-decoration:none;
+    color: #999999;
+    line-height: 19px;
+    display: block;
+}
+
+#back_way {
+	position:relative;
+	top:80px;
+	/*placed at middle*/
+	text-align:center;
+	margin:0 auto;
+}
+#back_way a:visited {
+	text-decoration:none;
+    color: #999999;
+    line-height: 19px;
+    display: block;
+}
+
+#back_way a:hover {
+	text-decoration:underline;
+	color:red;
+    line-height: 19px;
+    display: block;
+}
+
+#back_way a:active {
+	text-decoration:underline;
+	color:red;
+    line-height: 19px;
+    display: block;
+}
+#poem {
 	font-family: KaiTi;
 	color:white;
 }
 
-h1
-{
-	color:white;
+#submit_btn {
 }
+

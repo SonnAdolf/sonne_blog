@@ -88,6 +88,10 @@
     display: block;	
 }
 
+#msg_prompt {
+	color:red;
+}
+
 #poem_left {
 	margin-top:30px;
 	float:left;
@@ -109,7 +113,7 @@
 #article_list { 
 	float:left;
 	width:65%;
-	margin-top:20px;
+	margin-top:26px;
 	border-left: 1px solid #aaa;
 	padding:13px 0px 0px 13px;
 	/*if the letters overflow the div,hide*/
@@ -119,7 +123,6 @@
 #article_block {
 	padding-bottom:5px;
 	border-bottom:1px solid #aaa;
-	/*璁剧疆div鏈�皬楂樺害涓�0px,鑻ラ珮浜�0px鑷姩璋冩暣*/
 	height:auto!important;
 	min-height:70px;
 }

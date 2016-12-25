@@ -1,0 +1,72 @@
+body {
+	background-color:#f5fffa;
+}
+
+#left_page {
+	float:left;
+	width:24%;
+    font-family:Microsoft YaHei;
+	letter-spacing:5px;
+}
+
+a:link {
+	text-decoration:none;
+    color: blue;
+    line-height: 19px;
+    padding: 8px 10px 8px;
+}
+
+a:visited {
+	text-decoration:none;
+    color: blue;
+    line-height: 19px;
+    padding: 8px 10px 8px;
+}
+
+a:hover {
+	text-decoration:none;
+	color:red;
+    line-height: 19px;
+    padding: 8px 10px 8px;
+}
+
+a:active {
+	text-decoration:none;
+	color:red;
+    line-height: 19px;
+    padding: 8px 10px 8px;
+}
+
+#my_msgs {
+	font-family:Microsoft YaHei
+	background-color:#ffefd5;
+	height:575px;
+	width:45%;
+	float:left;
+    /*Բ�Ǳ߾�*/
+	border:2px solid;
+	border-radius:15px;
+	padding:15px;
+}	
+
+#msg_line {
+	border-bottom:1px solid #daa520;
+}
+
+#fans_attention {
+	width:24%;
+	float:left;
+	padding:5px;
+}
+
+#profile_pic {
+}
+
+.profile_pic img {
+	float:left;
+	height:150px;
+	width:150px;
+	margin-top: 3px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+}

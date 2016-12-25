@@ -97,6 +97,10 @@ body {
     display: block;	
 }
 
+#msg_prompt {
+	color:red;
+}
+
 #h_pic {
 	float:left;
 	width:20%;

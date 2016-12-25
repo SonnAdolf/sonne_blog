@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sonn.entity.Article;
 import sonn.entity.Comment;
+import sonn.entity.Message;
 import sonn.service.ArticleService;
 import sonn.service.CommentService;
+import sonn.service.MessageService;
 import sonn.service.UserService;
+import sonn.enums.MsgIsRead;
+import sonn.enums.MsgType;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -38,6 +42,9 @@ public class CommentController {
     @Resource(name = "userServiceImpl")
     private UserService userService;
     
+    @Resource(name = "messageServiceImpl")
+    private MessageService messageService;
+    
     @RequestMapping(value = "/writeComment", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject submit(HttpServletRequest request,Comment comment, int article_id) throws Exception {
@@ -53,8 +60,21 @@ public class CommentController {
 			comment.setAuthorName("a visitor");
 		}
     	commentService.save(comment);
+    	Message msg = new Message();
+    	msg.setType(MsgType.Comment);
+    	// old version Article entity class is without Author class
+    	if (article.getAuthor() != null) {
+    		msg.setReciever(article.getAuthor());
+    	}
+    	if (username != null ) {
+    		msg.setSender(userService.findByUserName(username).get(0));
+    	}
+    	msg.setIs_read(MsgIsRead.No);
+    	msg.setDate(new Date());
+    	msg.setArticle(article);
+    	messageService.save(msg);
     	json.put("success", true);
-    	json.put("msg", "���۳ɹ�");
+    	json.put("msg", "评论成功 ♪（＾∀＾●）ﾉｼ （●´∀｀）♪");
     	return json;
     }
 }

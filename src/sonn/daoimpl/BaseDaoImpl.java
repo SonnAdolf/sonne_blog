@@ -106,6 +106,17 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 		return findPage(criteriaQuery, pageInfo,clazz);
 	}
 	
+	@Override
+	public Page<T> findPage(CriteriaQuery<T> criteriaQuery,PageInfo pageInfo,
+			Class<T> clazz, List<Order> orders) 
+	{
+		Assert.notNull(criteriaQuery);
+		Assert.notNull(criteriaQuery.getSelection());
+		Assert.notEmpty(criteriaQuery.getRoots());
+		addOrders(criteriaQuery, orders);
+		return findPage(criteriaQuery, pageInfo,clazz);
+	}
+	
 	
 	protected Page<T> findPage(CriteriaQuery<T> criteriaQuery, 
 			                  PageInfo pageInfo,Class<T> clazz) 

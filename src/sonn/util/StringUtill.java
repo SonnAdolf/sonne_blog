@@ -1,7 +1,10 @@
 package sonn.util;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import sonn.entity.Comment;
 
 /**
 * @ClassName: StringUtil 

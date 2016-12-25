@@ -18,7 +18,7 @@ body {background: url(../image/blue_background.gif) repeat-x;}
 #title {color:red;}
 #author {color:green;}
 
-#articleContent {
+#editor-trigger {
 	height: 400px;
 	/*max-height: 500px;*/
 }

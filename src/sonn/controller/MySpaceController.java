@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sonn.entity.Article;
 import sonn.entity.User;
 import sonn.service.ArticleService;
+import sonn.service.MessageService;
 import sonn.service.UserService;
 import sonn.util.IOUtill;
 import sonn.util.Page;
 import sonn.util.PageInfo;
+import sonn.util.Principal;
 import sonn.util.TimeUtils;
 
 
@@ -37,11 +39,20 @@ public class MySpaceController
     @Resource(name = "articleServiceImpl")
     private ArticleService articleService;
     
+    @Resource(name = "messageServiceImpl")
+    private MessageService messageService;
+    
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String mySpace(HttpServletRequest request,PageInfo pageInfo,Model model) throws Exception
     {
-    	String username = userService.getUsernameFromSession(request);
-    	
+		Principal pipal = userService.getUserPrincipalFromSession(request);
+		String username = pipal.getUsername();
+		if (null != pipal) {
+			model.addAttribute("userName", username);
+			if (messageService.hasMsg(userService.find(pipal.getId(),User.class)))
+				model.addAttribute("has_new_msg", "has_new_msg");	
+		}
+		
 		pageInfo.setEveryPage(12);
         Page<Article> page = articleService.getArticlesByUsername(username, pageInfo);
        	model.addAttribute("page",page);

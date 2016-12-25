@@ -1,16 +1,23 @@
 package sonn.controller;
 
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sonn.entity.User;
 import sonn.service.UserService;
+import sonn.util.RSAUtils;
 import sonn.util.StringUtill;
 
 import com.alibaba.fastjson.JSONObject;
@@ -20,6 +27,7 @@ import com.alibaba.fastjson.JSONObject;
 * @Description: passwd
 * @author sonne
 * @date 2016-11-27 15:32:34 
+*       2016-12-20 Password Encryption
 * @version 1.0
  */
 @Controller
@@ -30,8 +38,19 @@ public class PasswdController
     private UserService userService;
     
     @RequestMapping(value = "/show", method = RequestMethod.GET)
-    public String show()throws Exception
+    public String show(HttpServletRequest request, Model model)throws Exception
     {
+		HttpSession session = request.getSession();
+    	// rsa key pair
+    	Map<String, Object> map = RSAUtils.genKeyPair();
+    	RSAPublicKey publicKey =  (RSAPublicKey) map.get("RSAPublicKey");
+    	RSAPrivateKey privateKey = (RSAPrivateKey)map.get("RSAPrivateKey");
+    	String strPublicKey = userService.getKeyString(publicKey);
+    	String strPrivateKey = userService.getKeyString(privateKey);
+    	// public key send to client
+    	model.addAttribute("publicKey",strPublicKey);
+    	// private key save in session
+    	session.setAttribute("PRIVATE_KEY", strPrivateKey);
         return "changePasswdPage";
     }
     
@@ -49,6 +68,13 @@ public class PasswdController
 			jo.put("returnMessage", "输入值不允许为空..@_@|||||..");
 			return jo;
 		}	
+		HttpSession session = request.getSession();
+    	// get private key from session
+    	String PRIVATE_KSY = (String) session.getAttribute("PRIVATE_KEY");
+    	newPassword = RSAUtils.decryptDataOnJava(newPassword, PRIVATE_KSY);
+    	password = RSAUtils.decryptDataOnJava(password, PRIVATE_KSY);
+    	rePassword  = RSAUtils.decryptDataOnJava(rePassword, PRIVATE_KSY);
+    	
 		if (newPassword.equals(password))
 		{
 			jo.put("success", false);
