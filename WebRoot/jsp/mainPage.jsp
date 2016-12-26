@@ -62,16 +62,15 @@ String imgPath = basePath + "image/";
 							       	   <span class = "title"><a href="<%=basePath %>article/show.form?id=${article.id}">${article.title}</a></span><br>
                                   	    <c:choose>
 										     <c:when test="${empty article.author || empty article.author.h_pic_path }">
-										             <img class="h_pic" src="<%=basePath %>h_pics/default.jpg" alt>
+										             <a href="<%=basePath %>space/other_space.form?usr_name=${article.authorName}" target="_blank"><img class="h_pic" src="<%=basePath %>h_pics/default.jpg" alt></a>
 										     </c:when>
 		                                     <c:otherwise>
-			                                        <img class="h_pic" src="<%=basePath %>${article.author.h_pic_path }" alt>
+			                                         <a href="<%=basePath %>space/other_space.form?usr_name=${article.authorName}" target="_blank"><img class="h_pic" src="<%=basePath %>${article.author.h_pic_path }" alt></a>
 	                                         </c:otherwise>
 	                                    </c:choose>
 										${article.summary}<br>
-										 <div id = "author_date"> by ${article.authorName}&nbsp&nbsp${fn:substring(article.date,0,16)}</div>
+										 <div id = "author_date"> by <a href="<%=basePath %>space/other_space.form?usr_name=${article.authorName}">${article.authorName}</a>&nbsp&nbsp${fn:substring(article.date,0,16)}</div>
 								  </p>
-								 
                                </div>
                          </c:forEach>     
 						 <div id="footer">

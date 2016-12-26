@@ -82,6 +82,9 @@ public class ArticleController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(HttpServletRequest request, PageInfo pageInfo,
 			Model model) throws Exception {
+		// if the usr has setting auto_login, auto login from home page 
+		userService.check_auto_login(request);
+		
 		pageInfo.setEveryPage(6);
 		List<Order> orders = new ArrayList<Order>();
 		Order order = new Order("id", Order.Direction.desc);

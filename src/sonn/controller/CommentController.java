@@ -17,6 +17,7 @@ import sonn.service.ArticleService;
 import sonn.service.CommentService;
 import sonn.service.MessageService;
 import sonn.service.UserService;
+import sonn.util.StringUtill;
 import sonn.enums.MsgIsRead;
 import sonn.enums.MsgType;
 
@@ -49,6 +50,17 @@ public class CommentController {
     @ResponseBody
     public JSONObject submit(HttpServletRequest request,Comment comment, int article_id) throws Exception {
     	JSONObject json = new JSONObject();
+    	String content = comment.getContent();
+    	if (StringUtill.isStringEmpty(content.trim())) {
+        	json.put("success", false);
+        	json.put("msg", "评论内容怎可为空白？(╯#-_-)╯~~~~~~~~~~~~~~~~~╧═╧");
+        	return json;
+    	}
+    	if (content.length() >= 400) {
+        	json.put("success", false);
+        	json.put("msg", "评论个四百字也就够了。(¬､¬) (￢_￢)");    
+        	return json;
+    	}
     	Article article =  articleService.find(article_id, Article.class);
     	comment.setArticle(article);
     	comment.setDate(new Date());

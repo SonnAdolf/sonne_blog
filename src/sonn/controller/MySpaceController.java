@@ -19,58 +19,53 @@ import sonn.util.PageInfo;
 import sonn.util.Principal;
 import sonn.util.TimeUtils;
 
-
 /**
-* @ClassName: MySpaceController 
-* @Description: personal space
-* @author sonne
-* @date 2016-5-21 下午6:38:00 
-*       2016-12-13 上传头像功能暂时合入个人主页
-*       2016-12-14 获取用户注册多久
-* @version 1.0
+ * @ClassName: MySpaceController
+ * @Description: personal space
+ * @author sonne
+ * @date 2016-5-21 下午6:38:00 2016-12-13 上传头像功能暂时合入个人主页 2016-12-14 获取用户注册多久
+ * @version 1.0
  */
 @Controller
 @RequestMapping("/space")
-public class MySpaceController 
-{
-    @Resource(name = "userServiceImpl")
-    private UserService userService;
-    
-    @Resource(name = "articleServiceImpl")
-    private ArticleService articleService;
-    
-    @Resource(name = "messageServiceImpl")
-    private MessageService messageService;
-    
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String mySpace(HttpServletRequest request,PageInfo pageInfo,Model model) throws Exception
-    {
+public class MySpaceController {
+	@Resource(name = "userServiceImpl")
+	private UserService userService;
+
+	@Resource(name = "articleServiceImpl")
+	private ArticleService articleService;
+
+	@Resource(name = "messageServiceImpl")
+	private MessageService messageService;
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String mySpace(HttpServletRequest request, PageInfo pageInfo,
+			Model model) throws Exception {
 		Principal pipal = userService.getUserPrincipalFromSession(request);
 		String username = pipal.getUsername();
 		if (null != pipal) {
-			model.addAttribute("userName", username);
-			if (messageService.hasMsg(userService.find(pipal.getId(),User.class)))
-				model.addAttribute("has_new_msg", "has_new_msg");	
+			if (messageService.hasMsg(userService.find(pipal.getId(),
+					User.class)))
+				model.addAttribute("has_new_msg", "has_new_msg");
 		}
-		
+
 		pageInfo.setEveryPage(12);
-        Page<Article> page = articleService.getArticlesByUsername(username, pageInfo);
-       	model.addAttribute("page",page);
-       	model.addAttribute("userName",username);
-       	
+		Page<Article> page = articleService.getArticlesByUsername(username,
+				pageInfo);
+		model.addAttribute("page", page);
+		model.addAttribute("userName", username);
+
 		User user = userService.findByUserName(username).get(0);
 		// if the user didnot upload his picture,the path is null
 		String h_pic_path = null;
 		if (null != user.getH_pic_path()) {
 			h_pic_path = IOUtill.getRelativePath(user.getH_pic_path());
-		}
-		else {
+		} else {
 			model.addAttribute("defulat_path", "h_pics/default.jpg");
 		}
-		
+
 		model.addAttribute("h_pic_path", h_pic_path);
-		model.addAttribute("username", user.getUsername());
-		
+
 		// 获取用户注册多久
 		int[] arr = TimeUtils.getHowLongFromNow(user.getBlog_date());
 		String blog_age = "";
@@ -80,8 +75,51 @@ public class MySpaceController
 		if (arr[1] != 0) {
 			blog_age = blog_age + Integer.toString(arr[1]) + "个月";
 		}
+
+		model.addAttribute("blog_age", blog_age);
+		return "mySpace";
+	}
+
+	@RequestMapping(value = "/other_space", method = RequestMethod.GET)
+	public String other_space(HttpServletRequest request, PageInfo pageInfo,
+			String usr_name, Model model) throws Exception {
+		Principal pipal = userService.getUserPrincipalFromSession(request);
+		if (null != pipal) {
+			model.addAttribute("my_name", pipal.getUsername());
+			if (messageService.hasMsg(userService.find(pipal.getId(),
+					User.class)))
+				model.addAttribute("has_new_msg", "has_new_msg");
+		}
 		
-		model.addAttribute("blog_age", blog_age);      	
-        return "mySpace";
-    }
+		model.addAttribute("userName", usr_name);
+
+		pageInfo.setEveryPage(12);
+		Page<Article> page = articleService.getArticlesByUsername(usr_name,
+				pageInfo);
+		model.addAttribute("page", page);
+
+		User user = userService.findByUserName(usr_name).get(0);
+		// if the user didnot upload his picture,the path is null
+		String h_pic_path = null;
+		if (null != user.getH_pic_path()) {
+			h_pic_path = IOUtill.getRelativePath(user.getH_pic_path());
+		} else {
+			model.addAttribute("defulat_path", "h_pics/default.jpg");
+		}
+
+		model.addAttribute("h_pic_path", h_pic_path);
+
+		// 获取用户注册多久
+		int[] arr = TimeUtils.getHowLongFromNow(user.getBlog_date());
+		String blog_age = "";
+		if (arr[0] != 0) {
+			blog_age = blog_age + Integer.toString(arr[0]) + "年";
+		}
+		if (arr[1] != 0) {
+			blog_age = blog_age + Integer.toString(arr[1]) + "个月";
+		}
+
+		model.addAttribute("blog_age", blog_age);
+		return "other_space";
+	}
 }

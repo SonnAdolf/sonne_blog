@@ -85,7 +85,8 @@ String imgPath = basePath + "image/";
 		       
 			   function validate(formData, jqForm, options) {
 			       for(var i=0; i < formData.length; i++) {
-			        	if(!formData[i].value) {
+			        	if(!formData[i].value.trim()) {
+			        	    alert("评论内容不可为空");
 			        		return false;
 			        	}
 			        } 
@@ -94,6 +95,7 @@ String imgPath = basePath + "image/";
 				}
 				function successFunc(data) {
 					if (data.success) {
+					    alert(data.msg);
 					    var old_url = window.location.href;
 					    var index = old_url.search("currentPage"); 
 					    if (index != -1) {

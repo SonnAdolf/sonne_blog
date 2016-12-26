@@ -46,4 +46,6 @@ public interface UserService extends BaseService<User>
     public Principal getUserPrincipalFromSession(HttpServletRequest request);
     
     public String getKeyString(Key key);
+    
+    public void check_auto_login(HttpServletRequest request);
 }

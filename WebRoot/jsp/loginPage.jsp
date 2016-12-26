@@ -89,6 +89,9 @@ String imgPath = basePath + "image/";
                                          密码 <input type="password" id="password" name="password" placeholder="Password">
                                </div>
            					  <textarea  style="display:none" id="pubkey" rows="15" cols="65">${publicKey}</textarea>
+
+           					        自动登录：<label><input name="auto_log_in" type="radio" value="yes">是</label>
+           					        <label><input name="auto_log_in" type="radio" checked="true" value="no">否</label>
                               <div id = "captcha"  class="form-group">
                                           验证码 <input type="text" id="captcha" name="captcha" placeholder="Enter captcha">
                                </div>

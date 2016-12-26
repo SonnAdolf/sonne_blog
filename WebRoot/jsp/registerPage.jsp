@@ -117,7 +117,7 @@ String imgPath = basePath + "image/";
 	
 						   <form id="registerForm" action="submit.form" method="post">
    							    <div class="form-group">
-    					                                   用户名:<input type="text" id="username" name="username" placeholder="Enter email">
+    					                                   用户名:<input type="text" id="username" name="username" placeholder="">
     				            </div>
   				                <div class="form-group">
                                                                                                   密码:<input type="password" id="password" name="password" placeholder="Password">

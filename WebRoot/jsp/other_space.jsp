@@ -57,15 +57,15 @@ String imgPath = basePath + "image/";
 		      	 <div id="navigator">
 		      		<ul id="navList">
 		                 <li><font>日   向  博  客&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</font></li>
-		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
-		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
+		                 <c:if test="${empty my_name}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
+		                 <c:if test="${empty my_name}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
 		                 <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
-		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li></c:if>
-		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${userName}</a></li></c:if>
-		                 <c:if test="${!empty userName}">
+		                 <c:if test="${!empty my_name}"><li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li></c:if>
+		                 <c:if test="${!empty my_name}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${my_name}</a></li></c:if>
+		                 <c:if test="${!empty my_name}">
 		                       <li>
 		                            <a href ="/RiXiang_blog/mine/show.form">
-		                                                                                                个人空间 - ${userName}		                                                                                                		                                 
+		                                                                                                个人空间 - ${my_name}		                                                                                                		                                 
 		                                   <c:if test="${!empty has_new_msg}">
 		                 	                   <span id="msg_prompt" class="glyphicon glyphicon-bell">
 		                 	                   </span>
@@ -73,7 +73,7 @@ String imgPath = basePath + "image/";
 		                 	        </a>
 		                 	   </li>
 		                 </c:if>
-		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
+		                 <c:if test="${!empty my_name}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
 		                 <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
 		                 <li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
 		           	</ul>
@@ -91,8 +91,8 @@ String imgPath = basePath + "image/";
                     </c:choose>
 					<br>
                     <!-- &nbsp&nbsp&nbsp<a href = "/RiXiang_blog/head/show.form">上传头像</a><br> -->
-                    &nbsp&nbsp&nbsp博名:${userName }<br>
-                    &nbsp&nbsp&nbsp博龄:${blog_age }
+                    &nbsp&nbsp&nbsp博名:${userName}<br>
+                    &nbsp&nbsp&nbsp博龄:${blog_age}
               </div>
               <div id = "main_page" class="main_page">
                        <div id="article_lst">

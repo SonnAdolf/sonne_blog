@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -73,7 +74,7 @@ public class LoginController
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject submit(HttpServletRequest request,User user,String captcha) throws Exception
+    public JSONObject submit(HttpServletRequest request, HttpServletResponse response, User user, String auto_log_in, String captcha) throws Exception
     {
 		JSONObject jo = new JSONObject();	
 		HttpSession session = request.getSession();
@@ -86,6 +87,21 @@ public class LoginController
     	String usr_name = user.getUsername();
     	session.setAttribute(User.PRINCIPAL_ATTRIBUTE_NAME,
     			   new Principal(userService.findByUserName(usr_name).get(0).getId(),usr_name));
+    	// auto log in settings
+    	if (auto_log_in.equals("yes")) {
+    		Cookie cookie = new Cookie("SONNE_BLOG_LOG_IN_USRNAME", usr_name);
+    		cookie.setPath("/");  
+    		String host = request.getServerName(); 
+    		cookie.setDomain(host);  
+    		int seconds = 30*24*60*60;
+    		cookie.setMaxAge(seconds);  
+    		response.addCookie(cookie); 
+    		cookie = new Cookie("SONNE_BLOG_LOG_IN_PASSWD", user.getPassword());  
+    		cookie.setPath("/");  
+    		cookie.setDomain(host);  
+    		cookie.setMaxAge(seconds);  
+    		response.addCookie(cookie); 
+    	}
         return jo;
     }
     
@@ -187,6 +203,8 @@ public class LoginController
 	                "密码错误!（°ο°）~ @");
     		return backMessage;
     	}
+    	// set the usr's passwd of MD5 from database here, it will be used when set Cookie.
+    	user.setPassword(userFromDB.getPassword());
     	MessageUtil.setSimpleBackMessage(backMessage, true, 
     			             "欢迎来到日向博客!(^_^)∠※ 送你一束花 。");
 		return backMessage;
