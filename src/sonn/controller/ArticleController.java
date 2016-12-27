@@ -87,7 +87,7 @@ public class ArticleController {
 		// if the usr has setting auto_login, auto login from home page 
 		userService.check_auto_login(request);
 		
-		pageInfo.setEveryPage(10);
+		pageInfo.setEveryPage(15);
 		List<Order> orders = new ArrayList<Order>();
 		Order order = new Order("id", Order.Direction.desc);
 		orders.add(order);
