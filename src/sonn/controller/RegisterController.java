@@ -75,8 +75,11 @@ public class RegisterController
     	{
             return jo;
     	}
+    	// get private key from session
+    	String PRIVATE_KSY = (String) session.getAttribute("PRIVATE_KEY");
+    	String passwd = RSAUtils.decryptDataOnJava(user.getPassword(), PRIVATE_KSY);
     	// using md5 to set the passwd
-    	user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+    	user.setPassword(DigestUtils.md5Hex(passwd));
     	user.setBlog_date(new Date());
 		userService.save(user);
     	session.setAttribute(User.PRINCIPAL_ATTRIBUTE_NAME,

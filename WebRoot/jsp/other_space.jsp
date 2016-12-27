@@ -99,11 +99,6 @@ String imgPath = basePath + "image/";
 			                 <c:forEach items="${page.content}" var="article" >
 						            <div id="article_block" class="article_block">
                                         <span id = "article_title"><a href = "/RiXiang_blog/article/show.form?id=${article.id}">${article.title}</a></span>
-                                        <div id="button">
-										     <button type="button" id=${article.id} onclick="button_Click_1(this)">删除</button>
-                                              <button type="button" id=${article.id} onclick="button_Click_2(this)">编辑</button><br> 
-                                               <!-- <p>文章内容： ${article.content}</p> -->   
-									    </div>
 							        </div>
                              </c:forEach>
                          </div>							 

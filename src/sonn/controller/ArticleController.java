@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sonn.Order;
 import sonn.entity.Article;
 import sonn.entity.Comment;
-import sonn.entity.Message;
 import sonn.entity.User;
 import sonn.service.ArticleService;
 import sonn.service.CommentService;
@@ -48,12 +47,14 @@ import com.alibaba.fastjson.JSONObject;
  *       2016-05-21 save the contents of articles in server context. 
  *       2016.07.30 add links form myspace to write article page and from show article page to ... 
  *       2016.11 article delete function. 
- *       2016-11-11 article summary 
- *       2016-11-13 article edit 
+ *       2016-11-11 article summary. 
+ *       2016-11-13 article edit. 
  *       2016-11-27 order or list 2016-11-28 add date 
- *       2016-12-07 sort the comments
- *       2016-12-11 check if the article already exits when write a new article
+ *       2016-12-07 sort the comments.
+ *       2016-12-11 check if the article already exits when write a new article.
  *       2016-12-23 show messages of usr logined from home page.
+ *       2016-12-26 auto log in.
+ *       2016-12-27 check if it is the operation(write,edit,delete articles) of user logined.
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
@@ -109,6 +110,8 @@ public class ArticleController {
 	public String writeArticlePage(HttpServletRequest request,
 			PageInfo pageInfo, Model model) throws Exception {
 		String username = userService.getUsernameFromSession(request);
+		if (StringUtill.isStringEmpty(username))
+			return "mainPage";
 		model.addAttribute("userName", username);
 		return "writeArticlePage";
 	}
@@ -133,8 +136,13 @@ public class ArticleController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean delete(HttpServletRequest request, int id) throws Exception {
+		String username = userService.getUsernameFromSession(request);
 		Article db_article = articleService.find(id, Article.class);
 		if (id <= 0 || null == db_article) {
+			return false;
+		}
+		// Check if it is the operation of user logined.
+		if (!db_article.getAuthorName().equals(username)) {
 			return false;
 		}
 		articleService.delete(id, Article.class);
@@ -150,6 +158,9 @@ public class ArticleController {
 		if (null == id) {
 			return "error";
 		}
+		String username = userService.getUsernameFromSession(request);
+		if (StringUtill.isStringEmpty(username))
+			return "mainPage";
 		Article article = articleService.find(id, Article.class);
 		if (null == articleService.find(id, Article.class)) {
 			return "error";
@@ -171,6 +182,13 @@ public class ArticleController {
 			jo.put("info", "该id文章不存在");
 			return jo;
 		}
+		String username = userService.getUsernameFromSession(request);
+		// Check if it is the operation of user logined.
+		if (!db_article.getAuthorName().equals(username)) {
+			jo.put("success", false);
+			jo.put("info", "你不是这篇文章作者不能修改");
+			return jo;
+		}
 		if (StringUtill.isStringEmpty(articleContent)) {
 			jo.put("success", false);
 			jo.put("info", "文章内容不能为空");
@@ -181,7 +199,6 @@ public class ArticleController {
 		// and if the title changed content and summary urls will be changed
 		// too.
 		if (!db_article.getTitle().equals(article.getTitle())) {
-			String username = userService.getUsernameFromSession(request);
 			// get new urls
 			String articleUrl = articleService.getArticleUrl(article, request,
 					username);
@@ -195,7 +212,6 @@ public class ArticleController {
 		// history problem, former version donot have a summary
 		if (db_article.getSummaryAddr() == null
 				|| db_article.getSummaryAddr().equals("")) {
-			String username = userService.getUsernameFromSession(request);
 			String summaryUrl = articleService.getSummaryUrl(article, request,
 					username);
 			article.setSummaryAddr(summaryUrl);
@@ -329,13 +345,12 @@ public class ArticleController {
 	@RequestMapping(value = "/article_imgs", method = RequestMethod.POST)
 	@ResponseBody
 	public String article_imgs(HttpServletRequest request) throws Exception {
-		@SuppressWarnings("deprecation")
 		String username = userService.getUsernameFromSession(request);
 		String fileName = "";
 
 		DiskFileUpload diskFileUpload = new DiskFileUpload();
 		try {
-			@SuppressWarnings({ "unchecked", "deprecation" })
+			@SuppressWarnings({ "unchecked" })
 			List<FileItem> list = diskFileUpload.parseRequest(request);
 
 			for (FileItem fileItem : list) {
