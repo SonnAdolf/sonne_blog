@@ -54,7 +54,8 @@ import com.alibaba.fastjson.JSONObject;
  *       2016-12-11 check if the article already exits when write a new article.
  *       2016-12-23 show messages of usr logined from home page.
  *       2016-12-26 auto log in.
- *       2016-12-27 check if it is the operation(write,edit,delete articles) of user logined.
+ *       2016-12-27 check if it is the operation(write,edit,delete articles) of the article's author.
+ *                  add the read times.
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
@@ -86,7 +87,7 @@ public class ArticleController {
 		// if the usr has setting auto_login, auto login from home page 
 		userService.check_auto_login(request);
 		
-		pageInfo.setEveryPage(6);
+		pageInfo.setEveryPage(10);
 		List<Order> orders = new ArrayList<Order>();
 		Order order = new Order("id", Order.Direction.desc);
 		orders.add(order);
@@ -95,7 +96,6 @@ public class ArticleController {
 		List<Article> articleList = page.getContent();
 		page.setContent(getArticleListOfSummaryByUrl(articleList));
 		model.addAttribute("page", page);
-		
 		Principal pipal = userService.getUserPrincipalFromSession(request);
 		if (null != pipal) {
 			String username = pipal.getUsername();
@@ -141,7 +141,7 @@ public class ArticleController {
 		if (id <= 0 || null == db_article) {
 			return false;
 		}
-		// Check if it is the operation of user logined.
+		// Check if it is the operation of the article's author.
 		if (!db_article.getAuthorName().equals(username)) {
 			return false;
 		}
@@ -183,7 +183,7 @@ public class ArticleController {
 			return jo;
 		}
 		String username = userService.getUsernameFromSession(request);
-		// Check if it is the operation of user logined.
+		// Check if it is the operation of the article's author.
 		if (!db_article.getAuthorName().equals(username)) {
 			jo.put("success", false);
 			jo.put("info", "你不是这篇文章作者不能修改");
@@ -311,6 +311,11 @@ public class ArticleController {
 			return "error";
 		}
 		Article article = articleService.find(id, Article.class);
+		
+		// click the link, then read_times ++
+		article.setRead_times(article.getRead_times() + 1);
+		articleService.update(article);
+		
 		article = getArticleOfContentByUrl(article);
 		// sort the comments
 		List<Comment> comments = commentService.sort(article.getComments());

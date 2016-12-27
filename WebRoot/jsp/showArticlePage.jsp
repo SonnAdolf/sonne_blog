@@ -133,7 +133,23 @@ String imgPath = basePath + "image/";
               <div id = "page_content">
                     <h id = "article_title">${article.title}</h> <br><br>
                     <p> ${article.content}</p>
-                    <div id = "author">by：${article.authorName}</div> <br> <br> <br>
+                    <div id = "author">by：${article.authorName}</div> <br/> <br/> 
+                    
+                    <!-- JiaThis Button BEGIN -->
+                    <div class="jiathis_style_24x24">
+                      	<a class="jiathis_button_qzone"></a>
+	                    <a class="jiathis_button_tsina"></a>
+	                    <a class="jiathis_button_tqq"></a>
+                    	<a class="jiathis_button_weixin"></a>
+	                    <a class="jiathis_button_renren"></a>
+                     	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	                    <a class="jiathis_counter_style"></a>
+                    </div>
+                    <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
+                    <!-- JiaThis Button END -->
+                    <br/>
+                    <br/>
+                    
 					<div class="comment">
                           <c:forEach items="${comments_page.content}" var="comment">
 								<div class="comment_box">

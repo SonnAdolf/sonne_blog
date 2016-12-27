@@ -26,6 +26,7 @@ import sonn.annotation.IsValidString;
  *       2016-11-11 article summary
  *       2016-11-25 check by annotation
  *       2016-11-28 add date
+ *       2016-12-27 read_time
  * @description:article entity class
  */
 @Entity
@@ -63,12 +64,15 @@ public class Article
 	@Length(min=1, max=20)
 	private String authorName;
 	
-	/*date of article*/
+	/* date of article */
 	@DateTimeFormat(pattern = "yyyy-MM-dd") 
 	private Date date;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	private User author;
+	
+	/* how many times the link of the article has been clicked */
+	private int read_times;
 	
 	public int getId()
 	{
@@ -165,6 +169,14 @@ public class Article
 
 	public void setAuthor(User author) {
 		this.author = author;
+	}
+
+	public int getRead_times() {
+		return read_times;
+	}
+
+	public void setRead_times(int read_times) {
+		this.read_times = read_times;
 	}
 	
 }

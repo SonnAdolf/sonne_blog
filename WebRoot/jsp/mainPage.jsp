@@ -69,7 +69,7 @@ String imgPath = basePath + "image/";
 	                                         </c:otherwise>
 	                                    </c:choose>
 										${article.summary}<br>
-										 <div id = "author_date"> by <a href="<%=basePath %>space/other_space.form?usr_name=${article.authorName}">${article.authorName}</a>&nbsp&nbsp${fn:substring(article.date,0,16)}</div>
+										 <div id = "author_date"> by <a href="<%=basePath %>space/other_space.form?usr_name=${article.authorName}">${article.authorName}</a>&nbsp&nbsp${fn:substring(article.date,0,16)}&nbsp阅读${article.read_times}&nbsp评论${fn:length(article.comments)}</div>
 								  </p>
                                </div>
                          </c:forEach>     
