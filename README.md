@@ -1,7 +1,7 @@
 # sonne_blog
 My blog,a web project, using mysql database, developed by Java and the web frame of Spring MVC.the front-end of website is developed by jsp,html\css,js,jquery,bootstrap.
 
-我的博客，使用mysql数据库，使用java开发，应用springmvc数据库。前端由jsp、html、css、js、jquery、bootstrap开发。
+我的博客，使用mysql数据库，使用java开发，应用springmvc框架。前端由jsp、html、css、js、jquery、bootstrap开发。
 
 Supported features：register,login,write articles with pictures and code,user's profile picture,comments of articles..
 
