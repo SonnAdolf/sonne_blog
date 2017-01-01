@@ -131,3 +131,12 @@ body {
 	border:2px dashed;
 	border-color:#77FFCC;
 }
+
+#login_before_comment {
+	font-family:Microsoft YaHei;
+}
+
+#comment_txt {
+	width:600px;
+	height:120px;
+}

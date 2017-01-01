@@ -127,13 +127,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <img src="<%=basePath %>image/blog_history/blog_age.png" alt="Sonne Blog" /><br>    
         2016.12.15<br>
                      新的登录页。pc端居中显示，手机端刚好铺满整个屏幕。达到了我心目中期待的“完美”。<br>
-       <img src="<%=basePath %>image/blog_history/new_login_page0.jpg" alt="Sonne Blog" /><br>
-       <img src="<%=basePath %>image/blog_history/new_login_page1.jpg" alt="Sonne Blog" /><br>
+        <img src="<%=basePath %>image/blog_history/new_login_page0.jpg" alt="Sonne Blog" /><br>
+        <img src="<%=basePath %>image/blog_history/new_login_page1.jpg" alt="Sonne Blog" /><br>
         2016.12.17<br>
                       实现写文章插入图片。<br>
         2016.12.25<br>
                       初步实现消息提醒机制。<br>
         <img src="<%=basePath %>image/blog_history/msg.png" alt="Sonne Blog" /><br>
+        2016.12.26<br>
+                      实现了自动登录功能<br>               
+        2016.12.27<br>
+                     首页显示文章阅读数和评论数，最重要新加入了分享功能，亲测分享微信成功。<br>
+        <img src="<%=basePath %>image/blog_history/WeiXin.png" alt="Sonne Blog" /><br>
+        2017.01.01<br>
+                      用了5天时间实现了对xss跨站脚本攻击的防范。<br>
     </div>
     <audio controls="controls" autoplay="autoplay" height="100" width="100">
   		  <source src="<%=basePath %>music/Flower Dance.mp3" type="audio/mp3" />

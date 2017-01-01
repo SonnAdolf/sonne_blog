@@ -11,8 +11,7 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/myspace.css" media="all" />
-             <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/myspace.css" media="all" /> 
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              
              <script type="text/javascript">
@@ -49,7 +48,6 @@ String imgPath = basePath + "image/";
       </head>
       <body>
 			  <div id="sonn_title">
-			        <br>
 					<p id="main_word">断剑重铸之日，骑士归来之时</p>   
 			  </div>
 
@@ -65,11 +63,10 @@ String imgPath = basePath + "image/";
 		                 <c:if test="${!empty userName}">
 		                       <li>
 		                            <a href ="/RiXiang_blog/mine/show.form">
-		                                                                                                个人空间 - ${userName}		                                                                                                		                                 
+		                                                                                                个人空间 - ${userName}	
 		                                   <c:if test="${!empty has_new_msg}">
-		                 	                   <span id="msg_prompt" class="glyphicon glyphicon-bell">
-		                 	                   </span>
-		                 	             </c:if>
+		                 	                    <span id="new_msg_txt">【新消息】</span>
+		                 	               </c:if>
 		                 	        </a>
 		                 	   </li>
 		                 </c:if>

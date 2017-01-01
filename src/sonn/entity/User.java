@@ -11,8 +11,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import sonn.annotation.IsValidString;
-
 /**
 * @ClassName: User 
 * @Description: User实体类
@@ -31,24 +29,25 @@ public class User
 	
 	/*用户名*/
 	@NotNull
-	@IsValidString
 	@Length(min=1, max=20)
 	private String username;
 	
 	/*密码*/
 	@NotNull
-	@IsValidString
 	@Length(min=1, max=70)
 	private String password;
 	
 	/*pic path*/
-	@IsValidString
 	@Length(min=1, max=200)	
 	private String h_pic_path;
 	
 	/*date of registering sonne blog*/
 	@DateTimeFormat(pattern = "yyyy-MM-dd") 
 	private Date blog_date;
+	
+	private int fans_num;
+	
+	private int following_num;
 	
 	/* "身份信息"参数名称 */
 	public static final String PRINCIPAL_ATTRIBUTE_NAME 
@@ -100,6 +99,22 @@ public class User
 
 	public void setBlog_date(Date blog_date) {
 		this.blog_date = blog_date;
+	}
+
+	public int getFans_num() {
+		return fans_num;
+	}
+
+	public void setFans_num(int fans_num) {
+		this.fans_num = fans_num;
+	}
+
+	public int getFollowing_num() {
+		return following_num;
+	}
+
+	public void setFollowing_num(int following_num) {
+		this.following_num = following_num;
 	}
 	
 }

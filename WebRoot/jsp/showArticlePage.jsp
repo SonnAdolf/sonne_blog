@@ -95,7 +95,6 @@ String imgPath = basePath + "image/";
 				}
 				function successFunc(data) {
 					if (data.success) {
-					    alert(data.msg);
 					    var old_url = window.location.href;
 					    var index = old_url.search("currentPage"); 
 					    if (index != -1) {
@@ -119,12 +118,12 @@ String imgPath = basePath + "image/";
 			  	<div id="navigator">
 			  		<ul id="navList">
 			  			<li><font>日   向  博  客&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</font></li>
-			  			<c:if test="${empty userName}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
-			  			<c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
+			  			<c:if test="${empty username}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
+			  			<c:if test="${empty username}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
 			  			<li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
-			  			<c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${userName}</a></li></c:if>
-			  			<c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${userName}</a></li></c:if>
-			  			<c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
+			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${username}</a></li></c:if>
+			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${username}</a></li></c:if>
+			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
 			  			<li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
 			  			<li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
 			  		</ul>
@@ -182,16 +181,20 @@ String imgPath = basePath + "image/";
                             </c:choose>
                         </div>
                          <p>写评论：</p>
-                         <form id="commentForm" action="/RiXiang_blog/comment/writeComment.form" method="post">
-
-  				               <div id="editor-container" class="container">
-                                   <textarea id="content" name="content" style="display:none;">
-                                   </textarea> 
-                               </div>
-                               &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                               <input type="text" style="display:none" name="article_id" value="${article.id}">
-                               <input name="提交" type="submit" class="button" style="height:30px;width:100px;background:black;color:white" value="写完了（￣ c￣）y" />
-                         </form>
+                             <c:choose>
+                                <c:when test = "${empty username}">
+                                      <p id="login_before_comment"> 【登录后发表你的看法 (ฅ´ω`ฅ)】 </p>
+                                </c:when>
+                                <c:otherwise>
+                                      <form id="commentForm" action="/RiXiang_blog/comment/writeComment.form" method="post">
+                                            <textarea id="comment_txt" name="content">
+                                            </textarea> 
+                                            <input type="text" style="display:none" name="article_id" value="${article.id}"><br/>
+                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                            <input name="提交" type="submit" class="button" style="height:30px;width:100px;background:black;color:white" value="写完了（￣ c￣）y" />
+                                      </form> 
+                               </c:otherwise>
+                          </c:choose>                                   
                          <!--    共${page.pageInfo.totalCount}条评论，当前第${page.pageInfo.currentPage}/${page.pageInfo.totalPage}页，每页${page.pageInfo.everyPage}条评论  -->
                     </div>
                </div>

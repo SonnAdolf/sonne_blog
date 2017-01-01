@@ -39,7 +39,6 @@ public class Article
 	
 	/*title*/
 	@NotNull
-	@IsValidString
 	@Length(min=1, max=40)
 	private String title;
 	

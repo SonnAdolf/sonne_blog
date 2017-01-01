@@ -11,7 +11,6 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-             <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/sonn.css" media="all" />
       </head>
       <body>              
@@ -29,8 +28,7 @@ String imgPath = basePath + "image/";
 		                             <a href ="/RiXiang_blog/mine/show.form">
 		                                                                                               个人空间 - ${userName}
 		                                  <c:if test="${!empty has_new_msg}">
-		                 	                   <span id="msg_prompt" class="glyphicon glyphicon-bell">
-		                 	                   </span>
+		                 	                   <span id="new_msg_txt">【新消息】</span>
 		                 	             </c:if>
 		                            </a>
 		                 	 </li>

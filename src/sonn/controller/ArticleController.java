@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,19 +45,21 @@ import com.alibaba.fastjson.JSONObject;
  * @Description: ArticleController
  * @author sonne
  * @date 2016-3-25 
- *       2016-05-15 write article func 
- *       2016-05-21 save the contents of articles in server context. 
+ *       2016-05-15 write article func 2016-05-21 save the contents of articles in server context. 
  *       2016.07.30 add links form myspace to write article page and from show article page to ... 
- *       2016.11 article delete function. 
+ *       2016.11 article delete function.
  *       2016-11-11 article summary. 
- *       2016-11-13 article edit. 
- *       2016-11-27 order or list 2016-11-28 add date 
- *       2016-12-07 sort the comments.
- *       2016-12-11 check if the article already exits when write a new article.
+ *       2016-11-13 article edit.
+ *       2016-11-27 order or list 
+ *       2016-11-28 add date 
+ *       2016-12-07 sort the comments. 
+ *       2016-12-11 check if the article already exits when write a new article. 
  *       2016-12-23 show messages of usr logined from home page.
- *       2016-12-26 auto log in.
- *       2016-12-27 check if it is the operation(write,edit,delete articles) of the article's author.
- *                  add the read times.
+ *       2016-12-26 auto log in. 
+ *       2016-12-27 check if it is the operation(write,edit,delete articles) of the article's author. 
+ *              add the read times.
+ *       2016-12-28 - 2017-01.01 fight with xss attack.
+ *                     delete all the messages before deleting the article.
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
@@ -70,9 +74,9 @@ public class ArticleController {
 
 	@Resource(name = "commentServiceImpl")
 	private CommentService commentService;
-	
-    @Resource(name = "messageServiceImpl")
-    private MessageService messageService;
+
+	@Resource(name = "messageServiceImpl")
+	private MessageService messageService;
 
 	/*
 	 * Get all articles, and show them at the main page.
@@ -84,10 +88,10 @@ public class ArticleController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(HttpServletRequest request, PageInfo pageInfo,
 			Model model) throws Exception {
-		// if the usr has setting auto_login, auto login from home page 
+		// if the usr has setting auto_login, auto login from home page
 		userService.check_auto_login(request);
-		
-		pageInfo.setEveryPage(15);
+
+		pageInfo.setEveryPage(20);
 		List<Order> orders = new ArrayList<Order>();
 		Order order = new Order("id", Order.Direction.desc);
 		orders.add(order);
@@ -100,8 +104,9 @@ public class ArticleController {
 		if (null != pipal) {
 			String username = pipal.getUsername();
 			model.addAttribute("userName", username);
-			if (messageService.hasMsg(userService.find(pipal.getId(),User.class)))
-				model.addAttribute("has_new_msg", "has_new_msg");	
+			if (messageService.hasMsg(userService.find(pipal.getId(),
+					User.class)))
+				model.addAttribute("has_new_msg", "has_new_msg");
 		}
 		return "mainPage";
 	}
@@ -145,6 +150,8 @@ public class ArticleController {
 		if (!db_article.getAuthorName().equals(username)) {
 			return false;
 		}
+		// delete all messages of this article.
+		messageService.delete_msgs_by_article(db_article);
 		articleService.delete(id, Article.class);
 		// delete the local files
 		IOUtill.delete(db_article.getArticleAddr());
@@ -175,6 +182,23 @@ public class ArticleController {
 	public JSONObject edit(HttpServletRequest request, Article article,
 			String articleContent, Model model) throws Exception {
 		JSONObject jo = new JSONObject();
+		String title_input = article.getTitle();
+		if (StringUtill.isStringEmpty(title_input)) {
+			jo.put("success", false);
+			jo.put("info", "文章标题不能为空");
+			return jo;
+		}
+		if (StringUtill.isStringEmpty(articleContent)) {
+			jo.put("success", false);
+			jo.put("info", "文章内容不能为空");
+			return jo;			
+		}
+		if (StringUtill.contains_sqlinject_illegal_ch(title_input)) {
+			jo.put("success", false);
+			jo.put("info", "文章标题不能包含特殊字符");
+			return jo;			
+		}
+		articleContent = Jsoup.clean(articleContent, Whitelist.basicWithImages());
 		Article db_article = articleService
 				.find(article.getId(), Article.class);
 		if (db_article == null) {
@@ -189,16 +213,10 @@ public class ArticleController {
 			jo.put("info", "你不是这篇文章作者不能修改");
 			return jo;
 		}
-		if (StringUtill.isStringEmpty(articleContent)) {
-			jo.put("success", false);
-			jo.put("info", "文章内容不能为空");
-			return jo;
-		}
-
 		// only the title may be edited on the db
 		// and if the title changed content and summary urls will be changed
 		// too.
-		if (!db_article.getTitle().equals(article.getTitle())) {
+		if (!db_article.getTitle().equals(title_input)) {
 			// get new urls
 			String articleUrl = articleService.getArticleUrl(article, request,
 					username);
@@ -249,13 +267,25 @@ public class ArticleController {
 			jo.put("info", "文章内容为空");
 			return jo;
 		}
+		String title_input = article.getTitle();
 		if (StringUtill.isStringEmpty(article.getTitle())) {
 			jo.put("success", false);
 			jo.put("info", "文章题目不可为空");
 			return jo;
 		}
+		if (StringUtill.contains_sqlinject_illegal_ch(title_input)) {
+			jo.put("success", false);
+			jo.put("info", "文章标题不能包含特殊字符");
+			return jo;			
+		}
+		articleContent = Jsoup.clean(articleContent, Whitelist.basicWithImages());
 		String username = userService.getUsernameFromSession(request);
-
+		if (StringUtill.isStringEmpty(username)) {
+			jo.put("success", false);
+			jo.put("msg", "请先登录");
+			return jo;				
+		}
+		
 		String articleUrl = articleService.getArticleUrl(article, request,
 				username);
 
@@ -311,17 +341,17 @@ public class ArticleController {
 			return "error";
 		}
 		Article article = articleService.find(id, Article.class);
-		
+
 		// click the link, then read_times ++
 		article.setRead_times(article.getRead_times() + 1);
 		articleService.update(article);
-		
+
 		article = getArticleOfContentByUrl(article);
 		// sort the comments
 		List<Comment> comments = commentService.sort(article.getComments());
 		String username = userService.getUsernameFromSession(request);
 		model.addAttribute("article", article);
-		model.addAttribute("userName", username);
+		model.addAttribute("username", username);
 		model.addAttribute("article_id", id);
 
 		if (currentPage == null || currentPage <= 0) {
@@ -360,9 +390,8 @@ public class ArticleController {
 
 			for (FileItem fileItem : list) {
 				String path = getPathFromSession(username, request);
-				fileName = new String(fileItem.getName().getBytes(),
-						"utf-8");
-				String localPicPath = path + "\\" + fileName;
+				fileName = new String(fileItem.getName().getBytes(), "utf-8");
+				String localPicPath = path + "/" + fileName;
 				File picFile = new File(localPicPath);
 				picFile.createNewFile();
 				InputStream ins = fileItem.getInputStream();
@@ -380,8 +409,8 @@ public class ArticleController {
 		} catch (FileUploadException e) {
 			return "";
 		}
-		String WEB_PATH = getWebBasePath(username, request) + "article_pics/" + username
-				+ "/" + fileName;
+		String WEB_PATH = getWebBasePath(username, request) + "article_pics/"
+				+ username + "/" + fileName;
 		// return the path of picture
 		return WEB_PATH;
 	}
@@ -416,7 +445,7 @@ public class ArticleController {
 		// the path of the user to save the pics
 		String basePath = request.getSession().getServletContext()
 				.getRealPath("/");
-		String path = basePath + "article_pics\\" + username;
+		String path = basePath + "article_pics/" + username;
 		File file = new File(path);
 		if (!file.exists() && !file.isDirectory()) {
 			file.mkdirs();

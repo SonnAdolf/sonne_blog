@@ -11,8 +11,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
 
-import sonn.util.StringUtill;
-
 /**
 * @ClassName: IsValidString 
 * @Description: 自定义注解实现前后台参数校验，判断是否包含非法字符
@@ -43,15 +41,7 @@ public @interface IsValidString
 		@Override
 		public boolean isValid(String strValue, ConstraintValidatorContext context)
 		{
-			if(StringUtill.isStringEmpty(strValue))
-			{
-				return true;
-			}
-			if(strValue.contains("<") || strValue.contains(">")
-					|| strValue.contains("=") || strValue.contains("'") || strValue.contains("\""))
-			{
-				return false;
-			}
+			//校验方法
 			return true;
 		}
 		

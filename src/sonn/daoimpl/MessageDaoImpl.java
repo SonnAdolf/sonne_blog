@@ -2,6 +2,7 @@ package sonn.daoimpl;
 
 import java.util.List;
 
+import javax.persistence.FlushModeType;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import sonn.Order;
 import sonn.dao.MessageDao;
+import sonn.entity.Article;
 import sonn.entity.Message;
 import sonn.entity.User;
 import sonn.enums.MsgIsRead;
@@ -50,6 +52,31 @@ public class MessageDaoImpl extends BaseDaoImpl<Message> implements MessageDao {
 		return super.findPage(criteriaQuery, pageInfo, Message.class, orders);
 	}
 	
+	
+	/**
+	* @Title: delete_msgs_by_article 
+	* @Description: used to delete all messages by searching the article
+	* @param @param Article article
+	* @return    
+	* @throws
+	 */
+	@Override
+	public void delete_msgs_by_article(Article article ) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Message> criteriaQuery = criteriaBuilder.createQuery(Message.class);
+		Root<Message> root = criteriaQuery.from(Message.class);
+		criteriaQuery.select(root);
+		Predicate restrictions = criteriaBuilder.conjunction();
+		if (article != null) 
+		{
+			restrictions = criteriaBuilder.and(restrictions, criteriaBuilder.equal(root.get("article"), article));
+		}
+		criteriaQuery.where(restrictions);
+		List<Message> msg_lst = entityManager.createQuery(criteriaQuery).setFlushMode(FlushModeType.COMMIT).getResultList();
+		for (Message msg:msg_lst) {
+			super.remove(msg);
+		}
+	}
 
 	/**
 	* @Title: getMessagesByUsrId 

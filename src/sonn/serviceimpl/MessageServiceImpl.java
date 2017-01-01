@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import sonn.Order;
 import sonn.dao.MessageDao;
+import sonn.entity.Article;
 import sonn.entity.Message;
 import sonn.entity.User;
 import sonn.service.MessageService;
@@ -52,4 +53,16 @@ public class MessageServiceImpl  extends BaseServiceImpl<Message> implements Mes
 		return false;
 	}
 
+	/**
+	* @Title: getMessagesByUsrId 
+	* @Description: used to get messages by searching the usr's id
+	* @param @param reciever
+	* @return List<Message>    
+	* @throws
+	 */
+	@Override
+	public void delete_msgs_by_article(Article article) {
+		messageDao.delete_msgs_by_article(article);
+	}
+	
 }
