@@ -12,11 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
     <link type="text/css" rel="stylesheet" href="<%=basePath %>css/mine.css" media="all" />
-    <script type="text/javascript" src="<%=basePath %>Jquery/jquery-1.3.1.js"></script>
-    <script type="text/javascript" src="<%=basePath %>Jquery/jquery.form.js"></script>   
-    <title>Sonn Blog</title>
-    <script type="text/javascript">
-    </script>
   </head>
 
 <body>
@@ -91,5 +86,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                      未来本页面右侧栏将显示关注粉丝、用户头像列表。
         </p>
   </div>
+    <script type="text/javascript" src="<%=basePath %>Jquery/jquery-1.3.1.js"></script>
+    <script type="text/javascript" src="<%=basePath %>Jquery/jquery.form.js"></script>   
+    <title>Sonn Blog</title>
+    <script type="text/javascript">
+    </script>
 </body>
 </html>

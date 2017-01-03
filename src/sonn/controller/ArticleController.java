@@ -111,6 +111,9 @@ public class ArticleController {
 		return "mainPage";
 	}
 
+	/*
+	 * to show the writing article page.
+	 */
 	@RequestMapping(value = "/writeArticlePage", method = RequestMethod.GET)
 	public String writeArticlePage(HttpServletRequest request,
 			PageInfo pageInfo, Model model) throws Exception {
@@ -150,7 +153,7 @@ public class ArticleController {
 		if (!db_article.getAuthorName().equals(username)) {
 			return false;
 		}
-		// delete all messages of this article.
+		// first,delete all messages of this article.
 		messageService.delete_msgs_by_article(db_article);
 		articleService.delete(id, Article.class);
 		// delete the local files
@@ -160,14 +163,12 @@ public class ArticleController {
 	}
 
 	@RequestMapping(value = "/editInit", method = RequestMethod.GET)
-	public String editInit(HttpServletRequest request, Integer id, Model model)
+	public String editInit(HttpServletRequest request, int id, Model model)
 			throws Exception {
-		if (null == id) {
-			return "error";
-		}
 		String username = userService.getUsernameFromSession(request);
-		if (StringUtill.isStringEmpty(username))
+		if (StringUtill.isStringEmpty(username)) {
 			return "mainPage";
+		}
 		Article article = articleService.find(id, Article.class);
 		if (null == articleService.find(id, Article.class)) {
 			return "error";

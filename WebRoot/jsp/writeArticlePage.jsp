@@ -11,7 +11,38 @@ String imgPath = basePath + "image/";
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/fixed_background.css" media="all" />
-              <link rel="stylesheet" type="text/css" href="<%=basePath %>wangEditor/dist/css/wangEditor.min.css">
+             <link rel="stylesheet" type="text/css" href="<%=basePath %>wangEditor/dist/css/wangEditor.min.css">
+      </head>
+      <body>
+             <div id="scene"> 
+                  <img src="<%=imgPath%>mainPageBanner.png" ALT=""/> 
+             </div>
+              <div id = "article_list">
+                   <br>
+                   <form id="articleForm" action="writeArticle.form" method="post">
+                               <label>标题：</label>
+                              <input type="text" name="title" style="height:25px;width:150px;"/><br>
+                               <br>
+  				               <div id="editor-container" class="container">
+                                   <textarea id="editor-trigger" name="articleContent">
+                                   </textarea> 
+                               </div>
+                               &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                               <input name="提交" type="submit" class="button" style="height:30px;width:100px;background:black;color:white" value="写完了（￣ c￣）y" />
+                  </form>
+			  </div>
+
+              <div id="col_right">
+                    <div id="menu">
+                          <h2>主页导航</h2>
+                          <ul>
+                              <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
+                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/space/list.form">个人空间 - ${userName}</a></c:if></li>
+                              <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
+                              <li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
+                          </ul>
+                    </div>
+              </div>
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>   
              <script type="text/javascript" src="<%=basePath %>wangEditor/dist/js/wangEditor.js"></script>
@@ -110,36 +141,5 @@ String imgPath = basePath + "image/";
 					}
 				}
                </script>
-      </head>
-      <body>
-             <div id="scene"> 
-                  <img src="<%=imgPath%>mainPageBanner.png" ALT=""/> 
-             </div>
-              <div id = "article_list">
-                   <br>
-                   <form id="articleForm" action="writeArticle.form" method="post">
-                               <label>标题：</label>
-                              <input type="text" name="title" style="height:25px;width:150px;"/><br>
-                               <br>
-  				               <div id="editor-container" class="container">
-                                   <textarea id="editor-trigger" name="articleContent">
-                                   </textarea> 
-                               </div>
-                               &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                               <input name="提交" type="submit" class="button" style="height:30px;width:100px;background:black;color:white" value="写完了（￣ c￣）y" />
-                  </form>
-			  </div>
-
-              <div id="col_right">
-                    <div id="menu">
-                          <h2>主页导航</h2>
-                          <ul>
-                              <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
-                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/space/list.form">个人空间 - ${userName}</a></c:if></li>
-                              <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-                              <li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
-                          </ul>
-                    </div>
-              </div>
       </body>
 </html>

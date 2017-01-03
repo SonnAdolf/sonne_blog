@@ -12,45 +12,11 @@ String imgPath = basePath + "image/";
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/myspace.css" media="all" /> 
-             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
-             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              
-             <script type="text/javascript">
-				    var oAjax = null;
-					if(window.XMLHttpRequest){
-   				         oAjax = new XMLHttpRequest();
-                    }else{
-                         oAjax = new ActiveXObject('Microsoft.XMLHTTP');
-                    }
-                    
-                    function button_Click_1(btn) {
-	  					var delete_id = btn.id;
-	  					url = "<%=basePath %>article/delete.form?id=" + delete_id 
-	  					oAjax.open('POST', url, true);
-	  					oAjax.send();
-   					    oAjax.onreadystatechange = function(){  
-       						 if(oAjax.readyState == 4){  
-       						     if(oAjax.status == 200){    
-        				             alert("delete successfully.");
-        					         location.reload(); 
-        						 }else{
-          			    		      alert("delete failed");
-          						  }
-       						 }
-   						 };
-                     } 
-                     
-                     function button_Click_2(btn) {
-	  					var edit_id = btn.id;
-	  					url = "<%=basePath %>article/editInit.form?id=" + edit_id 
-	  					window.location.href="<%=basePath %>article/editInit.form?id=" + edit_id; 
-                     } 
-               </script>
       </head>
       <body>
 			  <div id="sonn_title">
 					<p id="main_word">断剑重铸之日，骑士归来之时</p>   
 			  </div>
-
 		    <div id="header">
 		      	 <div id="navigator">
 		      		<ul id="navList">
@@ -128,5 +94,38 @@ String imgPath = basePath + "image/";
                           </c:choose>
                      </div>
 			  </div>
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              
+             <script type="text/javascript">
+				    var oAjax = null;
+					if(window.XMLHttpRequest){
+   				         oAjax = new XMLHttpRequest();
+                    }else{
+                         oAjax = new ActiveXObject('Microsoft.XMLHTTP');
+                    }
+                    
+                    function button_Click_1(btn) {
+	  					var delete_id = btn.id;
+	  					url = "<%=basePath %>article/delete.form?id=" + delete_id 
+	  					oAjax.open('POST', url, true);
+	  					oAjax.send();
+   					    oAjax.onreadystatechange = function(){  
+       						 if(oAjax.readyState == 4){  
+       						     if(oAjax.status == 200){    
+        				             alert("delete successfully.");
+        					         location.reload(); 
+        						 }else{
+          			    		      alert("delete failed");
+          						  }
+       						 }
+   						 };
+                     } 
+                     
+                     function button_Click_2(btn) {
+	  					var edit_id = btn.id;
+	  					url = "<%=basePath %>article/editInit.form?id=" + edit_id 
+	  					window.location.href="<%=basePath %>article/editInit.form?id=" + edit_id; 
+                     } 
+               </script>
       </body>
 </html>

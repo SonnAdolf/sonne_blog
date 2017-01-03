@@ -19,6 +19,54 @@ String imgPath = basePath + "image/";
              
              <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/login.css" media="all" />
+      </head>
+      <body>
+       		<div class="container">
+                 <div id="back_way">
+            	    <a href ="/RiXiang_blog/article/list.form">返回主页</a>
+                 </div>
+        		   <div id="content" class="row-fluid">
+        		             <img src="<%=basePath %>image/cat.jpg" alt/>
+        			          <h4>Sign in to SonneBlog</h4>
+
+            			   <h4>日向博客，你的精神家园</h4>
+						   <form id="loginForm" action="login.form" method="post">
+   							     <div id = "usr_name"  class="form-group">
+    					                 用户名 <input type="text" id="username" name="username" placeholder="Username">
+    				            </div>
+  				               <div id = "passwd"  class="form-group">
+                                         密码 <input type="password" id="password" name="password" placeholder="Password">
+                               </div>
+           					  <textarea  style="display:none" id="pubkey" rows="15" cols="65">${publicKey}</textarea>
+
+           					        自动登录：<label><input name="auto_log_in" type="radio" value="yes">是</label>
+           					        <label><input name="auto_log_in" type="radio" checked="true" value="no">否</label>
+                              <div id = "captcha"  class="form-group">
+                                          验证码 <input type="text" id="captcha" name="captcha" placeholder="Enter captcha">
+                               </div>
+    						  <div id = "captcha_img"  class="form-group">
+							         <img id="captchaImage"  src="captcha.form"/>
+							  </div>
+	                                
+	                          <div id="submit_btn"  class="form-group">
+                                <button id="submitbtn" name="submitbtn" class="btn-primary btn-block">登录</button>
+							  </div>
+                           </form>
+				    <!--
+                         <div id="poem" class="col-md-3">
+                                 <br/>
+                                 <br/>
+                                 <br/>
+                                 <p> 我们生活在漫漫寒夜 </p>
+                                 <p>人生好似长途旅行</p>
+                                 <p>仰望天空寻找方向</p>
+                                 <p>天际却无引路的明星</p>
+                                 <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp----《茫茫黑夜漫游》</p>
+                        </div>
+					-->
+            </div>
+
+       </div>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-1.3.1.js"></script>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery.form.js"></script>   
              <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
@@ -70,54 +118,5 @@ String imgPath = basePath + "image/";
 					}
 				}
                </script>
-      </head>
-      <body>
-       		<div class="container">
-                 <div id="back_way">
-            	    <a href ="/RiXiang_blog/article/list.form">返回主页</a>
-                 </div>
-        		   <div id="content" class="row-fluid">
-        		             <img src="<%=basePath %>image/cat.jpg" alt/>
-        			          <h4>Sign in to SonneBlog</h4>
-
-            			   <h4>日向博客，你的精神家园</h4>
-						   <form id="loginForm" action="login.form" method="post">
-   							     <div id = "usr_name"  class="form-group">
-    					                 用户名 <input type="text" id="username" name="username" placeholder="Username">
-    				            </div>
-  				               <div id = "passwd"  class="form-group">
-                                         密码 <input type="password" id="password" name="password" placeholder="Password">
-                               </div>
-           					  <textarea  style="display:none" id="pubkey" rows="15" cols="65">${publicKey}</textarea>
-
-           					        自动登录：<label><input name="auto_log_in" type="radio" value="yes">是</label>
-           					        <label><input name="auto_log_in" type="radio" checked="true" value="no">否</label>
-                              <div id = "captcha"  class="form-group">
-                                          验证码 <input type="text" id="captcha" name="captcha" placeholder="Enter captcha">
-                               </div>
-    						  <div id = "captcha_img"  class="form-group">
-							         <img id="captchaImage"  src="captcha.form"/>
-							  </div>
-	                                
-	                          <div id="submit_btn"  class="form-group">
-                                <button id="submitbtn" name="submitbtn" class="btn-primary btn-block">登录</button>
-							  </div>
-                           </form>
-				    <!--
-                         <div id="poem" class="col-md-3">
-                                 <br/>
-                                 <br/>
-                                 <br/>
-                                 <p> 我们生活在漫漫寒夜 </p>
-                                 <p>人生好似长途旅行</p>
-                                 <p>仰望天空寻找方向</p>
-                                 <p>天际却无引路的明星</p>
-                                 <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp----《茫茫黑夜漫游》</p>
-                        </div>
-					-->
-            </div>
-
-       </div>
-       
       </body>
 </html>

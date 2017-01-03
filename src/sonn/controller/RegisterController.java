@@ -65,26 +65,26 @@ public class RegisterController {
 			String repassword) throws Exception {
 		HttpSession session = request.getSession();
 		JSONObject jo = new JSONObject();
-		jo.put("success", false);
-		jo.put("returnMessage", "本博客目前处于开发测试时期，2016年1月将暂停注册功能");
-		return jo;
-		//SimpleBackMessage registerMessage = checkUserInfor(user, repassword,
-	    //			session);
-//		MessageUtil.setJSONObject(jo, registerMessage);
-//		if (!registerMessage.isSuccess()) {
-//			return jo;
-//		}
-		// get private key from session
-//		String PRIVATE_KSY = (String) session.getAttribute("PRIVATE_KEY");
-//		String passwd = RSAUtils.decryptDataOnJava(user.getPassword(),
-//				PRIVATE_KSY);
-		// using md5 to set the passwd
-//		user.setPassword(DigestUtils.md5Hex(passwd));
-//		user.setBlog_date(new Date());
-//		userService.save(user);
-//		session.setAttribute(User.PRINCIPAL_ATTRIBUTE_NAME,
-//				new Principal(user.getId(), user.getUsername()));
+//		jo.put("success", false);
+//		jo.put("returnMessage", "本博客目前处于开发测试时期，2016年1月将暂停注册功能");
 //		return jo;
+		SimpleBackMessage registerMessage = checkUserInfor(user, repassword,
+	    			session);
+		MessageUtil.setJSONObject(jo, registerMessage);
+		if (!registerMessage.isSuccess()) {
+			return jo;
+		}
+		// get private key from session
+		String PRIVATE_KSY = (String) session.getAttribute("PRIVATE_KEY");
+		String passwd = RSAUtils.decryptDataOnJava(user.getPassword(),
+				PRIVATE_KSY);
+		// using md5 to set the passwd
+		user.setPassword(DigestUtils.md5Hex(passwd));
+		user.setBlog_date(new Date());
+		userService.save(user);
+		session.setAttribute(User.PRINCIPAL_ATTRIBUTE_NAME,
+				new Principal(user.getId(), user.getUsername()));
+		return jo;
 	}
 
 	private SimpleBackMessage checkUserInfor(User user, String repassword,

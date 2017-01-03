@@ -10,7 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
     <title>Sonn Blog</title>
     <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>css/basic.css" />
-    <script type="text/javascript" src="<%=basePath %>js/global.js"></script>
   </head>
   
 <body>
@@ -50,5 +49,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <source src="<%=basePath %>music/Main Title.ogg" type="audio/ogg" />
           <embed height="100" width="100" src="<%=basePath %>music/Main Title.mp3" />
      </audio>
+     <script type="text/javascript" src="<%=basePath %>js/global.js"></script>
 </body>
 </html>

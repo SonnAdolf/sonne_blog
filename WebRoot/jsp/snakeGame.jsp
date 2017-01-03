@@ -9,23 +9,36 @@ String imgPath = basePath + "image/";
 <head>
     <title>日向贪吃蛇</title>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<style>
-    body{
-        font-size:9pt;
-    }
-    table{
-        border-collapse: collapse;
-        border:solid #333 1px;
-    }
-    td{
-        height: 20px;
-        width: 20px;
-        font-size: 0px;
-    }
-    .filled{
-        background-color:blue;
-    }
-</style>
+    <style>
+       body{
+          font-size:9pt;
+       }
+       table{
+          border-collapse: collapse;
+          border:solid #333 1px;
+       }
+       td{
+          height: 20px;
+          width: 20px;
+          font-size: 0px;
+        }
+        .filled{
+          background-color:blue;
+        }
+    </style>
+</head>
+
+<body onload="Snake.init();">
+     <div id = 'main_title'>日向贪吃蛇</div>
+     <table id="main" border="1" cellspacing="0" cellpadding="0"></table>
+     <input type="button" id="btn" value="开始/暂停" />
+     <input type="button" id="reset" value="重新开始" />
+     <a href="/RiXiang_blog/article/list.form">返回主页</a><br />
+     <audio controls="controls" autoplay="autoplay" height="100" width="100">
+  		  <source src="<%=basePath %>music/breaking_bad.mp3" type="audio/mp3" />
+          <source src="<%=basePath %>music/breaking_bad.ogg" type="audio/ogg" />
+          <embed height="100" width="100" src="<%=basePath %>music/breaking_bad.mp3" />
+     </audio>
 <script>
     function $(id){return document.getElementById(id);}
 	var Snake = {
@@ -261,23 +274,6 @@ String imgPath = basePath + "image/";
             }
         }
 	};
-</script>
-</head>
-
-<body onload="Snake.init();">
-<div id = 'main_title'>日向贪吃蛇</div>
-<table id="main" border="1" cellspacing="0" cellpadding="0"></table>
-<input type="button" id="btn" value="开始/暂停" />
-<input type="button" id="reset" value="重新开始" />
-<a href="/RiXiang_blog/article/list.form">返回主页</a><br />
-<!-- <div id="music" align="right" style="margin-top:0px"> -->
-    <audio controls="controls" autoplay="autoplay" height="100" width="100">
-  		  <source src="<%=basePath %>music/breaking_bad.mp3" type="audio/mp3" />
-          <source src="<%=basePath %>music/breaking_bad.ogg" type="audio/ogg" />
-          <embed height="100" width="100" src="<%=basePath %>music/breaking_bad.mp3" />
-     </audio>
-<!-- </div>  -->
-<script>
   $('btn').onclick = function(){
     if(Snake.paused){
       Snake.move();
