@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sonn.entity.User;
 import sonn.message.bean.SimpleBackMessage;
 import sonn.service.UserService;
-import sonn.util.MessageUtil;
+import sonn.util.MessageUtils;
 import sonn.util.Principal;
 import sonn.util.RSAUtils;
-import sonn.util.StringUtill;
+import sonn.util.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -70,7 +70,7 @@ public class RegisterController {
 //		return jo;
 		SimpleBackMessage registerMessage = checkUserInfor(user, repassword,
 	    			session);
-		MessageUtil.setJSONObject(jo, registerMessage);
+		MessageUtils.setJSONObject(jo, registerMessage);
 		if (!registerMessage.isSuccess()) {
 			return jo;
 		}
@@ -92,19 +92,19 @@ public class RegisterController {
 		SimpleBackMessage backMessage = new SimpleBackMessage();
 		Object sessionMsg = session.getAttribute(User.PRINCIPAL_ATTRIBUTE_NAME);
 		if (null != sessionMsg) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"注册前请先退出.( ^_^ )? ");
 			return backMessage;
 		}
 
-		if (null == user || StringUtill.isStringEmpty(user.getPassword())
-				|| StringUtill.isStringEmpty(user.getUsername())) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+		if (null == user || StringUtils.isStringEmpty(user.getPassword())
+				|| StringUtils.isStringEmpty(user.getUsername())) {
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"输入有误!( ^_^ )? ");
 			return backMessage;
 		}
-		if (StringUtill.contains_sqlinject_illegal_ch(user.getUsername())) {
-			MessageUtil
+		if (StringUtils.contains_sqlinject_illegal_ch(user.getUsername())) {
+			MessageUtils
 					.setSimpleBackMessage(backMessage, false, "用户名请不要包含特殊字符");
 			return backMessage;
 		}
@@ -115,39 +115,39 @@ public class RegisterController {
 				PRIVATE_KSY);
 		repassword = RSAUtils.decryptDataOnJava(repassword, PRIVATE_KSY);
 		
-		if (StringUtill.contains_sqlinject_illegal_ch(passwd)) {
-			MessageUtil
+		if (StringUtils.contains_sqlinject_illegal_ch(passwd)) {
+			MessageUtils
 					.setSimpleBackMessage(backMessage, false, "密码请不要包含特殊字符");
 			return backMessage;
 		}
 		
 		if (!userService.validPwd(passwd)) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"密码至少六位(╯#-_-)╯~~~~~~~~~~~~~~~~~╧═╧  ");
 			return backMessage;
 		}
-		if (StringUtill.isStringEmpty(repassword)) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+		if (StringUtils.isStringEmpty(repassword)) {
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"请再次输入你的密码( ^_^ )? !");
 			return backMessage;
 		}
-		if (StringUtill.isContainsChinese(user.getUsername())) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+		if (StringUtils.isContainsChinese(user.getUsername())) {
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"请使用英文名!..@_@|||||..");
 			return backMessage;
 		}
 		List<User> users = userService.findByUserName(user.getUsername());
 		if (!users.isEmpty()) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"该名称已被使用!..@_@|||||..");
 			return backMessage;
 		}
 		if (!passwd.equals(repassword)) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"两次输入密码相同!..@_@|||||..");
 			return backMessage;
 		}
-		MessageUtil.setSimpleBackMessage(backMessage, true,
+		MessageUtils.setSimpleBackMessage(backMessage, true,
 				"恭喜成为日向博客新成员!(^_^)∠※ 送你一束花。");
 		return backMessage;
 	}

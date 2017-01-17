@@ -14,6 +14,7 @@ import sonn.util.PageInfo;
 * @Description: about author and sonne history
 * @author sonne
 * @date 2016-11-20
+*       2017-01-09 delete the /sonne/sonne_pic page
 * @version 1.0
  */
 @Controller
@@ -23,12 +24,12 @@ public class SonneController {
     /*
      * sonne pics
      */
-    @RequestMapping(value = "/sonne_pic", method = RequestMethod.GET)
-    public String sonne_pic(HttpServletRequest request,PageInfo pageInfo,
-    		                   Model model) throws Exception
-    {
-        return "sonne";
-    }
+//    @RequestMapping(value = "/sonne_pic", method = RequestMethod.GET)
+//    public String sonne_pic(HttpServletRequest request,PageInfo pageInfo,
+//    		                   Model model) throws Exception
+//    {
+//        return "sonne";
+//    }
     
     /*
      * sonne

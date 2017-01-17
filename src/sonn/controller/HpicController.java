@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sonn.entity.User;
 import sonn.service.UserService;
-import sonn.util.IOUtill;
+import sonn.util.IOUtils;
 import sonn.util.PageInfo;
 
 /**
@@ -66,7 +66,7 @@ public class HpicController {
     					String path = getPathFromSession(username,request);
     					String fileName = new String(fileItem.getName().getBytes(),"utf-8");
     					// because one user only have one h_pic, delete the folder's pic
-    					IOUtill.delAllFile(path);
+    					IOUtils.delAllFile(path);
     					
     					// because every usr only has one profile picture 
     					// so that picture can use a default name of '1.jpg'
@@ -88,14 +88,14 @@ public class HpicController {
     					}
     					
     					// change the profile picture's name of local path
-    					IOUtill.renameFile(path, fileName, "1.jpg");
+    					IOUtils.renameFile(path, fileName, "1.jpg");
     					
     					// compress the picture.
-    					IOUtill.reduceImg(pathOfDefaultName, pathOfDefaultName, 200, 200, null);
+    					IOUtils.reduceImg(pathOfDefaultName, pathOfDefaultName, 200, 200, null);
     					
     					// uodate user of mysql db
     					User user = userService.findByUserName(username).get(0);
-    					path = IOUtill.getRelativePath(pathOfDefaultName);
+    					path = IOUtils.getRelativePath(pathOfDefaultName);
     					user.setH_pic_path(path);
     					userService.update(user);
     				}

@@ -24,7 +24,7 @@ import sonn.Order.Direction;
 import sonn.dao.BaseDao;
 import sonn.util.Page;
 import sonn.util.PageInfo;
-import sonn.util.PageUtil;
+import sonn.util.PageUtils;
 
 
 /**
@@ -127,12 +127,12 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 		{
 			if(null == pageInfo)
 			{
-				pageInfo = PageUtil.createPage(PageInfo.DEFAULT_EVERYOAGE, total,
+				pageInfo = PageUtils.createPage(PageInfo.DEFAULT_EVERYOAGE, total,
 						PageInfo.DEFAULT_CURRENTPAGE);
 			}
 			else
 			{
-				PageUtil.setPageInfo(pageInfo,pageInfo.getEveryPage(),total,
+				PageUtils.setPageInfo(pageInfo,pageInfo.getEveryPage(),total,
 						 pageInfo.getCurrentPage());
 			}
 		}

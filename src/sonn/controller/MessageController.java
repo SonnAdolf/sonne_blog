@@ -17,10 +17,10 @@ import sonn.enums.MsgIsRead;
 import sonn.service.CommentService;
 import sonn.service.MessageService;
 import sonn.service.UserService;
-import sonn.util.IOUtill;
+import sonn.util.IOUtils;
 import sonn.util.Page;
 import sonn.util.PageInfo;
-import sonn.util.PageUtil;
+import sonn.util.PageUtils;
 
 @Controller
 @RequestMapping("/msg")
@@ -47,12 +47,12 @@ public class MessageController {
 		String username = userService.getUsernameFromSession(request);
 		
 		model.addAttribute("article", article);
-		model.addAttribute("userName", username);
+		model.addAttribute("username", username);
 		model.addAttribute("article_id", id);
 		
 		int totalSize = comments.size();
 		final int CURRENT_PAGE = 1;
-		PageInfo pageInfo = PageUtil.createPage(10, comments.size(), CURRENT_PAGE);
+		PageInfo pageInfo = PageUtils.createPage(10, comments.size(), CURRENT_PAGE);
 		
 		int beginIndex = pageInfo.getBeginIndex();
 		long totalNum = pageInfo.getTotalCount();
@@ -73,7 +73,7 @@ public class MessageController {
 	}
 	
 	private Article getArticleOfContentByUrl(Article article) {
-		article.setContent(IOUtill.readByUrl(article.getArticleAddr()));
+		article.setContent(IOUtils.readByUrl(article.getArticleAddr()));
 		return article;
 	}
 }

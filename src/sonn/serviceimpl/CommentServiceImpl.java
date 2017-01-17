@@ -21,8 +21,8 @@ import sonn.service.CommentService;
 @Service("commentServiceImpl")
 public class CommentServiceImpl extends BaseServiceImpl<Comment> implements CommentService {
 
-	@Resource(name = "commentDaoImpl")
-	private CommentDao commentDao;
+//	@Resource(name = "commentDaoImpl")
+//	private CommentDao commentDao;
 	
 	@Resource(name = "commentDaoImpl")
 	public void setBaseDao(CommentDao commentDao)

@@ -1,7 +1,8 @@
 <%@ page pageEncoding="utf-8" contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page import="sonn.enums.MsgType"%>
+<%@ page import="sonn.enums.MsgIsRead" %>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -41,15 +42,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   <div id="my_msgs">
                 消息中心：<br>
+      <c:set var="Not_Read" value="<%=MsgIsRead.No%>"/>
       <c:forEach items="${msgPage.content}" begin="0" end="15" step="1" var="msg">
           <!-- 如果消息类型为评论 -->
           <div id="msg_line">
                <c:choose> 
                     <c:when test="${empty msg.sender.username}">
-                                                                  一名游客在${fn:substring(msg.date,0,16)}评论了你的文章<a href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                          <c:choose> 
+                               <c:when test="${msg.is_read eq Not_Read}">
+                                                                                                           一名游客在${fn:substring(msg.date,0,16)}评论了你的文章<a style="color:red" href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                               </c:when>
+                               <c:otherwise>
+                                                                                                           一名游客在${fn:substring(msg.date,0,16)}评论了你的文章<a href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                               </c:otherwise>
+                          </c:choose>
                     </c:when>
                     <c:otherwise>
-                                                                    用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}评论了你的文章<a href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                          <c:choose> 
+                               <c:when test="${msg.is_read eq Not_Read}">
+                                                                                                                用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}评论了你的文章<a style="color:red" href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                               </c:when>
+                               <c:otherwise>
+                                                                                                              用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}评论了你的文章<a href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                               </c:otherwise>
+                          </c:choose>
                     </c:otherwise>
                 </c:choose>
           </div>

@@ -20,7 +20,7 @@ import sonn.service.CommentService;
 import sonn.service.MessageService;
 import sonn.service.UserService;
 import sonn.util.Principal;
-import sonn.util.StringUtill;
+import sonn.util.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -59,7 +59,7 @@ public class CommentController {
 			return json;			
 		}
 		String content = comment.getContent();
-		if (StringUtill.isStringEmpty(content.trim())) {
+		if (StringUtils.isStringEmpty(content.trim())) {
 			json.put("success", false);
 			json.put("msg", "评论内容怎可为空白？(╯#-_-)╯~~~~~~~~~~~~~~~~~╧═╧");
 			return json;
@@ -69,7 +69,7 @@ public class CommentController {
 			json.put("msg", "评论个四百字也就够了。(¬､¬) (￢_￢)");
 			return json;
 		}
-		content = StringUtill.replace_html_tags(content);
+		content = StringUtils.replace_html_tags(content);
 		comment.setContent(content);
 		Article article = articleService.find(article_id, Article.class);
 		comment.setArticle(article);

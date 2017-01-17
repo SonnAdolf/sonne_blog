@@ -16,7 +16,7 @@ import sonn.dao.ArticleDao;
 import sonn.entity.Article;
 import sonn.util.Page;
 import sonn.util.PageInfo;
-import sonn.util.StringUtill;
+import sonn.util.StringUtils;
 
 
 /**
@@ -54,7 +54,7 @@ public class ArticleDaoImpl extends BaseDaoImpl<Article> implements ArticleDao
 		Root<Article> root = criteriaQuery.from(Article.class);
 		criteriaQuery.select(root);
 		Predicate restrictions = criteriaBuilder.conjunction();
-		if (!StringUtill.isStringEmpty(username)) 
+		if (!StringUtils.isStringEmpty(username)) 
 		{
 			restrictions = criteriaBuilder.and(restrictions, criteriaBuilder.equal(root.get("authorName"), username));
 		}

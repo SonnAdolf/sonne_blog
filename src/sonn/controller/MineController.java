@@ -16,7 +16,7 @@ import sonn.entity.Message;
 import sonn.entity.User;
 import sonn.service.MessageService;
 import sonn.service.UserService;
-import sonn.util.IOUtill;
+import sonn.util.IOUtils;
 import sonn.util.Page;
 import sonn.util.PageInfo;
 import sonn.util.Principal;
@@ -44,7 +44,7 @@ public class MineController {
 		// if the user didnot upload his picture,the path is null
 		String h_pic_path = null;
 		if (null != user.getH_pic_path()) {
-			h_pic_path = IOUtill.getRelativePath(user.getH_pic_path());
+			h_pic_path = IOUtils.getRelativePath(user.getH_pic_path());
 		}
 		else {
 			model.addAttribute("defulat_path", "h_pics/default.jpg");
@@ -62,7 +62,7 @@ public class MineController {
 		
 		model.addAttribute("username", user.getUsername());
 		
-		// 获取用户注册多久
+		// sonne blog age
 		int[] arr = TimeUtils.getHowLongFromNow(user.getBlog_date());
 		String blog_age = "";
 		if (arr[0] != 0) {
@@ -70,6 +70,10 @@ public class MineController {
 		}
 		if (arr[1] != 0) {
 			blog_age = blog_age + Integer.toString(arr[1]) + "个月";
+		}
+		// if he's new user
+		if (arr[0] == 0 && arr[1] == 0) {
+			blog_age = "不足一个月";
 		}
 		
 		model.addAttribute("blog_age", blog_age);  

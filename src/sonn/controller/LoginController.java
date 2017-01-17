@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sonn.entity.User;
 import sonn.message.bean.SimpleBackMessage;
 import sonn.service.UserService;
-import sonn.util.CaptchaUtil;
-import sonn.util.MessageUtil;
+import sonn.util.CaptchaUtils;
+import sonn.util.MessageUtils;
 import sonn.util.Principal;
 import sonn.util.RSAUtils;
-import sonn.util.StringUtill;
+import sonn.util.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -66,7 +66,7 @@ public class LoginController {
 	@ResponseBody
 	public void captcha(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		CaptchaUtil.outputCaptcha(request, response);
+		CaptchaUtils.outputCaptcha(request, response);
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -77,7 +77,7 @@ public class LoginController {
 		JSONObject jo = new JSONObject();
 		HttpSession session = request.getSession();
 		SimpleBackMessage loginMessage = checkUserInfor(user, captcha, session);
-		MessageUtil.setJSONObject(jo, loginMessage);
+		MessageUtils.setJSONObject(jo, loginMessage);
 		if (!loginMessage.isSuccess()) {
 			return jo;
 		}
@@ -125,14 +125,14 @@ public class LoginController {
 	 */
 	private SimpleBackMessage checkInput(SimpleBackMessage backMessage,
 			User user, String captcha) {
-		if (StringUtill.isStringEmpty(captcha)) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+		if (StringUtils.isStringEmpty(captcha)) {
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"请输入验证码!( ¯ □ ¯ )");
 			return backMessage;
 		}
-		if (null == user || StringUtill.isStringEmpty(user.getPassword())
-				|| StringUtill.isStringEmpty(user.getUsername())) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+		if (null == user || StringUtils.isStringEmpty(user.getPassword())
+				|| StringUtils.isStringEmpty(user.getUsername())) {
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"输入错误!( ¯ □ ¯ )");
 			return backMessage;
 		}
@@ -145,8 +145,8 @@ public class LoginController {
 	private SimpleBackMessage checkCaptcha(SimpleBackMessage backMessage,
 			String captcha, HttpSession session) {
 		String captchaInSession = (String) session.getAttribute("randomString");
-		if (StringUtill.isStringEmpty(captchaInSession)) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+		if (StringUtils.isStringEmpty(captchaInSession)) {
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"请输入验证码 ( ¯ □ ¯ ) ");
 			return backMessage;
 		}
@@ -157,7 +157,7 @@ public class LoginController {
 		// return backMessage;
 		// }
 		if (captcha.length() > 10) {
-			MessageUtil.setSimpleBackMessage(backMessage, false, "不要超过验证码长度限制");
+			MessageUtils.setSimpleBackMessage(backMessage, false, "不要超过验证码长度限制");
 			return backMessage;
 		}
 		char c_input;
@@ -167,7 +167,7 @@ public class LoginController {
 			c_ssesion = captchaInSession.charAt(i);
 			if (c_ssesion != c_input
 					&& c_input != Character.toLowerCase(c_ssesion)) {
-				MessageUtil.setSimpleBackMessage(backMessage, false,
+				MessageUtils.setSimpleBackMessage(backMessage, false,
 						"验证码错了 …(⊙_⊙;)…⊙﹏⊙‖∣°( ¯ □ ¯ )");
 				return backMessage;
 			}
@@ -180,14 +180,14 @@ public class LoginController {
 	 */
 	private SimpleBackMessage CheckUserNameAndPassword(
 			SimpleBackMessage backMessage, User user, HttpSession session) {
-		if (StringUtill.contains_sqlinject_illegal_ch(user.getUsername())) {
-			MessageUtil
+		if (StringUtils.contains_sqlinject_illegal_ch(user.getUsername())) {
+			MessageUtils
 					.setSimpleBackMessage(backMessage, false, "用户名请不要包含特殊字符");
 			return backMessage;
 		}
 		List<User> users = userService.findByUserName(user.getUsername());
 		if (users.isEmpty()) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"用户名不存在!‘(*>﹏<*)′ （°ο°）~ @");
 			return backMessage;
 		}
@@ -197,8 +197,8 @@ public class LoginController {
 		String PRIVATE_KSY = (String) session.getAttribute("PRIVATE_KEY");
 		String passwd = RSAUtils.decryptDataOnJava(user.getPassword(),
 				PRIVATE_KSY);
-		if (StringUtill.contains_sqlinject_illegal_ch(passwd)) {
-			MessageUtil
+		if (StringUtils.contains_sqlinject_illegal_ch(passwd)) {
+			MessageUtils
 					.setSimpleBackMessage(backMessage, false, "密码请不要包含特殊字符");
 			return backMessage;
 		}
@@ -206,14 +206,14 @@ public class LoginController {
 		// for compatible with the old version, here md5 or not
 		if (!userFromDB.getPassword().equals(passwd)
 				&& !userFromDB.getPassword().equals(DigestUtils.md5Hex(passwd))) {
-			MessageUtil.setSimpleBackMessage(backMessage, false,
+			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"密码错误!（°ο°）~ @");
 			return backMessage;
 		}
 		// set the usr's passwd of MD5 from database here, it will be used when
 		// set Cookie.
 		user.setPassword(userFromDB.getPassword());
-		MessageUtil.setSimpleBackMessage(backMessage, true,
+		MessageUtils.setSimpleBackMessage(backMessage, true,
 				"欢迎来到日向博客!(^_^)∠※ 送你一束花 。");
 		return backMessage;
 	}

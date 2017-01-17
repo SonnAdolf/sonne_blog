@@ -124,6 +124,8 @@ String imgPath = basePath + "image/";
 				function successFunc(data) {
 				     if (!data.success) {
 				         alert(data.msg);
+				     } else {
+				         window.location.reload();
 				     }
 				}
             </script>

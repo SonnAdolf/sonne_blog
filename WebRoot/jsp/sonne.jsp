@@ -20,7 +20,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <ul>
       <li><a href="/RiXiang_blog/article/list.form">主页</a></li>
       <li><a href="/RiXiang_blog/sonne/sonne.form">关于Sonne</a></li>
-      <li><a href="/RiXiang_blog/sonne/sonne_pic.form">相册</a></li>
       <li><a href="/RiXiang_blog/sonne/blog.form">关于日向博客</a></li>
       <li><a href="/RiXiang_blog/game/snake.form">游戏</a></li>
     </ul>

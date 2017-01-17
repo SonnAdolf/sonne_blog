@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sonn.entity.User;
 import sonn.service.UserService;
 import sonn.util.RSAUtils;
-import sonn.util.StringUtill;
+import sonn.util.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -60,9 +60,9 @@ public class PasswdController
     		             String newPassword, String rePassword) throws Exception
     {
 		JSONObject jo = new JSONObject();
-		if (StringUtill.isStringEmpty(password) 
-				|| StringUtill.isStringEmpty(newPassword)
-				|| StringUtill.isStringEmpty(rePassword))
+		if (StringUtils.isStringEmpty(password) 
+				|| StringUtils.isStringEmpty(newPassword)
+				|| StringUtils.isStringEmpty(rePassword))
 		{
 			jo.put("success", false);
 			jo.put("returnMessage", "输入值不允许为空..@_@|||||..");

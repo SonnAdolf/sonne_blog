@@ -5,6 +5,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.validation.Constraint;
 import javax.validation.ConstraintValidator;
@@ -41,8 +43,14 @@ public @interface IsValidString
 		@Override
 		public boolean isValid(String strValue, ConstraintValidatorContext context)
 		{
-			//校验方法
-			return true;
+			String regEx = "['=<>;\"]";
+			Pattern p = Pattern.compile(regEx);
+			Matcher m = p.matcher(strValue);
+			if (m.find()) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 		
 	}

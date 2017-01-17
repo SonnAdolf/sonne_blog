@@ -13,7 +13,7 @@ import sonn.entity.User;
 import sonn.service.ArticleService;
 import sonn.service.MessageService;
 import sonn.service.UserService;
-import sonn.util.IOUtill;
+import sonn.util.IOUtils;
 import sonn.util.Page;
 import sonn.util.PageInfo;
 import sonn.util.Principal;
@@ -23,7 +23,10 @@ import sonn.util.TimeUtils;
  * @ClassName: MySpaceController
  * @Description: personal space
  * @author sonne
- * @date 2016-5-21 ÏÂÎç6:38:00 2016-12-13 ÉÏ´«Í·Ïñ¹¦ÄÜÔİÊ±ºÏÈë¸öÈËÖ÷Ò³ 2016-12-14 »ñÈ¡ÓÃ»§×¢²á¶à¾Ã
+ * @date 2016-5-21 ä¸‹åˆ6:38:00 
+ *       2016-12-13 ä¸Šä¼ å¤´åƒåŠŸèƒ½æš‚æ—¶åˆå…¥ä¸ªäººä¸»é¡µ 
+ *       2016-12-14 è·å–ç”¨æˆ·æ³¨å†Œå¤šä¹…
+ *       2017-01-15 if the usr did not log in, return to home page
  * @version 1.0
  */
 @Controller
@@ -38,16 +41,21 @@ public class MySpaceController {
 	@Resource(name = "messageServiceImpl")
 	private MessageService messageService;
 
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String mySpace(HttpServletRequest request, PageInfo pageInfo,
 			Model model) throws Exception {
 		Principal pipal = userService.getUserPrincipalFromSession(request);
 		String username = pipal.getUsername();
-		if (null != pipal) {
+		if (null == pipal) {
+			return "mainPage";
+		}
+		else{
 			if (messageService.hasMsg(userService.find(pipal.getId(),
 					User.class)))
 				model.addAttribute("has_new_msg", "has_new_msg");
 		}
+
 
 		pageInfo.setEveryPage(12);
 		Page<Article> page = articleService.getArticlesByUsername(username,
@@ -59,23 +67,27 @@ public class MySpaceController {
 		// if the user didnot upload his picture,the path is null
 		String h_pic_path = null;
 		if (null != user.getH_pic_path()) {
-			h_pic_path = IOUtill.getRelativePath(user.getH_pic_path());
+			h_pic_path = IOUtils.getRelativePath(user.getH_pic_path());
 		} else {
 			model.addAttribute("defulat_path", "h_pics/default.jpg");
 		}
 
 		model.addAttribute("h_pic_path", h_pic_path);
 
-		// »ñÈ¡ÓÃ»§×¢²á¶à¾Ã
+		// sonne blog age
 		int[] arr = TimeUtils.getHowLongFromNow(user.getBlog_date());
 		String blog_age = "";
 		if (arr[0] != 0) {
-			blog_age = blog_age + Integer.toString(arr[0]) + "Äê";
+			blog_age = blog_age + Integer.toString(arr[0]) + "å¹´";
 		}
 		if (arr[1] != 0) {
-			blog_age = blog_age + Integer.toString(arr[1]) + "¸öÔÂ";
+			blog_age = blog_age + Integer.toString(arr[1]) + "ä¸ªæœˆ";
 		}
-
+		// if he's new user
+		if (arr[0] == 0 && arr[1] == 0) {
+			blog_age = "ä¸è¶³ä¸€ä¸ªæœˆ";
+		}
+		
 		model.addAttribute("blog_age", blog_age);
 		return "mySpace";
 	}
@@ -102,21 +114,25 @@ public class MySpaceController {
 		// if the user didnot upload his picture,the path is null
 		String h_pic_path = null;
 		if (null != user.getH_pic_path()) {
-			h_pic_path = IOUtill.getRelativePath(user.getH_pic_path());
+			h_pic_path = IOUtils.getRelativePath(user.getH_pic_path());
 		} else {
 			model.addAttribute("defulat_path", "h_pics/default.jpg");
 		}
 
 		model.addAttribute("h_pic_path", h_pic_path);
 
-		// »ñÈ¡ÓÃ»§×¢²á¶à¾Ã
+		// sonne blog age
 		int[] arr = TimeUtils.getHowLongFromNow(user.getBlog_date());
 		String blog_age = "";
 		if (arr[0] != 0) {
-			blog_age = blog_age + Integer.toString(arr[0]) + "Äê";
+			blog_age = blog_age + Integer.toString(arr[0]) + "å¹´";
 		}
 		if (arr[1] != 0) {
-			blog_age = blog_age + Integer.toString(arr[1]) + "¸öÔÂ";
+			blog_age = blog_age + Integer.toString(arr[1]) + "ä¸ªæœˆ";
+		}
+		// if he's new user
+		if (arr[0] == 0 && arr[1] == 0) {
+			blog_age = "ä¸è¶³ä¸€ä¸ªæœˆ";
 		}
 
 		model.addAttribute("blog_age", blog_age);

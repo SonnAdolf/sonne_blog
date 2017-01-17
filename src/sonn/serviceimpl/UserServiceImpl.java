@@ -15,7 +15,7 @@ import sonn.dao.UserDao;
 import sonn.entity.User;
 import sonn.service.UserService;
 import sonn.util.Principal;
-import sonn.util.StringUtill;
+import sonn.util.StringUtils;
 import sun.misc.BASE64Encoder;
 
 /**
@@ -52,7 +52,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements
 	 * @return
 	 */
 	public boolean validPwd(String pwd) {
-		if (StringUtill.isStringEmpty(pwd)) {
+		if (StringUtils.isStringEmpty(pwd)) {
 			return false;
 		}
 		if (pwd.length() < 6) {
@@ -76,7 +76,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements
 		if (userPrincipal == null)
 			return null;
 		String userName = userPrincipal.getUsername();
-		if (StringUtill.isStringEmpty(userName))
+		if (StringUtils.isStringEmpty(userName))
 			return null;
 		return userName;
 	}

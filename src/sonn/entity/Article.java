@@ -16,8 +16,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import sonn.annotation.IsValidString;
-
 
 /**
  * @author sonne
@@ -59,7 +57,6 @@ public class Article
 
 	/*name of the author*/
 	@NotNull
-	@IsValidString
 	@Length(min=1, max=20)
 	private String authorName;
 	

@@ -15,7 +15,6 @@ import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,13 +29,13 @@ import sonn.service.ArticleService;
 import sonn.service.CommentService;
 import sonn.service.MessageService;
 import sonn.service.UserService;
-import sonn.util.IOUtill;
-import sonn.util.MessageUtil;
+import sonn.util.IOUtils;
+import sonn.util.MessageUtils;
 import sonn.util.Page;
 import sonn.util.PageInfo;
-import sonn.util.PageUtil;
+import sonn.util.PageUtils;
 import sonn.util.Principal;
-import sonn.util.StringUtill;
+import sonn.util.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -118,7 +117,7 @@ public class ArticleController {
 	public String writeArticlePage(HttpServletRequest request,
 			PageInfo pageInfo, Model model) throws Exception {
 		String username = userService.getUsernameFromSession(request);
-		if (StringUtill.isStringEmpty(username))
+		if (StringUtils.isStringEmpty(username))
 			return "mainPage";
 		model.addAttribute("userName", username);
 		return "writeArticlePage";
@@ -157,8 +156,8 @@ public class ArticleController {
 		messageService.delete_msgs_by_article(db_article);
 		articleService.delete(id, Article.class);
 		// delete the local files
-		IOUtill.delete(db_article.getArticleAddr());
-		IOUtill.delete(db_article.getSummaryAddr());
+		IOUtils.delete(db_article.getArticleAddr());
+		IOUtils.delete(db_article.getSummaryAddr());
 		return true;
 	}
 
@@ -166,7 +165,7 @@ public class ArticleController {
 	public String editInit(HttpServletRequest request, int id, Model model)
 			throws Exception {
 		String username = userService.getUsernameFromSession(request);
-		if (StringUtill.isStringEmpty(username)) {
+		if (StringUtils.isStringEmpty(username)) {
 			return "mainPage";
 		}
 		Article article = articleService.find(id, Article.class);
@@ -184,22 +183,22 @@ public class ArticleController {
 			String articleContent, Model model) throws Exception {
 		JSONObject jo = new JSONObject();
 		String title_input = article.getTitle();
-		if (StringUtill.isStringEmpty(title_input)) {
+		if (StringUtils.isStringEmpty(title_input)) {
 			jo.put("success", false);
 			jo.put("info", "文章标题不能为空");
 			return jo;
 		}
-		if (StringUtill.isStringEmpty(articleContent)) {
+		if (StringUtils.isStringEmpty(articleContent)) {
 			jo.put("success", false);
 			jo.put("info", "文章内容不能为空");
 			return jo;			
 		}
-		if (StringUtill.contains_sqlinject_illegal_ch(title_input)) {
+		if (StringUtils.contains_sqlinject_illegal_ch(title_input)) {
 			jo.put("success", false);
-			jo.put("info", "文章标题不能包含特殊字符");
+			jo.put("info", "文章标题不能包含特殊字符['=<>;\"]");
 			return jo;			
 		}
-		articleContent = Jsoup.clean(articleContent, Whitelist.basicWithImages());
+		articleContent = Jsoup.clean(articleContent, StringUtils.basicWithImages());
 		Article db_article = articleService
 				.find(article.getId(), Article.class);
 		if (db_article == null) {
@@ -214,6 +213,8 @@ public class ArticleController {
 			jo.put("info", "你不是这篇文章作者不能修改");
 			return jo;
 		}
+		String old_article_url = db_article.getArticleAddr();
+		String old_summary_url = db_article.getSummaryAddr();
 		// only the title may be edited on the db
 		// and if the title changed content and summary urls will be changed
 		// too.
@@ -223,9 +224,13 @@ public class ArticleController {
 					username);
 			String summaryUrl = articleService.getSummaryUrl(article, request,
 					username);
-			article.setArticleAddr(articleUrl);
-			article.setSummaryAddr(summaryUrl);
-			articleService.update(article);
+			db_article.setTitle(article.getTitle());
+			db_article.setArticleAddr(articleUrl);
+			db_article.setSummaryAddr(summaryUrl);
+			if (null == db_article.getAuthor()) {
+				db_article.setAuthor(userService.findByUserName(username).get(0));
+			}
+			articleService.update(db_article);
 		}
 
 		// history problem, former version donot have a summary
@@ -233,26 +238,26 @@ public class ArticleController {
 				|| db_article.getSummaryAddr().equals("")) {
 			String summaryUrl = articleService.getSummaryUrl(article, request,
 					username);
-			article.setSummaryAddr(summaryUrl);
-			articleService.update(article);
+			db_article.setSummaryAddr(summaryUrl);
+			articleService.update(db_article);
 		}
 
 		// then update the local file of content and summary
 		// first delete
-		IOUtill.delete(db_article.getArticleAddr());
-		IOUtill.delete(db_article.getSummaryAddr());
+		IOUtils.delete(old_article_url);
+		IOUtils.delete(old_summary_url);
 
 		// rewrite content
-		IOUtill.writeByUrl(article.getArticleAddr(), articleContent);
+		IOUtils.writeByUrl(db_article.getArticleAddr(), articleContent);
 		// rewrite summary
 		// remove all the tags of HTML
-		String summary = StringUtill.removeTag(articleContent);
+		String summary = StringUtils.removeTag(articleContent);
 		// get the summary of article
 		if (summary.length() > 300) {
 			summary = summary.substring(0, 300);
 		}
 		// write the summary string on the local file
-		IOUtill.writeByUrl(article.getSummaryAddr(), summary);
+		IOUtils.writeByUrl(db_article.getSummaryAddr(), summary);
 		jo.put("success", true);
 		jo.put("info", "修改成功");
 		return jo;
@@ -263,25 +268,25 @@ public class ArticleController {
 	public JSONObject submit(HttpServletRequest request, Article article,
 			String articleContent) throws Exception {
 		JSONObject jo = new JSONObject();
-		if (null == article || StringUtill.isStringEmpty(articleContent)) {
+		if (null == article || StringUtils.isStringEmpty(articleContent)) {
 			jo.put("success", false);
 			jo.put("info", "文章内容为空");
 			return jo;
 		}
 		String title_input = article.getTitle();
-		if (StringUtill.isStringEmpty(article.getTitle())) {
+		if (StringUtils.isStringEmpty(article.getTitle())) {
 			jo.put("success", false);
 			jo.put("info", "文章题目不可为空");
 			return jo;
 		}
-		if (StringUtill.contains_sqlinject_illegal_ch(title_input)) {
+		if (StringUtils.contains_sqlinject_illegal_ch(title_input)) {
 			jo.put("success", false);
-			jo.put("info", "文章标题不能包含特殊字符");
+			jo.put("info", "文章标题不能包含特殊字符['=<>;\"]");
 			return jo;			
 		}
-		articleContent = Jsoup.clean(articleContent, Whitelist.basicWithImages());
+		articleContent = Jsoup.clean(articleContent, StringUtils.basicWithImages());
 		String username = userService.getUsernameFromSession(request);
-		if (StringUtill.isStringEmpty(username)) {
+		if (StringUtils.isStringEmpty(username)) {
 			jo.put("success", false);
 			jo.put("msg", "请先登录");
 			return jo;				
@@ -291,7 +296,7 @@ public class ArticleController {
 				username);
 
 		// check if the file already exists
-		if (IOUtill.isFileExits(articleUrl)) {
+		if (IOUtils.isFileExits(articleUrl)) {
 			jo.put("success", false);
 			jo.put("info", "您已经写过同样题目文章");
 			return jo;
@@ -305,26 +310,26 @@ public class ArticleController {
 		article.setArticleAddr(articleUrl);
 
 		// 向指定目录下存储文章内容
-		IOUtill.writeByUrl(articleUrl, articleContent);
+		IOUtils.writeByUrl(articleUrl, articleContent);
 
 		String summaryUrl = articleService.getSummaryUrl(article, request,
 				username);
 		// remove all the tags of HTML
-		String summary = StringUtill.removeTag(articleContent);
+		String summary = StringUtils.removeTag(articleContent);
 		article.setSummaryAddr(summaryUrl);
 		// get the summary of article
 		if (summary.length() > 300) {
 			summary = summary.substring(0, 300);
 		}
 		// write the summary string on the local file
-		IOUtill.writeByUrl(summaryUrl, summary);
+		IOUtils.writeByUrl(summaryUrl, summary);
 
 		Date date = new Date();
 		article.setDate(date);
 
 		articleService.save(article);
 
-		MessageUtil.setSimpleIsSuccessJSON(jo, true);
+		MessageUtils.setSimpleIsSuccessJSON(jo, true);
 		return jo;
 	}
 
@@ -359,7 +364,7 @@ public class ArticleController {
 			currentPage = 1;
 		}
 		int totalSize = comments.size();
-		PageInfo pageInfo = PageUtil.createPage(10, comments.size(),
+		PageInfo pageInfo = PageUtils.createPage(10, comments.size(),
 				currentPage);
 		int beginIndex = pageInfo.getBeginIndex();
 		long totalNum = pageInfo.getTotalCount();
@@ -426,10 +431,10 @@ public class ArticleController {
 				break;
 			}
 			url = article.getSummaryAddr();
-			if (StringUtill.isStringEmpty(url)) {
+			if (StringUtils.isStringEmpty(url)) {
 				article.setSummary("");
 			} else {
-				article.setSummary(IOUtill.readByUrl(url));
+				article.setSummary(IOUtils.readByUrl(url));
 			}
 			newArtiList.add(article);
 		}
@@ -437,7 +442,7 @@ public class ArticleController {
 	}
 
 	private Article getArticleOfContentByUrl(Article article) {
-		article.setContent(IOUtill.readByUrl(article.getArticleAddr()));
+		article.setContent(IOUtils.readByUrl(article.getArticleAddr()));
 		return article;
 	}
 

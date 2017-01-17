@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sonn.dao.UserDao;
 import sonn.entity.User;
-import sonn.util.StringUtill;
+import sonn.util.StringUtils;
 
 
 /**
@@ -48,7 +48,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao
 		Root<User> root = criteriaQuery.from(User.class);
 		criteriaQuery.select(root);
 		Predicate restrictions = criteriaBuilder.conjunction();
-		if (!StringUtill.isStringEmpty(username)) 
+		if (!StringUtils.isStringEmpty(username)) 
 		{
 			restrictions = criteriaBuilder.and(restrictions, criteriaBuilder.equal(root.get("username"), username));
 		}

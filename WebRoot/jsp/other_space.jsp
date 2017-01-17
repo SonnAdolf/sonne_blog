@@ -11,12 +11,10 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/myspace.css" media="all" />
-             <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/myspace.css" media="all" /> 
       </head>
       <body>
 			  <div id="sonn_title">
-			        <br>
 					<p id="main_word">断剑重铸之日，骑士归来之时</p>   
 			  </div>
 
@@ -32,11 +30,10 @@ String imgPath = basePath + "image/";
 		                 <c:if test="${!empty my_name}">
 		                       <li>
 		                            <a href ="/RiXiang_blog/mine/show.form">
-		                                                                                                个人空间 - ${my_name}		                                                                                                		                                 
+		                                                                                                个人空间 - ${userName}	
 		                                   <c:if test="${!empty has_new_msg}">
-		                 	                   <span id="msg_prompt" class="glyphicon glyphicon-bell">
-		                 	                   </span>
-		                 	             </c:if>
+		                 	                    <span id="new_msg_txt">【新消息】</span>
+		                 	               </c:if>
 		                 	        </a>
 		                 	   </li>
 		                 </c:if>
@@ -73,8 +70,8 @@ String imgPath = basePath + "image/";
                            共${page.pageInfo.totalCount}条纪录，当前第${page.pageInfo.currentPage}/${page.pageInfo.totalPage}页，每页${page.pageInfo.everyPage}条纪录
                           <c:choose>
                                     <c:when test = "${page.pageInfo.hasPrePage}">
-                                     			<a href="<%=basePath %>space/list.form?currentPage=1">首页</a>
-				                                <a href="<%=basePath %>space/list.form?currentPage=${page.pageInfo.currentPage-1}">上一页</a>
+                                     			<a href="<%=basePath %>space/other_space.form?currentPage=1&usr_name=${userName}">首页</a>
+				                                <a href="<%=basePath %>space/other_space.form?currentPage=${page.pageInfo.currentPage-1}&usr_name=${userName}">上一页</a>
                                     </c:when>
                                     <c:otherwise>
                                            		   首页
@@ -83,8 +80,8 @@ String imgPath = basePath + "image/";
                           </c:choose>
                           <c:choose>
                                      <c:when test = "${page.pageInfo.hasNextPage}">
-                                                <a href="<%=basePath %>space/list.form?currentPage=${page.pageInfo.currentPage+1}">下一页</a> 
-				                                <a href="<%=basePath %>space/list.form?currentPage=${page.pageInfo.totalPage}">尾页</a>
+                                                <a href="<%=basePath %>space/other_space.form?currentPage=${page.pageInfo.currentPage+1}&usr_name=${userName}">下一页</a> 
+				                                <a href="<%=basePath %>space/other_space.form?currentPage=${page.pageInfo.totalPage}&usr_name=${userName}">尾页</a>
                                      </c:when>
                                      <c:otherwise>
                                                                                                                                           下一页

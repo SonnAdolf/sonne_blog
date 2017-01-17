@@ -20,7 +20,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <ul>
       <li><a href="/RiXiang_blog/article/list.form">主页</a></li>
       <li><a href="/RiXiang_blog/sonne/sonne.form">关于Sonne</a></li>
-      <li><a href="/RiXiang_blog/sonne/sonne_pic.form">相册</a></li>
       <li><a href="/RiXiang_blog/sonne/blog.form">关于日向博客</a></li>
       <li><a href="/RiXiang_blog/game/snake.form">游戏</a></li>
     </ul>
@@ -28,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="content">
     <h1>Sonne</h1>
       <p>我是Sonne，一名普通程序员。这是我创作的博客网站，我将之命名为Sonne Blog。</p>
-      <p>我是从大学开始学编程的，但我不是计算机专业的学生，我只是东北大学的一名日语专业文科生。
+      <p>我是从大学开始学编程的，但我不是计算机专业的学生，我只是**大学的一名日语专业文科生。
                 当时学习编程，纯属兴趣。记得那时常常感到迷茫，有一天在图书馆闲逛，不经意间翻起一本又厚又旧的C语言书（大胡子鬼佬写的）。
                  当时就觉得，woow，cool~ 然后就这样学起了编程。</p>
       <p>所以，我学的第一门编程语言是C语言~除此之外，我还学了些现在基本用不上的东西，例如算法和数据结构还有汇编语言。
@@ -41,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          四是，Aeu（自制编程语言）。这四个项目涉及java、python、C、汇编、网络、操作系统、编译原理、算法等多方面技术，
                          是我自我修炼的四个训练场。</p>
         <p>我的github:https://github.com/SonnAdolf</p>
-        <p>我的csdn:http://blog.csdn.net/sonnadolf</p>
+        <p>我的博客园:http://www.cnblogs.com/rixiang/</p>
 		<img src="<%=basePath %>image/blog_history/books.jpg" alt="Sonne Blog" /><br>
     </div>
     <audio controls="controls" autoplay="autoplay" height="100" width="100">
