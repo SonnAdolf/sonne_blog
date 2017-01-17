@@ -22,13 +22,6 @@ import sonn.util.PageInfo;
 import sonn.util.Principal;
 import sonn.util.TimeUtils;
 
-/**
-* @ClassName: MineController 
-* @Description: personal management center, message center.
-* @author ÎÞÃû
-* @date 2016-12 
-* @version 1.0 
- */
 @Controller
 @RequestMapping("/mine")
 public class MineController {
