@@ -59,6 +59,7 @@ import com.alibaba.fastjson.JSONObject;
  *              add the read times.
  *       2016-12-28 - 2017-01.01 fight with xss attack.
  *                     delete all the messages before deleting the article.
+ *       2017-01-17 fix bug,when edit the article,user the object selected from database to update.
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
