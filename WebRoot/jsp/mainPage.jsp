@@ -9,10 +9,11 @@ String imgPath = basePath + "image/";
 <!DOCTYPE html>
 <html>
       <head>
-             <title>日向blog</title>
+             <title>日向博客</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link rel="icon" href="http://118.89.29.170/RiXiang_blog/favicon.ico">
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/sonn.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/xcConfirm/xcConfirm.css" media="all" />
       </head>
       <body>              
 		    <div id="header">
@@ -23,11 +24,11 @@ String imgPath = basePath + "image/";
 		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
 		                 <li><a href ="">主页</a></li>
 		         		 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li></c:if>
-		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${userName}</a></li></c:if>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页</a></li></c:if>
 		                 <c:if test="${!empty userName}">
 		                      <li>
 		                             <a href ="/RiXiang_blog/mine/show.form">
-		                                                                                               个人空间 - ${userName}
+		                                                                                               个人空间
 		                                  <c:if test="${!empty has_new_msg}">
 		                 	                   <span id="new_msg_txt">【新消息】</span>
 		                 	             </c:if>
@@ -35,23 +36,21 @@ String imgPath = basePath + "image/";
 		                 	 </li>
 		                </c:if>
 		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
-		                 <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-		                 <li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
+		                 <li><a href ="/RiXiang_blog/game/snake.form">游戏</a></li>
+		                 <li><a href ="/RiXiang_blog/sonne/blog.form">日向技术</a></li>
+		                 <c:if test="${!empty userName}"><li><a href="javascript:void(0)" onclick="logout()">退出</a></li></c:if>
 		           	</ul>
 		         </div>
 		     </div>
 			 <div id="poem_left">
 				  <p>
-				       <poem>
 					          <br>
-							  <img id="pic_left" src="<%=basePath %>image/walker.jpg" alt/>
+							  <img id="pic_left" src="<%=basePath %>image/walker.jpg" alt=""/>
 							  <br><br>
 							  我是否该写一首悲伤的歌<br>
 							  在你睡觉的时候唱给你听<br>
 							  我是否该写一首哀怨的歌<br>
 							  在你伤心的时候唱给你听<br>
-
-					   </poem>
 				  </p>
 			 </div>
               <div id = "article_list">
@@ -61,10 +60,10 @@ String imgPath = basePath + "image/";
 							       	   <span class = "title"><a href="<%=basePath %>article/show.form?id=${article.id}">${article.title}</a></span><br>
                                   	    <c:choose>
 										     <c:when test="${empty article.author || empty article.author.h_pic_path }">
-										             <a href="<%=basePath %>space/other_space.form?usr_name=${article.authorName}" target="_blank"><img class="h_pic" src="<%=basePath %>h_pics/default.jpg" alt></a>
+										             <a href="<%=basePath %>space/other_space.form?usr_name=${article.authorName}" target="_blank"><img class="h_pic" src="<%=basePath %>h_pics/default.jpg" alt=""></a>
 										     </c:when>
 		                                     <c:otherwise>
-			                                         <a href="<%=basePath %>space/other_space.form?usr_name=${article.authorName}" target="_blank"><img class="h_pic" src="<%=basePath %>${article.author.h_pic_path }" alt></a>
+			                                         <a href="<%=basePath %>space/other_space.form?usr_name=${article.authorName}" target="_blank"><img class="h_pic" src="<%=basePath %>${article.author.h_pic_path }" alt=""></a>
 	                                         </c:otherwise>
 	                                    </c:choose>
 										${article.summary}<br>
@@ -97,6 +96,32 @@ String imgPath = basePath + "image/";
                                 </c:choose>
 						</div>
             </div>
-
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>    
+             <script type="text/javascript" src="<%=basePath %>Jquery/xcConfirm/js/xcConfirm.js"></script>    
+             <script type="text/javascript">
+				    var oAjax = null;
+					if(window.XMLHttpRequest){
+   				         oAjax = new XMLHttpRequest();
+                    }else{
+                         oAjax = new ActiveXObject('Microsoft.XMLHTTP');
+                    }
+                    
+             	    function logout() {
+             	     	url = "<%=basePath %>logout/lo.form"
+	  					oAjax.open('POST', url, true);
+	  					oAjax.send();
+   					    oAjax.onreadystatechange = function(){  
+       						 if(oAjax.readyState == 4) {  
+       						     if(oAjax.status == 200) { 
+        				             window.wxc.xcConfirm("已退出", window.wxc.xcConfirm.typeEnum.success);
+        					         location.reload(); 
+        						 } else {
+          			    		     window.wxc.xcConfirm("退出失败", window.wxc.xcConfirm.typeEnum.warning);
+          						 }
+       						 }
+   						 };
+   					 }
+             </script>
       </body>
 </html>

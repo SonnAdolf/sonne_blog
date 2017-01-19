@@ -8,7 +8,7 @@ String imgPath = basePath + "image/";
 <!DOCTYPE html>
 <html>
       <head>
-             <title>日向blog</title>
+             <title>日向博客</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
      	     <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
              <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,6 +17,7 @@ String imgPath = basePath + "image/";
              
              <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/register.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/toastr.min.css" media="all" />
       </head>
       <body>
        		<div class="container">
@@ -25,7 +26,7 @@ String imgPath = basePath + "image/";
                  </div>
         		
         		   <div id="content" class="row-fluid">
-        		          <img src="<%=basePath %>image/bike.png" alt/>
+        		          <img src="<%=basePath %>image/bike.png" alt=""/>
         			       <h4>Sign up to SonneBlog</h4>
             			   <h4>欢迎来到日向博客，在这里，除了孤独，你还有文字相伴。</h4>
 	
@@ -44,13 +45,17 @@ String imgPath = basePath + "image/";
                            </form>
                    </div>
             </div>
-       </div>
+
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
               <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>  
               <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script> 
-              <script type="text/javascript" src="<%=basePath %>js/jsencrypt.min.js"></script>               
+              <script type="text/javascript" src="<%=basePath %>js/jsencrypt.min.js"></script>     
+              <script type="text/javascript" src="<%=basePath %>Jquery/toastr.min.js"></script>            
               <script type="text/javascript"> 
   			  $(document).ready(function() { 
+     			  toastr.options = {  
+        			     positionClass: "toast-bottom-full-width"
+   			  	  };  
 				  $('#registerForm').ajaxForm({ 
 			             dataType:      'json',
 						 beforeSubmit:  validate,   
@@ -60,23 +65,23 @@ String imgPath = basePath + "image/";
   
 			   function validate(formData, jqForm, options) {
 			        if (!formData[0].value) {
-			        	   alert("用户名不能为空！！(;¬_¬) ( ´◔ ‸◔`) (눈_눈) ( ∙̆ .̯ ∙̆ ) (;￢д￢) (“▔□▔)");
+			               toastr.warning("用户名不能为空！！(;¬_¬) ( ´◔ ‸◔`) (눈_눈) ( ∙̆ .̯ ∙̆ ) (;￢д￢) (“▔□▔)");
 			        	   return false;
 			        }
 			        if (!formData[1].value) {
-			               alert("密码不能为空！！π__π T.T ε(┬┬＿┬┬)3 ╥﹏╥ ┬＿┬ (╥╯^╰╥)");
+			               toastr.warning("密码不能为空！！π__π T.T ε(┬┬＿┬┬)3 ╥﹏╥ ┬＿┬ (╥╯^╰╥)");
 			               return false;
 			        }
 			        if (!formData[2].value) {
-			         	   alert("请再次输入密码！！ ԅ(¯﹃¯ԅ) （¯﹃¯）");
+			               toastr.warning("请再次输入密码！！ ԅ(¯﹃¯ԅ) （¯﹃¯）");
 			               return false;
 			        }
 			        if (formData[1].value != formData[2].value) {
-			               alert("两次密码输入不一致!!(,,•́ . •̀,,) (๑•́ ₃•̀๑) (๑•́ ₃ •̀),,Ծ‸Ծ,,");
+			               toastr.warning("两次密码输入不一致!!(,,•́ . •̀,,) (๑•́ ₃•̀๑) (๑•́ ₃ •̀),,Ծ‸Ծ,,");
 			               return false;
 			        }
 			        if (formData[1].value.length < 6) {
-			               alert("密码长度至少6位!!  (:3[▓▓] (:3[▓▓▓▓▓▓▓▓▓] (¦3[▓▓]");
+			               toastr.warning("密码长度至少6位!!  (:3[▓▓] (:3[▓▓▓▓▓▓▓▓▓] (¦3[▓▓]");
 			               return false;
 			        }
 			        // 加密密码
@@ -94,13 +99,13 @@ String imgPath = basePath + "image/";
 				}
 				function successFunc(data) {
 					if (data.success) {
-				        alert("注册成功："+" " + data.returnMessage);
+					    toastr.success("注册成功："+" " + data.returnMessage);
 						location.href = "/RiXiang_blog/space/list.form"; 
 					}
 					else {
 				      	$("#password").val("");
 				      	$("#repassword").val("");
-						alert("注册失败："+" " + data.returnMessage);
+				      	toastr.warning("注册失败："+" " + data.returnMessage);
 					}
 				} 
                </script>

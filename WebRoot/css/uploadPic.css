@@ -1,0 +1,60 @@
+
+body {
+	margin:0;     
+	padding:0;  
+	width:100%;  
+    height:100%;  
+    background-color:#e0ffff;
+}
+
+#pic_upload_form {
+	position:relative;
+	top:100px;
+	width:350px;
+	/*placed at middle*/
+	text-align:center;
+	margin:0 auto;
+	font-family: KaiTi;
+	background-color:#ffebcd;
+	padding:2px;
+	/*Ô²½Ç±ß¾à*/
+	border:2px solid;
+	border-radius:15px;
+	/* Old Firefox */
+	-moz-border-radius:25px; 
+}
+
+#choose_label {
+	position:relative;
+	top:80px;
+	text-align:center;
+	font-family:Microsoft YaHei;
+}
+
+#choose_label a:link {
+	text-decoration:none;
+    color: #999999;
+    line-height: 19px;
+    display: block;
+}
+
+#choose_label a:visited {
+	text-decoration:none;
+    color: #999999;
+    line-height: 19px;
+    display: block;
+}
+
+#choose_label a:hover {
+	text-decoration:underline;
+	color:red;
+    line-height: 19px;
+    display: block;
+}
+
+#choose_label a:active {
+	text-decoration:underline;
+	color:red;
+    line-height: 19px;
+    display: block;
+}

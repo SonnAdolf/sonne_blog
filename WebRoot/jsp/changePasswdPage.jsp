@@ -8,10 +8,11 @@ String imgPath = basePath + "image/";
 <!DOCTYPE html>
 <html>
       <head>
-             <title>日向blog</title>
+             <title>日向博客</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/passwd.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/toastr.min.css" media="all" />
       </head>
       <body>
        		<div class="container">
@@ -31,7 +32,7 @@ String imgPath = basePath + "image/";
             		<div class="navbar-collapse">
                 		<ul class="nav navbar-nav">
                     		<li class="active"><a href="#">修改密码</a></li>
-                    		<li><a href ="/RiXiang_blog/space/list.form">个人空间</a></li>
+                    		<li><a href ="/RiXiang_blog/space/list.form">个人主页</a></li>
                     		<li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
                     		<li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
                 		</ul>
@@ -70,12 +71,18 @@ String imgPath = basePath + "image/";
                         </div>
             </div>
        </div>
+       
+       
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>
              <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/js/bootstrap.min.js"></script>    
-             <script type="text/javascript" src="<%=basePath %>js/jsencrypt.min.js"></script>           
+             <script type="text/javascript" src="<%=basePath %>js/jsencrypt.min.js"></script> 
+             <script type="text/javascript" src="<%=basePath %>Jquery/toastr.min.js"></script>         
              <script type="text/javascript">
    			  $(document).ready(function() { 
+   			 	 toastr.options = {  
+        			positionClass: "toast-bottom-full-width"
+   			  	 };  
 				  $('#passwdForm').ajaxForm({ 
 			             dataType:      'json',
 						 beforeSubmit:  validate,   
@@ -84,23 +91,23 @@ String imgPath = basePath + "image/";
 		       });
 			   function validate(formData, jqForm, options) {
 			        if (!formData[0].value) {
-			        	   alert("旧密码不能为空！！(;¬_¬) ( ´◔ ‸◔`) (눈_눈) ( ∙̆ .̯ ∙̆ ) (;￢д￢) (“▔□▔)");
+			        	   toastr.warning("旧密码不能为空(;¬_¬) ( ´◔ ‸◔`) (눈_눈) ( ∙̆ .̯ ∙̆ ) (;￢д￢) (“▔□▔)。");
 			        	   return false;
 			        }
 			        if (!formData[1].value) {
-			               alert("新密码不能为空！！π__π T.T ε(┬┬＿┬┬)3 ╥﹏╥ ┬＿┬ (╥╯^╰╥)");
+			       	       toastr.warning("新密码不能为空！！π__π T.T ε(┬┬＿┬┬)3 ╥﹏╥ ┬＿┬ (╥╯^╰╥)");
 			               return false;
 			        }
 			        if (!formData[2].value) {
-			        	   alert("请再次输入密码！！ ԅ(¯﹃¯ԅ) （¯﹃¯）");
+			               toastr.warning("请再次输入密码！！ (╯#-_-)╯~~~~~~~~~~~~~~~~~╧═╧ ");
 			               return false;
 			        }
 			        if (formData[1].value != formData[2].value) {
-			               alert("两次密码输入不一致!!(,,•́ . •̀,,) (๑•́ ₃•̀๑) (๑•́ ₃ •̀),,Ծ‸Ծ,,");
+			               toastr.warning("两次密码输入不一致!!(,,•́ . •̀,,) (๑•́ ₃•̀๑) (๑•́ ₃ •̀),,Ծ‸Ծ,,");
 			               return false;
 			        }
 			        if (formData[1].value.length < 6) {
-			               alert("密码长度至少6位!!  (:3[▓▓] (:3[▓▓▓▓▓▓▓▓▓] (¦3[▓▓]");
+			               toastr.warning("密码长度至少6位!!  (:3[▓▓] (:3[▓▓▓▓▓▓▓▓▓] (¦3[▓▓]");
 			               return false;
 			        }
 			        // 加密密码
@@ -121,14 +128,14 @@ String imgPath = basePath + "image/";
 				}
 				function successFunc(data) {
 					if (data.success) {
-                         alert("修改密码成功"+" " + data.returnMessage);
+                         toastr.success("修改密码成功"+" " + data.returnMessage);
                          location.href = "/RiXiang_blog/space/list.form"; 
 					}
 					else {
 				      	$("#oldPassword").val("");
 				      	$("#newPassword").val("");
 				      	$("#rePassword").val("");
-						alert("修改密码失败"+" " + data.returnMessage);
+				      	toastr.warning("修改密码失败"+" " + data.returnMessage);
 					}
 				} 
                </script>    		

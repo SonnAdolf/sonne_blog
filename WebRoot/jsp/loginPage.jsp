@@ -8,7 +8,7 @@ String imgPath = basePath + "image/";
 <!DOCTYPE html>
 <html>
       <head>
-             <title>日向blog</title>
+             <title>日向博客</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              
      	     <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
@@ -19,6 +19,7 @@ String imgPath = basePath + "image/";
              
              <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/login.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/toastr.min.css" media="all" />
       </head>
       <body>
        		<div class="container">
@@ -70,9 +71,13 @@ String imgPath = basePath + "image/";
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-1.3.1.js"></script>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery.form.js"></script>   
              <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
-             <script type="text/javascript" src="<%=basePath %>js/jsencrypt.min.js"></script>              
+             <script type="text/javascript" src="<%=basePath %>js/jsencrypt.min.js"></script>  
+             <script type="text/javascript" src="<%=basePath %>Jquery/toastr.min.js"></script>
              <script type="text/javascript">
   			  $(document).ready(function() { 
+    			  toastr.options = {  
+        			     positionClass: "toast-bottom-full-width"
+   			  	  };  
 				  $('#loginForm').ajaxForm({ 
 			             dataType:      'json',
 						 beforeSubmit:  validate,   
@@ -93,15 +98,15 @@ String imgPath = basePath + "image/";
 		       });
 			   function validate(formData, jqForm, options) {
 			        if (!formData[0].value) {
-			        	   alert("用户名不能为空！！(;¬_¬) ( ´◔ ‸◔`) (눈_눈) ( ∙̆ .̯ ∙̆ ) (;￢д￢) (“▔□▔)");
+			               toastr.warning("用户名不能为空！！(;¬_¬) ( ´◔ ‸◔`) (눈_눈) ( ∙̆ .̯ ∙̆ ) (;￢д￢) (“▔□▔)");
 			        	   return false;
 			        }
 			        if (!formData[1].value) {
-			               alert("密码不能为空！！π__π T.T ε(┬┬＿┬┬)3 ╥﹏╥ ┬＿┬ (╥╯^╰╥)");
+			               toastr.warning("密码不能为空！！π__π T.T ε(┬┬＿┬┬)3 ╥﹏╥ ┬＿┬ (╥╯^╰╥)");
 			               return false;
 			        }
 			        if (!formData[2].value) {
-			               alert("验证码不能为空！！_(:з」∠)_ _(:qゝ∠)_ _(?ω?｣ ∠)_");
+			               toastr.warning("验证码不能为空！！_(:з」∠)_ _(:qゝ∠)_ _(?ω?｣ ∠)_");
 			               return false;
 			        }
 			        var queryString = $.param(formData);
@@ -109,12 +114,12 @@ String imgPath = basePath + "image/";
 				}
 				function successFunc(data) {
 					if (data.success) {
-				        alert("登录成功："+" " + data.returnMessage);
+					    toastr.success("登录成功："+" " + data.returnMessage);
 						location.href = "/RiXiang_blog/space/list.form"; 
 					}
 					else {
 					    $("#password").val("");
-						alert("登录失败："+" " + data.returnMessage);
+					    toastr.warning("登录失败："+" " + data.returnMessage);
 					}
 				}
                </script>

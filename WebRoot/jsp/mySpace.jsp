@@ -9,9 +9,10 @@ String imgPath = basePath + "image/";
 <!DOCTYPE html>
 <html>
       <head>
-             <title>日向blog</title>
+             <title>日向博客</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/myspace.css" media="all" /> 
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/xcConfirm/xcConfirm.css" media="all"/>
       </head>
       <body>
 			  <div id="sonn_title">
@@ -25,11 +26,11 @@ String imgPath = basePath + "image/";
 		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
 		                 <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
 		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li></c:if>
-		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${userName}</a></li></c:if>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页</a></li></c:if>
 		                 <c:if test="${!empty userName}">
 		                       <li>
 		                            <a href ="/RiXiang_blog/mine/show.form">
-		                                                                                                个人空间 - ${userName}	
+		                                                                                                个人空间	
 		                                   <c:if test="${!empty has_new_msg}">
 		                 	                    <span id="new_msg_txt">【新消息】</span>
 		                 	               </c:if>
@@ -37,8 +38,9 @@ String imgPath = basePath + "image/";
 		                 	   </li>
 		                 </c:if>
 		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
-		                 <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-		                 <li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
+		                 <li><a href ="/RiXiang_blog/game/snake.form">游戏</a></li>
+		                 <li><a href ="/RiXiang_blog/sonne/blog.form">日向技术</a></li>
+		                 <c:if test="${!empty userName}"><li><a href="javascript:void(0)" onclick="logout()">退出</a></li></c:if>
 		           	</ul>
 		         </div>
 		     </div>
@@ -95,7 +97,8 @@ String imgPath = basePath + "image/";
                      </div>
 			  </div>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
-             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>    
+             <script type="text/javascript" src="<%=basePath %>Jquery/xcConfirm/js/xcConfirm.js"></script>           
              <script type="text/javascript">
 				    var oAjax = null;
 					if(window.XMLHttpRequest){
@@ -105,6 +108,18 @@ String imgPath = basePath + "image/";
                     }
                     
                     function button_Click_1(btn) {
+   				    	var txt=  "确定删除这篇文章？";
+					    var option = {
+						   title: "sonne blog",
+						   btn: parseInt("0011",2),
+						   onOk: function(){
+							   delete_article(btn);
+						    }
+					    }
+					    window.wxc.xcConfirm(txt, "custom", option);
+                     } 
+                     
+                     function delete_article(btn) {
 	  					var delete_id = btn.id;
 	  					url = "<%=basePath %>article/delete.form?id=" + delete_id 
 	  					oAjax.open('POST', url, true);
@@ -112,20 +127,36 @@ String imgPath = basePath + "image/";
    					    oAjax.onreadystatechange = function(){  
        						 if(oAjax.readyState == 4){  
        						     if(oAjax.status == 200){    
-        				             alert("delete successfully.");
+        				             window.wxc.xcConfirm("删除成功", window.wxc.xcConfirm.typeEnum.success);
         					         location.reload(); 
         						 }else{
-          			    		      alert("delete failed");
+          			    		      window.wxc.xcConfirm("删除失败", window.wxc.xcConfirm.typeEnum.warning);
           						  }
        						 }
-   						 };
-                     } 
+   						 };                          
+                      }
                      
                      function button_Click_2(btn) {
 	  					var edit_id = btn.id;
 	  					url = "<%=basePath %>article/editInit.form?id=" + edit_id 
 	  					window.location.href="<%=basePath %>article/editInit.form?id=" + edit_id; 
                      } 
+             	    function logout() {
+             	     	url = "<%=basePath %>logout/lo.form"
+	  					oAjax.open('POST', url, true);
+	  					oAjax.send();
+   					    oAjax.onreadystatechange = function(){  
+       						 if(oAjax.readyState == 4) {  
+       						     if(oAjax.status == 200) { 
+       						         //alert("lo");
+        				             window.wxc.xcConfirm("已退出", window.wxc.xcConfirm.typeEnum.success);
+        					         window.location.href="<%=basePath %>article/list.form"
+        						 } else {
+          			    		     window.wxc.xcConfirm("退出失败", window.wxc.xcConfirm.typeEnum.warning);
+          						 }
+       						 }
+   						 };
+   					 }
                </script>
       </body>
 </html>

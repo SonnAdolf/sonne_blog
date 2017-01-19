@@ -27,13 +27,6 @@ body {
 	-moz-border-radius:25px; 
 }
 
-#back_way a:link {
-	text-decoration:none;
-    color: #999999;
-    line-height: 19px;
-    display: block;
-}
-
 #back_way {
 	position:relative;
 	top:80px;
@@ -41,6 +34,14 @@ body {
 	text-align:center;
 	margin:0 auto;
 }
+
+#back_way a:link {
+	text-decoration:none;
+    color: #999999;
+    line-height: 19px;
+    display: block;
+}
+
 #back_way a:visited {
 	text-decoration:none;
     color: #999999;

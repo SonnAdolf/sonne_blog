@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
+encoding//WebRoot/Jquery/xcConfirm/js/xcConfirm.js=UTF-8
 encoding//WebRoot/css/sonn.css=UTF-8
+encoding//WebRoot/jsp/error.jsp=UTF-8
 encoding//WebRoot/jsp/snakeGame.jsp=UTF-8
 encoding//src/sonn/controller/CommentController.java=UTF-8
 encoding//src/sonn/controller/LoginController.java=UTF-8

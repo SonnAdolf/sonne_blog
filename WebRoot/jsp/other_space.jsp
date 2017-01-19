@@ -9,7 +9,7 @@ String imgPath = basePath + "image/";
 <!DOCTYPE html>
 <html>
       <head>
-             <title>日向blog</title>
+             <title>日向博客</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/myspace.css" media="all" /> 
       </head>
@@ -26,11 +26,11 @@ String imgPath = basePath + "image/";
 		                 <c:if test="${empty my_name}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
 		                 <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
 		                 <c:if test="${!empty my_name}"><li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li></c:if>
-		                 <c:if test="${!empty my_name}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${my_name}</a></li></c:if>
+		                 <c:if test="${!empty my_name}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 </a></li></c:if>
 		                 <c:if test="${!empty my_name}">
 		                       <li>
 		                            <a href ="/RiXiang_blog/mine/show.form">
-		                                                                                                个人空间 - ${userName}	
+		                                                                                                个人空间	
 		                                   <c:if test="${!empty has_new_msg}">
 		                 	                    <span id="new_msg_txt">【新消息】</span>
 		                 	               </c:if>
@@ -38,8 +38,8 @@ String imgPath = basePath + "image/";
 		                 	   </li>
 		                 </c:if>
 		                 <c:if test="${!empty my_name}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
-		                 <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-		                 <li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
+		                 <li><a href ="/RiXiang_blog/game/snake.form">游戏</a></li>
+		                 <li><a href ="/RiXiang_blog/sonne/blog.form">日向技术</a></li>
 		           	</ul>
 		         </div>
 		     </div>
@@ -90,38 +90,5 @@ String imgPath = basePath + "image/";
                           </c:choose>
                      </div>
 			  </div>
-             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
-             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>              
-             <script type="text/javascript">
-				    var oAjax = null;
-					if(window.XMLHttpRequest){
-   				         oAjax = new XMLHttpRequest();
-                    }else{
-                         oAjax = new ActiveXObject('Microsoft.XMLHTTP');
-                    }
-                    
-                    function button_Click_1(btn) {
-	  					var delete_id = btn.id;
-	  					url = "<%=basePath %>article/delete.form?id=" + delete_id 
-	  					oAjax.open('POST', url, true);
-	  					oAjax.send();
-   					    oAjax.onreadystatechange = function(){  
-       						 if(oAjax.readyState == 4){  
-       						     if(oAjax.status == 200){    
-        				             alert("delete successfully.");
-        					         location.reload(); 
-        						 }else{
-          			    		      alert("delete failed");
-          						  }
-       						 }
-   						 };
-                     } 
-                     
-                     function button_Click_2(btn) {
-	  					var edit_id = btn.id;
-	  					url = "<%=basePath %>article/editInit.form?id=" + edit_id 
-	  					window.location.href="<%=basePath %>article/editInit.form?id=" + edit_id; 
-                     } 
-               </script>
       </body>
 </html>

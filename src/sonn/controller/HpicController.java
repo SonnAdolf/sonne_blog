@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sonn.entity.User;
 import sonn.service.UserService;
 import sonn.util.IOUtils;
+import sonn.util.ImageUtils;
 import sonn.util.PageInfo;
 
 /**
@@ -91,7 +92,8 @@ public class HpicController {
     					IOUtils.renameFile(path, fileName, "1.jpg");
     					
     					// compress the picture.
-    					IOUtils.reduceImg(pathOfDefaultName, pathOfDefaultName, 200, 200, null);
+    					//IOUtils.reduceImg(pathOfDefaultName, pathOfDefaultName, 200, 200, null);
+    					ImageUtils.scale2(pathOfDefaultName, pathOfDefaultName, 200, 200, true);
     					
     					// uodate user of mysql db
     					User user = userService.findByUserName(username).get(0);

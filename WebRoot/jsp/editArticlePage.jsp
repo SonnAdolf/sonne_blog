@@ -8,9 +8,10 @@ String imgPath = basePath + "image/";
 <!DOCTYPE html>
 <html>
       <head>
-             <title>日向blog</title>
+             <title>日向博客</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/fixed_background.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/xcConfirm/xcConfirm.css" media="all" />
              <link rel="stylesheet" type="text/css" href="<%=basePath %>wangEditor/dist/css/wangEditor.min.css">
       </head>
       <body>
@@ -52,6 +53,7 @@ String imgPath = basePath + "image/";
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>   
              <script type="text/javascript" src="<%=basePath %>wangEditor/dist/js/wangEditor.js"></script>
+             <script type="text/javascript" src="<%=basePath %>Jquery/xcConfirm/js/xcConfirm.js"></script>
              <script type="text/javascript">
  			  $(document).ready(function() { 
 				  $('#articleForm').ajaxForm({ 
@@ -126,10 +128,10 @@ String imgPath = basePath + "image/";
 			       for(var i=0; i < formData.length; i++) {
 			        	if(!formData[i].value) {
 			        	    if(i==0) {
-			        	        alert("标题不能为空");
+			        	        window.wxc.xcConfirm("题目不可为空", window.wxc.xcConfirm.typeEnum.warning);
 			        	    }
 			        	    if (i==1) {
-			        	        alert("内容不能为空");
+			        	        window.wxc.xcConfirm("内容不可为空", window.wxc.xcConfirm.typeEnum.warning);
 			        	    }
 			        		return false;
 			        	}
@@ -140,12 +142,14 @@ String imgPath = basePath + "image/";
 				}
 				function successFunc(data) {
 					if (data.success) {
+					    //var txt=  "修改成功";
+					    //window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
 						location.href = "/RiXiang_blog/space/list.form";
 					}
 					else {
-						alert(data.info);
+					    window.wxc.xcConfirm(data.info, window.wxc.xcConfirm.typeEnum.warning);
 					}
 				}
-               </script>
+          </script>
       </body>
 </html>

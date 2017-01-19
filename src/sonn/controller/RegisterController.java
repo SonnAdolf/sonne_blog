@@ -103,9 +103,19 @@ public class RegisterController {
 					"输入有误!( ^_^ )? ");
 			return backMessage;
 		}
+		if (StringUtils.isContainsChinese(user.getUsername())) {
+			MessageUtils.setSimpleBackMessage(backMessage, false,
+					"请使用英文名!..@_@|||||..");
+			return backMessage;
+		}
 		if (StringUtils.contains_sqlinject_illegal_ch(user.getUsername())) {
 			MessageUtils
 					.setSimpleBackMessage(backMessage, false, "用户名请不要包含特殊字符");
+			return backMessage;
+		}
+		if (user.getUsername().length() > 8) {
+			MessageUtils
+			.setSimpleBackMessage(backMessage, false, "用户名最多八个字符");
 			return backMessage;
 		}
 
@@ -129,11 +139,6 @@ public class RegisterController {
 		if (StringUtils.isStringEmpty(repassword)) {
 			MessageUtils.setSimpleBackMessage(backMessage, false,
 					"请再次输入你的密码( ^_^ )? !");
-			return backMessage;
-		}
-		if (StringUtils.isContainsChinese(user.getUsername())) {
-			MessageUtils.setSimpleBackMessage(backMessage, false,
-					"请使用英文名!..@_@|||||..");
 			return backMessage;
 		}
 		List<User> users = userService.findByUserName(user.getUsername());

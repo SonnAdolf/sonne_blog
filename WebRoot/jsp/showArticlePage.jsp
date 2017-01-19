@@ -9,9 +9,10 @@ String imgPath = basePath + "image/";
 <!DOCTYPE html>
 <html>
       <head>
-             <title>日向blog</title>
+             <title>日向博客</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/show_article.css" media="all" />
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/xcConfirm/xcConfirm.css" media="all" />
       </head>
       <body>
              <div id="header">
@@ -21,11 +22,11 @@ String imgPath = basePath + "image/";
 			  			<c:if test="${empty username}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
 			  			<c:if test="${empty username}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
 			  			<li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
-			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/space/list.form">个人主页 - ${username}</a></li></c:if>
-			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间 - ${username}</a></li></c:if>
+			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/space/list.form">个人主页</a></li></c:if>
+			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间</a></li></c:if>
 			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
-			  			<li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-			  			<li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
+			  			<li><a href ="/RiXiang_blog/game/snake.form">游戏</a></li>
+			  			<li><a href ="/RiXiang_blog/sonne/blog.form">日向技术</a></li>
 			  		</ul>
 			  	</div>
 			  </div>
@@ -101,6 +102,7 @@ String imgPath = basePath + "image/";
                </div>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>   
+             <script type="text/javascript" src="<%=basePath %>Jquery/xcConfirm/js/xcConfirm.js"></script>
              <script type="text/javascript">             
  			  $(document).ready(function() { 
 				  $('#commentForm').ajaxForm({ 
@@ -113,7 +115,7 @@ String imgPath = basePath + "image/";
 			   function validate(formData, jqForm, options) {
 			       for(var i=0; i < formData.length; i++) {
 			        	if(!formData[i].value.trim()) {
-			        	    alert("评论内容不可为空");
+			        	    window.wxc.xcConfirm("评论内容不可为空", window.wxc.xcConfirm.typeEnum.warning);
 			        		return false;
 			        	}
 			        } 
@@ -123,7 +125,7 @@ String imgPath = basePath + "image/";
 				
 				function successFunc(data) {
 				     if (!data.success) {
-				         alert(data.msg);
+				         window.wxc.xcConfirm(data.msg, window.wxc.xcConfirm.typeEnum.warning);
 				     } else {
 				         window.location.reload();
 				     }
