@@ -1,5 +1,5 @@
 package sonn.enums;
 
 public enum MsgType {
-	Comment, follow, fans;
+	comment, reply, follow, fans;
 }

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="sonn.enums.MsgIsRead" %>
+<%@ page import="sonn.enums.MsgType" %>
 
 <%
 String path = request.getContextPath();
@@ -44,10 +45,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="my_msgs">
                 消息中心：<br>
       <c:set var="Not_Read" value="<%=MsgIsRead.No%>"/>
+      <c:set var="Comment_Type" value="<%=MsgType.comment%>"/>
       <c:forEach items="${msgPage.content}" begin="0" end="15" step="1" var="msg">
-          <!-- 如果消息类型为评论 -->
-          <div id="msg_line">
-               <c:choose> 
+        <c:choose> 
+          <c:when test="${msg.type eq Comment_Type}">
+            <!-- 如果消息类型为评论 -->
+            <div id="msg_line">
+                 <c:choose> 
                     <c:when test="${empty msg.sender.username}">
                           <c:choose> 
                                <c:when test="${msg.is_read eq Not_Read}">
@@ -68,8 +72,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                </c:otherwise>
                           </c:choose>
                     </c:otherwise>
-                </c:choose>
-          </div>
+                  </c:choose>
+              </div>
+          </c:when>
+
+          <c:otherwise>
+          <!-- 如果消息类型为回复 -->
+            <div id="msg_line">
+                 <!-- 目前游客评论已关闭 -->
+                 <!-- 
+                 <c:choose> 
+                    <c:when test="${empty msg.sender.username}">
+                          <c:choose> 
+                               <c:when test="${msg.is_read eq Not_Read}">
+                                                                                                           一名游客在${fn:substring(msg.date,0,16)}评论了你的文章<a style="color:red" href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                               </c:when>
+                               <c:otherwise>
+                                                                                                           一名游客在${fn:substring(msg.date,0,16)}评论了你的文章<a href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                               </c:otherwise>
+                          </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                     -->
+                          <c:choose> 
+                               <c:when test="${msg.is_read eq Not_Read}">
+                                                                                                                用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}回复了你<a style="color:red" href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                               </c:when>
+                               <c:otherwise>
+                                                                                                              用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}回复了你<a href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                               </c:otherwise>
+                          </c:choose>
+                 <!-- 目前游客评论已关闭 -->
+                 <!-- 
+                    </c:otherwise>
+                  </c:choose>
+                  -->
+              </div>          
+          </c:otherwise>
+        </c:choose>
       </c:forEach> 
       <div id = "page_select">   
                            共${msgPage.pageInfo.totalCount}条纪录，当前第${msgPage.pageInfo.currentPage}/${msgPage.pageInfo.totalPage}页，每页${msgPage.pageInfo.everyPage}条纪录

@@ -30,6 +30,7 @@ import sonn.util.PageInfo;
 * @Description: config the usr's h_pic
 * @author sonne
 * @date 2016-12-4 13:30:18 
+*       2017-01-19 profile img compress.
 * @version 1.0
  */
 @SuppressWarnings("deprecation")
@@ -92,7 +93,6 @@ public class HpicController {
     					IOUtils.renameFile(path, fileName, "1.jpg");
     					
     					// compress the picture.
-    					//IOUtils.reduceImg(pathOfDefaultName, pathOfDefaultName, 200, 200, null);
     					ImageUtils.scale2(pathOfDefaultName, pathOfDefaultName, 200, 200, true);
     					
     					// uodate user of mysql db

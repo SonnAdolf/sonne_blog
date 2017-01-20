@@ -65,9 +65,6 @@ public class RegisterController {
 			String repassword) throws Exception {
 		HttpSession session = request.getSession();
 		JSONObject jo = new JSONObject();
-//		jo.put("success", false);
-//		jo.put("returnMessage", "本博客目前处于开发测试时期，2016年1月将暂停注册功能");
-//		return jo;
 		SimpleBackMessage registerMessage = checkUserInfor(user, repassword,
 	    			session);
 		MessageUtils.setJSONObject(jo, registerMessage);

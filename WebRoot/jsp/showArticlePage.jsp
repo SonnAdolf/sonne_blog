@@ -53,8 +53,9 @@ String imgPath = basePath + "image/";
 					<div class="comment">
                           <c:forEach items="${comments_page.content}" var="comment">
 								<div class="comment_box">
-                                    <span class = "date">#${comment.floor}楼  &nbsp${fn:substring(comment.date,0,16)}</span> &nbsp&nbsp<span class = "author">${comment.authorName}</span><br> 
-                                     <p>${comment.content}</p>
+                                    <span class = "date">#${comment.floor}楼  &nbsp${fn:substring(comment.date,0,16)}</span> &nbsp&nbsp<span class = "author">${comment.authorName}</span>&nbsp&nbsp&nbsp&nbsp
+                                                                                                     【<a href="javascript:void(0)" onclick="quote_comment('${comment.content}','${comment.authorName}')">回复</a>】<br> 
+                                     <p class = "comment_content">${comment.content}</p>
 								</div>                          
                           </c:forEach>
                           
@@ -93,7 +94,7 @@ String imgPath = basePath + "image/";
                                             <input type="text" style="display:none" name="article_id" value="${article.id}"/>
                                             <br/>
                                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                                            <input name="提交" type="submit" class="button" style="height:30px;width:100px;background:black;color:white" value="写完了（￣ c￣）y" />
+                                            <input name="提交" type="submit" class="button" style="height:30px;width:130px;background:black;color:white" onclick="comment_submit()" value="写完了（￣ c￣）y" />
                                       </form> 
                                </c:otherwise>
                           </c:choose>                                   
@@ -110,8 +111,39 @@ String imgPath = basePath + "image/";
 						 beforeSubmit:  validate,   
 						 success:       successFunc
 			   	  }); 
+			   	  var comment_arr=getElementsClass("comment_content");
+			      commentsQuoteTagReset(comment_arr);
 			  });
-				
+
+             function getElementsClass(classnames){ 
+                   var classobj= new Array(); 
+                   //数组下标 
+                   var classint=0;
+                   //获取HTML的所有标签 
+                   var tags=document.getElementsByTagName("*");
+                   for(var i in tags){
+                         if(tags[i].nodeType==1){
+                              //判断节点类型 
+                              if(tags[i].getAttribute("class") == classnames)
+                              { 
+                                    classobj[classint]=tags[i]; 
+                                    classint++; 
+                               } 
+                          } 
+                    } 
+                    return classobj;
+               }
+               
+               function commentsQuoteTagReset(comment_arr) {
+                   var str;
+                   for(var i=0; i < comment_arr.length; i++) {
+                        str = comment_arr[i].innerHTML;
+                        str = str.replace(/\[quote]/g,"<fieldset class=\"comment_quote\"><legend>引用</legend>");
+                        str = str.replace(/\[\/quote]/g,"</fieldset>");
+                        comment_arr[i].innerHTML=str;
+                   } 
+               }
+
 			   function validate(formData, jqForm, options) {
 			       for(var i=0; i < formData.length; i++) {
 			        	if(!formData[i].value.trim()) {
@@ -129,6 +161,12 @@ String imgPath = basePath + "image/";
 				     } else {
 				         window.location.reload();
 				     }
+				}
+				
+				function quote_comment(content, usr_name) {
+				    quote_content = '@' + usr_name + ' [quote]' + content.trim() + '[/quote]';
+				    document.getElementById("comment_txt").value = quote_content;
+					document.getElementsByTagName('body')[0].scrollTop=document.getElementsByTagName('body')[0].scrollHeight;
 				}
             </script>
       </body>

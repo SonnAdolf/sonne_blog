@@ -1,6 +1,9 @@
 body {
 	background-color:#f8f8ee;
 }
+pre {
+	background-color:#f5f5dc;
+}
 
 #header{
     left: 0;

@@ -152,7 +152,7 @@ public final class StringUtils {
                .addAttributes("a", "href")
                .addAttributes("blockquote", "cite")
                .addAttributes("q", "cite")
-               .addAttributes("code", "class")
+               .addAttributes("code", "class", "codemark")
                .addAttributes("span", "class")
                .addAttributes("pre", "style")
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sonn.entity.Article;
 import sonn.entity.Comment;
 import sonn.entity.Message;
+import sonn.entity.User;
 import sonn.enums.MsgIsRead;
 import sonn.enums.MsgType;
 import sonn.service.ArticleService;
@@ -64,9 +65,9 @@ public class CommentController {
 			json.put("msg", "评论内容怎可为空白？(╯#-_-)╯~~~~~~~~~~~~~~~~~╧═╧");
 			return json;
 		}
-		if (content.length() >= 400) {
+		if (content.length() >= 800) {
 			json.put("success", false);
-			json.put("msg", "评论个四百字也就够了。(¬､¬) (￢_￢)");
+			json.put("msg", "评论字数超限制。(¬､¬) (￢_￢)");
 			return json;
 		}
 		content = StringUtils.replace_html_tags(content);
@@ -82,18 +83,37 @@ public class CommentController {
 		}
 		commentService.save(comment);
 		Message msg = new Message();
-		msg.setType(MsgType.Comment);
+		msg.setType(MsgType.comment);
 		// old version Article entity class is without Author class
 		if (article.getAuthor() != null) {
 			msg.setReciever(article.getAuthor());
 		}
-		if (username != null) {
-			msg.setSender(userService.findByUserName(username).get(0));
-		}
+		User sender = userService.findByUserName(username).get(0);
+		msg.setSender(sender);
 		msg.setIs_read(MsgIsRead.No);
 		msg.setDate(new Date());
 		msg.setArticle(article);
 		messageService.save(msg);
+		content = comment.getContent().trim();
+		//if this comment is reply'
+		if (content.charAt(0) == '@') {
+			int index = content.indexOf("[quote]");
+			String usr_name = content.substring(1,index);
+			if (!StringUtils.isStringEmpty(usr_name)) {
+				usr_name = usr_name.trim();
+				User usr = userService.findByUserName(usr_name).get(0);
+				if (null != usr) {
+					Message reply_msg = new Message();
+					reply_msg.setSender(sender);
+					reply_msg.setReciever(usr);
+					reply_msg.setIs_read(MsgIsRead.No);
+					reply_msg.setArticle(article);
+					reply_msg.setDate(new Date());
+					reply_msg.setType(MsgType.reply);
+					messageService.save(reply_msg);
+				}
+			}
+		}
 		json.put("success", true);
 		json.put("msg", "评论成功 ♪（＾∀＾●）ﾉｼ （●´∀｀）♪");
 		return json;
