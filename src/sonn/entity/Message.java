@@ -17,6 +17,7 @@ import sonn.enums.MsgType;
 * @Description: entity class of message
 * @author sonne
 * @date 2016-12-23 20:32:16 
+*       2017-01-21 comment reply - reply message
 * @version 1.0
  */
 @Entity

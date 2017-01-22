@@ -1,10 +1,7 @@
 package sonn.controller;
 
 import java.io.IOException;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sonn.entity.User;
 import sonn.message.bean.SimpleBackMessage;
+import sonn.service.LoginService;
 import sonn.service.UserService;
 import sonn.util.CaptchaUtils;
 import sonn.util.MessageUtils;
@@ -36,7 +34,10 @@ import com.alibaba.fastjson.JSONObject;
  * @ClassName: LoginController
  * @Description:Login CONTROLLER
  * @author sonne
- * @date 2016-4-25 下午2:52:03 2016-05-02 具体编码 2016-05-07验证码相关 2016-12-01 rsa
+ * @date 2016-4-25 14:52:03 
+ *      2016-05-02 具体编码 
+ *      2016-05-07验证码相关 
+ *      2016-12-01 rsa
  * @version 1.0
  */
 @Controller
@@ -45,20 +46,13 @@ public class LoginController {
 	@Resource(name = "userServiceImpl")
 	private UserService userService;
 
+	@Resource(name = "loginServiceImpl")
+	private LoginService loginService;
+	
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public String show(HttpServletRequest request, Model model)
 			throws Exception {
-		HttpSession session = request.getSession();
-		// rsa key pair
-		Map<String, Object> map = RSAUtils.genKeyPair();
-		RSAPublicKey publicKey = (RSAPublicKey) map.get("RSAPublicKey");
-		RSAPrivateKey privateKey = (RSAPrivateKey) map.get("RSAPrivateKey");
-		String strPublicKey = userService.getKeyString(publicKey);
-		String strPrivateKey = userService.getKeyString(privateKey);
-		// public key send to client
-		model.addAttribute("publicKey", strPublicKey);
-		// private key save in session
-		session.setAttribute("PRIVATE_KEY", strPrivateKey);
+		loginService.loginCommonPretreatment(request, model);
 		return "loginPage";
 	}
 

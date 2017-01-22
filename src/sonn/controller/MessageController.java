@@ -15,13 +15,23 @@ import sonn.entity.Comment;
 import sonn.entity.Message;
 import sonn.enums.MsgIsRead;
 import sonn.service.CommentService;
+import sonn.service.LoginService;
 import sonn.service.MessageService;
 import sonn.service.UserService;
 import sonn.util.IOUtils;
 import sonn.util.Page;
 import sonn.util.PageInfo;
 import sonn.util.PageUtils;
+import sonn.util.StringUtils;
 
+/**
+* @ClassName: MessageController 
+* @Description: tips,message.
+* @author sonne
+* @date 2016-12
+*       2017-01-21 before some operations, check if has logged in first.
+* @version 1.0
+ */
 @Controller
 @RequestMapping("/msg")
 public class MessageController {
@@ -34,6 +44,9 @@ public class MessageController {
 	@Resource(name = "commentServiceImpl")
 	private CommentService commentService;
     
+	@Resource(name = "loginServiceImpl")
+	private LoginService loginService;
+	
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public String show(HttpServletRequest request, int id,
 		                                	Model model) throws Exception {
@@ -45,7 +58,11 @@ public class MessageController {
 		// sort the comments
 		List<Comment> comments = commentService.sort(article.getComments());
 		String username = userService.getUsernameFromSession(request);
-		
+		// if has't logged in, turned to login page
+		if (StringUtils.isStringEmpty(username)) {
+			loginService.loginCommonPretreatment(request, model);
+			return "loginPage";
+		}
 		model.addAttribute("article", article);
 		model.addAttribute("username", username);
 		model.addAttribute("article_id", id);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sonn.Order;
 import sonn.entity.Message;
 import sonn.entity.User;
+import sonn.service.LoginService;
 import sonn.service.MessageService;
 import sonn.service.UserService;
 import sonn.util.IOUtils;
@@ -22,6 +23,14 @@ import sonn.util.PageInfo;
 import sonn.util.Principal;
 import sonn.util.TimeUtils;
 
+/**
+* @ClassName: MineController 
+* @Description: personal space.message center.
+* @author sonne
+* @date 2017-1-21 14:18:17
+*       2017-01-21 before some operations, check if has logged in first. 
+* @version 1.0
+ */
 @Controller
 @RequestMapping("/mine")
 public class MineController {
@@ -32,13 +41,18 @@ public class MineController {
     @Resource(name = "messageServiceImpl")
     private MessageService messageService;
     
+	@Resource(name = "loginServiceImpl")
+	private LoginService loginService;
+    
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public String show(HttpServletRequest request, PageInfo pageInfo,
 		                                	Model model) throws Exception {
 		Principal pipal = userService.getUserPrincipalFromSession(request);
-		// if the usr should relogin,just back to the home page.
-		if (null == pipal)
-			return "mainPage";
+		if (null == pipal) {
+		    // if has't logged in, turned to login page
+			loginService.loginCommonPretreatment(request, model);
+			return "loginPage";
+		}
 		String username = pipal.getUsername();
 		User user = userService.findByUserName(username).get(0);
 		// if the user didnot upload his picture,the path is null

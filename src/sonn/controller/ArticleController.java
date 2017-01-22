@@ -27,6 +27,7 @@ import sonn.entity.Comment;
 import sonn.entity.User;
 import sonn.service.ArticleService;
 import sonn.service.CommentService;
+import sonn.service.LoginService;
 import sonn.service.MessageService;
 import sonn.service.UserService;
 import sonn.util.IOUtils;
@@ -59,6 +60,7 @@ import com.alibaba.fastjson.JSONObject;
  *              add the read times.
  *       2016-12-28 - 2017-01.01 fight with xss attack.
  *                     delete all the messages before deleting the article.
+ *       2017-01-21 before some operations, check if has logged in first.
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
@@ -76,6 +78,9 @@ public class ArticleController {
 
 	@Resource(name = "messageServiceImpl")
 	private MessageService messageService;
+	
+	@Resource(name = "loginServiceImpl")
+	private LoginService loginService;
 
 	/*
 	 * Get all articles, and show them at the main page.
@@ -117,8 +122,10 @@ public class ArticleController {
 	public String writeArticlePage(HttpServletRequest request,
 			PageInfo pageInfo, Model model) throws Exception {
 		String username = userService.getUsernameFromSession(request);
-		if (StringUtils.isStringEmpty(username))
-			return "mainPage";
+		if (StringUtils.isStringEmpty(username)) {
+			loginService.loginCommonPretreatment(request, model);
+			return "loginPage";
+		}
 		model.addAttribute("userName", username);
 		return "writeArticlePage";
 	}
@@ -144,6 +151,10 @@ public class ArticleController {
 	@ResponseBody
 	public boolean delete(HttpServletRequest request, int id) throws Exception {
 		String username = userService.getUsernameFromSession(request);
+		// if hasn't loged in
+		if (StringUtils.isStringEmpty(username)) {
+			return false;
+		}
 		Article db_article = articleService.find(id, Article.class);
 		if (id <= 0 || null == db_article) {
 			return false;
@@ -165,8 +176,10 @@ public class ArticleController {
 	public String editInit(HttpServletRequest request, int id, Model model)
 			throws Exception {
 		String username = userService.getUsernameFromSession(request);
+		// if has't logged in, turned to login page
 		if (StringUtils.isStringEmpty(username)) {
-			return "mainPage";
+			loginService.loginCommonPretreatment(request, model);
+			return "loginPage";
 		}
 		Article article = articleService.find(id, Article.class);
 		if (null == articleService.find(id, Article.class)) {
@@ -181,7 +194,14 @@ public class ArticleController {
 	@ResponseBody
 	public JSONObject edit(HttpServletRequest request, Article article,
 			String articleContent, Model model) throws Exception {
+		String username = userService.getUsernameFromSession(request);
 		JSONObject jo = new JSONObject();
+		// if has't logged in, turned to login page
+		if (StringUtils.isStringEmpty(username)) {
+			jo.put("success", false);
+			jo.put("info", "请先登录");
+			return jo;
+		}
 		String title_input = article.getTitle();
 		if (StringUtils.isStringEmpty(title_input)) {
 			jo.put("success", false);
@@ -206,7 +226,6 @@ public class ArticleController {
 			jo.put("info", "该id文章不存在");
 			return jo;
 		}
-		String username = userService.getUsernameFromSession(request);
 		// Check if it is the operation of the article's author.
 		if (!db_article.getAuthorName().equals(username)) {
 			jo.put("success", false);
@@ -268,6 +287,12 @@ public class ArticleController {
 	public JSONObject submit(HttpServletRequest request, Article article,
 			String articleContent) throws Exception {
 		JSONObject jo = new JSONObject();
+		String username = userService.getUsernameFromSession(request);
+		if (StringUtils.isStringEmpty(username)) {
+			jo.put("success", false);
+			jo.put("msg", "请先登录");
+			return jo;				
+		}
 		if (null == article || StringUtils.isStringEmpty(articleContent)) {
 			jo.put("success", false);
 			jo.put("info", "文章内容为空");
@@ -285,13 +310,6 @@ public class ArticleController {
 			return jo;			
 		}
 		articleContent = Jsoup.clean(articleContent, StringUtils.basicWithImages());
-		String username = userService.getUsernameFromSession(request);
-		if (StringUtils.isStringEmpty(username)) {
-			jo.put("success", false);
-			jo.put("msg", "请先登录");
-			return jo;				
-		}
-		
 		String articleUrl = articleService.getArticleUrl(article, request,
 				username);
 
@@ -385,8 +403,12 @@ public class ArticleController {
 
 	@RequestMapping(value = "/article_imgs", method = RequestMethod.POST)
 	@ResponseBody
-	public String article_imgs(HttpServletRequest request) throws Exception {
+	public String article_imgs(HttpServletRequest request, Model model) throws Exception {
 		String username = userService.getUsernameFromSession(request);
+		if (StringUtils.isStringEmpty(username)) {
+			loginService.loginCommonPretreatment(request, model);
+			return "loginPage";
+		}
 		String fileName = "";
 
 		DiskFileUpload diskFileUpload = new DiskFileUpload();

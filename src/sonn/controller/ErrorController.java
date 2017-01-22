@@ -12,7 +12,7 @@ public class ErrorController {
 
 	@RequestMapping(value = "/404", method = RequestMethod.GET)
 	public String error404(HttpServletRequest request) throws Exception {
-		return "error";
+		return "404-error";
 	}
 
 	@RequestMapping(value = "/500", method = RequestMethod.GET)

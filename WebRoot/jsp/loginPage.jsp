@@ -46,7 +46,7 @@ String imgPath = basePath + "image/";
                                           验证码 <input type="text" id="captcha" name="captcha" placeholder="Enter captcha">
                                </div>
     						  <div id = "captcha_img"  class="form-group">
-							         <img id="captchaImage"  src="captcha.form"/>
+							         <img id="captchaImage"  src="/RiXiang_blog/login/captcha.form"/>
 							  </div>
 	                                
 	                          <div id="submit_btn"  class="form-group">
@@ -68,7 +68,7 @@ String imgPath = basePath + "image/";
             </div>
 
        </div>
-             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-1.3.1.js"></script>
+             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
              <script type="text/javascript" src="<%=basePath %>Jquery/jquery.form.js"></script>   
              <script type="text/javascript" src="<%=basePath %>bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
              <script type="text/javascript" src="<%=basePath %>js/jsencrypt.min.js"></script>  

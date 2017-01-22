@@ -13,18 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
      <link type="text/css" rel="stylesheet" href="<%=basePath %>css/error.css" media="all" />
      <title>日向博客</title>
-     <style>
-           body {
-               color:white;
-               background-color:black;
-           }
-     </style>
    </head>
    <body>
-         <br><br><br>网站错误发生，请逃离地球!<a href = "/RiXiang_blog/article/list.form" style="color:#90ee90">返回主页</a><br>
-                         穿越宇宙的广阔黑幕，奔向远方孤独的星球。<br>
-                         渺小愚蠢的人类必将灭亡，永恒不灭的唯有神的光。<br>
-                         那是人类永远无法理解的谜题。<br>               
-         <img src="<%=basePath %>image/error.jpg" style=""/>
+         <br><br><br>404，您输入的网址无法找到。<a href = "/RiXiang_blog/article/list.form">返回主页</a><br>
+         <img src="<%=basePath %>image/404.jpg" style=""/>
    </body>
 </html>

@@ -30,6 +30,8 @@ import com.alibaba.fastjson.JSONObject;
  * @Description: controller of comments
  * @author sonne
  * @date 2016-12-5 20:41:07
+ *       2017-01-21 comment reply - reply message
+ *       2017-01-21 before some operations, check if has logged in first.
  * @version 1.0
  */
 @Controller

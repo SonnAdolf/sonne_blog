@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sonn.entity.User;
+import sonn.service.LoginService;
 import sonn.service.UserService;
+import sonn.util.Principal;
 import sonn.util.RSAUtils;
 import sonn.util.StringUtils;
 
@@ -28,6 +30,7 @@ import com.alibaba.fastjson.JSONObject;
 * @author sonne
 * @date 2016-11-27 15:32:34 
 *       2016-12-20 Password Encryption
+*       2017-01-21 before some operations, check if has logged in first.
 * @version 1.0
  */
 @Controller
@@ -37,9 +40,18 @@ public class PasswdController
     @Resource(name = "userServiceImpl")
     private UserService userService;
     
+	@Resource(name = "loginServiceImpl")
+	private LoginService loginService;
+	
     @RequestMapping(value = "/show", method = RequestMethod.GET)
     public String show(HttpServletRequest request, Model model)throws Exception
     {
+		Principal pipal = userService.getUserPrincipalFromSession(request);
+		if (null == pipal) {
+		    // if has't logged in, turned to login page
+			loginService.loginCommonPretreatment(request, model);
+			return "loginPage";
+		}
 		HttpSession session = request.getSession();
     	// rsa key pair
     	Map<String, Object> map = RSAUtils.genKeyPair();
@@ -60,6 +72,13 @@ public class PasswdController
     		             String newPassword, String rePassword) throws Exception
     {
 		JSONObject jo = new JSONObject();
+		Principal pipal = userService.getUserPrincipalFromSession(request);
+		if (null == pipal) {
+		    // if has't logged in, turned to login page
+			jo.put("success", false);
+			jo.put("returnMessage", "请先登录");
+			return jo;
+		}
 		if (StringUtils.isStringEmpty(password) 
 				|| StringUtils.isStringEmpty(newPassword)
 				|| StringUtils.isStringEmpty(rePassword))

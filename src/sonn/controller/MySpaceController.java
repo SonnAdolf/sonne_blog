@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sonn.entity.Article;
 import sonn.entity.User;
 import sonn.service.ArticleService;
+import sonn.service.LoginService;
 import sonn.service.MessageService;
 import sonn.service.UserService;
 import sonn.util.IOUtils;
@@ -27,6 +28,7 @@ import sonn.util.TimeUtils;
  *       2016-12-13 上传头像功能暂时合入个人主页 
  *       2016-12-14 获取用户注册多久
  *       2017-01-15 if the usr did not log in, return to home page
+ *       2017-01-21 before some operations, check if has logged in first.
  * @version 1.0
  */
 @Controller
@@ -41,14 +43,17 @@ public class MySpaceController {
 	@Resource(name = "messageServiceImpl")
 	private MessageService messageService;
 
-	@SuppressWarnings("unused")
+	@Resource(name = "loginServiceImpl")
+	private LoginService loginService;
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String mySpace(HttpServletRequest request, PageInfo pageInfo,
 			Model model) throws Exception {
 		Principal pipal = userService.getUserPrincipalFromSession(request);
-		String username = pipal.getUsername();
 		if (null == pipal) {
-			return "mainPage";
+		    // if has't logged in, turned to login page
+			loginService.loginCommonPretreatment(request, model);
+			return "loginPage";
 		}
 		else{
 			if (messageService.hasMsg(userService.find(pipal.getId(),
@@ -56,7 +61,7 @@ public class MySpaceController {
 				model.addAttribute("has_new_msg", "has_new_msg");
 		}
 
-
+		String username = pipal.getUsername();
 		pageInfo.setEveryPage(12);
 		Page<Article> page = articleService.getArticlesByUsername(username,
 				pageInfo);
