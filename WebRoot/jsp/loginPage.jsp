@@ -78,7 +78,7 @@ String imgPath = basePath + "image/";
     			  toastr.options = {  
         			     positionClass: "toast-bottom-full-width"
    			  	  };  
-				  $('#loginForm').ajaxForm({ 
+				  $("#loginForm").ajaxForm({ 
 			             dataType:      'json',
 						 beforeSubmit:  validate,   
 						 success:       successFunc
@@ -89,7 +89,8 @@ String imgPath = basePath + "image/";
                          encrypt.setPublicKey(keyValue);
                          var password = encrypt.encrypt($("#password").val());  
                          $("#password").val(password);  
-                         document.loginForm.submit();  
+                         $("#loginForm").submit();
+                         //document.forms.loginForm.submit();  
                      });  
                  // 更换验证码
 	              $('#captchaImage').click(function() {

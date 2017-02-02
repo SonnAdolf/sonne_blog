@@ -1,5 +1,8 @@
 package sonn.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import sonn.Order;
 import sonn.entity.Article;
 import sonn.entity.User;
 import sonn.service.ArticleService;
@@ -29,6 +33,7 @@ import sonn.util.TimeUtils;
  *       2016-12-14 获取用户注册多久
  *       2017-01-15 if the usr did not log in, return to home page
  *       2017-01-21 before some operations, check if has logged in first.
+ *       2017-02-02 articles'order(sorting) setting.
  * @version 1.0
  */
 @Controller
@@ -63,8 +68,11 @@ public class MySpaceController {
 
 		String username = pipal.getUsername();
 		pageInfo.setEveryPage(12);
+		List<Order> orders = new ArrayList<Order>();
+		Order order = new Order("id", Order.Direction.desc);
+		orders.add(order);
 		Page<Article> page = articleService.getArticlesByUsername(username,
-				pageInfo);
+				pageInfo, orders);
 		model.addAttribute("page", page);
 		model.addAttribute("userName", username);
 
@@ -111,8 +119,11 @@ public class MySpaceController {
 		model.addAttribute("userName", usr_name);
 
 		pageInfo.setEveryPage(12);
+		List<Order> orders = new ArrayList<Order>();
+		Order order = new Order("id", Order.Direction.desc);
+		orders.add(order);
 		Page<Article> page = articleService.getArticlesByUsername(usr_name,
-				pageInfo);
+				pageInfo, orders);
 		model.addAttribute("page", page);
 
 		User user = userService.findByUserName(usr_name).get(0);

@@ -1,27 +1,44 @@
-
 body 
 {
 	background-color: black;
 }
-
-
-#passwd
-{ 
-	background-color:#ffffff;
-	border: 1px solid black;
-	padding: 80px;
-	filter:alpha(opacity=60);
-	opacity:0.6;
-}
-
-#poem
-{
-	font-family: KaiTi;
-	color:white;
-}
-
 h1
 {
 	color:white;
 }
+#content 
+{
+	text-align:center;
+}
+@media screen and (max-width : 500px){
+	#poem
+	{
+		display:none;
+	}
+	#passwd
+	{
+		background-color:white;
+		filter:alpha(opacity=60);
+		opacity:0.6;
+	}
+}
+
+@media screen and (min-width: 501px) {
+	#poem
+	{
+		font-family: KaiTi;
+		color:white;
+	}
+	#passwd
+	{ 
+		background-color:#ffffff;
+		border: 1px solid black;
+		padding: 80px;
+		filter:alpha(opacity=60);
+		opacity:0.6;
+	}
+}
+
+
+
 

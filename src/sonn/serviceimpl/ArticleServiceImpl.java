@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
+import sonn.Order;
 import sonn.dao.ArticleDao;
 import sonn.entity.Article;
 import sonn.service.ArticleService;
@@ -15,7 +16,10 @@ import sonn.util.PageInfo;
 
 /**
  * @author sonne
- * @date 2016.04.21 2016-11-11 article summary 2016-11-27 order
+ * @date 2016.04.21 
+ *       2016-11-11 article summary 
+ *       2016-11-27 order
+ *       2017-02-02 articles'order(sorting) setting.
  * @description:文章service实现类
  */
 @Service("articleServiceImpl")
@@ -66,6 +70,15 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article> implements
 	public Page<Article> getArticlesByUsername(String username,
 			PageInfo pageInfo) {
 		return articleDao.getArticlesByUsername(username, pageInfo);
+	}
+	
+	/*
+	 * 根据用户名查找文章
+	 */
+	@Override
+	public Page<Article> getArticlesByUsername(String username,
+			PageInfo pageInfo, List<Order> orders) {
+		return articleDao.getArticlesByUsername(username, pageInfo, orders);
 	}
 
 }

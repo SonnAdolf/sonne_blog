@@ -9,6 +9,8 @@ String imgPath = basePath + "image/";
 <html>
       <head>
              <title>日向博客</title>
+             <meta http-equiv="X-UA-Compatible" content="IE=edge">
+             <meta name="viewport" content="width=device-width, initial-scale=1">
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
              <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/passwd.css" media="all" />
@@ -39,25 +41,32 @@ String imgPath = basePath + "image/";
             		</div>
         		</nav>
         		
-        		   <div id="content" class="row-fluid">
-        			   <div id="passwd" class="col-md-9">
+        		   <div id="content">
+        			   <div id="passwd" class="col-xs-12 col-md-9">
             			   <h4>日向博客，你的精神家园</h4>
 	
-						   <form id="passwdForm" action="change.form" method="post">
+						   <form id="passwdForm" class="form-horizontal" action="change.form" method="post">
   				               <div class="form-group">
-      				             <span class="glyphicon glyphicon-lock"></span>
-                                                                                          旧密码：<input type="password" id="password" name="password" placeholder="Password">
+      				             <!--  <span class="glyphicon glyphicon-lock"></span> -->
+                                      <label class="col-xs-4 col-md-5 control-label">旧密码：</label>
+                                      <div class="col-xs-8 col-md-4">
+                                           <input type="password" id="password" name="password" placeholder="旧密码">
+                                      </div>
                                </div>
   				               <div class="form-group">
-      				             <span class="glyphicon glyphicon-lock"></span>
-                                                                                            新密码：<input type="password" id="newPassword" name="newPassword" placeholder="Password">
+                                      <label class="col-xs-4 col-md-5 control-label"> 新密码：</label>
+                                      <div class="col-xs-8 col-md-4">
+                                            <input type="password" id="newPassword" name="newPassword" placeholder="新密码">
+                                      </div>
                                </div>
   				               <div class="form-group">
-      				             <span class="glyphicon glyphicon-lock"></span>
-                                                                                              重新输入：<input type="password" id="rePassword" name="rePassword" placeholder="Password">
+                                     <label class="col-xs-4 col-md-5 control-label">重新输入</label>
+                                     <div class="col-xs-8 col-md-4">
+                                          <input type="password" id="rePassword" name="rePassword" placeholder="确认输入">
+                                     </div>
                                </div>      
                                 <textarea  style="display:none" id="pubkey" rows="15" cols="65">${publicKey}</textarea>
-                                <button type="submit" class="btn btn-default">Submit</button>
+                                <button type="submit" class="btn btn-primary">提交</button>
                              </form>
                         </div>
                          <div id="poem" class="col-md-3">

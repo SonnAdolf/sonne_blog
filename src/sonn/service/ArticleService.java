@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import sonn.Order;
 import sonn.entity.Article;
 import sonn.util.Page;
 import sonn.util.PageInfo;
@@ -13,6 +14,7 @@ import sonn.util.PageInfo;
  * @author 无名
  * @date 2016.04.21
  *       2016-11-11 article summary
+ *       2017-02-02 articles'order(sorting) setting.
  * @description:文章service接口
  */
 public interface ArticleService extends BaseService<Article>
@@ -34,4 +36,7 @@ public interface ArticleService extends BaseService<Article>
 	 * 根据用户名查找文章
 	 */
 	public Page<Article> getArticlesByUsername(String username,PageInfo pageInfo);
+
+	Page<Article> getArticlesByUsername(String username, PageInfo pageInfo,
+			List<Order> orders);
 }
