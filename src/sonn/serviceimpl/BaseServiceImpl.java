@@ -16,6 +16,7 @@ import sonn.util.PageInfo;
 * @Description:service¸¸Àà
 * @author ÎÞÃû
 * @date 2016-4-22
+*       2017-02-02 updates
 * @version 1.0
 * @param <T>
  */
@@ -65,6 +66,14 @@ public class BaseServiceImpl<T> implements BaseService<T>
 		return baseDao.merge(entity);
 	}
 
+	@Transactional
+	public List<T> updates(List<T> entities) {
+		for (T t:entities) {
+			baseDao.merge(t);
+		}
+		return entities;
+	}
+	
 	@Transactional
 	public void delete(Integer id, Class<T> clazz) {
 		delete(baseDao.find(id, clazz));

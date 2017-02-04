@@ -12,6 +12,7 @@ import org.jsoup.safety.Whitelist;
  * @Description: 字符串处理工具类
  * @author 无名
  * @date 2016-4-30 下午10:26:48
+ *       2017-02-02 replace & with &amp; function
  * @version 1.0
  */
 public final class StringUtils {
@@ -52,6 +53,23 @@ public final class StringUtils {
 		str_input = str_input.replaceAll(">", "&gt;");
 		return str_input;
 	}
+	
+	/*
+	 * replace & with &amp;
+	 */
+	public static String replace_and_tags(String str_input) {
+		str_input = str_input.replaceAll("&", "&amp;");
+		return str_input;
+	}
+	
+	/*
+	 * replace &amp; with &
+	 */
+	public static String replace_and_tags2(String str_input) {
+		str_input = str_input.replaceAll("&amp;", "&");
+		return str_input;
+	}
+
 
 	public static boolean contains_sqlinject_illegal_ch(String str_input) {
 		// "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]"

@@ -20,6 +20,7 @@ import sonn.util.PageInfo;
 * @Description: the implementation of service interface of message
 * @author sonne
 * @date 2016-12-23 21:16:46 
+*       2017-02-02 findMsgsByArticle
 * @version 1.0
  */
 @Service("messageServiceImpl")
@@ -63,6 +64,19 @@ public class MessageServiceImpl  extends BaseServiceImpl<Message> implements Mes
 	@Override
 	public void delete_msgs_by_article(Article article) {
 		messageDao.delete_msgs_by_article(article);
+	}
+
+	/**
+	* @Title: findMsgsByArticle 
+	* @Description: find messages of a article
+	* @param @param article
+	* @param @return    articles 
+	* @return List<Message>    ∑µªÿ¿‡–Õ 
+	* @throws
+	 */
+	@Override
+	public List<Message> findMsgsByArticle(Article article) {
+		return messageDao.findMsgsByArticle(article);
 	}
 	
 }

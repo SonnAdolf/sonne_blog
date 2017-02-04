@@ -26,11 +26,11 @@ String imgPath = basePath + "image/";
 		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
 		                 <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
 		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li></c:if>
-		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页</a></li></c:if>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">文章管理</a></li></c:if>
 		                 <c:if test="${!empty userName}">
 		                       <li>
 		                            <a href ="/RiXiang_blog/mine/show.form">
-		                                                                                                个人空间	
+		                                   ${userName}                                                             	
 		                                   <c:if test="${!empty has_new_msg}">
 		                 	                    <span id="new_msg_txt">【新消息】</span>
 		                 	               </c:if>

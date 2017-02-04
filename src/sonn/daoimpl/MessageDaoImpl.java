@@ -24,6 +24,7 @@ import sonn.util.PageInfo;
 * @Description: the implement of message dao
 * @author sonne
 * @date 2016-12-5 20:55:06 
+*       2017-02-02 findMsgsByArticle
 * @version 1.0
  */
 @Repository("messageDaoImpl")
@@ -99,6 +100,29 @@ public class MessageDaoImpl extends BaseDaoImpl<Message> implements MessageDao {
 		restrictions = criteriaBuilder.and(restrictions, criteriaBuilder.equal(root.get("is_read"), MsgIsRead.No));
 		criteriaQuery.where(restrictions);
 		return super.count(criteriaQuery, Message.class);
+	}
+
+	/**
+	* @Title: findMsgsByArticle 
+	* @Description: find messages of a article
+	* @param @param article
+	* @param @return    articles 
+	* @return List<Message>    ∑µªÿ¿‡–Õ 
+	* @throws
+	 */
+	@Override
+	public List<Message> findMsgsByArticle(Article article) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Message> criteriaQuery = criteriaBuilder.createQuery(Message.class);
+		Root<Message> root = criteriaQuery.from(Message.class);
+		criteriaQuery.select(root);
+		Predicate restrictions = criteriaBuilder.conjunction();
+		if (article != null) 
+		{
+			restrictions = criteriaBuilder.and(restrictions, criteriaBuilder.equal(root.get("article"), article));
+		}
+		criteriaQuery.where(restrictions);
+		return entityManager.createQuery(criteriaQuery).setFlushMode(FlushModeType.COMMIT).getResultList();
 	}
 
 }

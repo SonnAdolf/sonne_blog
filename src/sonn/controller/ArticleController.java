@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,6 +62,7 @@ import com.alibaba.fastjson.JSONObject;
  *       2016-12-28 - 2017-01.01 fight with xss attack.
  *                     delete all the messages before deleting the article.
  *       2017-01-21 before some operations, check if has logged in first.
+ *       2017-02-02 & replace.
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
@@ -187,6 +189,7 @@ public class ArticleController {
 		}
 		article = getArticleOfContentByUrl(article);
 		model.addAttribute("article", article);
+		model.addAttribute("userName", username);
 		return "editArticlePage";
 	}
 
@@ -219,6 +222,7 @@ public class ArticleController {
 			return jo;			
 		}
 		articleContent = Jsoup.clean(articleContent, StringUtils.basicWithImages());
+		articleContent = StringUtils.replace_and_tags(articleContent);
 		Article db_article = articleService
 				.find(article.getId(), Article.class);
 		if (db_article == null) {
@@ -310,6 +314,7 @@ public class ArticleController {
 			return jo;			
 		}
 		articleContent = Jsoup.clean(articleContent, StringUtils.basicWithImages());
+		articleContent = StringUtils.replace_and_tags(articleContent);
 		String articleUrl = articleService.getArticleUrl(article, request,
 				username);
 
@@ -371,6 +376,7 @@ public class ArticleController {
 		articleService.update(article);
 
 		article = getArticleOfContentByUrl(article);
+		article.setContent(StringUtils.replace_and_tags2(article.getContent()));
 		// sort the comments
 		List<Comment> comments = commentService.sort(article.getComments());
 		String username = userService.getUsernameFromSession(request);
@@ -398,6 +404,10 @@ public class ArticleController {
 				pageInfo);
 
 		model.addAttribute("comments_page", comments_page);
+		
+		Logger logger = Logger.getLogger(ArticleController.class);
+		logger.info("User " + username + " had read the article " + article.getTitle());  
+		
 		return "showArticlePage";
 	}
 
@@ -457,6 +467,7 @@ public class ArticleController {
 				article.setSummary("");
 			} else {
 				article.setSummary(IOUtils.readByUrl(url));
+				article.setSummary(StringUtils.replace_and_tags2(article.getSummary()));
 			}
 			newArtiList.add(article);
 		}

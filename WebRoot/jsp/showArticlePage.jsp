@@ -22,8 +22,8 @@ String imgPath = basePath + "image/";
 			  			<c:if test="${empty username}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
 			  			<c:if test="${empty username}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
 			  			<li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
-			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/space/list.form">个人主页</a></li></c:if>
-			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/mine/show.form">个人空间</a></li></c:if>
+			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/space/list.form">文章管理</a></li></c:if>
+			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/mine/show.form">${username}</a></li></c:if>
 			  			<c:if test="${!empty username}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
 			  			<li><a href ="/RiXiang_blog/game/snake.form">游戏</a></li>
 			  			<li><a href ="/RiXiang_blog/sonne/blog.form">日向技术</a></li>

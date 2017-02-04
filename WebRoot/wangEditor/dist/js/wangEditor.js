@@ -1,79 +1,79 @@
 (function (factory) {
     if (typeof window.define === 'function') {
         if (window.define.amd) {
-            // AMDæ¨¡å¼
+            // AMDÄ£Ê½
             window.define('wangEditor', ["jquery"], factory);
         } else if (window.define.cmd) {
-            // CMDæ¨¡å¼
+            // CMDÄ£Ê½
             window.define(function (require, exports, module) {
                 return factory;
             });
         } else {
-            // å…¨å±€æ¨¡å¼
+            // È«¾ÖÄ£Ê½
             factory(window.jQuery);
         }
     } else if (typeof module === "object" && typeof module.exports === "object") {
         // commonjs
 
-        // å¼•ç”¨ css â€”â€” webapck
+        // ÒıÓÃ css ¡ª¡ª webapck
         window.wangEditorCssPath ? require(window.wangEditorCssPath) : require('../css/wangEditor.css');
         module.exports = factory(
-            // ä¼ å…¥ jquery ï¼Œæ”¯æŒä½¿ç”¨ npm æ–¹å¼æˆ–è€…è‡ªå·±å®šä¹‰jqueryçš„è·¯å¾„
+            // ´«Èë jquery £¬Ö§³ÖÊ¹ÓÃ npm ·½Ê½»òÕß×Ô¼º¶¨ÒåjqueryµÄÂ·¾¶
             window.wangEditorJQueryPath ? require(window.wangEditorJQueryPath) : require('jquery')
         );
     } else {
-        // å…¨å±€æ¨¡å¼
+        // È«¾ÖÄ£Ê½
         factory(window.jQuery);
     }
 })(function($){
     
-    // éªŒè¯æ˜¯å¦å¼•ç”¨jquery
+    // ÑéÖ¤ÊÇ·ñÒıÓÃjquery
     if (!$ || !$.fn || !$.fn.jquery) {
-        alert('åœ¨å¼•ç”¨wangEditor.jsä¹‹å‰ï¼Œå…ˆå¼•ç”¨jQueryï¼Œå¦åˆ™æ— æ³•ä½¿ç”¨ wangEditor');
+        alert('ÔÚÒıÓÃwangEditor.jsÖ®Ç°£¬ÏÈÒıÓÃjQuery£¬·ñÔòÎŞ·¨Ê¹ÓÃ wangEditor');
         return;
     }
 
-    // å®šä¹‰æ‰©å±•å‡½æ•°
+    // ¶¨ÒåÀ©Õ¹º¯Êı
     var _e = function (fn) {
         var E = window.wangEditor;
         if (E) {
-            // æ‰§è¡Œä¼ å…¥çš„å‡½æ•°
+            // Ö´ĞĞ´«ÈëµÄº¯Êı
             fn(E, $);
         }
     };
-// å®šä¹‰æ„é€ å‡½æ•°
+// ¶¨Òå¹¹Ôìº¯Êı
 (function (window, $) {
     if (window.wangEditor) {
-        // é‡å¤å¼•ç”¨
-        alert('ä¸€ä¸ªé¡µé¢ä¸èƒ½é‡å¤å¼•ç”¨ wangEditor.js æˆ– wangEditor.min.js ï¼ï¼ï¼');
+        // ÖØ¸´ÒıÓÃ
+        alert('Ò»¸öÒ³Ãæ²»ÄÜÖØ¸´ÒıÓÃ wangEditor.js »ò wangEditor.min.js £¡£¡£¡');
         return;
     }
 
-    // ç¼–è¾‘å™¨ï¼ˆæ•´ä½“ï¼‰æ„é€ å‡½æ•°
+    // ±à¼­Æ÷£¨ÕûÌå£©¹¹Ôìº¯Êı
     var E = function (elem) {
-        // æ”¯æŒ id å’Œ element ä¸¤ç§å½¢å¼
+        // Ö§³Ö id ºÍ element Á½ÖÖĞÎÊ½
         if (typeof elem === 'string') {
             elem = '#' + elem;
         }
 
-        // ---------------è·å–åŸºæœ¬èŠ‚ç‚¹------------------
+        // ---------------»ñÈ¡»ù±¾½Úµã------------------
         var $elem = $(elem);
         if ($elem.length !== 1) {
             return;
         }
         var nodeName = $elem[0].nodeName;
         if (nodeName !== 'TEXTAREA' && nodeName !== 'DIV') {
-            // åªèƒ½æ˜¯ textarea å’Œ div ï¼Œå…¶ä»–ç±»å‹çš„å…ƒç´ ä¸è¡Œ
+            // Ö»ÄÜÊÇ textarea ºÍ div £¬ÆäËûÀàĞÍµÄÔªËØ²»ĞĞ
             return;   
         }
         this.valueNodeName = nodeName.toLowerCase();
         this.$valueContainer = $elem;
 
-        // è®°å½• elem çš„ prev å’Œ parentï¼ˆæœ€åæ¸²æŸ“ editor è¦ç”¨åˆ°ï¼‰
+        // ¼ÇÂ¼ elem µÄ prev ºÍ parent£¨×îºóäÖÈ¾ editor ÒªÓÃµ½£©
         this.$prev = $elem.prev();
         this.$parent = $elem.parent();
 
-        // ------------------åˆå§‹åŒ–------------------
+        // ------------------³õÊ¼»¯------------------
         this.init();
     };
 
@@ -90,12 +90,12 @@
     E.isOnWebsite = E.websiteHost.indexOf(E.hostname) >= 0;
     E.docsite = 'http://www.kancloud.cn/wangfupeng/wangeditor2/113961';
 
-    // æš´éœ²ç»™å…¨å±€å¯¹è±¡
+    // ±©Â¶¸øÈ«¾Ö¶ÔÏó
     window.wangEditor = E;
 
-    // æ³¨å†Œ plugin äº‹ä»¶ï¼Œç”¨äºç”¨æˆ·è‡ªå®šä¹‰æ’ä»¶
-    // ç”¨æˆ·åœ¨å¼•ç”¨ wangEditor.js ä¹‹åï¼Œè¿˜å¯ä»¥é€šè¿‡ E.plugin() æ³¨å…¥è‡ªå®šä¹‰å‡½æ•°ï¼Œ
-    // è¯¥å‡½æ•°å°†ä¼šåœ¨ editor.create() æ–¹æ³•çš„æœ€åä¸€æ­¥æ‰§è¡Œ
+    // ×¢²á plugin ÊÂ¼ş£¬ÓÃÓÚÓÃ»§×Ô¶¨Òå²å¼ş
+    // ÓÃ»§ÔÚÒıÓÃ wangEditor.js Ö®ºó£¬»¹¿ÉÒÔÍ¨¹ı E.plugin() ×¢Èë×Ô¶¨Òåº¯Êı£¬
+    // ¸Ãº¯Êı½«»áÔÚ editor.create() ·½·¨µÄ×îºóÒ»²½Ö´ĞĞ
     E.plugin = function (fn) {
         if (!E._plugins) {
             E._plugins = [];
@@ -107,27 +107,27 @@
     };
 
 })(window, $);
-// editor ç»‘å®šäº‹ä»¶
+// editor °ó¶¨ÊÂ¼ş
 _e(function (E, $) {
 
     E.fn.init = function () {
 
-        // åˆå§‹åŒ– editor é»˜è®¤é…ç½®
+        // ³õÊ¼»¯ editor Ä¬ÈÏÅäÖÃ
         this.initDefaultConfig();
 
-        // å¢åŠ container
+        // Ôö¼Ócontainer
         this.addEditorContainer();
 
-        // å¢åŠ ç¼–è¾‘åŒºåŸŸ
+        // Ôö¼Ó±à¼­ÇøÓò
         this.addTxt();
 
-        // å¢åŠ menuContainer
+        // Ôö¼ÓmenuContainer
         this.addMenuContainer();
 
-        // åˆå§‹åŒ–èœå•é›†åˆ
+        // ³õÊ¼»¯²Ëµ¥¼¯ºÏ
         this.menus = {};
 
-        // åˆå§‹åŒ–commandHooks
+        // ³õÊ¼»¯commandHooks
         this.commandHooks();
 
     };
@@ -136,7 +136,7 @@ _e(function (E, $) {
 // editor api
 _e(function (E, $) {
 
-    // é¢„å®šä¹‰ ready äº‹ä»¶
+    // Ô¤¶¨Òå ready ÊÂ¼ş
     E.fn.ready = function (fn) {
 
         if (!this.readyFns) {
@@ -146,7 +146,7 @@ _e(function (E, $) {
         this.readyFns.push(fn);
     };
 
-    // å¤„ç†readyäº‹ä»¶
+    // ´¦ÀíreadyÊÂ¼ş
     E.fn.readyHeadler = function () {
         var fns = this.readyFns;
 
@@ -155,14 +155,14 @@ _e(function (E, $) {
         }
     };
 
-    // æ›´æ–°å†…å®¹åˆ° $valueContainer
+    // ¸üĞÂÄÚÈİµ½ $valueContainer
     E.fn.updateValue = function () {
         var editor = this;
         var $valueContainer = editor.$valueContainer;
         var $txt = editor.txt.$txt;
 
         if ($valueContainer === $txt) {
-            // ä¼ å…¥ç”Ÿæˆç¼–è¾‘å™¨çš„divï¼Œå³æ˜¯ç¼–è¾‘åŒºåŸŸ
+            // ´«ÈëÉú³É±à¼­Æ÷µÄdiv£¬¼´ÊÇ±à¼­ÇøÓò
             return;
         }
 
@@ -170,7 +170,7 @@ _e(function (E, $) {
         $valueContainer.val(value);
     };
 
-    // è·å–åˆå§‹åŒ–çš„å†…å®¹
+    // »ñÈ¡³õÊ¼»¯µÄÄÚÈİ
     E.fn.getInitValue = function () {
         var editor = this;
         var $valueContainer = editor.$valueContainer;
@@ -185,7 +185,7 @@ _e(function (E, $) {
         return currentValue;
     };
 
-    // è§¦å‘èœå•updatestyle
+    // ´¥·¢²Ëµ¥updatestyle
     E.fn.updateMenuStyle = function () {
         var menus = this.menus;
 
@@ -194,13 +194,13 @@ _e(function (E, $) {
         });
     };
 
-    // é™¤äº†ä¼ å…¥çš„ menuIdsï¼Œå…¶ä»–å…¨éƒ¨å¯ç”¨
+    // ³ıÁË´«ÈëµÄ menuIds£¬ÆäËûÈ«²¿ÆôÓÃ
     E.fn.enableMenusExcept = function (menuIds) {
         if (this._disabled) {
-            // ç¼–è¾‘å™¨å¤„äºç¦ç”¨çŠ¶æ€ï¼Œåˆ™ä¸æ‰§è¡Œæ”¹æ“ä½œ
+            // ±à¼­Æ÷´¦ÓÚ½ûÓÃ×´Ì¬£¬Ôò²»Ö´ĞĞ¸Ä²Ù×÷
             return;
         }
-        // menuIdså‚æ•°ï¼šæ”¯æŒæ•°ç»„å’Œå­—ç¬¦ä¸²
+        // menuIds²ÎÊı£ºÖ§³ÖÊı×éºÍ×Ö·û´®
         menuIds = menuIds || [];
         if (typeof menuIds === 'string') {
             menuIds = [menuIds];
@@ -214,13 +214,13 @@ _e(function (E, $) {
         });
     };
 
-    // é™¤äº†ä¼ å…¥çš„ menuIdsï¼Œå…¶ä»–å…¨éƒ¨ç¦ç”¨
+    // ³ıÁË´«ÈëµÄ menuIds£¬ÆäËûÈ«²¿½ûÓÃ
     E.fn.disableMenusExcept = function (menuIds) {
         if (this._disabled) {
-            // ç¼–è¾‘å™¨å¤„äºç¦ç”¨çŠ¶æ€ï¼Œåˆ™ä¸æ‰§è¡Œæ”¹æ“ä½œ
+            // ±à¼­Æ÷´¦ÓÚ½ûÓÃ×´Ì¬£¬Ôò²»Ö´ĞĞ¸Ä²Ù×÷
             return;
         }
-        // menuIdså‚æ•°ï¼šæ”¯æŒæ•°ç»„å’Œå­—ç¬¦ä¸²
+        // menuIds²ÎÊı£ºÖ§³ÖÊı×éºÍ×Ö·û´®
         menuIds = menuIds || [];
         if (typeof menuIds === 'string') {
             menuIds = [menuIds];
@@ -234,7 +234,7 @@ _e(function (E, $) {
         });
     };
 
-    // éšè—æ‰€æœ‰ dropPanel droplist modal
+    // Òş²ØËùÓĞ dropPanel droplist modal
     E.fn.hideDropPanelAndModal = function () {
         var menus = this.menus;
 
@@ -250,11 +250,11 @@ _e(function (E, $) {
 // selection range API
 _e(function (E, $) {
 
-    // ç”¨åˆ° w3c range çš„å‡½æ•°ï¼Œå¦‚æœæ£€æµ‹åˆ°æµè§ˆå™¨ä¸æ”¯æŒ w3c rangeï¼Œåˆ™èµ‹å€¼ä¸ºç©ºå‡½æ•°
+    // ÓÃµ½ w3c range µÄº¯Êı£¬Èç¹û¼ì²âµ½ä¯ÀÀÆ÷²»Ö§³Ö w3c range£¬Ôò¸³ÖµÎª¿Õº¯Êı
     var ieRange = !E.w3cRange;
     function emptyFn() {}
 
-    // è®¾ç½®æˆ–è¯»å–å½“å‰çš„range
+    // ÉèÖÃ»ò¶ÁÈ¡µ±Ç°µÄrange
     E.fn.currentRange = function (cr){
         if (cr) {
             this._rangeData = cr;
@@ -263,22 +263,22 @@ _e(function (E, $) {
         }
     };
 
-    // å°†å½“å‰é€‰åŒºæŠ˜å 
+    // ½«µ±Ç°Ñ¡ÇøÕÛµş
     E.fn.collapseRange = function (range, opt) {
-        // opt å‚æ•°è¯´æ˜ï¼š'start'-æŠ˜å åˆ°å¼€å§‹; 'end'-æŠ˜å åˆ°ç»“æŸ
+        // opt ²ÎÊıËµÃ÷£º'start'-ÕÛµşµ½¿ªÊ¼; 'end'-ÕÛµşµ½½áÊø
         opt = opt || 'end';
         opt = opt === 'start' ? true : false;
 
         range = range || this.currentRange();
         
         if (range) {
-            // åˆå¹¶ï¼Œä¿å­˜
+            // ºÏ²¢£¬±£´æ
             range.collapse(opt);
             this.currentRange(range);
         }
     };
 
-    // è·å–é€‰åŒºçš„æ–‡å­—
+    // »ñÈ¡Ñ¡ÇøµÄÎÄ×Ö
     E.fn.getRangeText = ieRange ? emptyFn : function (range) {
         range = range || this.currentRange();
         if (!range) {
@@ -287,7 +287,7 @@ _e(function (E, $) {
         return range.toString();
     };
 
-    // è·å–é€‰åŒºå¯¹åº”çš„DOMå¯¹è±¡
+    // »ñÈ¡Ñ¡Çø¶ÔÓ¦µÄDOM¶ÔÏó
     E.fn.getRangeElem = ieRange ? emptyFn : function (range) {
         range = range || this.currentRange();
         var dom = range.commonAncestorContainer;
@@ -299,7 +299,7 @@ _e(function (E, $) {
         }
     };
 
-    // é€‰åŒºå†…å®¹æ˜¯å¦ä¸ºç©ºï¼Ÿ
+    // Ñ¡ÇøÄÚÈİÊÇ·ñÎª¿Õ£¿
     E.fn.isRangeEmpty = ieRange ? emptyFn : function (range) {
         range = range || this.currentRange();
 
@@ -314,7 +314,7 @@ _e(function (E, $) {
         return false;
     };
 
-    // ä¿å­˜é€‰åŒºæ•°æ®
+    // ±£´æÑ¡ÇøÊı¾İ
     E.fn.saveSelection = ieRange ? emptyFn : function (range) {
         var self = this,
             _parentElem,
@@ -330,14 +330,14 @@ _e(function (E, $) {
                 _parentElem = range.commonAncestorContainer;
             }
         }
-        // ç¡®å®šçˆ¶å…ƒç´ ä¸€å®šè¦åŒ…å«åœ¨ç¼–è¾‘å™¨åŒºåŸŸå†…
+        // È·¶¨¸¸ÔªËØÒ»¶¨Òª°üº¬ÔÚ±à¼­Æ÷ÇøÓòÄÚ
         if (_parentElem && ($.contains(txt, _parentElem) || txt === _parentElem) ) {
-            // ä¿å­˜é€‰æ‹©åŒºåŸŸ
+            // ±£´æÑ¡ÔñÇøÓò
             self.currentRange(range);
         }
     };
 
-    // æ¢å¤é€‰ä¸­åŒºåŸŸ
+    // »Ö¸´Ñ¡ÖĞÇøÓò
     E.fn.restoreSelection = ieRange ? emptyFn : function (range) {
         var selection;
 
@@ -347,28 +347,28 @@ _e(function (E, $) {
             return;
         }
 
-        // ä½¿ç”¨ try catch æ¥é˜²æ­¢ IE æŸäº›æƒ…å†µæŠ¥é”™
+        // Ê¹ÓÃ try catch À´·ÀÖ¹ IE Ä³Ğ©Çé¿ö±¨´í
         try {
             selection = document.getSelection();
             selection.removeAllRanges();
             selection.addRange(range);
         } catch (ex) {
-            E.error('æ‰§è¡Œ editor.restoreSelection æ—¶ï¼ŒIEå¯èƒ½ä¼šæœ‰å¼‚å¸¸ï¼Œä¸å½±å“ä½¿ç”¨');
+            E.error('Ö´ĞĞ editor.restoreSelection Ê±£¬IE¿ÉÄÜ»áÓĞÒì³££¬²»Ó°ÏìÊ¹ÓÃ');
         }
     };
 
-    // æ ¹æ®elemæ¢å¤é€‰åŒº
+    // ¸ù¾İelem»Ö¸´Ñ¡Çø
     E.fn.restoreSelectionByElem = ieRange ? emptyFn : function (elem, opt) {
-        // optå‚æ•°è¯´æ˜ï¼š'start'-æŠ˜å åˆ°å¼€å§‹ï¼Œ'end'-æŠ˜å åˆ°ç»“æŸï¼Œ'all'-å…¨éƒ¨é€‰ä¸­
+        // opt²ÎÊıËµÃ÷£º'start'-ÕÛµşµ½¿ªÊ¼£¬'end'-ÕÛµşµ½½áÊø£¬'all'-È«²¿Ñ¡ÖĞ
         if (!elem) {
             return;
         }
-        opt = opt || 'end'; // é»˜è®¤ä¸ºæŠ˜å åˆ°ç»“æŸ
+        opt = opt || 'end'; // Ä¬ÈÏÎªÕÛµşµ½½áÊø
 
-        // æ ¹æ®elemè·å–é€‰åŒº
+        // ¸ù¾İelem»ñÈ¡Ñ¡Çø
         this.setRangeByElem(elem);
 
-        // æ ¹æ® opt æŠ˜å é€‰åŒº
+        // ¸ù¾İ opt ÕÛµşÑ¡Çø
         if (opt === 'start') {
             this.collapseRange(this.currentRange(), 'start');
         }
@@ -376,15 +376,15 @@ _e(function (E, $) {
             this.collapseRange(this.currentRange(), 'end');
         }
         
-        // æ¢å¤é€‰åŒº
+        // »Ö¸´Ñ¡Çø
         this.restoreSelection();
     };
 
-    // åˆå§‹åŒ–é€‰åŒº
+    // ³õÊ¼»¯Ñ¡Çø
     E.fn.initSelection = ieRange ? emptyFn : function () {
         var editor = this;
         if( editor.currentRange() ){
-            //å¦‚æœcurrentRangeæœ‰å€¼ï¼Œåˆ™ä¸ç”¨å†åˆå§‹åŒ–
+            //Èç¹ûcurrentRangeÓĞÖµ£¬Ôò²»ÓÃÔÙ³õÊ¼»¯
             return;
         }
 
@@ -397,7 +397,7 @@ _e(function (E, $) {
         }
     };
 
-    // æ ¹æ®å…ƒç´ åˆ›å»ºé€‰åŒº
+    // ¸ù¾İÔªËØ´´½¨Ñ¡Çø
     E.fn.setRangeByElem = ieRange ? emptyFn : function (elem) {
         var editor = this;
         var txtElem = editor.txt.$txt.get(0);
@@ -405,13 +405,13 @@ _e(function (E, $) {
             return;
         }
 
-        // æ‰¾åˆ°elemçš„ç¬¬ä¸€ä¸ª textNode å’Œ æœ€åä¸€ä¸ª textNode
+        // ÕÒµ½elemµÄµÚÒ»¸ö textNode ºÍ ×îºóÒ»¸ö textNode
         var firstTextNode = elem.firstChild;
         while (firstTextNode) {
             if (firstTextNode.nodeType === 3) {
                 break;
             }
-            // ç»§ç»­å‘ä¸‹
+            // ¼ÌĞøÏòÏÂ
             firstTextNode = firstTextNode.firstChild;
         }
         var lastTextNode = elem.lastChild;
@@ -419,37 +419,37 @@ _e(function (E, $) {
             if (lastTextNode.nodeType === 3) {
                 break;
             }
-            // ç»§ç»­å‘ä¸‹
+            // ¼ÌĞøÏòÏÂ
             lastTextNode = lastTextNode.lastChild;
         }
         
         var range = document.createRange();
         if (firstTextNode && lastTextNode) {
-            // è¯´æ˜ elem æœ‰å†…å®¹ï¼Œèƒ½å–åˆ°å­å…ƒç´ 
+            // ËµÃ÷ elem ÓĞÄÚÈİ£¬ÄÜÈ¡µ½×ÓÔªËØ
             range.setStart(firstTextNode, 0);
             range.setEnd(lastTextNode, lastTextNode.textContent.length);
         } else {
-            // è¯´æ˜ elem æ— å†…å®¹
+            // ËµÃ÷ elem ÎŞÄÚÈİ
             range.setStart(elem, 0);
             range.setEnd(elem, 0);
         }
 
-        // ä¿å­˜é€‰åŒº
+        // ±£´æÑ¡Çø
         editor.saveSelection(range);
     };
 
 });
-// selection range API - IE8åŠä»¥ä¸‹
+// selection range API - IE8¼°ÒÔÏÂ
 _e(function (E, $) {
 
     if (E.w3cRange) {
-        // è¯´æ˜æ”¯æŒ W3C çš„rangeæ–¹æ³•
+        // ËµÃ÷Ö§³Ö W3C µÄrange·½·¨
         return;
     }
 
-    // -----------------IE8æ—¶ï¼Œéœ€è¦é‡å†™ä»¥ä¸‹æ–¹æ³•-------------------
+    // -----------------IE8Ê±£¬ĞèÒªÖØĞ´ÒÔÏÂ·½·¨-------------------
 
-    // è·å–é€‰åŒºçš„æ–‡å­—
+    // »ñÈ¡Ñ¡ÇøµÄÎÄ×Ö
     E.fn.getRangeText = function (range) {
         range = range || this.currentRange();
         if (!range) {
@@ -458,7 +458,7 @@ _e(function (E, $) {
         return range.text;
     };
 
-    // è·å–é€‰åŒºå¯¹åº”çš„DOMå¯¹è±¡
+    // »ñÈ¡Ñ¡Çø¶ÔÓ¦µÄDOM¶ÔÏó
     E.fn.getRangeElem = function (range) {
         range = range || this.currentRange();
         if (!range) {
@@ -473,7 +473,7 @@ _e(function (E, $) {
         }
     };
 
-    // é€‰åŒºå†…å®¹æ˜¯å¦ä¸ºç©ºï¼Ÿ
+    // Ñ¡ÇøÄÚÈİÊÇ·ñÎª¿Õ£¿
     E.fn.isRangeEmpty = function (range) {
         range = range || this.currentRange();
 
@@ -484,7 +484,7 @@ _e(function (E, $) {
         return true;
     };
 
-    // ä¿å­˜é€‰åŒºæ•°æ®
+    // ±£´æÑ¡ÇøÊı¾İ
     E.fn.saveSelection = function (range) {
         var self = this,
             _parentElem,
@@ -496,22 +496,22 @@ _e(function (E, $) {
         } else {
             range = document.selection.createRange();
             if(typeof range.parentElement === 'undefined'){
-                //IE6ã€7ä¸­ï¼ŒinsertImageåä¼šæ‰§è¡Œæ­¤å¤„
-                //ç”±äºæ‰¾ä¸åˆ°range.parentElementï¼Œæ‰€ä»¥å¹²è„†å°†_parentElemèµ‹å€¼ä¸ºnull
+                //IE6¡¢7ÖĞ£¬insertImageºó»áÖ´ĞĞ´Ë´¦
+                //ÓÉÓÚÕÒ²»µ½range.parentElement£¬ËùÒÔ¸É´à½«_parentElem¸³ÖµÎªnull
                 _parentElem = null;
             }else{
                 _parentElem = range.parentElement();
             }
         }
 
-        // ç¡®å®šçˆ¶å…ƒç´ ä¸€å®šè¦åŒ…å«åœ¨ç¼–è¾‘å™¨åŒºåŸŸå†…
+        // È·¶¨¸¸ÔªËØÒ»¶¨Òª°üº¬ÔÚ±à¼­Æ÷ÇøÓòÄÚ
         if (_parentElem && ($.contains(txt, _parentElem) || txt === _parentElem) ) {
-            // ä¿å­˜é€‰æ‹©åŒºåŸŸ
+            // ±£´æÑ¡ÔñÇøÓò
             self.currentRange(range);
         }
     };
 
-    // æ¢å¤é€‰ä¸­åŒºåŸŸ
+    // »Ö¸´Ñ¡ÖĞÇøÓò
     E.fn.restoreSelection = function (currentRange){
         var editor = this,
             selection,
@@ -524,7 +524,7 @@ _e(function (E, $) {
 
         range = document.selection.createRange();
         try {
-            // æ­¤å¤„ï¼Œpluploadä¸Šä¼ ä¸Šä¼ å›¾ç‰‡æ—¶ï¼ŒIE8-ä¼šæŠ¥ä¸€ä¸ªã€å‚æ•°æ— æ•ˆã€çš„é”™è¯¯
+            // ´Ë´¦£¬pluploadÉÏ´«ÉÏ´«Í¼Æ¬Ê±£¬IE8-»á±¨Ò»¸ö¡º²ÎÊıÎŞĞ§¡»µÄ´íÎó
             range.setEndPoint('EndToEnd', currentRange);
         } catch (ex) {
 
@@ -532,7 +532,7 @@ _e(function (E, $) {
         
         if(currentRange.text.length === 0){
             try {
-                // IE8 æ’å…¥è¡¨æƒ…ä¼šæŠ¥é”™
+                // IE8 ²åÈë±íÇé»á±¨´í
                 range.collapse(false);
             } catch (ex) {
                 
@@ -566,7 +566,7 @@ _e(function (E, $) {
             $(targetElem).after($elem);
         };
 
-        // ä¿å­˜åˆ°å¯¹è±¡
+        // ±£´æµ½¶ÔÏó
         editor.commandHooks = commandHooks;
     };
 
@@ -574,7 +574,7 @@ _e(function (E, $) {
 // editor command API
 _e(function (E, $) {
 
-    // åŸºæœ¬å‘½ä»¤
+    // »ù±¾ÃüÁî
     E.fn.command = function (e, commandName, commandValue, callback) {
         var editor = this;
         var hooks;
@@ -584,10 +584,10 @@ _e(function (E, $) {
                 return;
             }
             if (editor.queryCommandSupported(commandName)) {
-                // é»˜è®¤å‘½ä»¤
+                // Ä¬ÈÏÃüÁî
                 document.execCommand(commandName, false, commandValue);
             } else {
-                // hooks å‘½ä»¤
+                // hooks ÃüÁî
                 hooks = editor.commandHooks;
                 if (commandName in hooks) {
                     hooks[commandName](commandValue);
@@ -598,9 +598,9 @@ _e(function (E, $) {
         this.customCommand(e, commandFn, callback);
     };
 
-    // é’ˆå¯¹ä¸€ä¸ªelemå¯¹è±¡æ‰§è¡ŒåŸºç¡€å‘½ä»¤
+    // Õë¶ÔÒ»¸öelem¶ÔÏóÖ´ĞĞ»ù´¡ÃüÁî
     E.fn.commandForElem = function (elemOpt, e, commandName, commandValue, callback) {
-        // å–å¾—æŸ¥è¯¢elemçš„æŸ¥è¯¢æ¡ä»¶å’ŒéªŒè¯å‡½æ•°
+        // È¡µÃ²éÑ¯elemµÄ²éÑ¯Ìõ¼şºÍÑéÖ¤º¯Êı
         var selector;
         var check;
         if (typeof elemOpt === 'string') {
@@ -610,61 +610,61 @@ _e(function (E, $) {
             check = elemOpt.check;
         }
 
-        // æŸ¥è¯¢elem
+        // ²éÑ¯elem
         var rangeElem = this.getRangeElem();
         rangeElem = this.getSelfOrParentByName(rangeElem, selector, check);
 
-        // æ ¹æ®elemè®¾ç½®range
+        // ¸ù¾İelemÉèÖÃrange
         if (rangeElem) {
             this.setRangeByElem(rangeElem);
         }
 
-        // ç„¶åæ‰§è¡ŒåŸºç¡€å‘½ä»¤
+        // È»ºóÖ´ĞĞ»ù´¡ÃüÁî
         this.command(e, commandName, commandValue, callback);
     };
 
-    // è‡ªå®šä¹‰å‘½ä»¤
+    // ×Ô¶¨ÒåÃüÁî
     E.fn.customCommand = function (e, commandFn, callback) {
         var editor = this;
         var range = editor.currentRange();
 
         if (!range) {
-            // ç›®å‰æ²¡æœ‰é€‰åŒºï¼Œåˆ™æ— æ³•æ‰§è¡Œå‘½ä»¤
+            // Ä¿Ç°Ã»ÓĞÑ¡Çø£¬ÔòÎŞ·¨Ö´ĞĞÃüÁî
             e && e.preventDefault();
             return;
         }
-        // è®°å½•å†…å®¹ï¼Œä»¥ä¾¿æ’¤é”€ï¼ˆæ‰§è¡Œå‘½ä»¤ä¹‹å‰å°±è¦è®°å½•ï¼‰
+        // ¼ÇÂ¼ÄÚÈİ£¬ÒÔ±ã³·Ïú£¨Ö´ĞĞÃüÁîÖ®Ç°¾ÍÒª¼ÇÂ¼£©
         editor.undoRecord();
 
-        // æ¢å¤é€‰åŒºï¼ˆæœ‰ range å‚æ•°ï¼‰
+        // »Ö¸´Ñ¡Çø£¨ÓĞ range ²ÎÊı£©
         this.restoreSelection(range);
 
-        // æ‰§è¡Œå‘½ä»¤äº‹ä»¶
+        // Ö´ĞĞÃüÁîÊÂ¼ş
         commandFn.call(editor);
 
-        // ä¿å­˜é€‰åŒºï¼ˆæ— å‚æ•°ï¼Œè¦ä»æµè§ˆå™¨ç›´æ¥è·å–rangeä¿¡æ¯ï¼‰
+        // ±£´æÑ¡Çø£¨ÎŞ²ÎÊı£¬Òª´Óä¯ÀÀÆ÷Ö±½Ó»ñÈ¡rangeĞÅÏ¢£©
         this.saveSelection();
-        // é‡æ–°æ¢å¤é€‰åŒºï¼ˆæ— å‚æ•°ï¼Œè¦å–å¾—åˆšåˆšä»æµè§ˆå™¨å¾—åˆ°çš„rangeä¿¡æ¯ï¼‰
+        // ÖØĞÂ»Ö¸´Ñ¡Çø£¨ÎŞ²ÎÊı£¬ÒªÈ¡µÃ¸Õ¸Õ´Óä¯ÀÀÆ÷µÃµ½µÄrangeĞÅÏ¢£©
         this.restoreSelection();
 
-        // æ‰§è¡Œ callback
+        // Ö´ĞĞ callback
         if (callback && typeof callback === 'function') {
             callback.call(editor);
         }
 
-        // æœ€åæ’å…¥ç©ºè¡Œ
+        // ×îºó²åÈë¿ÕĞĞ
         editor.txt.insertEmptyP();
 
-        // åŒ…è£¹æš´éœ²çš„imgå’Œtext
+        // °ü¹ü±©Â¶µÄimgºÍtext
         editor.txt.wrapImgAndText();
 
-        // æ›´æ–°å†…å®¹
+        // ¸üĞÂÄÚÈİ
         editor.updateValue();
 
-        // æ›´æ–°èœå•æ ·å¼
+        // ¸üĞÂ²Ëµ¥ÑùÊ½
         editor.updateMenuStyle();
 
-        // éšè— dropPanel dropList modal  è®¾ç½® 200ms é—´éš”
+        // Òş²Ø dropPanel dropList modal  ÉèÖÃ 200ms ¼ä¸ô
         function hidePanelAndModal() {
             editor.hideDropPanelAndModal();
         } 
@@ -675,8 +675,8 @@ _e(function (E, $) {
         }
     };
 
-    // å°è£… document.queryCommandValue å‡½æ•°
-    // IE8 ç›´æ¥æ‰§è¡Œå¶å°”ä¼šæŠ¥é”™ï¼Œå› æ­¤ç›´æ¥ç”¨ try catch å°è£…ä¸€ä¸‹
+    // ·â×° document.queryCommandValue º¯Êı
+    // IE8 Ö±½ÓÖ´ĞĞÅ¼¶û»á±¨´í£¬Òò´ËÖ±½ÓÓÃ try catch ·â×°Ò»ÏÂ
     E.fn.queryCommandValue = function (commandName) {
         var result = '';
         try {
@@ -687,8 +687,8 @@ _e(function (E, $) {
         return result;
     };
 
-    // å°è£… document.queryCommandState å‡½æ•°
-    // IE8 ç›´æ¥æ‰§è¡Œå¶å°”ä¼šæŠ¥é”™ï¼Œå› æ­¤ç›´æ¥ç”¨ try catch å°è£…ä¸€ä¸‹
+    // ·â×° document.queryCommandState º¯Êı
+    // IE8 Ö±½ÓÖ´ĞĞÅ¼¶û»á±¨´í£¬Òò´ËÖ±½ÓÓÃ try catch ·â×°Ò»ÏÂ
     E.fn.queryCommandState = function (commandName) {
         var result = false;
         try {
@@ -699,7 +699,7 @@ _e(function (E, $) {
         return result;
     };
 
-    // å°è£… document.queryCommandSupported å‡½æ•°
+    // ·â×° document.queryCommandSupported º¯Êı
     E.fn.queryCommandSupported = function (commandName) {
         var result = false;
         try {
@@ -722,7 +722,7 @@ _e(function (E, $) {
         var $elems = $(selector);
         var result = false;
 
-        // ç”¨jqueryæŸ¥æ‰¾ selector æ‰€æœ‰å¯¹è±¡ï¼Œå¦‚æœå…¶ä¸­æœ‰ä¸€ä¸ªå’Œä¼ å…¥ elem ç›¸åŒï¼Œåˆ™è¯æ˜ elem ç¬¦åˆ selector
+        // ÓÃjquery²éÕÒ selector ËùÓĞ¶ÔÏó£¬Èç¹ûÆäÖĞÓĞÒ»¸öºÍ´«Èë elem ÏàÍ¬£¬ÔòÖ¤Ã÷ elem ·ûºÏ selector
         $elems.each(function () {
             if (this === elem) {
                 result = true;
@@ -733,17 +733,17 @@ _e(function (E, $) {
         return result;
     }
 
-    // ä»å½“å‰çš„elemï¼Œå¾€ä¸Šå»æŸ¥æ‰¾åˆæ³•æ ‡ç­¾ å¦‚ p head table blockquote ul ol ç­‰
+    // ´Óµ±Ç°µÄelem£¬ÍùÉÏÈ¥²éÕÒºÏ·¨±êÇ© Èç p head table blockquote ul ol µÈ
     E.fn.getLegalTags = function (elem) {
         var legalTags = this.config.legalTags;
         if (!legalTags) {
-            E.error('é…ç½®é¡¹ä¸­ç¼ºå°‘ legalTags çš„é…ç½®');
+            E.error('ÅäÖÃÏîÖĞÈ±ÉÙ legalTags µÄÅäÖÃ');
             return;
         }
         return this.getSelfOrParentByName(elem, legalTags);
     };
 
-    // æ ¹æ®æ¡ä»¶ï¼ŒæŸ¥è¯¢è‡ªèº«æˆ–è€…çˆ¶å…ƒç´ ï¼Œç¬¦åˆå³è¿”å›
+    // ¸ù¾İÌõ¼ş£¬²éÑ¯×ÔÉí»òÕß¸¸ÔªËØ£¬·ûºÏ¼´·µ»Ø
     E.fn.getSelfOrParentByName = function (elem, selector, check) {
 
         if (!elem || !selector) {
@@ -751,14 +751,14 @@ _e(function (E, $) {
         }
 
         if (!matchesSelector) {
-            // å®šä¹‰ matchesSelector å‡½æ•°
+            // ¶¨Òå matchesSelector º¯Êı
             matchesSelector = elem.webkitMatchesSelector || 
                               elem.mozMatchesSelector ||
                               elem.oMatchesSelector || 
                               elem.matchesSelector;
         }
         if (!matchesSelector) {
-            // å¦‚æœæµè§ˆå™¨æœ¬èº«ä¸æ”¯æŒ matchesSelector åˆ™ä½¿ç”¨è‡ªå®šä¹‰çš„hook
+            // Èç¹ûä¯ÀÀÆ÷±¾Éí²»Ö§³Ö matchesSelector ÔòÊ¹ÓÃ×Ô¶¨ÒåµÄhook
             matchesSelector = _matchesSelectorForIE;
         }
 
@@ -766,20 +766,20 @@ _e(function (E, $) {
 
         while (elem && txt !== elem && $.contains(txt, elem)) {
             if (matchesSelector.call(elem, selector)) {
-                // ç¬¦åˆ selector æŸ¥è¯¢æ¡ä»¶
+                // ·ûºÏ selector ²éÑ¯Ìõ¼ş
 
                 if (!check) {
-                    // æ²¡æœ‰ check éªŒè¯å‡½æ•°ï¼Œç›´æ¥è¿”å›å³å¯
+                    // Ã»ÓĞ check ÑéÖ¤º¯Êı£¬Ö±½Ó·µ»Ø¼´¿É
                     return elem;
                 }
 
                 if (check(elem)) {
-                    // å¦‚æœæœ‰ check éªŒè¯å‡½æ•°ï¼Œè¿˜éœ€ check å‡½æ•°çš„ç¡®è®¤
+                    // Èç¹ûÓĞ check ÑéÖ¤º¯Êı£¬»¹Ğè check º¯ÊıµÄÈ·ÈÏ
                     return elem;
                 }
             }
 
-            // å¦‚æœä¸Šä¸€æ­¥æ²¡ç»è¿‡éªŒè¯ï¼Œåˆ™å°†è·³è½¬åˆ°çˆ¶å…ƒç´ 
+            // Èç¹ûÉÏÒ»²½Ã»¾­¹ıÑéÖ¤£¬Ôò½«Ìø×ªµ½¸¸ÔªËØ
             elem = elem.parentNode;
         }
 
@@ -790,7 +790,7 @@ _e(function (E, $) {
 // undo redo
 _e(function (E, $) {
 
-    var length = 20;  // ç¼“å­˜çš„æœ€å¤§é•¿åº¦
+    var length = 20;  // »º´æµÄ×î´ó³¤¶È
     function _getRedoList(editor) {
         if (editor._redoList == null) {
             editor._redoList = [];
@@ -804,7 +804,7 @@ _e(function (E, $) {
         return editor._undoList;
     }
 
-    // æ•°æ®å¤„ç†
+    // Êı¾İ´¦Àí
     function _handle(editor, data, type) {
         // var range = data.range;
         // var range2 = range.cloneRange && range.cloneRange();
@@ -827,25 +827,25 @@ _e(function (E, $) {
             }
         }
 
-        // ä¿å­˜æ•°æ®
+        // ±£´æÊı¾İ
         editor.txt.$txt.html(val);
-        // æ›´æ–°æ•°æ®åˆ°textareaï¼ˆæœ‰å¿…è¦çš„è¯ï¼‰
+        // ¸üĞÂÊı¾İµ½textarea£¨ÓĞ±ØÒªµÄ»°£©
         editor.updateValue();
 
-        // onchange äº‹ä»¶
+        // onchange ÊÂ¼ş
         if (editor.onchange && typeof editor.onchange === 'function') {
             editor.onchange.call(editor);
         }
 
         // ?????
-        // æ³¨é‡Šï¼š$txt è¢«é‡æ–°èµ‹å€¼ä¹‹åï¼Œrangeä¼šè¢«é‡ç½®ï¼ŒcloneRange() ä¹Ÿä¸å¥½ä½¿
-        // // é‡ç½®é€‰åŒº
+        // ×¢ÊÍ£º$txt ±»ÖØĞÂ¸³ÖµÖ®ºó£¬range»á±»ÖØÖÃ£¬cloneRange() Ò²²»ºÃÊ¹
+        // // ÖØÖÃÑ¡Çø
         // if (range2) {
         //     editor.restoreSelection(range2);
         // }
     }
 
-    // è®°å½•
+    // ¼ÇÂ¼
     E.fn.undoRecord = function () {
         var editor = this;
         var $txt = editor.txt.$txt;
@@ -858,24 +858,24 @@ _e(function (E, $) {
             return;
         }
 
-        // æ¸…ç©º redolist
+        // Çå¿Õ redolist
         if (redoList.length) {
             redoList = [];
         }
 
-        // æ·»åŠ æ•°æ®åˆ° undoList
+        // Ìí¼ÓÊı¾İµ½ undoList
         undoList.unshift({
-            range: editor.currentRange(),  // å°†å½“å‰çš„rangeä¹Ÿè®°å½•ä¸‹
+            range: editor.currentRange(),  // ½«µ±Ç°µÄrangeÒ²¼ÇÂ¼ÏÂ
             val: val
         });
 
-        // é™åˆ¶ undoList é•¿åº¦
+        // ÏŞÖÆ undoList ³¤¶È
         if (undoList.length > length) {
             undoList.pop();
         }
     };
 
-    // undo æ“ä½œ
+    // undo ²Ù×÷
     E.fn.undo = function () {
         var editor = this;
         var undoList = _getUndoList(editor);
@@ -885,15 +885,15 @@ _e(function (E, $) {
             return;
         }
 
-        // å–å‡º undolist ç¬¬ä¸€ä¸ªå€¼ï¼ŒåŠ å…¥ redolist
+        // È¡³ö undolist µÚÒ»¸öÖµ£¬¼ÓÈë redolist
         var data = undoList.shift();
         redoList.unshift(data);
 
-        // å¹¶ä¿®æ”¹ç¼–è¾‘å™¨çš„å†…å®¹
+        // ²¢ĞŞ¸Ä±à¼­Æ÷µÄÄÚÈİ
         _handle(this, data, 'undo');
     };
 
-    // redo æ“ä½œ
+    // redo ²Ù×÷
     E.fn.redo = function () {
         var editor = this;
         var undoList = _getUndoList(editor);
@@ -902,56 +902,56 @@ _e(function (E, $) {
             return;
         }
 
-        // å–å‡º redolist ç¬¬ä¸€ä¸ªå€¼ï¼ŒåŠ å…¥ undolist
+        // È¡³ö redolist µÚÒ»¸öÖµ£¬¼ÓÈë undolist
         var data = redoList.shift();
         undoList.unshift(data);
 
-        // å¹¶ä¿®æ”¹ç¼–è¾‘å™¨çš„å†…å®¹
+        // ²¢ĞŞ¸Ä±à¼­Æ÷µÄÄÚÈİ
         _handle(this, data, 'redo');
     };
 });
-// æš´éœ²ç»™ç”¨æˆ·çš„ API
+// ±©Â¶¸øÓÃ»§µÄ API
 _e(function (E, $) {
 
-    // åˆ›å»ºç¼–è¾‘å™¨
+    // ´´½¨±à¼­Æ÷
     E.fn.create = function () {
         var editor = this;
 
-        // æ£€æŸ¥ E.$body æ˜¯å¦æœ‰å€¼
-        // å¦‚æœåœ¨ body ä¹‹å‰å¼•ç”¨äº† js æ–‡ä»¶ï¼Œbody å°šæœªåŠ è½½ï¼Œå¯èƒ½æ²¡æœ‰å€¼
+        // ¼ì²é E.$body ÊÇ·ñÓĞÖµ
+        // Èç¹ûÔÚ body Ö®Ç°ÒıÓÃÁË js ÎÄ¼ş£¬body ÉĞÎ´¼ÓÔØ£¬¿ÉÄÜÃ»ÓĞÖµ
         if (!E.$body || E.$body.length === 0) {
             E.$body = $('body');
             E.$document = $(document);
             E.$window = $(window);
         }
 
-        // æ‰§è¡Œ addMenus ä¹‹å‰ï¼š
-        // 1. å…è®¸ç”¨æˆ·ä¿®æ”¹ editor.UI è‡ªå®šä¹‰é…ç½®UI
-        // 2. å…è®¸ç”¨æˆ·é€šè¿‡ä¿®æ”¹ editor.menus æ¥è‡ªå®šä¹‰é…ç½®èœå•
-        // å› æ­¤è¦åœ¨ create æ—¶æ‰§è¡Œï¼Œè€Œä¸æ˜¯ init           
+        // Ö´ĞĞ addMenus Ö®Ç°£º
+        // 1. ÔÊĞíÓÃ»§ĞŞ¸Ä editor.UI ×Ô¶¨ÒåÅäÖÃUI
+        // 2. ÔÊĞíÓÃ»§Í¨¹ıĞŞ¸Ä editor.menus À´×Ô¶¨ÒåÅäÖÃ²Ëµ¥
+        // Òò´ËÒªÔÚ create Ê±Ö´ĞĞ£¬¶ø²»ÊÇ init           
         editor.addMenus();
 
-        // æ¸²æŸ“
+        // äÖÈ¾
         editor.renderMenus();
         editor.renderMenuContainer();
         editor.renderTxt();
         editor.renderEditorContainer();
 
-        // ç»‘å®šäº‹ä»¶
+        // °ó¶¨ÊÂ¼ş
         editor.eventMenus();
         editor.eventMenuContainer();
         editor.eventTxt();
 
-        // å¤„ç†readyäº‹ä»¶
+        // ´¦ÀíreadyÊÂ¼ş
         editor.readyHeadler();
 
-        // åˆå§‹åŒ–é€‰åŒº
+        // ³õÊ¼»¯Ñ¡Çø
         editor.initSelection();
 
-        // $txt å¿«æ·æ–¹å¼
+        // $txt ¿ì½İ·½Ê½
         editor.$txt = editor.txt.$txt;
 
-        // æ‰§è¡Œç”¨æˆ·è‡ªå®šä¹‰äº‹ä»¶ï¼Œé€šè¿‡ E.ready() æ·»åŠ 
+        // Ö´ĞĞÓÃ»§×Ô¶¨ÒåÊÂ¼ş£¬Í¨¹ı E.ready() Ìí¼Ó
         var _plugins = E._plugins;
         if (_plugins && _plugins.length) {
             $.each(_plugins, function (k, val) {
@@ -960,23 +960,23 @@ _e(function (E, $) {
         }
     };
 
-    // ç¦ç”¨ç¼–è¾‘å™¨
+    // ½ûÓÃ±à¼­Æ÷
     E.fn.disable = function () {
         this.txt.$txt.removeAttr('contenteditable');
         this.disableMenusExcept();
 
-        // å…ˆç¦ç”¨ï¼Œå†è®°å½•çŠ¶æ€
+        // ÏÈ½ûÓÃ£¬ÔÙ¼ÇÂ¼×´Ì¬
         this._disabled = true;
     };
-    // å¯ç”¨ç¼–è¾‘å™¨
+    // ÆôÓÃ±à¼­Æ÷
     E.fn.enable = function () {
-        // å…ˆè§£é™¤çŠ¶æ€è®°å½•ï¼Œå†å¯ç”¨
+        // ÏÈ½â³ı×´Ì¬¼ÇÂ¼£¬ÔÙÆôÓÃ
         this._disabled = false;
         this.txt.$txt.attr('contenteditable', 'true');
         this.enableMenusExcept();
     };
 
-    // é”€æ¯ç¼–è¾‘å™¨
+    // Ïú»Ù±à¼­Æ÷
     E.fn.destroy = function () {
         var self = this;
         var $valueContainer = self.$valueContainer;
@@ -984,18 +984,18 @@ _e(function (E, $) {
         var valueNodeName = self.valueNodeName;
 
         if (valueNodeName === 'div') {
-            // div ç”Ÿæˆçš„ç¼–è¾‘å™¨
+            // div Éú³ÉµÄ±à¼­Æ÷
             $valueContainer.removeAttr('contenteditable');
             $editorContainer.after($valueContainer);
             $editorContainer.hide();
         } else {
-            // textarea ç”Ÿæˆçš„ç¼–è¾‘å™¨
+            // textarea Éú³ÉµÄ±à¼­Æ÷
             $valueContainer.show();
             $editorContainer.hide();
         }
     };
 
-    // æ’¤é”€ é”€æ¯ç¼–è¾‘å™¨
+    // ³·Ïú Ïú»Ù±à¼­Æ÷
     E.fn.undestroy = function () {
         var self = this;
         var $valueContainer = self.$valueContainer;
@@ -1004,18 +1004,18 @@ _e(function (E, $) {
         var valueNodeName = self.valueNodeName;
 
         if (valueNodeName === 'div') {
-            // div ç”Ÿæˆçš„ç¼–è¾‘å™¨
+            // div Éú³ÉµÄ±à¼­Æ÷
             $valueContainer.attr('contenteditable', 'true');
             $menuContainer.after($valueContainer);
             $editorContainer.show();
         } else {
-            // textarea ç”Ÿæˆçš„ç¼–è¾‘å™¨
+            // textarea Éú³ÉµÄ±à¼­Æ÷
             $valueContainer.hide();
             $editorContainer.show();
         }
     };
 
-    // æ¸…ç©ºå†…å®¹çš„å¿«æ·æ–¹å¼
+    // Çå¿ÕÄÚÈİµÄ¿ì½İ·½Ê½
     E.fn.clear = function () {
         var editor = this;
         var $txt = editor.txt.$txt;
@@ -1024,10 +1024,10 @@ _e(function (E, $) {
     };
 
 });
-// menuContainer æ„é€ å‡½æ•°
+// menuContainer ¹¹Ôìº¯Êı
 _e(function (E, $) {
 
-    // å®šä¹‰æ„é€ å‡½æ•°
+    // ¶¨Òå¹¹Ôìº¯Êı
     var MenuContainer = function (editor) {
         this.editor = editor;
         this.init();
@@ -1035,7 +1035,7 @@ _e(function (E, $) {
 
     MenuContainer.fn = MenuContainer.prototype;
 
-    // æš´éœ²ç»™ E å³ window.wangEditor
+    // ±©Â¶¸ø E ¼´ window.wangEditor
     E.MenuContainer = MenuContainer;
 
 });
@@ -1044,7 +1044,7 @@ _e(function (E, $) {
 
     var MenuContainer = E.MenuContainer;
 
-    // åˆå§‹åŒ–
+    // ³õÊ¼»¯
     MenuContainer.fn.init = function () {
         var self = this;
         var $menuContainer = $('<div class="wangEditor-menu-container clearfix"></div>');
@@ -1055,7 +1055,7 @@ _e(function (E, $) {
         self.changeShadow();
     };
 
-    // ç¼–è¾‘åŒºåŸŸæ»šåŠ¨æ—¶ï¼Œå¢åŠ shadow
+    // ±à¼­ÇøÓò¹ö¶¯Ê±£¬Ôö¼Óshadow
     MenuContainer.fn.changeShadow = function () {
         var $menuContainer = this.$menuContainer;
         var editor = this.editor;
@@ -1083,17 +1083,17 @@ _e(function (E, $) {
         $editorContainer.append($menuContainer);
     };
     
-    // è·å–èœå•æ çš„é«˜åº¦
+    // »ñÈ¡²Ëµ¥À¸µÄ¸ß¶È
     MenuContainer.fn.height = function () {
         var $menuContainer = this.$menuContainer;
         return $menuContainer.height();
     };
 
-    // æ·»åŠ èœå•
+    // Ìí¼Ó²Ëµ¥
     MenuContainer.fn.appendMenu = function (groupIdx, menu) {
-        // åˆ¤æ–­æ˜¯å¦éœ€è¦æ–°å¢ä¸€ä¸ªèœå•ç»„
+        // ÅĞ¶ÏÊÇ·ñĞèÒªĞÂÔöÒ»¸ö²Ëµ¥×é
         this._addGroup(groupIdx);
-        // å¢åŠ èœå•ï¼ˆè¿”å› $menuItemï¼‰
+        // Ôö¼Ó²Ëµ¥£¨·µ»Ø $menuItem£©
         return this._addOneMenu(menu);
     };
     MenuContainer.fn._addGroup = function (groupIdx) {
@@ -1121,10 +1121,10 @@ _e(function (E, $) {
     };
 
 });
-// menu æ„é€ å‡½æ•°
+// menu ¹¹Ôìº¯Êı
 _e(function (E, $) {
 
-    // å®šä¹‰æ„é€ å‡½æ•°
+    // ¶¨Òå¹¹Ôìº¯Êı
     var Menu = function (opt) {
         this.editor = opt.editor;
         this.id = opt.id;
@@ -1132,7 +1132,7 @@ _e(function (E, $) {
         this.$domNormal = opt.$domNormal;
         this.$domSelected = opt.$domSelected || opt.$domNormal;
 
-        // document.execCommand çš„å‚æ•°
+        // document.execCommand µÄ²ÎÊı
         this.commandName = opt.commandName;
         this.commandValue = opt.commandValue;
         this.commandNameSelected = opt.commandNameSelected || opt.commandName;
@@ -1141,15 +1141,15 @@ _e(function (E, $) {
 
     Menu.fn = Menu.prototype;
 
-    // æš´éœ²ç»™ E å³ window.wangEditor
+    // ±©Â¶¸ø E ¼´ window.wangEditor
     E.Menu = Menu;
 });
-// Menu.fn åˆå§‹åŒ–ç»‘å®šçš„äº‹ä»¶
+// Menu.fn ³õÊ¼»¯°ó¶¨µÄÊÂ¼ş
 _e(function (E, $) {
 
     var Menu = E.Menu;
 
-    // åˆå§‹åŒ–UI
+    // ³õÊ¼»¯UI
     Menu.fn.initUI = function () {
         var editor = this.editor;
         var uiConfig = editor.UI.menus;
@@ -1157,27 +1157,27 @@ _e(function (E, $) {
         var menuUI = uiConfig[menuId];
 
         if (this.$domNormal && this.$domSelected) {
-            // è‡ªå®šä¹‰çš„èœå•ä¸­ï¼Œå·²ç»ä¼ å…¥äº† $dom æ— éœ€ä»é…ç½®æ–‡ä»¶ä¸­æŸ¥æ‰¾ç”Ÿæˆ
+            // ×Ô¶¨ÒåµÄ²Ëµ¥ÖĞ£¬ÒÑ¾­´«ÈëÁË $dom ÎŞĞè´ÓÅäÖÃÎÄ¼şÖĞ²éÕÒÉú³É
             return;
         }
 
         if (menuUI == null) {
-            E.warn('editor.UIé…ç½®ä¸­ï¼Œæ²¡æœ‰èœå• "' + menuId + '" çš„UIé…ç½®ï¼Œåªèƒ½å–é»˜è®¤å€¼');
+            E.warn('editor.UIÅäÖÃÖĞ£¬Ã»ÓĞ²Ëµ¥ "' + menuId + '" µÄUIÅäÖÃ£¬Ö»ÄÜÈ¡Ä¬ÈÏÖµ');
             
-            // å¿…é¡»å†™æˆ uiConfig['default'];
-            // å†™æˆ uiConfig.default IE8ä¼šæŠ¥é”™
+            // ±ØĞëĞ´³É uiConfig['default'];
+            // Ğ´³É uiConfig.default IE8»á±¨´í
             menuUI = uiConfig['default'];
         }
 
-        // æ­£å¸¸çŠ¶æ€
+        // Õı³£×´Ì¬
         this.$domNormal = $(menuUI.normal);
 
-        // é€‰ä¸­çŠ¶æ€
+        // Ñ¡ÖĞ×´Ì¬
         if (/^\./.test(menuUI.selected)) {
-            // å¢åŠ ä¸€ä¸ªæ ·å¼
+            // Ôö¼ÓÒ»¸öÑùÊ½
             this.$domSelected = this.$domNormal.clone().addClass(menuUI.selected.slice(1));
         } else {
-            // ä¸€ä¸ªæ–°çš„domå¯¹è±¡
+            // Ò»¸öĞÂµÄdom¶ÔÏó
             this.$domSelected = $(menuUI.selected);
         }
     };
@@ -1188,9 +1188,9 @@ _e(function (E, $) {
 
     var Menu = E.Menu;
 
-    // æ¸²æŸ“èœå•
+    // äÖÈ¾²Ëµ¥
     Menu.fn.render = function (groupIdx) {
-        // æ¸²æŸ“UI
+        // äÖÈ¾UI
         this.initUI();
         
         var editor = this.editor;
@@ -1198,10 +1198,10 @@ _e(function (E, $) {
         var $menuItem = menuContainer.appendMenu(groupIdx, this);
         var onRender = this.onRender;
 
-        // æ¸²æŸ“tip
+        // äÖÈ¾tip
         this._renderTip($menuItem);
 
-        // æ‰§è¡Œ onRender å‡½æ•°
+        // Ö´ĞĞ onRender º¯Êı
         if (onRender && typeof onRender === 'function') {
             onRender.call(this);
         }
@@ -1211,32 +1211,32 @@ _e(function (E, $) {
         var editor = self.editor;
         var title = self.title;
         var $tip = $('<div class="menu-tip"></div>');
-        // var $triangle = $('<i class="tip-triangle"></i>'); // å°ä¸‰è§’
+        // var $triangle = $('<i class="tip-triangle"></i>'); // Ğ¡Èı½Ç
 
-        // è®¡ç®— tip å®½åº¦
+        // ¼ÆËã tip ¿í¶È
         var $tempDiv;
         if (!self.tipWidth) {
-            // è®¾ç½®ä¸€ä¸ªçº¯é€æ˜çš„ pï¼ˆabsolute;top:-10000px;ä¸ä¼šæ˜¾ç¤ºåœ¨å†…å®¹åŒºåŸŸï¼‰
-            // å†…å®¹èµ‹å€¼ä¸º title ï¼Œä¸ºäº†è®¡ç®—tipå®½åº¦
+            // ÉèÖÃÒ»¸ö´¿Í¸Ã÷µÄ p£¨absolute;top:-10000px;²»»áÏÔÊ¾ÔÚÄÚÈİÇøÓò£©
+            // ÄÚÈİ¸³ÖµÎª title £¬ÎªÁË¼ÆËãtip¿í¶È
             $tempDiv = $('<p style="opacity:0; filter:Alpha(opacity=0); position:absolute;top:-10000px;">' + title + '</p>');
-            // å…ˆæ·»åŠ åˆ°bodyï¼Œè®¡ç®—å®Œå† remove
+            // ÏÈÌí¼Óµ½body£¬¼ÆËãÍêÔÙ remove
             E.$body.append($tempDiv);
             editor.ready(function () {
                 var editor = this;
-                var titleWidth = $tempDiv.outerWidth() + 5; // å¤šå‡º 5px çš„å†—ä½™
+                var titleWidth = $tempDiv.outerWidth() + 5; // ¶à³ö 5px µÄÈßÓà
                 var currentWidth = $tip.outerWidth();
                 var currentMarginLeft = parseFloat($tip.css('margin-left'), 10);
-                // è®¡ç®—å®Œï¼Œæ‹¿åˆ°æ•°æ®ï¼Œåˆ™å¼ƒç”¨
+                // ¼ÆËãÍê£¬ÄÃµ½Êı¾İ£¬ÔòÆúÓÃ
                 $tempDiv.remove();
                 $tempDiv = null;
 
-                // é‡æ–°è®¾ç½®æ ·å¼
+                // ÖØĞÂÉèÖÃÑùÊ½
                 $tip.css({
                     width: titleWidth,
                     'margin-left': currentMarginLeft + (currentWidth - titleWidth)/2
                 });
 
-                // å­˜å‚¨
+                // ´æ´¢
                 self.tipWidth = titleWidth;
             });
         }
@@ -1263,14 +1263,14 @@ _e(function (E, $) {
         }).on('click', hide);
     };
 
-    // ç»‘å®šäº‹ä»¶
+    // °ó¶¨ÊÂ¼ş
     Menu.fn.bindEvent = function () {
         var self = this;
 
         var $domNormal = self.$domNormal;
         var $domSelected = self.$domSelected;
 
-        // è¯•å›¾è·å–è¯¥èœå•å®šä¹‰çš„äº‹ä»¶ï¼ˆæœªselectedï¼‰ï¼Œæ²¡æœ‰åˆ™è‡ªå·±å®šä¹‰
+        // ÊÔÍ¼»ñÈ¡¸Ã²Ëµ¥¶¨ÒåµÄÊÂ¼ş£¨Î´selected£©£¬Ã»ÓĞÔò×Ô¼º¶¨Òå
         var clickEvent = self.clickEvent;
         if (!clickEvent) {
             clickEvent = function (e) {
@@ -1300,19 +1300,19 @@ _e(function (E, $) {
                 }
 
                 if (commandName) {
-                    // æ‰§è¡Œå‘½ä»¤
+                    // Ö´ĞĞÃüÁî
                     editor.command(e, commandName, commandValue);
                 } else {
-                    // æç¤º
-                    E.warn('èœå• "' + self.id + '" æœªå®šä¹‰clickäº‹ä»¶');
+                    // ÌáÊ¾
+                    E.warn('²Ëµ¥ "' + self.id + '" Î´¶¨ÒåclickÊÂ¼ş');
                     e.preventDefault();
                 }
             };
         }
-        // è·å–èœå•å®šä¹‰çš„selectedæƒ…å†µä¸‹çš„ç‚¹å‡»äº‹ä»¶
+        // »ñÈ¡²Ëµ¥¶¨ÒåµÄselectedÇé¿öÏÂµÄµã»÷ÊÂ¼ş
         var clickEventSelected = self.clickEventSelected || clickEvent;
 
-        // å°†äº‹ä»¶ç»‘å®šåˆ°èœå•domä¸Š
+        // ½«ÊÂ¼ş°ó¶¨µ½²Ëµ¥domÉÏ
         $domNormal.click(function (e) {
             if (!self.disabled()) {
                 clickEvent.call(self, e);
@@ -1329,15 +1329,15 @@ _e(function (E, $) {
         });
     };
 
-    // æ›´æ–°é€‰ä¸­çŠ¶æ€
+    // ¸üĞÂÑ¡ÖĞ×´Ì¬
     Menu.fn.updateSelected = function () {
         var self = this;
         var editor = self.editor;
 
-        // è¯•å›¾è·å–ç”¨æˆ·è‡ªå®šä¹‰çš„åˆ¤æ–­äº‹ä»¶
+        // ÊÔÍ¼»ñÈ¡ÓÃ»§×Ô¶¨ÒåµÄÅĞ¶ÏÊÂ¼ş
         var updateSelectedEvent = self.updateSelectedEvent;
         if (!updateSelectedEvent) {
-            // ç”¨æˆ·æœªè‡ªå®šä¹‰ï¼Œåˆ™è®¾ç½®é»˜è®¤å€¼
+            // ÓÃ»§Î´×Ô¶¨Òå£¬ÔòÉèÖÃÄ¬ÈÏÖµ
             updateSelectedEvent = function () {
                 var self = this;
                 var editor = self.editor;
@@ -1356,41 +1356,41 @@ _e(function (E, $) {
             };
         }
 
-        // è·å–ç»“æœ
+        // »ñÈ¡½á¹û
         var result = updateSelectedEvent.call(self);
         result = !!result;
 
-        // å­˜å‚¨ç»“æœã€æ˜¾ç¤ºæ•ˆæœ
+        // ´æ´¢½á¹û¡¢ÏÔÊ¾Ğ§¹û
         self.changeSelectedState(result);
     };
 
-    // åˆ‡æ¢é€‰ä¸­çŠ¶æ€ã€æ˜¾ç¤ºæ•ˆæœ
+    // ÇĞ»»Ñ¡ÖĞ×´Ì¬¡¢ÏÔÊ¾Ğ§¹û
     Menu.fn.changeSelectedState = function (state) {
         var self = this;
         var selected = self.selected;
 
         if (state != null && typeof state === 'boolean') {
             if (selected === state) {
-                // è®¡ç®—ç»“æœå’Œå½“å‰çš„çŠ¶æ€ä¸€æ ·
+                // ¼ÆËã½á¹ûºÍµ±Ç°µÄ×´Ì¬Ò»Ñù
                 return;
             }
-            // å­˜å‚¨ç»“æœ
+            // ´æ´¢½á¹û
             self.selected = state;
 
-            // åˆ‡æ¢èœå•çš„æ˜¾ç¤º
+            // ÇĞ»»²Ëµ¥µÄÏÔÊ¾
             if (state) {
-                // é€‰ä¸­
+                // Ñ¡ÖĞ
                 self.$domNormal.hide();
                 self.$domSelected.show();
             } else {
-                // æœªé€‰ä¸­
+                // Î´Ñ¡ÖĞ
                 self.$domNormal.show();
                 self.$domSelected.hide();
             }
         } // if
     };
 
-    // ç‚¹å‡»èœå•ï¼Œæ˜¾ç¤ºäº† dropPanel modal æ—¶ï¼Œèœå•çš„çŠ¶æ€ 
+    // µã»÷²Ëµ¥£¬ÏÔÊ¾ÁË dropPanel modal Ê±£¬²Ëµ¥µÄ×´Ì¬ 
     Menu.fn.active = function (active) {
         if (active == null) {
             return this._activeState;
@@ -1410,26 +1410,26 @@ _e(function (E, $) {
             $domSelected.removeClass('active');
         }
 
-        // è®°å½•çŠ¶æ€ ï¼ˆ menu hover æ—¶ä¼šå–çŠ¶æ€ç”¨ ï¼‰
+        // ¼ÇÂ¼×´Ì¬ £¨ menu hover Ê±»áÈ¡×´Ì¬ÓÃ £©
         this.active(active);
     };
 
-    // èœå•çš„å¯ç”¨å’Œç¦ç”¨
+    // ²Ëµ¥µÄÆôÓÃºÍ½ûÓÃ
     Menu.fn.disabled = function (opt) {
-        // å‚æ•°ä¸ºç©ºï¼Œå–å€¼
+        // ²ÎÊıÎª¿Õ£¬È¡Öµ
         if (opt == null) {
             return !!this._disabled;
         }
 
         if (this._disabled === opt) {
-            // è¦è®¾ç½®çš„å‚æ•°å€¼å’Œå½“å‰å‚æ•°åªä¸€æ ·ï¼Œæ— éœ€å†æ¬¡è®¾ç½®
+            // ÒªÉèÖÃµÄ²ÎÊıÖµºÍµ±Ç°²ÎÊıÖ»Ò»Ñù£¬ÎŞĞèÔÙ´ÎÉèÖÃ
             return;
         }
 
         var $dom = this.$domNormal;
         var $domSelected = this.$domSelected;
 
-        // è®¾ç½®æ ·å¼
+        // ÉèÖÃÑùÊ½
         if (opt) {
             $dom.addClass('disable');
             $domSelected.addClass('disable');
@@ -1438,37 +1438,37 @@ _e(function (E, $) {
             $domSelected.removeClass('disable');
         }
 
-        // å­˜å‚¨
+        // ´æ´¢
         this._disabled = opt;
     };
 
 });
-// dropList æ„é€ å‡½æ•°
+// dropList ¹¹Ôìº¯Êı
 _e(function (E, $) {
 
-    // å®šä¹‰æ„é€ å‡½æ•°
+    // ¶¨Òå¹¹Ôìº¯Êı
     var DropList = function (editor, menu, opt) {
         this.editor = editor;
         this.menu = menu;
 
-        // list çš„æ•°æ®æºï¼Œæ ¼å¼ {'commandValue': 'title', ...}
+        // list µÄÊı¾İÔ´£¬¸ñÊ½ {'commandValue': 'title', ...}
         this.data = opt.data;
-        // è¦ä¸ºæ¯ä¸ªitemè‡ªå®šä¹‰çš„æ¨¡æ¿
+        // ÒªÎªÃ¿¸öitem×Ô¶¨ÒåµÄÄ£°å
         this.tpl = opt.tpl;
-        // ä¸ºäº†æ‰§è¡Œ editor.commandForElem è€Œä¼ å…¥çš„elemæŸ¥è¯¢æ–¹å¼
+        // ÎªÁËÖ´ĞĞ editor.commandForElem ¶ø´«ÈëµÄelem²éÑ¯·½Ê½
         this.selectorForELemCommand = opt.selectorForELemCommand;
 
-        // æ‰§è¡Œäº‹ä»¶å‰åçš„é’©å­
+        // Ö´ĞĞÊÂ¼şÇ°ºóµÄ¹³×Ó
         this.beforeEvent = opt.beforeEvent;
         this.afterEvent = opt.afterEvent;
 
-        // åˆå§‹åŒ–
+        // ³õÊ¼»¯
         this.init();
     };
 
     DropList.fn = DropList.prototype;
 
-    // æš´éœ²ç»™ E å³ window.wangEditor
+    // ±©Â¶¸ø E ¼´ window.wangEditor
     E.DropList = DropList;
 });
 // dropList fn bind
@@ -1480,17 +1480,17 @@ _e(function (E, $) {
     DropList.fn.init = function () {
         var self = this;
 
-        // ç”Ÿæˆdomå¯¹è±¡
+        // Éú³Édom¶ÔÏó
         self.initDOM();
 
-        // ç»‘å®šcommandäº‹ä»¶
+        // °ó¶¨commandÊÂ¼ş
         self.bindEvent();
 
-        // å£°æ˜éšè—çš„äº‹ä»¶
+        // ÉùÃ÷Òş²ØµÄÊÂ¼ş
         self.initHideEvent();
     };
 
-    // åˆå§‹åŒ–domç»“æ„
+    // ³õÊ¼»¯dom½á¹¹
     DropList.fn.initDOM = function () {
         var self = this;
         var data = self.data;
@@ -1509,7 +1509,7 @@ _e(function (E, $) {
         self.$list = $list;
     };
 
-    // ç»‘å®šäº‹ä»¶
+    // °ó¶¨ÊÂ¼ş
     DropList.fn.bindEvent = function () {
         var self = this;
         var editor = self.editor;
@@ -1518,38 +1518,38 @@ _e(function (E, $) {
         var selectorForELemCommand = self.selectorForELemCommand;
         var $list = self.$list;
 
-        // æ‰§è¡Œäº‹ä»¶å‰åçš„é’©å­å‡½æ•°
+        // Ö´ĞĞÊÂ¼şÇ°ºóµÄ¹³×Óº¯Êı
         var beforeEvent = self.beforeEvent;
         var afterEvent = self.afterEvent;
 
         $list.on('click', 'a[commandValue]', function (e) {
-            // æ­£å¼å‘½ä»¤æ‰§è¡Œä¹‹å‰
+            // ÕıÊ½ÃüÁîÖ´ĞĞÖ®Ç°
             if (beforeEvent && typeof beforeEvent === 'function') {
                 beforeEvent.call(e);
             }
 
-            // æ‰§è¡Œå‘½ä»¤
+            // Ö´ĞĞÃüÁî
             var commandValue = $(e.currentTarget).attr('commandValue');
             if (menu.selected && editor.isRangeEmpty() && selectorForELemCommand) {
-                // å½“å‰å¤„äºé€‰ä¸­çŠ¶æ€ï¼Œå¹¶ä¸”é€‰ä¸­å†…å®¹ä¸ºç©º
+                // µ±Ç°´¦ÓÚÑ¡ÖĞ×´Ì¬£¬²¢ÇÒÑ¡ÖĞÄÚÈİÎª¿Õ
                 editor.commandForElem(selectorForELemCommand, e, commandName, commandValue);
             } else {
-                // å½“å‰æœªå¤„äºé€‰ä¸­çŠ¶æ€ï¼Œæˆ–è€…æœ‰é€‰ä¸­å†…å®¹ã€‚åˆ™æ‰§è¡Œé»˜è®¤å‘½ä»¤
+                // µ±Ç°Î´´¦ÓÚÑ¡ÖĞ×´Ì¬£¬»òÕßÓĞÑ¡ÖĞÄÚÈİ¡£ÔòÖ´ĞĞÄ¬ÈÏÃüÁî
                 editor.command(e, commandName, commandValue);
             }
 
-            // æ­£å¼å‘½ä»¤ä¹‹åçš„é’©å­
+            // ÕıÊ½ÃüÁîÖ®ºóµÄ¹³×Ó
             if (afterEvent && typeof afterEvent === 'function') {
                 afterEvent.call(e);
             }
         });
     };
 
-    // ç‚¹å‡»å…¶ä»–åœ°æ–¹ï¼Œç«‹å³éšè— droplist
+    // µã»÷ÆäËûµØ·½£¬Á¢¼´Òş²Ø droplist
     DropList.fn.initHideEvent = function () {
         var self = this;
 
-        // è·å– list elem
+        // »ñÈ¡ list elem
         var thisList = self.$list.get(0);
 
         E.$body.on('click', function (e) {
@@ -1558,7 +1558,7 @@ _e(function (E, $) {
             }
             var trigger = e.target;
 
-            // è·å–èœå•elem
+            // »ñÈ¡²Ëµ¥elem
             var menu = self.menu;
             var menuDom;
             if (menu.selected) {
@@ -1568,16 +1568,16 @@ _e(function (E, $) {
             }
 
             if (menuDom === trigger || $.contains(menuDom, trigger)) {
-                // è¯´æ˜ç”±æœ¬èœå•ç‚¹å‡»è§¦å‘çš„
+                // ËµÃ÷ÓÉ±¾²Ëµ¥µã»÷´¥·¢µÄ
                 return;
             }
 
             if (thisList === trigger || $.contains(thisList, trigger)) {
-                // è¯´æ˜ç”±æœ¬listç‚¹å‡»è§¦å‘çš„
+                // ËµÃ÷ÓÉ±¾listµã»÷´¥·¢µÄ
                 return;
             }
 
-            // å…¶ä»–æƒ…å†µï¼Œéšè— list
+            // ÆäËûÇé¿ö£¬Òş²Ø list
             self.hide();
         });
 
@@ -1596,20 +1596,20 @@ _e(function (E, $) {
     
     var DropList = E.DropList;
 
-    // æ¸²æŸ“
+    // äÖÈ¾
     DropList.fn._render = function () {
         var self = this;
         var editor = self.editor;
         var $list = self.$list;
 
-        // æ¸²æŸ“åˆ°é¡µé¢
+        // äÖÈ¾µ½Ò³Ãæ
         editor.$editorContainer.append($list);
 
-        // è®°å½•çŠ¶æ€
+        // ¼ÇÂ¼×´Ì¬
         self.rendered = true;
     };
 
-    // å®šä½
+    // ¶¨Î»
     DropList.fn._position = function () {
         var self = this;
         var $list = self.$list;
@@ -1617,59 +1617,59 @@ _e(function (E, $) {
         var menu = self.menu;
         var $menuContainer = editor.menuContainer.$menuContainer;
         var $menuDom = menu.selected ? menu.$domSelected : menu.$domNormal;
-        // æ³¨æ„è¿™é‡Œçš„ offsetParent() è¦è¿”å› .menu-item çš„ position
-        // å› ä¸º .menu-item æ˜¯ position:relative
+        // ×¢ÒâÕâÀïµÄ offsetParent() Òª·µ»Ø .menu-item µÄ position
+        // ÒòÎª .menu-item ÊÇ position:relative
         var menuPosition = $menuDom.offsetParent().position();
 
-        // å–å¾— menu çš„ä½ç½®ã€å°ºå¯¸å±æ€§
+        // È¡µÃ menu µÄÎ»ÖÃ¡¢³ß´çÊôĞÔ
         var menuTop = menuPosition.top;
         var menuLeft = menuPosition.left;
         var menuHeight = $menuDom.offsetParent().height();
         var menuWidth = $menuDom.offsetParent().width();
 
-        // å–å¾— list çš„å°ºå¯¸å±æ€§
+        // È¡µÃ list µÄ³ß´çÊôĞÔ
         var listWidth = $list.outerWidth();
         // var listHeight = $list.outerHeight();
 
-        // å–å¾— $txt çš„å°ºå¯¸
+        // È¡µÃ $txt µÄ³ß´ç
         var txtWidth = editor.txt.$txt.outerWidth();
 
-        // ------------å¼€å§‹è®¡ç®—-------------
+        // ------------¿ªÊ¼¼ÆËã-------------
 
-        // åˆæ­¥è®¡ç®— list ä½ç½®å±æ€§
+        // ³õ²½¼ÆËã list Î»ÖÃÊôĞÔ
         var top = menuTop + menuHeight;
         var left = menuLeft + menuWidth/2;
         var marginLeft = 0 - menuWidth/2;
 
-        // å¦‚æœè¶…å‡ºäº†æœ‰è¾¹ç•Œï¼Œåˆ™è¦å·¦ç§»ï¼ˆä¸”å’Œå³ä¾§æœ‰é—´éš™ï¼‰
+        // Èç¹û³¬³öÁËÓĞ±ß½ç£¬ÔòÒª×óÒÆ£¨ÇÒºÍÓÒ²àÓĞ¼äÏ¶£©
         var valWithTxt = (left + listWidth) - txtWidth;
         if (valWithTxt > -10) {
             marginLeft = marginLeft - valWithTxt - 10;
         }
-        // è®¾ç½®æ ·å¼
+        // ÉèÖÃÑùÊ½
         $list.css({
             top: top,
             left: left,
             'margin-left': marginLeft
         });
 
-        // å¦‚æœå› ä¸ºå‘ä¸‹æ»šåŠ¨è€Œå¯¼è‡´èœå•fixedï¼Œåˆ™å†åŠ ä¸€æ­¥å¤„ç†
+        // Èç¹ûÒòÎªÏòÏÂ¹ö¶¯¶øµ¼ÖÂ²Ëµ¥fixed£¬ÔòÔÙ¼ÓÒ»²½´¦Àí
         if (editor._isMenufixed) {
             top = top + (($menuContainer.offset().top + $menuContainer.outerHeight()) - $list.offset().top);
 
-            // é‡æ–°è®¾ç½®top
+            // ÖØĞÂÉèÖÃtop
             $list.css({
                 top: top
             });
         }
     };
 
-    // æ˜¾ç¤º
+    // ÏÔÊ¾
     DropList.fn.show = function () {
         var self = this;
         var menu = self.menu;
         if (!self.rendered) {
-            // ç¬¬ä¸€æ¬¡showä¹‹å‰ï¼Œå…ˆæ¸²æŸ“
+            // µÚÒ»´ÎshowÖ®Ç°£¬ÏÈäÖÈ¾
             self._render();
         }
 
@@ -1680,17 +1680,17 @@ _e(function (E, $) {
         var $list = self.$list;
         $list.show();
 
-        // å®šä½
+        // ¶¨Î»
         self._position();
 
-        // è®°å½•çŠ¶æ€
+        // ¼ÇÂ¼×´Ì¬
         self.isShowing = true;
 
-        // èœå•çŠ¶æ€
+        // ²Ëµ¥×´Ì¬
         menu.activeStyle(true);
     };
 
-    // éšè—
+    // Òş²Ø
     DropList.fn.hide = function () {
         var self = this;
         var menu = self.menu;
@@ -1701,17 +1701,17 @@ _e(function (E, $) {
         var $list = self.$list;
         $list.hide();
 
-        // è®°å½•çŠ¶æ€
+        // ¼ÇÂ¼×´Ì¬
         self.isShowing = false;
 
-        // èœå•çŠ¶æ€
+        // ²Ëµ¥×´Ì¬
         menu.activeStyle(false);
     };
 });
-// dropPanel æ„é€ å‡½æ•°
+// dropPanel ¹¹Ôìº¯Êı
 _e(function (E, $) {
 
-    // å®šä¹‰æ„é€ å‡½æ•°
+    // ¶¨Òå¹¹Ôìº¯Êı
     var DropPanel = function (editor, menu, opt) {
         this.editor = editor;
         this.menu = menu;
@@ -1726,7 +1726,7 @@ _e(function (E, $) {
 
     DropPanel.fn = DropPanel.prototype;
 
-    // æš´éœ²ç»™ E å³ window.wangEditor
+    // ±©Â¶¸ø E ¼´ window.wangEditor
     E.DropPanel = DropPanel;
 });
 // dropPanel fn bind
@@ -1738,10 +1738,10 @@ _e(function (E, $) {
     DropPanel.fn.init = function () {
         var self = this;
 
-        // ç”Ÿæˆdomå¯¹è±¡
+        // Éú³Édom¶ÔÏó
         self.initDOM();
 
-        // å£°æ˜éšè—çš„äº‹ä»¶
+        // ÉùÃ÷Òş²ØµÄÊÂ¼ş
         self.initHideEvent();
     };
 
@@ -1761,16 +1761,16 @@ _e(function (E, $) {
         $panel.append($triangle);
         $panel.append($content);
 
-        // æ·»åŠ å¯¹è±¡æ•°æ®
+        // Ìí¼Ó¶ÔÏóÊı¾İ
         self.$panel = $panel;
         self.$triangle = $triangle;
     };
 
-    // ç‚¹å‡»å…¶ä»–åœ°æ–¹ï¼Œç«‹å³éšè— dropPanel
+    // µã»÷ÆäËûµØ·½£¬Á¢¼´Òş²Ø dropPanel
     DropPanel.fn.initHideEvent = function () {
         var self = this;
 
-        // è·å– panel elem
+        // »ñÈ¡ panel elem
         var thisPanle = self.$panel.get(0);
 
         E.$body.on('click', function (e) {
@@ -1779,7 +1779,7 @@ _e(function (E, $) {
             }
             var trigger = e.target;
 
-            // è·å–èœå•elem
+            // »ñÈ¡²Ëµ¥elem
             var menu = self.menu;
             var menuDom;
             if (menu.selected) {
@@ -1789,16 +1789,16 @@ _e(function (E, $) {
             }
 
             if (menuDom === trigger || $.contains(menuDom, trigger)) {
-                // è¯´æ˜ç”±æœ¬èœå•ç‚¹å‡»è§¦å‘çš„
+                // ËµÃ÷ÓÉ±¾²Ëµ¥µã»÷´¥·¢µÄ
                 return;
             }
 
             if (thisPanle === trigger || $.contains(thisPanle, trigger)) {
-                // è¯´æ˜ç”±æœ¬panelç‚¹å‡»è§¦å‘çš„
+                // ËµÃ÷ÓÉ±¾panelµã»÷´¥·¢µÄ
                 return;
             }
 
-            // å…¶ä»–æƒ…å†µï¼Œéšè— panel
+            // ÆäËûÇé¿ö£¬Òş²Ø panel
             self.hide();
         });
 
@@ -1817,24 +1817,24 @@ _e(function (E, $) {
    
     var DropPanel = E.DropPanel;
 
-    // æ¸²æŸ“
+    // äÖÈ¾
     DropPanel.fn._render = function () {
         var self = this;
         var onRender = self.onRender;
         var editor = self.editor;
         var $panel = self.$panel;
 
-        // æ¸²æŸ“åˆ°é¡µé¢
+        // äÖÈ¾µ½Ò³Ãæ
         editor.$editorContainer.append($panel);
 
-        // æ¸²æŸ“åçš„å›è°ƒäº‹ä»¶
+        // äÖÈ¾ºóµÄ»Øµ÷ÊÂ¼ş
         onRender && onRender.call(self);
 
-        // è®°å½•çŠ¶æ€
+        // ¼ÇÂ¼×´Ì¬
         self.rendered = true;
     };
 
-    // å®šä½
+    // ¶¨Î»
     DropPanel.fn._position = function () {
         var self = this;
         var $panel = self.$panel;
@@ -1843,66 +1843,66 @@ _e(function (E, $) {
         var $menuContainer = editor.menuContainer.$menuContainer;
         var menu = self.menu;
         var $menuDom = menu.selected ? menu.$domSelected : menu.$domNormal;
-        // æ³¨æ„è¿™é‡Œçš„ offsetParent() è¦è¿”å› .menu-item çš„ position
-        // å› ä¸º .menu-item æ˜¯ position:relative
+        // ×¢ÒâÕâÀïµÄ offsetParent() Òª·µ»Ø .menu-item µÄ position
+        // ÒòÎª .menu-item ÊÇ position:relative
         var menuPosition = $menuDom.offsetParent().position();
 
-        // å–å¾— menu çš„ä½ç½®ã€å°ºå¯¸å±æ€§
+        // È¡µÃ menu µÄÎ»ÖÃ¡¢³ß´çÊôĞÔ
         var menuTop = menuPosition.top;
         var menuLeft = menuPosition.left;
         var menuHeight = $menuDom.offsetParent().height();
         var menuWidth = $menuDom.offsetParent().width();
 
-        // å–å¾— panel çš„å°ºå¯¸å±æ€§
+        // È¡µÃ panel µÄ³ß´çÊôĞÔ
         var panelWidth = $panel.outerWidth();
         // var panelHeight = $panel.outerHeight();
 
-        // å–å¾— $txt çš„å°ºå¯¸
+        // È¡µÃ $txt µÄ³ß´ç
         var txtWidth = editor.txt.$txt.outerWidth();
 
-        // ------------å¼€å§‹è®¡ç®—-------------
+        // ------------¿ªÊ¼¼ÆËã-------------
 
-        // åˆæ­¥è®¡ç®— panel ä½ç½®å±æ€§
+        // ³õ²½¼ÆËã panel Î»ÖÃÊôĞÔ
         var top = menuTop + menuHeight;
         var left = menuLeft + menuWidth/2;
         var marginLeft = 0 - panelWidth/2;
-        var marginLeft2 = marginLeft;  // ä¸‹æ–‡ç”¨äºå’Œ marginLeft æ¯”è¾ƒï¼Œæ¥è®¾ç½®ä¸‰è§’å½¢tipçš„ä½ç½®
+        var marginLeft2 = marginLeft;  // ÏÂÎÄÓÃÓÚºÍ marginLeft ±È½Ï£¬À´ÉèÖÃÈı½ÇĞÎtipµÄÎ»ÖÃ
 
-        // å¦‚æœè¶…å‡ºäº†å·¦è¾¹ç•Œï¼Œåˆ™ç§»åŠ¨å›æ¥ï¼ˆè¦å’Œå·¦ä¾§æœ‰10pxé—´éš™ï¼‰
+        // Èç¹û³¬³öÁË×ó±ß½ç£¬ÔòÒÆ¶¯»ØÀ´£¨ÒªºÍ×ó²àÓĞ10px¼äÏ¶£©
         if ((0 - marginLeft) > (left - 10)) {
             marginLeft = 0 - (left - 10);
         }
 
-        // å¦‚æœè¶…å‡ºäº†æœ‰è¾¹ç•Œï¼Œåˆ™è¦å·¦ç§»ï¼ˆä¸”å’Œå³ä¾§æœ‰10pxé—´éš™ï¼‰
+        // Èç¹û³¬³öÁËÓĞ±ß½ç£¬ÔòÒª×óÒÆ£¨ÇÒºÍÓÒ²àÓĞ10px¼äÏ¶£©
         var valWithTxt = (left + panelWidth + marginLeft) - txtWidth;
         if (valWithTxt > -10) {
             marginLeft = marginLeft - valWithTxt - 10;
         }
 
-        // è®¾ç½®æ ·å¼
+        // ÉèÖÃÑùÊ½
         $panel.css({
             top: top,
             left: left,
             'margin-left': marginLeft
         });
 
-        // å¦‚æœå› ä¸ºå‘ä¸‹æ»šåŠ¨è€Œå¯¼è‡´èœå•fixedï¼Œåˆ™å†åŠ ä¸€æ­¥å¤„ç†
+        // Èç¹ûÒòÎªÏòÏÂ¹ö¶¯¶øµ¼ÖÂ²Ëµ¥fixed£¬ÔòÔÙ¼ÓÒ»²½´¦Àí
         if (editor._isMenufixed) {
             top = top + (($menuContainer.offset().top + $menuContainer.outerHeight()) - $panel.offset().top);
 
-            // é‡æ–°è®¾ç½®top
+            // ÖØĞÂÉèÖÃtop
             $panel.css({
                 top: top
             });
         }
 
-        // è®¾ç½®ä¸‰è§’å½¢ tip çš„ä½ç½®
+        // ÉèÖÃÈı½ÇĞÎ tip µÄÎ»ÖÃ
         $triangle.css({
             'margin-left': marginLeft2 - marginLeft - 5
         });
     };
 
-    // focus ç¬¬ä¸€ä¸ª input
+    // focus µÚÒ»¸ö input
     DropPanel.fn.focusFirstInput = function () {
         var self = this;
         var $panel = self.$panel;
@@ -1915,12 +1915,12 @@ _e(function (E, $) {
         });
     };
 
-    // æ˜¾ç¤º
+    // ÏÔÊ¾
     DropPanel.fn.show = function () {
         var self = this;
         var menu = self.menu;
         if (!self.rendered) {
-            // ç¬¬ä¸€æ¬¡showä¹‹å‰ï¼Œå…ˆæ¸²æŸ“
+            // µÚÒ»´ÎshowÖ®Ç°£¬ÏÈäÖÈ¾
             self._render();
         }
 
@@ -1931,25 +1931,25 @@ _e(function (E, $) {
         var $panel = self.$panel;
         $panel.show();
 
-        // å®šä½
+        // ¶¨Î»
         self._position();
 
-        // è®°å½•çŠ¶æ€
+        // ¼ÇÂ¼×´Ì¬
         self.isShowing = true;
 
-        // èœå•çŠ¶æ€
+        // ²Ëµ¥×´Ì¬
         menu.activeStyle(true);
 
         if (E.w3cRange) {
-            // é«˜çº§æµè§ˆå™¨
+            // ¸ß¼¶ä¯ÀÀÆ÷
             self.focusFirstInput();
         } else {
-            // å…¼å®¹ IE8 input placeholder
+            // ¼æÈİ IE8 input placeholder
             E.placeholderForIE8($panel);
         }
     };
 
-    // éšè—
+    // Òş²Ø
     DropPanel.fn.hide = function () {
         var self = this;
         var menu = self.menu;
@@ -1960,18 +1960,18 @@ _e(function (E, $) {
         var $panel = self.$panel;
         $panel.hide();
 
-        // è®°å½•çŠ¶æ€
+        // ¼ÇÂ¼×´Ì¬
         self.isShowing = false;
 
-        // èœå•çŠ¶æ€
+        // ²Ëµ¥×´Ì¬
         menu.activeStyle(false);
     };
 
 });
-// modal æ„é€ å‡½æ•°
+// modal ¹¹Ôìº¯Êı
 _e(function (E, $) {
 
-    // å®šä¹‰æ„é€ å‡½æ•°
+    // ¶¨Òå¹¹Ôìº¯Êı
     var Modal = function (editor, menu, opt) {
         this.editor = editor;
         this.menu = menu;
@@ -1982,7 +1982,7 @@ _e(function (E, $) {
 
     Modal.fn = Modal.prototype;
 
-    // æš´éœ²ç»™ E å³ window.wangEditor
+    // ±©Â¶¸ø E ¼´ window.wangEditor
     E.Modal = Modal;
 });
 // modal fn bind
@@ -1993,14 +1993,14 @@ _e(function (E, $) {
     Modal.fn.init = function () {
         var self = this;
 
-        // åˆå§‹åŒ–dom
+        // ³õÊ¼»¯dom
         self.initDom();
 
-        // åˆå§‹åŒ–éšè—äº‹ä»¶
+        // ³õÊ¼»¯Òş²ØÊÂ¼ş
         self.initHideEvent();
     };
 
-    // åˆå§‹åŒ–dom
+    // ³õÊ¼»¯dom
     Modal.fn.initDom = function () {
         var self = this;
         var $content = self.$content;
@@ -2010,30 +2010,30 @@ _e(function (E, $) {
         $modal.append($close);
         $modal.append($content);
 
-        // è®°å½•æ•°æ®
+        // ¼ÇÂ¼Êı¾İ
         self.$modal = $modal;
         self.$close = $close;
     };
 
-    // åˆå§‹åŒ–éšè—äº‹ä»¶
+    // ³õÊ¼»¯Òş²ØÊÂ¼ş
     Modal.fn.initHideEvent = function () {
         var self = this;
         var $close = self.$close;
         var modal = self.$modal.get(0);
 
-        // ç‚¹å‡» $close æŒ‰é’®ï¼Œéšè—
+        // µã»÷ $close °´Å¥£¬Òş²Ø
         $close.click(function () {
             self.hide();
         });
 
-        // ç‚¹å‡»å…¶ä»–éƒ¨åˆ†ï¼Œéšè—
+        // µã»÷ÆäËû²¿·Ö£¬Òş²Ø
         E.$body.on('click', function (e) {
             if (!self.isShowing) {
                 return;
             }
             var trigger = e.target;
 
-            // è·å–èœå•elem
+            // »ñÈ¡²Ëµ¥elem
             var menu = self.menu;
             var menuDom;
             if (menu) {
@@ -2044,17 +2044,17 @@ _e(function (E, $) {
                 }
 
                 if (menuDom === trigger || $.contains(menuDom, trigger)) {
-                    // è¯´æ˜ç”±æœ¬èœå•ç‚¹å‡»è§¦å‘çš„
+                    // ËµÃ÷ÓÉ±¾²Ëµ¥µã»÷´¥·¢µÄ
                     return;
                 }
             }
 
             if (modal === trigger || $.contains(modal, trigger)) {
-                // è¯´æ˜ç”±æœ¬panelç‚¹å‡»è§¦å‘çš„
+                // ËµÃ÷ÓÉ±¾panelµã»÷´¥·¢µÄ
                 return;
             }
 
-            // å…¶ä»–æƒ…å†µï¼Œéšè— panel
+            // ÆäËûÇé¿ö£¬Òş²Ø panel
             self.hide();
         });
     };
@@ -2064,23 +2064,23 @@ _e(function (E, $) {
 
     var Modal = E.Modal;
 
-    // æ¸²æŸ“
+    // äÖÈ¾
     Modal.fn._render = function () {
         var self = this;
         var editor = self.editor;
         var $modal = self.$modal;
 
-        // $modalçš„z-indexï¼Œåœ¨é…ç½®çš„z-indexåŸºç¡€ä¸Šå† +10
+        // $modalµÄz-index£¬ÔÚÅäÖÃµÄz-index»ù´¡ÉÏÔÙ +10
         $modal.css('z-index', editor.config.zindex + 10 + '');
 
-        // æ¸²æŸ“åˆ°bodyæœ€åé¢
+        // äÖÈ¾µ½body×îºóÃæ
         E.$body.append($modal);
 
-        // è®°å½•çŠ¶æ€
+        // ¼ÇÂ¼×´Ì¬
         self.rendered = true;
     };
 
-    // å®šä½
+    // ¶¨Î»
     Modal.fn._position = function () {
         var self = this;
         var $modal = self.$modal;
@@ -2091,7 +2091,7 @@ _e(function (E, $) {
         var marginTop = 0 - (height / 2);
         var sTop = E.$window.scrollTop();
 
-        // ä¿è¯modalæœ€é¡¶éƒ¨ï¼Œä¸è¶…è¿‡æµè§ˆå™¨ä¸Šè¾¹æ¡†
+        // ±£Ö¤modal×î¶¥²¿£¬²»³¬¹ıä¯ÀÀÆ÷ÉÏ±ß¿ò
         if ((height / 2) > top) {
             marginTop = 0 - top;
         }
@@ -2102,63 +2102,63 @@ _e(function (E, $) {
         });
     };
 
-    // æ˜¾ç¤º
+    // ÏÔÊ¾
     Modal.fn.show = function () {
         var self = this;
         var menu = self.menu;
         if (!self.rendered) {
-            // ç¬¬ä¸€æ¬¡showä¹‹å‰ï¼Œå…ˆæ¸²æŸ“
+            // µÚÒ»´ÎshowÖ®Ç°£¬ÏÈäÖÈ¾
             self._render();
         }
 
         if (self.isShowing) {
             return;
         }
-        // è®°å½•çŠ¶æ€
+        // ¼ÇÂ¼×´Ì¬
         self.isShowing = true;
 
         var $modal = self.$modal;
         $modal.show();
 
-        // å®šä½
+        // ¶¨Î»
         self._position();
 
-        // æ¿€æ´»èœå•çŠ¶æ€
+        // ¼¤»î²Ëµ¥×´Ì¬
         menu && menu.activeStyle(true);
     };
 
-    // éšè—
+    // Òş²Ø
     Modal.fn.hide = function () {
         var self = this;
         var menu = self.menu;
         if (!self.isShowing) {
             return;
         }
-        // è®°å½•çŠ¶æ€
+        // ¼ÇÂ¼×´Ì¬
         self.isShowing = false;
 
-        // éšè—
+        // Òş²Ø
         var $modal = self.$modal;
         $modal.hide();
 
-        // èœå•çŠ¶æ€
+        // ²Ëµ¥×´Ì¬
         menu && menu.activeStyle(false);
     };
 });
-// txt æ„é€ å‡½æ•°
+// txt ¹¹Ôìº¯Êı
 _e(function (E, $) {
 
-    // å®šä¹‰æ„é€ å‡½æ•°
+    // ¶¨Òå¹¹Ôìº¯Êı
     var Txt = function (editor) {
         this.editor = editor;
 
-        // åˆå§‹åŒ–
+        // ³õÊ¼»¯
         this.init();
     };
 
     Txt.fn = Txt.prototype;
 
-    // æš´éœ²ç»™ E å³ window.wangEditor
+    // ±©Â¶¸ø E ¼´ window.wangEditor
     E.Txt = Txt;
 });
 // Txt.fn bind fn
@@ -2166,7 +2166,7 @@ _e(function (E, $) {
 
     var Txt = E.Txt;
 
-    // åˆå§‹åŒ–
+    // ³õÊ¼»¯
     Txt.fn.init = function () {
         var self = this;
         var editor = self.editor;
@@ -2175,12 +2175,12 @@ _e(function (E, $) {
         var $txt;
 
         if ($valueContainer.get(0).nodeName === 'DIV') {
-            // å¦‚æœä¼ å…¥ç”Ÿæˆç¼–è¾‘å™¨çš„å…ƒç´ å°±æ˜¯divï¼Œåˆ™ç›´æ¥ä½¿ç”¨
+            // Èç¹û´«ÈëÉú³É±à¼­Æ÷µÄÔªËØ¾ÍÊÇdiv£¬ÔòÖ±½ÓÊ¹ÓÃ
             $txt = $valueContainer;
             $txt.addClass("wangEditor-txt");
             $txt.attr('contentEditable', 'true');
         } else {
-            // å¦‚æœä¸æ˜¯divï¼ˆæ˜¯textareaï¼‰ï¼Œåˆ™åˆ›å»ºä¸€ä¸ªdiv
+            // Èç¹û²»ÊÇdiv£¨ÊÇtextarea£©£¬Ôò´´½¨Ò»¸ödiv
             $txt = $(
                 '<div class="wangEditor-txt" contentEditable="true">' +
                     currentValue +
@@ -2188,36 +2188,36 @@ _e(function (E, $) {
             );
         }
 
-        // è¯•å›¾æœ€åæ’å…¥ä¸€ä¸ªç©ºè¡Œï¼Œreadyä¹‹åæ‰è¡Œ
+        // ÊÔÍ¼×îºó²åÈëÒ»¸ö¿ÕĞĞ£¬readyÖ®ºó²ÅĞĞ
         editor.ready(function () {
             self.insertEmptyP();
         });
 
         self.$txt = $txt;
 
-        // åˆ é™¤æ—¶ï¼Œå¦‚æœæ²¡æœ‰å†…å®¹äº†ï¼Œå°±æ·»åŠ ä¸€ä¸ª <p><br></p>
+        // É¾³ıÊ±£¬Èç¹ûÃ»ÓĞÄÚÈİÁË£¬¾ÍÌí¼ÓÒ»¸ö <p><br></p>
         self.contentEmptyHandle();
 
-        // enteræ—¶ï¼Œä¸èƒ½ä½¿ç”¨ div æ¢è¡Œ
+        // enterÊ±£¬²»ÄÜÊ¹ÓÃ div »»ĞĞ
         self.bindEnterForDiv();
 
-        // enteræ—¶ï¼Œç”¨ p åŒ…è£¹ text
+        // enterÊ±£¬ÓÃ p °ü¹ü text
         self.bindEnterForText();
 
-        // tab æ’å…¥4ä¸ªç©ºæ ¼
+        // tab ²åÈë4¸ö¿Õ¸ñ
         self.bindTabEvent();
 
-        // å¤„ç†ç²˜è´´å†…å®¹
+        // ´¦ÀíÕ³ÌùÄÚÈİ
         self.bindPasteFilter();
 
-        // $txt.formatText() æ–¹æ³•
+        // $txt.formatText() ·½·¨
         self.bindFormatText();
 
-        // å®šä¹‰ $txt.html() æ–¹æ³•
+        // ¶¨Òå $txt.html() ·½·¨
         self.bindHtml();
     };
 
-    // åˆ é™¤æ—¶ï¼Œå¦‚æœæ²¡æœ‰å†…å®¹äº†ï¼Œå°±æ·»åŠ ä¸€ä¸ª <p><br></p>
+    // É¾³ıÊ±£¬Èç¹ûÃ»ÓĞÄÚÈİÁË£¬¾ÍÌí¼ÓÒ»¸ö <p><br></p>
     Txt.fn.contentEmptyHandle = function () {
         var self = this;
         var editor = self.editor;
@@ -2230,7 +2230,7 @@ _e(function (E, $) {
             }
             var txtHtml = $.trim($txt.html().toLowerCase());
             if (txtHtml === '<p><br></p>') {
-                // å¦‚æœæœ€åè¿˜å‰©ä½™ä¸€ä¸ªç©ºè¡Œï¼Œå°±ä¸å†ç»§ç»­åˆ é™¤äº†
+                // Èç¹û×îºó»¹Ê£ÓàÒ»¸ö¿ÕĞĞ£¬¾Í²»ÔÙ¼ÌĞøÉ¾³ıÁË
                 e.preventDefault();
                 return;
             }
@@ -2241,20 +2241,20 @@ _e(function (E, $) {
                 return;
             }
             var txtHtml = $.trim($txt.html().toLowerCase());
-            // ffæ—¶ç”¨ txtHtml === '<br>' åˆ¤æ–­ï¼Œå…¶ä»–ç”¨ !txtHtml åˆ¤æ–­
+            // ffÊ±ÓÃ txtHtml === '<br>' ÅĞ¶Ï£¬ÆäËûÓÃ !txtHtml ÅĞ¶Ï
             if (!txtHtml || txtHtml === '<br>') {
-                // å†…å®¹ç©ºäº†
+                // ÄÚÈİ¿ÕÁË
                 $p = $('<p><br/></p>');
-                $txt.html(''); // ä¸€å®šè¦å…ˆæ¸…ç©ºï¼Œå¦åˆ™åœ¨ ff ä¸‹æœ‰é—®é¢˜
+                $txt.html(''); // Ò»¶¨ÒªÏÈÇå¿Õ£¬·ñÔòÔÚ ff ÏÂÓĞÎÊÌâ
                 $txt.append($p);
                 editor.restoreSelectionByElem($p.get(0));
             }
         });
     };
 
-    // enteræ—¶ï¼Œä¸èƒ½ä½¿ç”¨ div æ¢è¡Œ
+    // enterÊ±£¬²»ÄÜÊ¹ÓÃ div »»ĞĞ
     Txt.fn.bindEnterForDiv = function () {
-        var tags = E.config.legalTags; // é…ç½®ä¸­ç¼–è¾‘å™¨è¦æ±‚çš„åˆæ³•æ ‡ç­¾ï¼Œå¦‚ p head table blockquote ul ol ç­‰
+        var tags = E.config.legalTags; // ÅäÖÃÖĞ±à¼­Æ÷ÒªÇóµÄºÏ·¨±êÇ©£¬Èç p head table blockquote ul ol µÈ
         var self = this;
         var editor = self.editor;
         var $txt = self.$txt;
@@ -2274,14 +2274,14 @@ _e(function (E, $) {
             if (e.keyCode !== 13) {
                 return;
             }
-            // æŸ¥æ‰¾åˆæ³•æ ‡ç­¾
+            // ²éÕÒºÏ·¨±êÇ©
             var rangeElem = editor.getRangeElem();
             var targetElem = editor.getLegalTags(rangeElem);
             var $targetElem;
             var $pElem;
 
             if (!targetElem) {
-                // æ²¡æ‰¾åˆ°åˆæ³•æ ‡ç­¾ï¼Œå°±å»æŸ¥æ‰¾ div
+                // Ã»ÕÒµ½ºÏ·¨±êÇ©£¬¾ÍÈ¥²éÕÒ div
                 targetElem = editor.getSelfOrParentByName(rangeElem, 'div');
                 if (!targetElem) {
                     return;
@@ -2289,25 +2289,25 @@ _e(function (E, $) {
                 $targetElem = $(targetElem);
 
                 if (e.type === 'keydown') {
-                    // å¼‚æ­¥æ‰§è¡Œï¼ˆåŒæ­¥æ‰§è¡Œä¼šå‡ºç°é—®é¢˜ï¼‰
+                    // Òì²½Ö´ĞĞ£¨Í¬²½Ö´ĞĞ»á³öÏÖÎÊÌâ£©
                     $keydownDivElem = $targetElem;
                     setTimeout(divHandler, 0);
                 }
 
                 if (e.type === 'keyup') {
-                    // å°† div çš„å†…å®¹ç§»åŠ¨åˆ° p é‡Œé¢ï¼Œå¹¶ç§»é™¤ div
+                    // ½« div µÄÄÚÈİÒÆ¶¯µ½ p ÀïÃæ£¬²¢ÒÆ³ı div
                     $pElem = $('<p>' + $targetElem.html() + '</p>');
                     $targetElem.after($pElem);
                     $targetElem.remove();
 
-                    // å¦‚æœæ˜¯å›è½¦ç»“æŸï¼Œå°†é€‰åŒºå®šä½åˆ°è¡Œé¦–
+                    // Èç¹ûÊÇ»Ø³µ½áÊø£¬½«Ñ¡Çø¶¨Î»µ½ĞĞÊ×
                     editor.restoreSelectionByElem($pElem.get(0), 'start');
                 }
             }
         });
     };
 
-    // enteræ—¶ï¼Œç”¨ p åŒ…è£¹ text
+    // enterÊ±£¬ÓÃ p °ü¹ü text
     Txt.fn.bindEnterForText = function () {
         var self = this;
         var $txt = self.$txt;
@@ -2325,7 +2325,7 @@ _e(function (E, $) {
         });
     };
 
-    // tab æ—¶ï¼Œæ’å…¥4ä¸ªç©ºæ ¼
+    // tab Ê±£¬²åÈë4¸ö¿Õ¸ñ
     Txt.fn.bindTabEvent = function () {
         var self = this;
         var editor = self.editor;
@@ -2333,45 +2333,45 @@ _e(function (E, $) {
 
         $txt.on('keydown', function (e) {
             if (e.keyCode !== 9) {
-                // åªç›‘å¬ tab æŒ‰é’®
+                // Ö»¼àÌı tab °´Å¥
                 return;
             }
-            // å¦‚æœæµè§ˆå™¨æ”¯æŒ insertHtml åˆ™æ’å…¥4ä¸ªç©ºæ ¼ã€‚å¦‚æœä¸æ”¯æŒï¼Œå°±ä¸ç®¡äº†
+            // Èç¹ûä¯ÀÀÆ÷Ö§³Ö insertHtml Ôò²åÈë4¸ö¿Õ¸ñ¡£Èç¹û²»Ö§³Ö£¬¾Í²»¹ÜÁË
             if (editor.queryCommandSupported('insertHtml')) {
                 editor.command(e, 'insertHtml', '&nbsp;&nbsp;&nbsp;&nbsp;');
             }
         });
     };
 
-    // å¤„ç†ç²˜è´´å†…å®¹
+    // ´¦ÀíÕ³ÌùÄÚÈİ
     Txt.fn.bindPasteFilter = function () {
         var self = this;
         var editor = self.editor;
-        var resultHtml = '';  //å­˜å‚¨æœ€ç»ˆçš„ç»“æœ
+        var resultHtml = '';  //´æ´¢×îÖÕµÄ½á¹û
         var $txt = self.$txt;
         var legalTags = editor.config.legalTags;
         var legalTagArr = legalTags.split(',');
 
         $txt.on('paste', function (e) {
             if (!editor.config.pasteFilter) {
-                // é…ç½®ä¸­å–æ¶ˆäº†ç²˜è´´è¿‡æ»¤
+                // ÅäÖÃÖĞÈ¡ÏûÁËÕ³Ìù¹ıÂË
                 return;
             }
 
             var currentNodeName = editor.getRangeElem().nodeName;
             if (currentNodeName === 'TD' || currentNodeName === 'TH') {
-                // åœ¨è¡¨æ ¼çš„å•å…ƒæ ¼ä¸­ç²˜è´´ï¼Œå¿½ç•¥æ‰€æœ‰å†…å®¹ã€‚å¦åˆ™ä¼šå‡ºç°å¼‚å¸¸æƒ…å†µ
+                // ÔÚ±í¸ñµÄµ¥Ôª¸ñÖĞÕ³Ìù£¬ºöÂÔËùÓĞÄÚÈİ¡£·ñÔò»á³öÏÖÒì³£Çé¿ö
                 return;
             }
 
-            resultHtml = ''; // å…ˆæ¸…ç©º resultHtml
+            resultHtml = ''; // ÏÈÇå¿Õ resultHtml
 
             var pasteHtml, $paste;
             var data = e.clipboardData || e.originalEvent.clipboardData;
             var ieData = window.clipboardData;
 
             if (editor.config.pasteText) {
-                // åªç²˜è´´çº¯æ–‡æœ¬
+                // Ö»Õ³Ìù´¿ÎÄ±¾
 
                 if (data && data.getData) {
                     // w3c
@@ -2380,41 +2380,41 @@ _e(function (E, $) {
                     // IE
                     pasteHtml = ieData.getData('text');
                 } else {
-                    // å…¶ä»–æƒ…å†µ
+                    // ÆäËûÇé¿ö
                     return;
                 }
 
-                // æ‹¼æ¥ä¸º <p> æ ‡ç­¾
+                // Æ´½ÓÎª <p> ±êÇ©
                 if (pasteHtml) {
                     resultHtml = '<p>' + pasteHtml + '</p>';
                 }
 
             } else {
-                // ç²˜è´´è¿‡æ»¤äº†æ ·å¼çš„ã€åªæœ‰æ ‡ç­¾çš„ html
+                // Õ³Ìù¹ıÂËÁËÑùÊ½µÄ¡¢Ö»ÓĞ±êÇ©µÄ html
 
                 if (data && data.getData) {
                     // w3c
 
-                    // è·å–ç²˜è´´è¿‡æ¥çš„html
+                    // »ñÈ¡Õ³Ìù¹ıÀ´µÄhtml
                     pasteHtml = data.getData('text/html');
                     if (pasteHtml) {
-                        // åˆ›å»ºdom
+                        // ´´½¨dom
                         $paste = $('<div>' + pasteHtml + '</div>');
-                        // å¤„ç†ï¼Œå¹¶å°†ç»“æœå­˜å‚¨åˆ° resultHtml ã€å…¨å±€ã€å˜é‡
+                        // ´¦Àí£¬²¢½«½á¹û´æ´¢µ½ resultHtml ¡ºÈ«¾Ö¡»±äÁ¿
                         handle($paste.get(0));
                     } else {
-                        // å¾—ä¸åˆ°htmlï¼Œè¯•å›¾è·å–text
+                        // µÃ²»µ½html£¬ÊÔÍ¼»ñÈ¡text
                         pasteHtml = data.getData('text/plain');
                         if (pasteHtml) {
-                            // æ›¿æ¢ç‰¹æ®Šå­—ç¬¦
+                            // Ìæ»»ÌØÊâ×Ö·û
                             pasteHtml = pasteHtml.replace(/[ ]/g, '&nbsp;')
                                                  .replace(/</g, '&lt;')
                                                  .replace(/>/g, '&gt;')
                                                  .replace(/\n/g, '</p><p>');
-                            // æ‹¼æ¥
+                            // Æ´½Ó
                             resultHtml = '<p>' + pasteHtml + '</p>';
 
-                            // æŸ¥è¯¢é“¾æ¥
+                            // ²éÑ¯Á´½Ó
                             resultHtml = resultHtml.replace(/<p>(https?:\/\/.*?)<\/p>/ig, function (match, link) {
                                 return '<p><a href="' + link + '" target="_blank">' + link + '</p>';
                             });
@@ -2422,30 +2422,30 @@ _e(function (E, $) {
                     }
                     
                 } else if (ieData && ieData.getData) {
-                    // IE ç›´æ¥ä»å‰ªåˆ‡æ¿ä¸­å–å‡ºçº¯æ–‡æœ¬æ ¼å¼
+                    // IE Ö±½Ó´Ó¼ôÇĞ°åÖĞÈ¡³ö´¿ÎÄ±¾¸ñÊ½
                     resultHtml = ieData.getData('text');
                     if (!resultHtml) {
                         return;
                     }
-                    // æ‹¼æ¥ä¸º <p> æ ‡ç­¾
+                    // Æ´½ÓÎª <p> ±êÇ©
                     resultHtml = '<p>' + resultHtml + '</p>';
                     resultHtml = resultHtml.replace(new RegExp('\n', 'g'), '</p><p>');
                 } else {
-                    // å…¶ä»–æƒ…å†µ
+                    // ÆäËûÇé¿ö
                     return;
                 }
             }
 
-            // æ‰§è¡Œå‘½ä»¤
+            // Ö´ĞĞÃüÁî
             if (resultHtml) {
                 editor.command(e, 'insertHtml', resultHtml);
 
-                // åˆ é™¤å†…å®¹ä¸ºç©ºçš„ p å’ŒåµŒå¥—çš„ p
+                // É¾³ıÄÚÈİÎª¿ÕµÄ p ºÍÇ¶Ì×µÄ p
                 self.clearEmptyOrNestP();
             }
         });
 
-        // å¤„ç†ç²˜è´´çš„å†…å®¹
+        // ´¦ÀíÕ³ÌùµÄÄÚÈİ
         function handle(elem) {
             if (!elem || !elem.nodeType || !elem.nodeName) {
                 return;
@@ -2455,22 +2455,22 @@ _e(function (E, $) {
             var nodeType = elem.nodeType;
             var childNodesClone;
 
-            // åªå¤„ç†æ–‡æœ¬å’Œæ™®é€šnodeæ ‡ç­¾
+            // Ö»´¦ÀíÎÄ±¾ºÍÆÕÍ¨node±êÇ©
             if (nodeType !== 3 && nodeType !== 1) {
                 return;
             }
 
             $elem = $(elem);
 
-            // å¦‚æœæ˜¯å®¹å™¨ï¼Œåˆ™ç»§ç»­æ·±åº¦éå†
+            // Èç¹ûÊÇÈİÆ÷£¬Ôò¼ÌĞøÉî¶È±éÀú
             if (nodeName === 'div') {
                 childNodesClone = [];
                 $.each(elem.childNodes, function (index, item) {
-                    // elem.childNodes å¯è·å–TEXTèŠ‚ç‚¹ï¼Œè€Œ $elem.children() å°±è·å–ä¸åˆ°
-                    // å…ˆå°† elem.childNodes æ‹·è´ä¸€ä»½ï¼Œä¸€é¢åœ¨å¾ªç¯é€’å½’è¿‡ç¨‹ä¸­ elem å‘ç”Ÿå˜åŒ–
+                    // elem.childNodes ¿É»ñÈ¡TEXT½Úµã£¬¶ø $elem.children() ¾Í»ñÈ¡²»µ½
+                    // ÏÈ½« elem.childNodes ¿½±´Ò»·İ£¬Ò»ÃæÔÚÑ­»·µİ¹é¹ı³ÌÖĞ elem ·¢Éú±ä»¯
                     childNodesClone.push(item);
                 });
-                // éå†å­å…ƒç´ ï¼Œæ‰§è¡Œæ“ä½œ
+                // ±éÀú×ÓÔªËØ£¬Ö´ĞĞ²Ù×÷
                 $.each(childNodesClone, function () {
                     handle(this);
                 });
@@ -2478,28 +2478,28 @@ _e(function (E, $) {
             }
             
             if (legalTagArr.indexOf(nodeName) >= 0) {
-                // å¦‚æœæ˜¯åˆæ³•æ ‡ç­¾ä¹‹å†…çš„ï¼Œåˆ™æ ¹æ®å…ƒç´ ç±»å‹ï¼Œè·å–å€¼
+                // Èç¹ûÊÇºÏ·¨±êÇ©Ö®ÄÚµÄ£¬Ôò¸ù¾İÔªËØÀàĞÍ£¬»ñÈ¡Öµ
                 resultHtml += getResult(elem);
             } else if (nodeType === 3) {
-                // å¦‚æœæ˜¯æ–‡æœ¬ï¼Œåˆ™ç›´æ¥æ’å…¥ p æ ‡ç­¾
+                // Èç¹ûÊÇÎÄ±¾£¬ÔòÖ±½Ó²åÈë p ±êÇ©
                 resultHtml += '<p>' + elem.textContent + '</p>';
             } else if (nodeName === 'br') {
-                // <br>ä¿ç•™
+                // <br>±£Áô
                 resultHtml += '<br/>';
             }
             else {
-                // å¿½ç•¥çš„æ ‡ç­¾
+                // ºöÂÔµÄ±êÇ©
                 if (['meta', 'style', 'script', 'object', 'form', 'iframe', 'hr'].indexOf(nodeName) >= 0) {
                     return;
                 }
-                // å…¶ä»–æ ‡ç­¾ï¼Œç§»é™¤å±æ€§ï¼Œæ’å…¥ p æ ‡ç­¾
+                // ÆäËû±êÇ©£¬ÒÆ³ıÊôĞÔ£¬²åÈë p ±êÇ©
                 $elem = $(removeAttrs(elem));
-                // æ³¨æ„ï¼Œè¿™é‡Œçš„ clone() æ˜¯å¿…é¡»çš„ï¼Œå¦åˆ™ä¼šå‡ºé”™
+                // ×¢Òâ£¬ÕâÀïµÄ clone() ÊÇ±ØĞëµÄ£¬·ñÔò»á³ö´í
                 resultHtml += $('<div>').append($elem.clone()).html();
             }
         }
 
-        // è·å–å…ƒç´ çš„ç»“æœ
+        // »ñÈ¡ÔªËØµÄ½á¹û
         function getResult(elem) {
             var nodeName = elem.nodeName.toLowerCase();
             var $elem;
@@ -2508,18 +2508,18 @@ _e(function (E, $) {
 
             if (['blockquote'].indexOf(nodeName) >= 0) {
 
-                // ç›´æ¥å–å‡ºå…ƒç´ textå³å¯
+                // Ö±½ÓÈ¡³öÔªËØtext¼´¿É
                 $elem = $(elem);
                 return '<' + nodeName + '>' + $elem.text() + '</' + nodeName + '>';
 
             } else if (['p', 'h1', 'h2', 'h3', 'h4', 'h5'].indexOf(nodeName) >= 0) {
 
-                //p head å–å‡º text å’Œé“¾æ¥
+                //p head È¡³ö text ºÍÁ´½Ó
                 elem = removeAttrs(elem);
                 $elem = $(elem);
                 htmlForP = $elem.html();
 
-                // å‰”é™¤ a img ä¹‹å¤–çš„å…ƒç´ 
+                // ÌŞ³ı a img Ö®ÍâµÄÔªËØ
                 htmlForP = htmlForP.replace(/<.*?>/ig, function (tag) {
                     if (tag === '</a>' || tag.indexOf('<a ') === 0 || tag.indexOf('<img ') === 0) {
                         return tag;
@@ -2532,7 +2532,7 @@ _e(function (E, $) {
 
             } else if (['ul', 'ol'].indexOf(nodeName) >= 0) {
                 
-                // ul olå…ƒç´ ï¼Œè·å–å­å…ƒç´ ï¼ˆliå…ƒç´ ï¼‰çš„text link imgï¼Œå†æ‹¼æ¥
+                // ul olÔªËØ£¬»ñÈ¡×ÓÔªËØ£¨liÔªËØ£©µÄtext link img£¬ÔÙÆ´½Ó
                 $elem = $(elem);
                 $elem.children().each(function () {
                     var $li = $(removeAttrs(this));
@@ -2552,34 +2552,34 @@ _e(function (E, $) {
             
             } else {
                 
-                // å…¶ä»–å…ƒç´ ï¼Œç§»é™¤å…ƒç´ å±æ€§
+                // ÆäËûÔªËØ£¬ÒÆ³ıÔªËØÊôĞÔ
                 $elem = $(removeAttrs(elem));
                 return $('<div>').append($elem).html();
             }
         }
 
-        // ç§»é™¤ä¸€ä¸ªå…ƒç´ ï¼ˆå­å…ƒç´ ï¼‰çš„attr
+        // ÒÆ³ıÒ»¸öÔªËØ£¨×ÓÔªËØ£©µÄattr
         function removeAttrs(elem) {
             var attrs = elem.attributes || [];
             var attrNames = [];
-            var exception = ['href', 'target', 'src', 'alt', 'rowspan', 'colspan']; //ä¾‹å¤–æƒ…å†µ
+            var exception = ['href', 'target', 'src', 'alt', 'rowspan', 'colspan']; //ÀıÍâÇé¿ö
 
-            // å…ˆå­˜å‚¨ä¸‹elemä¸­æ‰€æœ‰ attr çš„åç§°
+            // ÏÈ´æ´¢ÏÂelemÖĞËùÓĞ attr µÄÃû³Æ
             $.each(attrs, function (key, attr) {
                 if (attr && attr.nodeType === 2) {
                     attrNames.push(attr.nodeName);
                 }
             });
-            // å†æ ¹æ®åç§°åˆ é™¤æ‰€æœ‰attr
+            // ÔÙ¸ù¾İÃû³ÆÉ¾³ıËùÓĞattr
             $.each(attrNames, function (key, attr) {
                 if (exception.indexOf(attr) < 0) {
-                    // é™¤äº† exception è§„å®šçš„ä¾‹å¤–æƒ…å†µï¼Œåˆ é™¤å…¶ä»–å±æ€§
+                    // ³ıÁË exception ¹æ¶¨µÄÀıÍâÇé¿ö£¬É¾³ıÆäËûÊôĞÔ
                     elem.removeAttribute(attr);
                 }
             });
 
 
-            // é€’å½’å­èŠ‚ç‚¹
+            // µİ¹é×Ó½Úµã
             var children = elem.childNodes;
             if (children.length) {
                 $.each(children, function (key, value) {
@@ -2591,7 +2591,7 @@ _e(function (E, $) {
         }
     };
 
-    // ç»‘å®š $txt.formatText() æ–¹æ³•
+    // °ó¶¨ $txt.formatText() ·½·¨
     Txt.fn.bindFormatText = function () {
         var self = this;
         var editor = self.editor;
@@ -2601,30 +2601,30 @@ _e(function (E, $) {
         var length = legalTagArr.length;
         var regArr = [];
 
-        // å°† E.config.legalTags é…ç½®çš„æœ‰æ•ˆå­—ç¬¦ï¼Œç”Ÿæˆæ­£åˆ™è¡¨è¾¾å¼
+        // ½« E.config.legalTags ÅäÖÃµÄÓĞĞ§×Ö·û£¬Éú³ÉÕıÔò±í´ïÊ½
         $.each(legalTagArr, function (k, tag) {
             var reg = '\>\\s*\<(' + tag + ')\>';
             regArr.push(new RegExp(reg, 'ig'));
         });
 
-        // å¢åŠ  li 
+        // Ôö¼Ó li 
         regArr.push(new RegExp('\>\\s*\<(li)\>', 'ig'));
 
-        // å¢åŠ  tr
+        // Ôö¼Ó tr
         regArr.push(new RegExp('\>\\s*\<(tr)\>', 'ig'));
 
-        // å¢åŠ  code
+        // Ôö¼Ó code
         regArr.push(new RegExp('\>\\s*\<(code)\>', 'ig'));
 
-        // ç”Ÿæˆ formatText æ–¹æ³•
+        // Éú³É formatText ·½·¨
         $txt.formatText = function () {
             var $temp = $('<div>');
             var html = $txt.html();
 
-            // å»é™¤ç©ºæ ¼
+            // È¥³ı¿Õ¸ñ
             html = html.replace(/\s*</ig, '<');
 
-            // æ®µè½ã€è¡¨æ ¼ä¹‹é—´æ¢è¡Œ
+            // ¶ÎÂä¡¢±í¸ñÖ®¼ä»»ĞĞ
             $.each(regArr, function (k, reg) {
                 if (!reg.test(html)) {
                     return;
@@ -2639,7 +2639,7 @@ _e(function (E, $) {
         };
     };
 
-    // å®šåˆ¶ $txt.html æ–¹æ³•
+    // ¶¨ÖÆ $txt.html ·½·¨
     Txt.fn.bindHtml = function () {
         var self = this;
         var editor = self.editor;
@@ -2651,23 +2651,23 @@ _e(function (E, $) {
             var result;
 
             if (valueNodeName === 'div') {
-                // div ç”Ÿæˆçš„ç¼–è¾‘å™¨ï¼Œå–å€¼ã€èµ‹å€¼ï¼Œéƒ½ç›´æ¥è§¦å‘jqueryçš„htmlæ–¹æ³•
+                // div Éú³ÉµÄ±à¼­Æ÷£¬È¡Öµ¡¢¸³Öµ£¬¶¼Ö±½Ó´¥·¢jqueryµÄhtml·½·¨
                 result = $.fn.html.call($txt, html);
             }
 
-            // textarea ç”Ÿæˆçš„ç¼–è¾‘å™¨ï¼Œåˆ™éœ€è¦è€ƒè™‘èµ‹å€¼æ—¶ï¼Œä¹Ÿç»™textareaèµ‹å€¼
+            // textarea Éú³ÉµÄ±à¼­Æ÷£¬ÔòĞèÒª¿¼ÂÇ¸³ÖµÊ±£¬Ò²¸øtextarea¸³Öµ
 
             if (html === undefined) {
-                // å–å€¼ï¼Œç›´æ¥è§¦å‘jqueryåŸç”Ÿhtmlæ–¹æ³•
+                // È¡Öµ£¬Ö±½Ó´¥·¢jqueryÔ­Éúhtml·½·¨
                 result = $.fn.html.call($txt);
 
-                // æ›¿æ¢ html ä¸­ï¼Œsrcå’Œhrefå±æ€§ä¸­çš„ & å­—ç¬¦ã€‚
-                // å› ä¸º .html() æˆ–è€… .innerHTML ä¼šæŠŠæ‰€æœ‰çš„ & å­—ç¬¦éƒ½æ”¹æˆ &amp; ä½†æ˜¯ src å’Œ href ä¸­çš„è¦ä¿æŒ &
+                // Ìæ»» html ÖĞ£¬srcºÍhrefÊôĞÔÖĞµÄ & ×Ö·û¡£
+                // ÒòÎª .html() »òÕß .innerHTML »á°ÑËùÓĞµÄ & ×Ö·û¶¼¸Ä³É &amp; µ«ÊÇ src ºÍ href ÖĞµÄÒª±£³Ö &
                 result = result.replace(/(href|src)\=\"(.*)\"/igm, function (a, b, c) {
                     return b + '="' + c.replace('&amp;', '&') + '"';
                 });
             } else {
-                // èµ‹å€¼ï¼Œéœ€è¦åŒæ—¶ç»™ textarea èµ‹å€¼
+                // ¸³Öµ£¬ĞèÒªÍ¬Ê±¸ø textarea ¸³Öµ
                 result = $.fn.html.call($txt, html);
                 $valueContainer.val(html);
             }
@@ -2675,7 +2675,7 @@ _e(function (E, $) {
             if (html === undefined) {
                 return result;
             } else {
-                // æ‰‹åŠ¨è§¦å‘ change äº‹ä»¶ï¼Œå› ä¸º $txt ç›‘æ§äº† change äº‹ä»¶æ¥åˆ¤æ–­æ˜¯å¦éœ€è¦æ‰§è¡Œ editor.onchange 
+                // ÊÖ¶¯´¥·¢ change ÊÂ¼ş£¬ÒòÎª $txt ¼à¿ØÁË change ÊÂ¼şÀ´ÅĞ¶ÏÊÇ·ñĞèÒªÖ´ĞĞ editor.onchange 
                 $txt.change();
             }
         };
@@ -2688,14 +2688,14 @@ _e(function (E, $) {
 
     var txtChangeEventNames = 'propertychange change click keyup input paste';
 
-    // æ¸²æŸ“
+    // äÖÈ¾
     Txt.fn.render = function () {
         var $txt = this.$txt;
         var $editorContainer = this.editor.$editorContainer;
         $editorContainer.append($txt);
     };
 
-    // è®¡ç®—é«˜åº¦
+    // ¼ÆËã¸ß¶È
     Txt.fn.initHeight = function () {
         var editor = this.editor;
         var $txt = this.$txt;
@@ -2703,43 +2703,43 @@ _e(function (E, $) {
         var menuHeight = editor.menuContainer.height();
         var txtHeight = valueContainerHeight - menuHeight;
 
-        // é™åˆ¶æœ€å°ä¸º 50px
+        // ÏŞÖÆ×îĞ¡Îª 50px
         txtHeight = txtHeight < 50 ? 50 : txtHeight;
 
         $txt.height(txtHeight);
 
-        // è®°å½•åŸå§‹é«˜åº¦
+        // ¼ÇÂ¼Ô­Ê¼¸ß¶È
         editor.valueContainerHeight = valueContainerHeight;
 
-        // è®¾ç½® max-height
+        // ÉèÖÃ max-height
         this.initMaxHeight(txtHeight, menuHeight);
     };
 
-    // è®¡ç®—æœ€å¤§é«˜åº¦
+    // ¼ÆËã×î´ó¸ß¶È
     Txt.fn.initMaxHeight = function (txtHeight, menuHeight) {
         var editor = this.editor;
         var $menuContainer = editor.menuContainer.$menuContainer;
         var $txt = this.$txt;
         var $wrap = $('<div>');
 
-        // éœ€è¦æµè§ˆå™¨æ”¯æŒ max-heightï¼Œå¦åˆ™ä¸ç®¡
+        // ĞèÒªä¯ÀÀÆ÷Ö§³Ö max-height£¬·ñÔò²»¹Ü
         if (window.getComputedStyle && 'max-height'in window.getComputedStyle($txt.get(0))) {
-            // è·å– max-height å¹¶åˆ¤æ–­æ˜¯å¦æœ‰å€¼
+            // »ñÈ¡ max-height ²¢ÅĞ¶ÏÊÇ·ñÓĞÖµ
             var maxHeight = parseInt(editor.$valueContainer.css('max-height'));
             if (isNaN(maxHeight)) {
                 return;
             }
 
-            // max-height å’Œã€å…¨å±ã€æš‚æ—¶æœ‰å†²çª
+            // max-height ºÍ¡ºÈ«ÆÁ¡»ÔİÊ±ÓĞ³åÍ»
             if (editor.menus.fullscreen) {
-                E.warn('max-heightå’Œã€å…¨å±ã€èœå•ä¸€èµ·ä½¿ç”¨æ—¶ï¼Œä¼šæœ‰ä¸€äº›é—®é¢˜å°šæœªè§£å†³ï¼Œè¯·æš‚æ—¶ä¸è¦ä¸¤ä¸ªåŒæ—¶ä½¿ç”¨');
+                E.warn('max-heightºÍ¡ºÈ«ÆÁ¡»²Ëµ¥Ò»ÆğÊ¹ÓÃÊ±£¬»áÓĞÒ»Ğ©ÎÊÌâÉĞÎ´½â¾ö£¬ÇëÔİÊ±²»ÒªÁ½¸öÍ¬Ê±Ê¹ÓÃ');
                 return;
             }
 
-            // æ ‡è®°
+            // ±ê¼Ç
             editor.useMaxHeight = true;
 
-            // è®¾ç½®maxheight
+            // ÉèÖÃmaxheight
             $wrap.css({
                 'max-height': (maxHeight - menuHeight) + 'px',
                 'overflow-y': 'auto'
@@ -2750,7 +2750,7 @@ _e(function (E, $) {
                 'min-height': txtHeight + 'px'
             });
 
-            // æ»šåŠ¨å¼ï¼Œèœå•é˜´å½±
+            // ¹ö¶¯Ê½£¬²Ëµ¥ÒõÓ°
             $wrap.on('scroll', function () {
                 if ($txt.parent().scrollTop() > 10) {
                     $menuContainer.addClass('wangEditor-menu-shadow');
@@ -2759,12 +2759,12 @@ _e(function (E, $) {
                 }
             });
 
-            // éœ€åœ¨ç¼–è¾‘å™¨åŒºåŸŸå¤–é¢å†åŒ…è£¹ä¸€å±‚
+            // ĞèÔÚ±à¼­Æ÷ÇøÓòÍâÃæÔÙ°ü¹üÒ»²ã
             $txt.wrap($wrap);
         }
     };
 
-    // ä¿å­˜é€‰åŒº
+    // ±£´æÑ¡Çø
     Txt.fn.saveSelectionEvent = function () {
         var $txt = this.$txt;
         var editor = this.editor;
@@ -2775,9 +2775,9 @@ _e(function (E, $) {
             editor.saveSelection();
         }
 
-        // åŒæ­¥ä¿å­˜é€‰åŒº
+        // Í¬²½±£´æÑ¡Çø
         function saveSync() {
-            // 100msä¹‹å†…ï¼Œä¸é‡å¤ä¿å­˜
+            // 100msÖ®ÄÚ£¬²»ÖØ¸´±£´æ
             if (Date.now() - dt < 100) {
                 return;
             }
@@ -2786,33 +2786,33 @@ _e(function (E, $) {
             save();
         }
 
-        // å¼‚æ­¥ä¿å­˜é€‰åŒº
+        // Òì²½±£´æÑ¡Çø
         function saveAync() {
-            // èŠ‚æµï¼Œé˜²æ­¢é«˜é¢‘ç‡é‡å¤æ“ä½œ
+            // ½ÚÁ÷£¬·ÀÖ¹¸ßÆµÂÊÖØ¸´²Ù×÷
             if (timeoutId) {
                 clearTimeout(timeoutId);
             }
             timeoutId = setTimeout(save, 300);
         }
 
-        // txt change ã€focusã€blur æ—¶éšæ—¶ä¿å­˜é€‰åŒº
+        // txt change ¡¢focus¡¢blur Ê±ËæÊ±±£´æÑ¡Çø
         $txt.on(txtChangeEventNames + ' focus blur', function (e) {
-            // å…ˆåŒæ­¥ä¿å­˜é€‰åŒºï¼Œä¸ºäº†è®©æ¥ä¸‹æ¥å°±é©¬ä¸Šè¦æ‰§è¡Œ editor.getRangeElem() çš„ç¨‹åº
-            // èƒ½å¤Ÿè·å–åˆ°æ­£ç¡®çš„ rangeElem
+            // ÏÈÍ¬²½±£´æÑ¡Çø£¬ÎªÁËÈÃ½ÓÏÂÀ´¾ÍÂíÉÏÒªÖ´ĞĞ editor.getRangeElem() µÄ³ÌĞò
+            // ÄÜ¹»»ñÈ¡µ½ÕıÈ·µÄ rangeElem
             saveSync();
 
-            // å†å¼‚æ­¥ä¿å­˜é€‰åŒºï¼Œä¸ºäº†ç¡®å®šæ›´åŠ å‡†ç¡®çš„é€‰åŒºï¼Œä¸ºåç»­çš„æ“ä½œåšå‡†å¤‡
+            // ÔÙÒì²½±£´æÑ¡Çø£¬ÎªÁËÈ·¶¨¸ü¼Ó×¼È·µÄÑ¡Çø£¬ÎªºóĞøµÄ²Ù×÷×ö×¼±¸
             saveAync();
         });
 
-        // é¼ æ ‡æ‹–æ‹½é€‰æ‹©æ—¶ï¼Œå¯èƒ½ä¼šæ‹–æ‹½åˆ°ç¼–è¾‘å™¨åŒºåŸŸå¤–é¢å†æ¾æ‰‹ï¼Œæ­¤æ—¶ $txt å°±ç›‘å¬ä¸åˆ° clickäº‹ä»¶äº†
+        // Êó±êÍÏ×§Ñ¡ÔñÊ±£¬¿ÉÄÜ»áÍÏ×§µ½±à¼­Æ÷ÇøÓòÍâÃæÔÙËÉÊÖ£¬´ËÊ± $txt ¾Í¼àÌı²»µ½ clickÊÂ¼şÁË
         $txt.on('mousedown', function () {
             $txt.on('mouseleave.saveSelection', function (e) {
-                // å…ˆåŒæ­¥åå¼‚æ­¥ï¼Œå¦‚ä¸Šè¿°æ³¨é‡Š
+                // ÏÈÍ¬²½ºóÒì²½£¬ÈçÉÏÊö×¢ÊÍ
                 saveSync();
                 saveAync();
 
-                // é¡ºé“å§èœå•çŠ¶æ€ä¹Ÿæ›´æ–°äº†
+                // Ë³µÀ°É²Ëµ¥×´Ì¬Ò²¸üĞÂÁË
                 editor.updateMenuStyle();
             });
         }).on('mouseup', function () {
@@ -2821,40 +2821,40 @@ _e(function (E, $) {
         
     };
 
-    // éšæ—¶æ›´æ–° value
+    // ËæÊ±¸üĞÂ value
     Txt.fn.updateValueEvent = function () {
         var $txt = this.$txt;
         var editor = this.editor;
         var timeoutId, oldValue;
 
-        // è§¦å‘ onchange äº‹ä»¶
+        // ´¥·¢ onchange ÊÂ¼ş
         function doOnchange() {
             var val = $txt.html();
             if (oldValue === val) {
-                // æ— å˜åŒ–
+                // ÎŞ±ä»¯
                 return;
             }
 
-            // è§¦å‘ onchange äº‹ä»¶
+            // ´¥·¢ onchange ÊÂ¼ş
             if (editor.onchange && typeof editor.onchange === 'function') {
                 editor.onchange.call(editor);
             }
 
-            // æ›´æ–°å†…å®¹
+            // ¸üĞÂÄÚÈİ
             editor.updateValue();
 
-            // è®°å½•æœ€æ–°å†…å®¹
+            // ¼ÇÂ¼×îĞÂÄÚÈİ
             oldValue = val;
         }
 
-        // txt change æ—¶éšæ—¶æ›´æ–°å†…å®¹
+        // txt change Ê±ËæÊ±¸üĞÂÄÚÈİ
         $txt.on(txtChangeEventNames, function (e) {
-            // åˆå§‹åŒ–
+            // ³õÊ¼»¯
             if (oldValue == null) {
                 oldValue = $txt.html();
             }
 
-            // ç›‘æ§å†…å®¹å˜åŒ–ï¼ˆåœæ­¢æ“ä½œ 100ms ä¹‹åç«‹å³æ‰§è¡Œï¼‰
+            // ¼à¿ØÄÚÈİ±ä»¯£¨Í£Ö¹²Ù×÷ 100ms Ö®ºóÁ¢¼´Ö´ĞĞ£©
             if (timeoutId) {
                 clearTimeout(timeoutId);
             }
@@ -2862,18 +2862,18 @@ _e(function (E, $) {
         });
     };
 
-    // éšæ—¶æ›´æ–° menustyle
+    // ËæÊ±¸üĞÂ menustyle
     Txt.fn.updateMenuStyleEvent = function () {
         var $txt = this.$txt;
         var editor = this.editor;
 
-        // txt change æ—¶éšæ—¶æ›´æ–°å†…å®¹
+        // txt change Ê±ËæÊ±¸üĞÂÄÚÈİ
         $txt.on(txtChangeEventNames, function (e) {
             editor.updateMenuStyle();
         });
     };
 
-    // æœ€åæ’å…¥è¯•å›¾æ’å…¥ <p><br><p>
+    // ×îºó²åÈëÊÔÍ¼²åÈë <p><br><p>
     Txt.fn.insertEmptyP = function () {
         var $txt = this.$txt;
         var $children = $txt.children();
@@ -2888,7 +2888,7 @@ _e(function (E, $) {
         }
     };
 
-    // å°†ç¼–è¾‘å™¨æš´éœ²å‡ºæ¥çš„æ–‡å­—å’Œå›¾ç‰‡ï¼Œéƒ½ç”¨ p æ¥åŒ…è£¹
+    // ½«±à¼­Æ÷±©Â¶³öÀ´µÄÎÄ×ÖºÍÍ¼Æ¬£¬¶¼ÓÃ p À´°ü¹ü
     Txt.fn.wrapImgAndText = function () {
         var $txt = this.$txt;
         var $imgs = $txt.children('img');
@@ -2897,12 +2897,12 @@ _e(function (E, $) {
         var childrenLength = childNodes.length;
         var i, childNode, p;
 
-        // å¤„ç†å›¾ç‰‡
+        // ´¦ÀíÍ¼Æ¬
         $imgs.length && $imgs.each(function () {
             $(this).wrap('<p>');
         });
 
-        // å¤„ç†æ–‡å­—
+        // ´¦ÀíÎÄ×Ö
         for (i = 0; i < childrenLength; i++) {
             childNode = childNodes[i];
             if (childNode.nodeType === 3 && childNode.textContent && $.trim(childNode.textContent)) {
@@ -2911,7 +2911,7 @@ _e(function (E, $) {
         }
     };
 
-    // æ¸…ç©ºå†…å®¹ä¸ºç©ºçš„<p>ï¼Œä»¥åŠé‡å¤åŒ…è£¹çš„<p>ï¼ˆåœ¨windowsä¸‹çš„chromeç²˜è´´æ–‡å­—ä¹‹åï¼Œä¼šå‡ºç°ä¸Šè¿°æƒ…å†µï¼‰
+    // Çå¿ÕÄÚÈİÎª¿ÕµÄ<p>£¬ÒÔ¼°ÖØ¸´°ü¹üµÄ<p>£¨ÔÚwindowsÏÂµÄchromeÕ³ÌùÎÄ×ÖÖ®ºó£¬»á³öÏÖÉÏÊöÇé¿ö£©
     Txt.fn.clearEmptyOrNestP = function () {
         var $txt = this.$txt;
         var $pList = $txt.find('p');
@@ -2923,13 +2923,13 @@ _e(function (E, $) {
             var $firstChild;
             var content = $.trim($p.html());
 
-            // å†…å®¹ä¸ºç©ºçš„p
+            // ÄÚÈİÎª¿ÕµÄp
             if (!content) {
                 $p.remove();
                 return;
             }
 
-            // åµŒå¥—çš„p
+            // Ç¶Ì×µÄp
             if (childrenLength === 1) {
                 $firstChild = $children.first();
                 if ($firstChild.get(0) && $firstChild.get(0).nodeName === 'P') {
@@ -2939,7 +2939,7 @@ _e(function (E, $) {
         });
     };
 
-    // è·å– scrollTop
+    // »ñÈ¡ scrollTop
     Txt.fn.scrollTop = function (val) {
         var self = this;
         var editor = self.editor;
@@ -2952,7 +2952,7 @@ _e(function (E, $) {
         }
     };
 
-    // é¼ æ ‡hoveræ—¶å€™ï¼Œæ˜¾ç¤ºpã€headçš„é«˜åº¦
+    // Êó±êhoverÊ±ºò£¬ÏÔÊ¾p¡¢headµÄ¸ß¶È
     Txt.fn.showHeightOnHover = function () {
         var editor = this.editor;
         var $editorContainer = editor.$editorContainer;
@@ -2977,26 +2977,26 @@ _e(function (E, $) {
             var marginBottom = parseInt($target.css('margin-bottom'), 10);
             var paddingBottom = parseInt($target.css('padding-bottom'), 10);
 
-            // è®¡ç®—åˆæ­¥çš„ç»“æœ
+            // ¼ÆËã³õ²½µÄ½á¹û
             var resultHeight = height + paddingTop + marginTop + paddingBottom + marginBottom;
             var resultTop = top + menuContainer.height();
             
             // var spaceValue;
 
-            // // åˆ¤æ–­æ˜¯å¦è¶…å‡ºä¸‹è¾¹ç•Œ
+            // // ÅĞ¶ÏÊÇ·ñ³¬³öÏÂ±ß½ç
             // spaceValue = (resultTop + resultHeight) - (txtTop + txtHeight);
             // if (spaceValue > 0) {
             //     resultHeight = resultHeight - spaceValue;
             // }
 
-            // // åˆ¤æ–­æ˜¯å¦è¶…å‡ºäº†ä¸‹è¾¹ç•Œ
+            // // ÅĞ¶ÏÊÇ·ñ³¬³öÁËÏÂ±ß½ç
             // spaceValue = txtTop > resultTop;
             // if (spaceValue) {
             //     resultHeight = resultHeight - spaceValue;
             //     top = top + spaceValue;
             // }
 
-            // æŒ‰ç…§æœ€ç»ˆç»“æœæ¸²æŸ“
+            // °´ÕÕ×îÖÕ½á¹ûäÖÈ¾
             $tip.css({
                 height: height + paddingTop + marginTop + paddingBottom + marginBottom,
                 top: top + menuContainer.height()
@@ -3018,12 +3018,12 @@ _e(function (E, $) {
     };
 
 });
-// å·¥å…·å‡½æ•°
+// ¹¤¾ßº¯Êı
 _e(function (E, $) {
 
     // IE8 [].indexOf()
     if(!Array.prototype.indexOf){
-        //IEä½ç‰ˆæœ¬ä¸æ”¯æŒ arr.indexOf 
+        //IEµÍ°æ±¾²»Ö§³Ö arr.indexOf 
         Array.prototype.indexOf = function(elem){
             var i = 0,
                 length = this.length;
@@ -3034,7 +3034,7 @@ _e(function (E, $) {
             }
             return -1;
         };
-        //IEä½ç‰ˆæœ¬ä¸æ”¯æŒ arr.lastIndexOf
+        //IEµÍ°æ±¾²»Ö§³Ö arr.lastIndexOf
         Array.prototype.lastIndexOf = function(elem){
             var length = this.length;
             for(length = length - 1; length >= 0; length--){
@@ -3061,23 +3061,23 @@ _e(function (E, $) {
             E[value] = emptyFn;
         } else {
             E[value] = function (info) {
-                // é€šè¿‡é…ç½®æ¥æ§åˆ¶æ‰“å°è¾“å‡º
+                // Í¨¹ıÅäÖÃÀ´¿ØÖÆ´òÓ¡Êä³ö
                 if (E.config && E.config.printLog) {
-                    console[value]('wangEditoræç¤º: ' + info);
+                    console[value]('wangEditorÌáÊ¾: ' + info);
                 }
             };
         }
     });
 
-    // è·å–éšæœºæ•°
+    // »ñÈ¡Ëæ»úÊı
     E.random = function () {
         return Math.random().toString().slice(2);
     };
 
-    // æµè§ˆå™¨æ˜¯å¦æ”¯æŒ placeholder
+    // ä¯ÀÀÆ÷ÊÇ·ñÖ§³Ö placeholder
     E.placeholder = 'placeholder' in document.createElement('input');
 
-    // å…¼å®¹IE8çš„ input placeholder
+    // ¼æÈİIE8µÄ input placeholder
     E.placeholderForIE8 = function ($container) {
         if (E.placeholder) {
             return;
@@ -3099,54 +3099,54 @@ _e(function (E, $) {
         });
     };
 });
-// è¯­è¨€åŒ…
+// ÓïÑÔ°ü
 _e(function (E, $) {
     E.langs = {};
     
-    // ä¸­æ–‡
+    // ÖĞÎÄ
     E.langs['zh-cn'] = {
-        bold: 'ç²—ä½“',
-        underline: 'ä¸‹åˆ’çº¿',
-        italic: 'æ–œä½“',
-        forecolor: 'æ–‡å­—é¢œè‰²',
-        bgcolor: 'èƒŒæ™¯è‰²',
-        strikethrough: 'åˆ é™¤çº¿',
-        eraser: 'æ¸…ç©ºæ ¼å¼',
-        source: 'æºç ',
-        quote: 'å¼•ç”¨',
-        fontfamily: 'å­—ä½“',
-        fontsize: 'å­—å·',
-        head: 'æ ‡é¢˜',
-        orderlist: 'æœ‰åºåˆ—è¡¨',
-        unorderlist: 'æ— åºåˆ—è¡¨',
-        alignleft: 'å·¦å¯¹é½',
-        aligncenter: 'å±…ä¸­',
-        alignright: 'å³å¯¹é½',
-        link: 'é“¾æ¥',
-        text: 'æ–‡æœ¬',
-        submit: 'æäº¤',
-        cancel: 'å–æ¶ˆ',
-        unlink: 'å–æ¶ˆé“¾æ¥',
-        table: 'è¡¨æ ¼',
-        emotion: 'è¡¨æƒ…',
-        img: 'å›¾ç‰‡',
-        video: 'è§†é¢‘',
-        'width': 'å®½',
-        'height': 'é«˜',
-        location: 'ä½ç½®',
-        loading: 'åŠ è½½ä¸­',
-        searchlocation: 'æœç´¢ä½ç½®',
-        dynamicMap: 'åŠ¨æ€åœ°å›¾',
-        clearLocation: 'æ¸…é™¤ä½ç½®',
-        langDynamicOneLocation: 'åŠ¨æ€åœ°å›¾åªèƒ½æ˜¾ç¤ºä¸€ä¸ªä½ç½®',
-        insertcode: 'æ’å…¥ä»£ç ',
-        undo: 'æ’¤é”€',
-        redo: 'é‡å¤',
-        fullscreen: 'å…¨å±',
-        openLink: 'æ‰“å¼€é“¾æ¥'
+        bold: '´ÖÌå',
+        underline: 'ÏÂ»®Ïß',
+        italic: 'Ğ±Ìå',
+        forecolor: 'ÎÄ×ÖÑÕÉ«',
+        bgcolor: '±³¾°É«',
+        strikethrough: 'É¾³ıÏß',
+        eraser: 'Çå¿Õ¸ñÊ½',
+        source: 'Ô´Âë',
+        quote: 'ÒıÓÃ',
+        fontfamily: '×ÖÌå',
+        fontsize: '×ÖºÅ',
+        head: '±êÌâ',
+        orderlist: 'ÓĞĞòÁĞ±í',
+        unorderlist: 'ÎŞĞòÁĞ±í',
+        alignleft: '×ó¶ÔÆë',
+        aligncenter: '¾ÓÖĞ',
+        alignright: 'ÓÒ¶ÔÆë',
+        link: 'Á´½Ó',
+        text: 'ÎÄ±¾',
+        submit: 'Ìá½»',
+        cancel: 'È¡Ïû',
+        unlink: 'È¡ÏûÁ´½Ó',
+        table: '±í¸ñ',
+        emotion: '±íÇé',
+        img: 'Í¼Æ¬',
+        video: 'ÊÓÆµ',
+        'width': '¿í',
+        'height': '¸ß',
+        location: 'Î»ÖÃ',
+        loading: '¼ÓÔØÖĞ',
+        searchlocation: 'ËÑË÷Î»ÖÃ',
+        dynamicMap: '¶¯Ì¬µØÍ¼',
+        clearLocation: 'Çå³ıÎ»ÖÃ',
+        langDynamicOneLocation: '¶¯Ì¬µØÍ¼Ö»ÄÜÏÔÊ¾Ò»¸öÎ»ÖÃ',
+        insertcode: '²åÈë´úÂë',
+        undo: '³·Ïú',
+        redo: 'ÖØ¸´',
+        fullscreen: 'È«ÆÁ',
+        openLink: '´ò¿ªÁ´½Ó'
     };
 
-    // è‹±æ–‡
+    // Ó¢ÎÄ
     E.langs.en = {
         bold: 'Bold',
         underline: 'Underline',
@@ -3189,30 +3189,30 @@ _e(function (E, $) {
         openLink: 'open link'
     };
 });
-// å…¨å±€é…ç½®
+// È«¾ÖÅäÖÃ
 _e(function (E, $) {
 
     E.config = {};
 
-    // å…¨å±æ—¶çš„ z-index
+    // È«ÆÁÊ±µÄ z-index
     E.config.zindex = 10000;
 
-    // æ˜¯å¦æ‰“å°log
+    // ÊÇ·ñ´òÓ¡log
     E.config.printLog = true;
 
-    // èœå•å¸é¡¶ï¼šfalse - ä¸å¸é¡¶ï¼›number - å¸é¡¶ï¼Œå€¼ä¸ºtopå€¼
+    // ²Ëµ¥Îü¶¥£ºfalse - ²»Îü¶¥£»number - Îü¶¥£¬ÖµÎªtopÖµ
     E.config.menuFixed = 0;
 
-    // ç¼–è¾‘æºç æ—¶ï¼Œè¿‡æ»¤ javascript
+    // ±à¼­Ô´ÂëÊ±£¬¹ıÂË javascript
     E.config.jsFilter = true;
 
-    // ç¼–è¾‘å™¨å…è®¸çš„æ ‡ç­¾
+    // ±à¼­Æ÷ÔÊĞíµÄ±êÇ©
     E.config.legalTags = 'p,h1,h2,h3,h4,h5,h6,blockquote,table,ul,ol,pre';
 
-    // è¯­è¨€åŒ…
+    // ÓïÑÔ°ü
     E.config.lang = E.langs['zh-cn'];
 
-    // èœå•é…ç½®
+    // ²Ëµ¥ÅäÖÃ
     E.config.menus = [
         'source',
         '|',
@@ -3249,38 +3249,38 @@ _e(function (E, $) {
         'fullscreen'
     ];
 
-    // é¢œè‰²é…ç½®
+    // ÑÕÉ«ÅäÖÃ
     E.config.colors = {
         // 'value': 'title'
-        '#880000': 'æš—çº¢è‰²',
-        '#800080': 'ç´«è‰²',
-        '#ff0000': 'çº¢è‰²',
-        '#ff00ff': 'é²œç²‰è‰²',
-        '#000080': 'æ·±è“è‰²',
-        '#0000ff': 'è“è‰²',
-        '#00ffff': 'æ¹–è“è‰²',
-        '#008080': 'è“ç»¿è‰²',
-        '#008000': 'ç»¿è‰²',
-        '#808000': 'æ©„æ¦„è‰²',
-        '#00ff00': 'æµ…ç»¿è‰²',
-        '#ffcc00': 'æ©™é»„è‰²',
-        '#808080': 'ç°è‰²',
-        '#c0c0c0': 'é“¶è‰²',
-        '#000000': 'é»‘è‰²',
-        '#ffffff': 'ç™½è‰²'
+        '#880000': '°µºìÉ«',
+        '#800080': '×ÏÉ«',
+        '#ff0000': 'ºìÉ«',
+        '#ff00ff': 'ÏÊ·ÛÉ«',
+        '#000080': 'ÉîÀ¶É«',
+        '#0000ff': 'À¶É«',
+        '#00ffff': 'ºşÀ¶É«',
+        '#008080': 'À¶ÂÌÉ«',
+        '#008000': 'ÂÌÉ«',
+        '#808000': 'éÏé­É«',
+        '#00ff00': 'Ç³ÂÌÉ«',
+        '#ffcc00': '³È»ÆÉ«',
+        '#808080': '»ÒÉ«',
+        '#c0c0c0': 'ÒøÉ«',
+        '#000000': 'ºÚÉ«',
+        '#ffffff': '°×É«'
     };
 
-    // å­—ä½“
+    // ×ÖÌå
     E.config.familys = [
-        'å®‹ä½“', 'é»‘ä½“', 'æ¥·ä½“', 'å¾®è½¯é›…é»‘',
+        'ËÎÌå', 'ºÚÌå', '¿¬Ìå', 'Î¢ÈíÑÅºÚ',
         'Arial', 'Verdana', 'Georgia',
         'Times New Roman', 'Microsoft JhengHei',
         'Trebuchet MS', 'Courier New', 'Impact', 'Comic Sans MS', 'Consolas'
     ];
 
-    // å­—å·
+    // ×ÖºÅ
     E.config.fontsizes = {
-        // æ ¼å¼ï¼š'value': 'title'
+        // ¸ñÊ½£º'value': 'title'
         1: '12px',
         2: '13px',
         3: '16px',
@@ -3290,125 +3290,125 @@ _e(function (E, $) {
         7: '48px'
     };
 
-    // è¡¨æƒ…åŒ…
-    E.config.emotionsShow = 'icon'; // æ˜¾ç¤ºé¡¹ï¼Œé»˜è®¤ä¸º'icon'ï¼Œä¹Ÿå¯ä»¥é…ç½®æˆ'value'
+    // ±íÇé°ü
+    E.config.emotionsShow = 'icon'; // ÏÔÊ¾Ïî£¬Ä¬ÈÏÎª'icon'£¬Ò²¿ÉÒÔÅäÖÃ³É'value'
     E.config.emotions = {
         // 'default': {
-        //     title: 'é»˜è®¤',
+        //     title: 'Ä¬ÈÏ',
         //     data: './emotions.data'
         // },
         'weibo': {
-            title: 'å¾®åšè¡¨æƒ…',
+            title: 'Î¢²©±íÇé',
             data: [
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
-                    value: '[è‰æ³¥é©¬]'    
+                    value: '[²İÄàÂí]'    
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
-                    value: '[ç¥é©¬]'    
+                    value: '[ÉñÂí]'    
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
-                    value: '[æµ®äº‘]'    
+                    value: '[¸¡ÔÆ]'    
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
-                    value: '[ç»™åŠ›]'    
+                    value: '[¸øÁ¦]'    
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
-                    value: '[å›´è§‚]'    
+                    value: '[Î§¹Û]'    
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
-                    value: '[å¨æ­¦]'
+                    value: '[ÍşÎä]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif',
-                    value: '[ç†ŠçŒ«]'
+                    value: '[ĞÜÃ¨]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif',
-                    value: '[å…”å­]'
+                    value: '[ÍÃ×Ó]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif',
-                    value: '[å¥¥ç‰¹æ›¼]'
+                    value: '[°ÂÌØÂü]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif',
-                    value: '[å›§]'
+                    value: '[‡å]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/hufen_thumb.gif',
-                    value: '[äº’ç²‰]'
+                    value: '[»¥·Û]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c4/liwu_thumb.gif',
-                    value: '[ç¤¼ç‰©]'
+                    value: '[ÀñÎï]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif',
-                    value: '[å‘µå‘µ]'
+                    value: '[ºÇºÇ]'
                 },
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif',
-                    value: '[å“ˆå“ˆ]'
+                    value: '[¹ş¹ş]'
                 }
             ]
         }
     };
 
-    // ç™¾åº¦åœ°å›¾çš„key
+    // °Ù¶ÈµØÍ¼µÄkey
     E.config.mapAk = 'TVhjYjq1ICT2qqL5LdS8mwas';
 
-    // ä¸Šä¼ å›¾ç‰‡çš„é…ç½®
-    // serveråœ°å€
+    // ÉÏ´«Í¼Æ¬µÄÅäÖÃ
+    // serverµØÖ·
     E.config.uploadImgUrl = '';
-    // è¶…æ—¶æ—¶é—´
+    // ³¬Ê±Ê±¼ä
     E.config.uploadTimeout = 20 * 1000;
-    // ç”¨äºå­˜å‚¨ä¸Šä¼ å›è°ƒäº‹ä»¶
+    // ÓÃÓÚ´æ´¢ÉÏ´«»Øµ÷ÊÂ¼ş
     E.config.uploadImgFns = {};
-    // è‡ªå®šä¹‰ä¸Šä¼ å›¾ç‰‡çš„filename
+    // ×Ô¶¨ÒåÉÏ´«Í¼Æ¬µÄfilename
     // E.config.uploadImgFileName = 'customFileName';
 
-    // è‡ªå®šä¹‰ä¸Šä¼ ï¼Œè®¾ç½®ä¸º true ä¹‹åï¼Œæ˜¾ç¤ºä¸Šä¼ å›¾æ ‡
+    // ×Ô¶¨ÒåÉÏ´«£¬ÉèÖÃÎª true Ö®ºó£¬ÏÔÊ¾ÉÏ´«Í¼±ê
     E.config.customUpload = false;
-    // è‡ªå®šä¹‰ä¸Šä¼ çš„initäº‹ä»¶
+    // ×Ô¶¨ÒåÉÏ´«µÄinitÊÂ¼ş
     // E.config.customUploadInit = function () {....};
 
-    // è‡ªå®šä¹‰ä¸Šä¼ æ—¶ä¼ é€’çš„å‚æ•°ï¼ˆå¦‚ tokenï¼‰
+    // ×Ô¶¨ÒåÉÏ´«Ê±´«µİµÄ²ÎÊı£¨Èç token£©
     E.config.uploadParams = {
         /* token: 'abcdef12345' */
     };
 
-    // è‡ªå®šä¹‰ä¸Šä¼ æ˜¯çš„headerå‚æ•°
+    // ×Ô¶¨ÒåÉÏ´«ÊÇµÄheader²ÎÊı
     E.config.uploadHeaders = {
          /* 'Accept' : 'text/x-json' */
     };
 
-    // éšè—ç½‘ç»œå›¾ç‰‡ï¼Œé»˜è®¤ä¸º false
+    // Òş²ØÍøÂçÍ¼Æ¬£¬Ä¬ÈÏÎª false
     E.config.hideLinkImg = false;
 
-    // æ˜¯å¦è¿‡æ»¤ç²˜è´´å†…å®¹
+    // ÊÇ·ñ¹ıÂËÕ³ÌùÄÚÈİ
     E.config.pasteFilter = true;
 
-    // æ˜¯å¦ç²˜è´´çº¯æ–‡æœ¬ï¼Œå½“ editor.config.pasteFilter === false æ—¶å€™ï¼Œæ­¤é…ç½®å°†å¤±æ•ˆ
+    // ÊÇ·ñÕ³Ìù´¿ÎÄ±¾£¬µ± editor.config.pasteFilter === false Ê±ºò£¬´ËÅäÖÃ½«Ê§Ğ§
     E.config.pasteText = false;
 
-    // æ’å…¥ä»£ç æ—¶ï¼Œé»˜è®¤çš„è¯­è¨€
+    // ²åÈë´úÂëÊ±£¬Ä¬ÈÏµÄÓïÑÔ
     E.config.codeDefaultLang = 'javascript';
 
 });
-// å…¨å±€UI
+// È«¾ÖUI
 _e(function (E, $) {
 
      E.UI = {};
 
-     // ä¸ºèœå•è‡ªå®šä¹‰é…ç½®çš„UI
+     // Îª²Ëµ¥×Ô¶¨ÒåÅäÖÃµÄUI
      E.UI.menus = {
-        // è¿™ä¸ª default ä¸åŠ å¼•å·ï¼Œåœ¨ IE8 ä¼šæŠ¥é”™
+        // Õâ¸ö default ²»¼ÓÒıºÅ£¬ÔÚ IE8 »á±¨´í
         'default': {
             normal: '<a href="#" tabindex="-1"><i class="wangeditor-menu-img-command"></i></a>',
             selected: '.selected'
@@ -3528,7 +3528,7 @@ _e(function (E, $) {
      };
      
 });
-// å¯¹è±¡é…ç½®
+// ¶ÔÏóÅäÖÃ
 _e(function (E, $) {
 
     E.fn.initDefaultConfig = function () {
@@ -3538,7 +3538,7 @@ _e(function (E, $) {
     };
 
 });
-// å¢åŠ  container
+// Ôö¼Ó container
 _e(function (E, $) {
 
     E.fn.addEditorContainer = function () {
@@ -3546,7 +3546,7 @@ _e(function (E, $) {
     };
 
 });
-// å¢åŠ ç¼–è¾‘åŒºåŸŸå¯¹è±¡
+// Ôö¼Ó±à¼­ÇøÓò¶ÔÏó
 _e(function (E, $) {
 
     E.fn.addTxt = function () {
@@ -3557,7 +3557,7 @@ _e(function (E, $) {
     };
 
 });
-// å¢åŠ menuContainerå¯¹è±¡
+// Ôö¼ÓmenuContainer¶ÔÏó
 _e(function (E, $) {
 
     E.fn.addMenuContainer = function () {
@@ -3566,21 +3566,21 @@ _e(function (E, $) {
     };
 
 });
-// å¢åŠ menus
+// Ôö¼Ómenus
 _e(function (E, $) {
 
-    // å­˜å‚¨åˆ›å»ºèœå•çš„å‡½æ•°
+    // ´æ´¢´´½¨²Ëµ¥µÄº¯Êı
     E.createMenuFns = [];
     E.createMenu = function (fn) {
         E.createMenuFns.push(fn);
     };
 
-    // åˆ›å»ºæ‰€æœ‰èœå•
+    // ´´½¨ËùÓĞ²Ëµ¥
     E.fn.addMenus = function () {
         var editor = this;
         var menuIds = editor.config.menus;
 
-        // æ£€éªŒ menuId æ˜¯å¦åœ¨é…ç½®ä¸­å­˜åœ¨
+        // ¼ìÑé menuId ÊÇ·ñÔÚÅäÖÃÖĞ´æÔÚ
         function check(menuId) {
             if (menuIds.indexOf(menuId) >= 0) {
                 return true;
@@ -3588,14 +3588,14 @@ _e(function (E, $) {
             return false;
         }
 
-        // éå†æ‰€æœ‰çš„èœå•åˆ›å»ºå‡½æ•°ï¼Œå¹¶æ‰§è¡Œ
+        // ±éÀúËùÓĞµÄ²Ëµ¥´´½¨º¯Êı£¬²¢Ö´ĞĞ
         $.each(E.createMenuFns, function (k, createMenuFn) {
             createMenuFn.call(editor, check);
         });
     };
 
 });
-// boldèœå•
+// bold²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -3607,7 +3607,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -3615,24 +3615,24 @@ _e(function (E, $) {
             commandName: 'Bold'
         });
 
-        // å®šä¹‰é€‰ä¸­çŠ¶æ€ä¸‹çš„clickäº‹ä»¶
+        // ¶¨ÒåÑ¡ÖĞ×´Ì¬ÏÂµÄclickÊÂ¼ş
         menu.clickEventSelected = function (e) {
             var isRangeEmpty = editor.isRangeEmpty();
             if (!isRangeEmpty) {
-                // å¦‚æœé€‰åŒºæœ‰å†…å®¹ï¼Œåˆ™æ‰§è¡ŒåŸºç¡€å‘½ä»¤
+                // Èç¹ûÑ¡ÇøÓĞÄÚÈİ£¬ÔòÖ´ĞĞ»ù´¡ÃüÁî
                 editor.command(e, 'Bold');
             } else {
-                // å¦‚æœé€‰åŒºæ²¡æœ‰å†…å®¹
+                // Èç¹ûÑ¡ÇøÃ»ÓĞÄÚÈİ
                 editor.commandForElem('b,strong,h1,h2,h3,h4,h5', e, 'Bold');
             }
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// underlineèœå•
+// underline²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -3644,7 +3644,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -3652,24 +3652,24 @@ _e(function (E, $) {
             commandName: 'Underline'
         });
 
-        // å®šä¹‰é€‰ä¸­çŠ¶æ€ä¸‹çš„clickäº‹ä»¶
+        // ¶¨ÒåÑ¡ÖĞ×´Ì¬ÏÂµÄclickÊÂ¼ş
         menu.clickEventSelected = function (e) {
             var isRangeEmpty = editor.isRangeEmpty();
             if (!isRangeEmpty) {
-                // å¦‚æœé€‰åŒºæœ‰å†…å®¹ï¼Œåˆ™æ‰§è¡ŒåŸºç¡€å‘½ä»¤
+                // Èç¹ûÑ¡ÇøÓĞÄÚÈİ£¬ÔòÖ´ĞĞ»ù´¡ÃüÁî
                 editor.command(e, 'Underline');
             } else {
-                // å¦‚æœé€‰åŒºæ²¡æœ‰å†…å®¹
+                // Èç¹ûÑ¡ÇøÃ»ÓĞÄÚÈİ
                 editor.commandForElem('u,a', e, 'Underline');
             }
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// italic èœå•
+// italic ²Ëµ¥
 _e(function (E, $) {
     
     E.createMenu(function (check) {
@@ -3680,7 +3680,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -3688,24 +3688,24 @@ _e(function (E, $) {
             commandName: 'Italic'
         });
 
-        // å®šä¹‰é€‰ä¸­çŠ¶æ€ä¸‹çš„clickäº‹ä»¶
+        // ¶¨ÒåÑ¡ÖĞ×´Ì¬ÏÂµÄclickÊÂ¼ş
         menu.clickEventSelected = function (e) {
             var isRangeEmpty = editor.isRangeEmpty();
             if (!isRangeEmpty) {
-                // å¦‚æœé€‰åŒºæœ‰å†…å®¹ï¼Œåˆ™æ‰§è¡ŒåŸºç¡€å‘½ä»¤
+                // Èç¹ûÑ¡ÇøÓĞÄÚÈİ£¬ÔòÖ´ĞĞ»ù´¡ÃüÁî
                 editor.command(e, 'Italic');
             } else {
-                // å¦‚æœé€‰åŒºæ²¡æœ‰å†…å®¹
+                // Èç¹ûÑ¡ÇøÃ»ÓĞÄÚÈİ
                 editor.commandForElem('i', e, 'Italic');
             }
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// forecolor èœå•
+// forecolor ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -3717,14 +3717,14 @@ _e(function (E, $) {
         var lang = editor.config.lang;
         var configColors = editor.config.colors;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.forecolor
         });
 
-        // åˆ›å»º dropPanel
+        // ´´½¨ dropPanel
         var $content = $('<div></div>');
         $.each(configColors, function (k, v) {
             $content.append(
@@ -3737,15 +3737,15 @@ _e(function (E, $) {
             );
         });
         $content.on('click', 'a[commandValue]', function (e) {
-            // æ‰§è¡Œå‘½ä»¤
+            // Ö´ĞĞÃüÁî
             var $elem = $(this);
             var commandValue = $elem.attr('commandValue');
 
             if (menu.selected && editor.isRangeEmpty()) {
-                // å½“å‰å¤„äºé€‰ä¸­çŠ¶æ€ï¼Œå¹¶ä¸”é€‰ä¸­å†…å®¹ä¸ºç©º
+                // µ±Ç°´¦ÓÚÑ¡ÖĞ×´Ì¬£¬²¢ÇÒÑ¡ÖĞÄÚÈİÎª¿Õ
                 editor.commandForElem('font[color]', e, 'forecolor', commandValue);
             } else {
-                // å½“å‰æœªå¤„äºé€‰ä¸­çŠ¶æ€ï¼Œæˆ–è€…æœ‰é€‰ä¸­å†…å®¹ã€‚åˆ™æ‰§è¡Œé»˜è®¤å‘½ä»¤
+                // µ±Ç°Î´´¦ÓÚÑ¡ÖĞ×´Ì¬£¬»òÕßÓĞÑ¡ÖĞÄÚÈİ¡£ÔòÖ´ĞĞÄ¬ÈÏÃüÁî
                 editor.command(e, 'forecolor', commandValue);
             }
         });
@@ -3754,7 +3754,7 @@ _e(function (E, $) {
             width: 125
         });
 
-        // å®šä¹‰ update selected äº‹ä»¶
+        // ¶¨Òå update selected ÊÂ¼ş
         menu.updateSelectedEvent = function () {
             var rangeElem = editor.getRangeElem();
             rangeElem = editor.getSelfOrParentByName(rangeElem, 'font[color]');
@@ -3764,12 +3764,12 @@ _e(function (E, $) {
             return false;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// bgcolor èœå•
+// bgcolor ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -3781,7 +3781,7 @@ _e(function (E, $) {
         var lang = editor.config.lang;
         var configColors = editor.config.colors;
 
-        // æ£€æŸ¥å…ƒç´ æ˜¯å¦æœ‰ background-color: å†…è”æ ·å¼
+        // ¼ì²éÔªËØÊÇ·ñÓĞ background-color: ÄÚÁªÑùÊ½
         function checkElemFn(elem) {
             var cssText;
             if (elem && elem.style && elem.style.cssText != null) {
@@ -3793,14 +3793,14 @@ _e(function (E, $) {
             return false;
         }
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.bgcolor
         });
 
-        // åˆ›å»º dropPanel
+        // ´´½¨ dropPanel
         var $content = $('<div></div>');
         $.each(configColors, function (k, v) {
             $content.append(
@@ -3813,19 +3813,19 @@ _e(function (E, $) {
             );
         });
         $content.on('click', 'a[commandValue]', function (e) {
-            // æ‰§è¡Œå‘½ä»¤
+            // Ö´ĞĞÃüÁî
 
             var $elem = $(this);
             var commandValue = $elem.attr('commandValue');
 
             if (menu.selected && editor.isRangeEmpty()) {
-                // å½“å‰å¤„äºé€‰ä¸­çŠ¶æ€ï¼Œå¹¶ä¸”é€‰ä¸­å†…å®¹ä¸ºç©ºã€‚ä½¿ç”¨ commandForElem æ‰§è¡Œå‘½ä»¤
+                // µ±Ç°´¦ÓÚÑ¡ÖĞ×´Ì¬£¬²¢ÇÒÑ¡ÖĞÄÚÈİÎª¿Õ¡£Ê¹ÓÃ commandForElem Ö´ĞĞÃüÁî
                 editor.commandForElem({
                     selector: 'span,font',
                     check: checkElemFn
                 }, e, 'BackColor', commandValue);
             } else {
-                // å½“å‰æœªå¤„äºé€‰ä¸­çŠ¶æ€ï¼Œæˆ–è€…æœ‰é€‰ä¸­å†…å®¹ã€‚åˆ™æ‰§è¡Œé»˜è®¤å‘½ä»¤
+                // µ±Ç°Î´´¦ÓÚÑ¡ÖĞ×´Ì¬£¬»òÕßÓĞÑ¡ÖĞÄÚÈİ¡£ÔòÖ´ĞĞÄ¬ÈÏÃüÁî
                 editor.command(e, 'BackColor', commandValue);
             }
         });
@@ -3834,7 +3834,7 @@ _e(function (E, $) {
             width: 125
         });
 
-        // å®šä¹‰ update selected äº‹ä»¶
+        // ¶¨Òå update selected ÊÂ¼ş
         menu.updateSelectedEvent = function () {
             var rangeElem = editor.getRangeElem();
             rangeElem = editor.getSelfOrParentByName(rangeElem, 'span,font', checkElemFn);
@@ -3845,12 +3845,12 @@ _e(function (E, $) {
             return false;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// strikethrough èœå•
+// strikethrough ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -3861,7 +3861,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -3869,24 +3869,24 @@ _e(function (E, $) {
             commandName: 'StrikeThrough'
         });
 
-        // å®šä¹‰é€‰ä¸­çŠ¶æ€ä¸‹çš„clickäº‹ä»¶
+        // ¶¨ÒåÑ¡ÖĞ×´Ì¬ÏÂµÄclickÊÂ¼ş
         menu.clickEventSelected = function (e) {
             var isRangeEmpty = editor.isRangeEmpty();
             if (!isRangeEmpty) {
-                // å¦‚æœé€‰åŒºæœ‰å†…å®¹ï¼Œåˆ™æ‰§è¡ŒåŸºç¡€å‘½ä»¤
+                // Èç¹ûÑ¡ÇøÓĞÄÚÈİ£¬ÔòÖ´ĞĞ»ù´¡ÃüÁî
                 editor.command(e, 'StrikeThrough');
             } else {
-                // å¦‚æœé€‰åŒºæ²¡æœ‰å†…å®¹
+                // Èç¹ûÑ¡ÇøÃ»ÓĞÄÚÈİ
                 editor.commandForElem('strike', e, 'StrikeThrough');
             }
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// eraser èœå•
+// eraser ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -3897,7 +3897,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -3905,19 +3905,19 @@ _e(function (E, $) {
             commandName: 'RemoveFormat'
         });
 
-        // å®šä¹‰ç‚¹å‡»äº‹ä»¶
+        // ¶¨Òåµã»÷ÊÂ¼ş
         menu.clickEvent = function (e) {
             var isRangeEmpty = editor.isRangeEmpty();
 
             if (!isRangeEmpty) {
-                // é€‰åŒºä¸æ˜¯ç©ºçš„ï¼Œåˆ™æ‰§è¡Œé»˜è®¤å‘½ä»¤
+                // Ñ¡Çø²»ÊÇ¿ÕµÄ£¬ÔòÖ´ĞĞÄ¬ÈÏÃüÁî
                 editor.command(e, 'RemoveFormat');
                 return;
             }
 
             var $clearElem;
 
-            // è‡ªå®šä¹‰çš„å‘½ä»¤å‡½æ•°
+            // ×Ô¶¨ÒåµÄÃüÁîº¯Êı
             function commandFn() {
                 var editor = this;
                 var rangeElem;
@@ -3925,23 +3925,23 @@ _e(function (E, $) {
                 var quoteElem, $quoteElem;
                 var listElem, $listElem;
 
-                // è·å–é€‰åŒº elem
+                // »ñÈ¡Ñ¡Çø elem
                 rangeElem = editor.getRangeElem();
-                // ç¬¬ä¸€æ­¥ï¼Œè·å– quote çˆ¶å…ƒç´ 
+                // µÚÒ»²½£¬»ñÈ¡ quote ¸¸ÔªËØ
                 quoteElem = editor.getSelfOrParentByName(rangeElem, 'blockquote');
                 if (quoteElem) {
                     $quoteElem = $(quoteElem);
                     $clearElem = $('<p>' + $quoteElem.text() + '</p>');
                     $quoteElem.after($clearElem).remove();
                 }
-                // ç¬¬äºŒæ­¥ï¼Œè·å– p h çˆ¶å…ƒç´ 
+                // µÚ¶ş²½£¬»ñÈ¡ p h ¸¸ÔªËØ
                 pElem = editor.getSelfOrParentByName(rangeElem, 'p,h1,h2,h3,h4,h5');
                 if (pElem) {
                     $pElem = $(pElem);
                     $clearElem = $('<p>' + $pElem.text() + '</p>');
                     $pElem.after($clearElem).remove();
                 }
-                // ç¬¬ä¸‰æ­¥ï¼Œè·å–list
+                // µÚÈı²½£¬»ñÈ¡list
                 listElem = editor.getSelfOrParentByName(rangeElem, 'ul,ol');
                 if (listElem) {
                     $listElem = $(listElem);
@@ -3950,25 +3950,25 @@ _e(function (E, $) {
                 }
             }
 
-            // è‡ªå®šä¹‰ callback äº‹ä»¶
+            // ×Ô¶¨Òå callback ÊÂ¼ş
             function callback() {
-                // callbackä¸­ï¼Œè®¾ç½®rangeä¸ºclearElem
+                // callbackÖĞ£¬ÉèÖÃrangeÎªclearElem
                 var editor = this;
                 if ($clearElem) {
                     editor.restoreSelectionByElem($clearElem.get(0));
                 }
             }
 
-            // æ‰§è¡Œè‡ªå®šä¹‰å‘½ä»¤
+            // Ö´ĞĞ×Ô¶¨ÒåÃüÁî
             editor.customCommand(e, commandFn, callback);
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// source èœå•
+// source ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -3980,7 +3980,7 @@ _e(function (E, $) {
         var lang = editor.config.lang;
         var txtHtml;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -3989,30 +3989,30 @@ _e(function (E, $) {
 
         menu.isShowCode = false;
 
-        // æ›´æ–°å†…å®¹
+        // ¸üĞÂÄÚÈİ
         function updateValue() {
             var $code = menu.$codeTextarea;
             var $txt = editor.txt.$txt;
-            var value = $.trim($code.val()); // å–å€¼
+            var value = $.trim($code.val()); // È¡Öµ
 
             if (!value) {
                 value = '<p><br></p>';
             }
             
-            // è¿‡æ»¤jsä»£ç 
+            // ¹ıÂËjs´úÂë
             if (editor.config.jsFilter) {
                 
                 value = value.replace(/<script[\s\S]*?<\/script>/ig, '');
             }
-            // èµ‹å€¼
+            // ¸³Öµ
             try {
                 $txt.html(value);
             } catch (ex) {
-                // æ›´æ–° html æºç å‡ºé”™ï¼Œä¸€èˆ¬éƒ½æ˜¯å–æ¶ˆäº† js è¿‡æ»¤ä¹‹åï¼ŒjsæŠ¥é”™å¯¼è‡´çš„
+                // ¸üĞÂ html Ô´Âë³ö´í£¬Ò»°ã¶¼ÊÇÈ¡ÏûÁË js ¹ıÂËÖ®ºó£¬js±¨´íµ¼ÖÂµÄ
             }
         }
 
-        // å®šä¹‰clickäº‹ä»¶
+        // ¶¨ÒåclickÊÂ¼ş
         menu.clickEvent = function (e) {
             var self = this;
             var editor = self.editor;
@@ -4029,32 +4029,32 @@ _e(function (E, $) {
                 'margin-top': txtOuterHeight - txtHeight
             });
 
-            // èµ‹å€¼
+            // ¸³Öµ
             $code.val($txt.html());
 
-            // ç›‘æ§å˜åŒ–
+            // ¼à¿Ø±ä»¯
             $code.on('change', function (e) {
                 updateValue();
             });
 
-            // æ¸²æŸ“
+            // äÖÈ¾
             $txt.after($code).hide();
             $code.show();
 
-            // æ›´æ–°çŠ¶æ€
+            // ¸üĞÂ×´Ì¬
             menu.isShowCode = true;
 
-            // æ‰§è¡Œ updateSelected äº‹ä»¶
+            // Ö´ĞĞ updateSelected ÊÂ¼ş
             this.updateSelected();
 
-            // ç¦ç”¨å…¶ä»–èœå•
+            // ½ûÓÃÆäËû²Ëµ¥
             editor.disableMenusExcept('source');
 
-            // è®°å½•å½“å‰htmlå€¼
+            // ¼ÇÂ¼µ±Ç°htmlÖµ
             txtHtml = $txt.html();
         };
 
-        // å®šä¹‰é€‰ä¸­çŠ¶æ€ä¸‹çš„clickäº‹ä»¶
+        // ¶¨ÒåÑ¡ÖĞ×´Ì¬ÏÂµÄclickÊÂ¼ş
         menu.clickEventSelected = function (e) {
             var self = this;
             var editor = self.editor;
@@ -4066,23 +4066,23 @@ _e(function (E, $) {
                 return;
             }
 
-            // æ›´æ–°å†…å®¹
+            // ¸üĞÂÄÚÈİ
             updateValue();
 
-            // æ¸²æŸ“
+            // äÖÈ¾
             $code.after($txt).hide();
             $txt.show();
 
-            // æ›´æ–°çŠ¶æ€
+            // ¸üĞÂ×´Ì¬
             menu.isShowCode = false;
 
-            // æ‰§è¡Œ updateSelected äº‹ä»¶
+            // Ö´ĞĞ updateSelected ÊÂ¼ş
             this.updateSelected();
 
-            // å¯ç”¨å…¶ä»–èœå•
+            // ÆôÓÃÆäËû²Ëµ¥
             editor.enableMenusExcept('source');
 
-            // åˆ¤æ–­æ˜¯å¦æ‰§è¡Œ onchange äº‹ä»¶
+            // ÅĞ¶ÏÊÇ·ñÖ´ĞĞ onchange ÊÂ¼ş
             if ($txt.html() !== txtHtml) {
                 if (editor.onchange && typeof editor.onchange === 'function') {
                     editor.onchange.call(editor);
@@ -4090,17 +4090,17 @@ _e(function (E, $) {
             }
         };
 
-        // å®šä¹‰åˆ‡æ¢é€‰ä¸­çŠ¶æ€äº‹ä»¶
+        // ¶¨ÒåÇĞ»»Ñ¡ÖĞ×´Ì¬ÊÂ¼ş
         menu.updateSelectedEvent = function () {
             return this.isShowCode;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// quote èœå•
+// quote ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -4111,7 +4111,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -4120,7 +4120,7 @@ _e(function (E, $) {
             commandValue: 'blockquote'
         });
 
-        // å®šä¹‰clickäº‹ä»¶
+        // ¶¨ÒåclickÊÂ¼ş
         menu.clickEvent = function (e) {
             var rangeElem = editor.getRangeElem();
             var $rangeElem;
@@ -4132,7 +4132,7 @@ _e(function (E, $) {
             var $quote;
 
             if (currentQuote) {
-                // è¯´æ˜å½“å‰åœ¨quoteä¹‹å†…ï¼Œä¸åšä»»ä½•å¤„ç†
+                // ËµÃ÷µ±Ç°ÔÚquoteÖ®ÄÚ£¬²»×öÈÎºÎ´¦Àí
                 e.preventDefault();
                 return;
             }
@@ -4140,55 +4140,55 @@ _e(function (E, $) {
             rangeElem = editor.getLegalTags(rangeElem);
             $rangeElem = $(rangeElem);
 
-            // æ— æ–‡å­—ï¼Œåˆ™ä¸å…è®¸æ‰§è¡Œå¼•ç”¨
+            // ÎŞÎÄ×Ö£¬Ôò²»ÔÊĞíÖ´ĞĞÒıÓÃ
             if (!$rangeElem.text()) {
                 return;
             }
 
 
             if (!rangeElem) {
-                // æ‰§è¡Œé»˜è®¤å‘½ä»¤
-                // IE8 ä¸‹æ‰§è¡Œæ­¤å¤„ï¼ˆä¸è¿‡ï¼Œç»æµ‹è¯•ä»£ç æ— æ•ˆï¼Œä¹Ÿä¸æŠ¥é”™ï¼‰
+                // Ö´ĞĞÄ¬ÈÏÃüÁî
+                // IE8 ÏÂÖ´ĞĞ´Ë´¦£¨²»¹ı£¬¾­²âÊÔ´úÂëÎŞĞ§£¬Ò²²»±¨´í£©
                 editor.command(e, 'formatBlock', 'blockquote');
                 return;
             }
 
-            // è‡ªå®šä¹‰commandäº‹ä»¶
+            // ×Ô¶¨ÒåcommandÊÂ¼ş
             function commandFn() {
                 $quote = $('<p>' + $rangeElem.text() + '</p>');
                 $rangeElem.after($quote).remove();
                 $quote.wrap('<blockquote>');
             }
 
-            // è‡ªå®šä¹‰ callback äº‹ä»¶
+            // ×Ô¶¨Òå callback ÊÂ¼ş
             function callback() {
-                // callbackä¸­ï¼Œè®¾ç½®rangeä¸ºquote
+                // callbackÖĞ£¬ÉèÖÃrangeÎªquote
                 var editor = this;
                 if ($quote) {
                     editor.restoreSelectionByElem($quote.get(0));
                 }
             }
 
-            // æ‰§è¡Œè‡ªå®šä¹‰å‘½ä»¤
+            // Ö´ĞĞ×Ô¶¨ÒåÃüÁî
             editor.customCommand(e, commandFn, callback);
         };
 
-        // å®šä¹‰é€‰ä¸­çŠ¶æ€ä¸‹çš„clickäº‹ä»¶
+        // ¶¨ÒåÑ¡ÖĞ×´Ì¬ÏÂµÄclickÊÂ¼ş
         menu.clickEventSelected = function (e) {
             var rangeElem;
             var quoteElem;
             var $lastChild;
 
-            // è·å–å½“å‰é€‰åŒºçš„elemï¼Œå¹¶è¯•å›¾å¾€ä¸Šæ‰¾ quote å…ƒç´ 
+            // »ñÈ¡µ±Ç°Ñ¡ÇøµÄelem£¬²¢ÊÔÍ¼ÍùÉÏÕÒ quote ÔªËØ
             rangeElem = editor.getRangeElem();
             quoteElem = editor.getSelfOrParentByName(rangeElem, 'blockquote');
             if (!quoteElem) {
-                // æ²¡æ‰¾åˆ°ï¼Œåˆ™è¿”å›
+                // Ã»ÕÒµ½£¬Ôò·µ»Ø
                 e.preventDefault();
                 return;
             }
 
-            // è‡ªå®šä¹‰çš„commandäº‹ä»¶
+            // ×Ô¶¨ÒåµÄcommandÊÂ¼ş
             function commandFn() {
                 var $quoteElem;
                 var $children;
@@ -4203,29 +4203,29 @@ _e(function (E, $) {
                         } else {
                             $quoteElem.after('<p>' + $item.text() + '</p>');
                         }
-                        $lastChild = $item;  // è®°å½•æœ€åä¸€ä¸ªå­å…ƒç´ ï¼Œç”¨äºcallbackä¸­çš„rangeå®šä½
+                        $lastChild = $item;  // ¼ÇÂ¼×îºóÒ»¸ö×ÓÔªËØ£¬ÓÃÓÚcallbackÖĞµÄrange¶¨Î»
                     });
                     $quoteElem.remove();
                     return;
                 }
             }
 
-            // è‡ªå®šä¹‰çš„callbackå‡½æ•°
+            // ×Ô¶¨ÒåµÄcallbackº¯Êı
             function callback() {
-                // callbackä¸­ï¼Œè®¾ç½®rangeä¸ºlastChild
+                // callbackÖĞ£¬ÉèÖÃrangeÎªlastChild
                 var editor = this;
                 if ($lastChild) {
                     editor.restoreSelectionByElem($lastChild.get(0));
                 }
             }
 
-            // æ‰§è¡Œè‡ªå®šä¹‰å‘½ä»¤
+            // Ö´ĞĞ×Ô¶¨ÒåÃüÁî
             editor.customCommand(e, commandFn, callback);
         };
 
-        // å®šä¹‰æ›´æ–°é€‰ä¸­çŠ¶æ€çš„äº‹ä»¶
+        // ¶¨Òå¸üĞÂÑ¡ÖĞ×´Ì¬µÄÊÂ¼ş
         menu.updateSelectedEvent = function () {
-            var self = this; //èœå•å¯¹è±¡
+            var self = this; //²Ëµ¥¶ÔÏó
             var editor = self.editor;
             var rangeElem;
 
@@ -4239,17 +4239,17 @@ _e(function (E, $) {
             return false;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
 
-        // --------------- ä¸¤æ¬¡ç‚¹å‡» enter è·³å‡ºå¼•ç”¨ ---------------
+        // --------------- Á½´Îµã»÷ enter Ìø³öÒıÓÃ ---------------
         editor.ready(function () {
             var editor = this;
             var $txt = editor.txt.$txt;
-            var isPrevEnter = false;  // æ˜¯ä¸æ˜¯åˆšåˆšåœ¨quoteä¸­æŒ‰äº† enter é”®
+            var isPrevEnter = false;  // ÊÇ²»ÊÇ¸Õ¸ÕÔÚquoteÖĞ°´ÁË enter ¼ü
             $txt.on('keydown', function (e) {
                 if (e.keyCode !== 13) {
-                    // ä¸æ˜¯ enter é”®
+                    // ²»ÊÇ enter ¼ü
                     isPrevEnter = false;
                     return;
                 }
@@ -4257,13 +4257,13 @@ _e(function (E, $) {
                 var rangeElem = editor.getRangeElem();
                 rangeElem = editor.getSelfOrParentByName(rangeElem, 'blockquote');
                 if (!rangeElem) {
-                    // é€‰åŒºä¸æ˜¯ quote
+                    // Ñ¡Çø²»ÊÇ quote
                     isPrevEnter = false;
                     return;
                 }
 
                 if (!isPrevEnter) {
-                    // æœ€è¿‘æ²¡æœ‰åœ¨qoteä¸­æŒ‰enteré”®
+                    // ×î½üÃ»ÓĞÔÚqoteÖĞ°´enter¼ü
                     isPrevEnter = true;
                     return;
                 }
@@ -4274,17 +4274,17 @@ _e(function (E, $) {
                     $currentRangeElem.parent().after($currentRangeElem);
                 }
 
-                // è®¾ç½®é€‰åŒº
+                // ÉèÖÃÑ¡Çø
                 editor.restoreSelectionByElem(currentRangeElem, 'start');
 
                 isPrevEnter = false;
-                // é˜»æ­¢é»˜è®¤è¡Œæ–‡
+                // ×èÖ¹Ä¬ÈÏĞĞÎÄ
                 e.preventDefault();
 
             });
         }); // editor.ready(
 
-        // --------------- å¤„ç†quoteä¸­æ— å†…å®¹æ—¶ä¸èƒ½åˆ é™¤çš„é—®é¢˜ ---------------
+        // --------------- ´¦ÀíquoteÖĞÎŞÄÚÈİÊ±²»ÄÜÉ¾³ıµÄÎÊÌâ ---------------
         editor.ready(function () {
             var editor = this;
             var $txt = editor.txt.$txt;
@@ -4299,31 +4299,31 @@ _e(function (E, $) {
                 }
                 var $prev = $rangeElem.prev();
                 if ($prev.length) {
-                    // æœ‰ prev åˆ™å®šä½åˆ° prev æœ€å
+                    // ÓĞ prev Ôò¶¨Î»µ½ prev ×îºó
                     editor.restoreSelectionByElem($prev.get(0));
                 } else {
-                    // æ—  prev åˆ™åˆå§‹åŒ–é€‰åŒº
+                    // ÎŞ prev Ôò³õÊ¼»¯Ñ¡Çø
                     editor.initSelection();
                 }
             }
 
             $txt.on('keydown', function (e) {
                 if (e.keyCode !== 8) {
-                    // ä¸æ˜¯ backspace é”®
+                    // ²»ÊÇ backspace ¼ü
                     return;
                 }
 
                 var rangeElem = editor.getRangeElem();
                 rangeElem = editor.getSelfOrParentByName(rangeElem, 'blockquote');
                 if (!rangeElem) {
-                    // é€‰åŒºä¸æ˜¯ quote
+                    // Ñ¡Çø²»ÊÇ quote
                     return;
                 }
                 $rangeElem = $(rangeElem);
 
                 var text = $rangeElem.text();
                 if (text) {
-                    // quote ä¸­è¿˜æœ‰å†…å®¹
+                    // quote ÖĞ»¹ÓĞÄÚÈİ
                     return;
                 }
                 editor.customCommand(e, commandFn, callback);
@@ -4333,7 +4333,7 @@ _e(function (E, $) {
     });
 
 });
-// å­—ä½“ èœå•
+// ×ÖÌå ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -4345,7 +4345,7 @@ _e(function (E, $) {
         var lang = editor.config.lang;
         var configFamilys = editor.config.familys;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -4353,29 +4353,29 @@ _e(function (E, $) {
             commandName: 'fontName'
         });
 
-        // åˆå§‹åŒ–æ•°æ®
+        // ³õÊ¼»¯Êı¾İ
         var data  = {};
         /*
-            data éœ€è¦çš„ç»“æ„
+            data ĞèÒªµÄ½á¹¹
             {
                 'commandValue': 'title'
                 ...
             }
         */
         $.each(configFamilys, function (k, v) {
-            // configFamilys æ˜¯æ•°ç»„ï¼Œdata æ˜¯å¯¹è±¡
+            // configFamilys ÊÇÊı×é£¬data ÊÇ¶ÔÏó
             data[v] = v;
         });
 
-        // åˆ›å»ºdroplist
+        // ´´½¨droplist
         var tpl = '<span style="font-family:{#commandValue};">{#title}</span>';
         menu.dropList = new E.DropList(editor, menu, {
             data: data,
             tpl: tpl,
-            selectorForELemCommand: 'font[face]'  // ä¸ºäº†æ‰§è¡Œ editor.commandForElem è€Œä¼ å…¥çš„elemæŸ¥è¯¢æ–¹å¼
+            selectorForELemCommand: 'font[face]'  // ÎªÁËÖ´ĞĞ editor.commandForElem ¶ø´«ÈëµÄelem²éÑ¯·½Ê½
         });
 
-        // å®šä¹‰ update selected äº‹ä»¶
+        // ¶¨Òå update selected ÊÂ¼ş
         menu.updateSelectedEvent = function () {
             var rangeElem = editor.getRangeElem();
             rangeElem = editor.getSelfOrParentByName(rangeElem, 'font[face]');
@@ -4385,11 +4385,11 @@ _e(function (E, $) {
             return false;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 });
-// å­—å· èœå•
+// ×ÖºÅ ²Ëµ¥
 _e(function (E, $) {
     E.createMenu(function (check) {
         var menuId = 'fontsize';
@@ -4400,7 +4400,7 @@ _e(function (E, $) {
         var lang = editor.config.lang;
         var configSize = editor.config.fontsizes;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -4408,25 +4408,25 @@ _e(function (E, $) {
             commandName: 'fontSize'
         });
 
-        // åˆå§‹åŒ–æ•°æ®
+        // ³õÊ¼»¯Êı¾İ
         var data  = configSize;
         /*
-            data éœ€è¦çš„ç»“æ„
+            data ĞèÒªµÄ½á¹¹
             {
                 'commandValue': 'title'
                 ...
             }
         */
 
-        // åˆ›å»ºdroplist
+        // ´´½¨droplist
         var tpl = '<span style="font-size:{#title};">{#title}</span>';
         menu.dropList = new E.DropList(editor, menu, {
             data: data,
             tpl: tpl,
-            selectorForELemCommand: 'font[size]'  // ä¸ºäº†æ‰§è¡Œ editor.commandForElem è€Œä¼ å…¥çš„elemæŸ¥è¯¢æ–¹å¼
+            selectorForELemCommand: 'font[size]'  // ÎªÁËÖ´ĞĞ editor.commandForElem ¶ø´«ÈëµÄelem²éÑ¯·½Ê½
         });
 
-        // å®šä¹‰ update selected äº‹ä»¶
+        // ¶¨Òå update selected ÊÂ¼ş
         menu.updateSelectedEvent = function () {
             var rangeElem = editor.getRangeElem();
             rangeElem = editor.getSelfOrParentByName(rangeElem, 'font[size]');
@@ -4436,11 +4436,11 @@ _e(function (E, $) {
             return false;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 });
-// head èœå•
+// head ²Ëµ¥
 _e(function (E, $) {
     E.createMenu(function (check) {
         var menuId = 'head';
@@ -4450,7 +4450,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -4458,16 +4458,16 @@ _e(function (E, $) {
             commandName: 'formatBlock'
         });
 
-        // åˆå§‹åŒ–æ•°æ®
+        // ³õÊ¼»¯Êı¾İ
         var data  = {
-            '<h1>': 'æ ‡é¢˜1',
-            '<h2>': 'æ ‡é¢˜2',
-            '<h3>': 'æ ‡é¢˜3',
-            '<h4>': 'æ ‡é¢˜4',
-            '<h5>': 'æ ‡é¢˜5'
+            '<h1>': '±êÌâ1',
+            '<h2>': '±êÌâ2',
+            '<h3>': '±êÌâ3',
+            '<h4>': '±êÌâ4',
+            '<h5>': '±êÌâ5'
         };
         /*
-            data éœ€è¦çš„ç»“æ„
+            data ĞèÒªµÄ½á¹¹
             {
                 'commandValue': 'title'
                 ...
@@ -4479,7 +4479,7 @@ _e(function (E, $) {
             if (editor.queryCommandState('InsertOrderedList')) {
                 isOrderedList = true;
 
-                // å…ˆå–æ¶ˆæœ‰åºåˆ—è¡¨
+                // ÏÈÈ¡ÏûÓĞĞòÁĞ±í
                 editor.command(e, 'InsertOrderedList');
             } else {
                 isOrderedList = false;
@@ -4488,22 +4488,22 @@ _e(function (E, $) {
 
         function afterEvent(e) {
             if (isOrderedList) {
-                // å†è®¾ç½®æœ‰åºåˆ—è¡¨
+                // ÔÙÉèÖÃÓĞĞòÁĞ±í
                 editor.command(e, 'InsertOrderedList');
             }
         }
 
-        // åˆ›å»ºdroplist
+        // ´´½¨droplist
         var tpl = '{#commandValue}{#title}';
         menu.dropList = new E.DropList(editor, menu, {
             data: data,
             tpl: tpl,
-            // å¯¹ ol ç›´æ¥è®¾ç½® headï¼Œä¼šå‡ºç°æ¯ä¸ª li çš„ index éƒ½å˜æˆ 1 çš„é—®é¢˜ï¼Œå› æ­¤è¦å…ˆå–æ¶ˆ olï¼Œç„¶åè®¾ç½® headï¼Œæœ€åå†å¢åŠ ä¸Š ol
+            // ¶Ô ol Ö±½ÓÉèÖÃ head£¬»á³öÏÖÃ¿¸ö li µÄ index ¶¼±ä³É 1 µÄÎÊÌâ£¬Òò´ËÒªÏÈÈ¡Ïû ol£¬È»ºóÉèÖÃ head£¬×îºóÔÙÔö¼ÓÉÏ ol
             beforeEvent: beforeEvent,
             afterEvent: afterEvent
         });
 
-        // å®šä¹‰ update selected äº‹ä»¶
+        // ¶¨Òå update selected ÊÂ¼ş
         menu.updateSelectedEvent = function () {
             var rangeElem = editor.getRangeElem();
             rangeElem = editor.getSelfOrParentByName(rangeElem, 'h1,h2,h3,h4,h5');
@@ -4513,11 +4513,11 @@ _e(function (E, $) {
             return false;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 });
-// unorderlist èœå•
+// unorderlist ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -4528,7 +4528,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -4536,12 +4536,12 @@ _e(function (E, $) {
             commandName: 'InsertUnorderedList'
         });
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// orderlist èœå•
+// orderlist ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -4552,7 +4552,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -4560,12 +4560,12 @@ _e(function (E, $) {
             commandName: 'InsertOrderedList'
         });
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// alignleft èœå•
+// alignleft ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -4576,7 +4576,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -4584,7 +4584,7 @@ _e(function (E, $) {
             commandName: 'JustifyLeft'
         });
 
-        // å®šä¹‰ update selected äº‹ä»¶
+        // ¶¨Òå update selected ÊÂ¼ş
         menu.updateSelectedEvent = function () {
             var rangeElem = editor.getRangeElem();
             rangeElem = editor.getSelfOrParentByName(rangeElem, 'p,h1,h2,h3,h4,h5,li', function (elem) {
@@ -4596,7 +4596,7 @@ _e(function (E, $) {
                     }
                 }
                 if ($(elem).attr('align') === 'left') {
-                    // ff ä¸­ï¼Œè®¾ç½®align-leftä¹‹åï¼Œä¼šæ˜¯ <p align="left">xxx</p>
+                    // ff ÖĞ£¬ÉèÖÃalign-leftÖ®ºó£¬»áÊÇ <p align="left">xxx</p>
                     return true;
                 }
                 return false;
@@ -4607,12 +4607,12 @@ _e(function (E, $) {
             return false;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// aligncenter èœå•
+// aligncenter ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -4623,7 +4623,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -4631,7 +4631,7 @@ _e(function (E, $) {
             commandName: 'JustifyCenter'
         });
 
-        // å®šä¹‰ update selected äº‹ä»¶
+        // ¶¨Òå update selected ÊÂ¼ş
         menu.updateSelectedEvent = function () {
             var rangeElem = editor.getRangeElem();
             rangeElem = editor.getSelfOrParentByName(rangeElem, 'p,h1,h2,h3,h4,h5,li', function (elem) {
@@ -4643,7 +4643,7 @@ _e(function (E, $) {
                     }
                 }
                 if ($(elem).attr('align') === 'center') {
-                    // ff ä¸­ï¼Œè®¾ç½®align-centerä¹‹åï¼Œä¼šæ˜¯ <p align="center">xxx</p>
+                    // ff ÖĞ£¬ÉèÖÃalign-centerÖ®ºó£¬»áÊÇ <p align="center">xxx</p>
                     return true;
                 }
                 return false;
@@ -4654,12 +4654,12 @@ _e(function (E, $) {
             return false;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// alignright èœå•
+// alignright ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -4670,7 +4670,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -4678,7 +4678,7 @@ _e(function (E, $) {
             commandName: 'JustifyRight'
         });
 
-        // å®šä¹‰ update selected äº‹ä»¶
+        // ¶¨Òå update selected ÊÂ¼ş
         menu.updateSelectedEvent = function () {
             var rangeElem = editor.getRangeElem();
             rangeElem = editor.getSelfOrParentByName(rangeElem, 'p,h1,h2,h3,h4,h5,li', function (elem) {
@@ -4690,7 +4690,7 @@ _e(function (E, $) {
                     }
                 }
                 if ($(elem).attr('align') === 'right') {
-                    // ff ä¸­ï¼Œè®¾ç½®align-rightä¹‹åï¼Œä¼šæ˜¯ <p align="right">xxx</p>
+                    // ff ÖĞ£¬ÉèÖÃalign-rightÖ®ºó£¬»áÊÇ <p align="right">xxx</p>
                     return true;
                 }
                 return false;
@@ -4701,12 +4701,12 @@ _e(function (E, $) {
             return false;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// link èœå•
+// link ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -4717,14 +4717,14 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.link
         });
 
-        // åˆ›å»º dropPanel
+        // ´´½¨ dropPanel
         var $content = $('<div></div>');
         var $div1 = $('<div style="margin:20px 10px;" class="clearfix"></div>');
         var $div2 = $div1.clone();
@@ -4744,24 +4744,24 @@ _e(function (E, $) {
             width: 300
         });
 
-        // å®šä¹‰clickäº‹ä»¶
+        // ¶¨ÒåclickÊÂ¼ş
         menu.clickEvent = function (e) {
             var menu = this;
             var dropPanel = menu.dropPanel;
 
-            // -------------éšè—----------------
+            // -------------Òş²Ø----------------
             if (dropPanel.isShowing) {
                 dropPanel.hide();
                 return;
             }
 
-            // -------------æ˜¾ç¤º----------------
+            // -------------ÏÔÊ¾----------------
 
-            // é‡ç½® input
+            // ÖØÖÃ input
             $textInput.val('');
             $urlInput.val('http://');
 
-            // è·å–url
+            // »ñÈ¡url
             var url = '';
             var rangeElem = editor.getRangeElem();
             rangeElem = editor.getSelfOrParentByName(rangeElem, 'a');
@@ -4769,33 +4769,33 @@ _e(function (E, $) {
                 url = rangeElem.href || '';
             }
 
-            // è·å– text
+            // »ñÈ¡ text
             var text = '';
             var isRangeEmpty = editor.isRangeEmpty();
             if (!isRangeEmpty) {
-                // é€‰åŒºä¸æ˜¯ç©º
+                // Ñ¡Çø²»ÊÇ¿Õ
                 text = editor.getRangeText() || '';
             } else if (rangeElem) {
-                // å¦‚æœé€‰åŒºç©ºï¼Œå¹¶ä¸”åœ¨ a æ ‡ç­¾ä¹‹å†…
+                // Èç¹ûÑ¡Çø¿Õ£¬²¢ÇÒÔÚ a ±êÇ©Ö®ÄÚ
                 text = rangeElem.textContent || rangeElem.innerHTML;
             }
 
-            // è®¾ç½® url å’Œ text
+            // ÉèÖÃ url ºÍ text
             url && $urlInput.val(url);
             text && $textInput.val(text);
 
-            // å¦‚æœæœ‰é€‰åŒºå†…å®¹ï¼Œtextinput ä¸èƒ½ä¿®æ”¹
+            // Èç¹ûÓĞÑ¡ÇøÄÚÈİ£¬textinput ²»ÄÜĞŞ¸Ä
             if (!isRangeEmpty) {
                 $textInput.attr('disabled', true);
             } else {
                 $textInput.removeAttr('disabled');
             }
 
-            // æ˜¾ç¤ºï¼ˆè¦è®¾ç½®å¥½äº†æ‰€æœ‰inputçš„å€¼å’Œå±æ€§ä¹‹åå†æ˜¾ç¤ºï¼‰
+            // ÏÔÊ¾£¨ÒªÉèÖÃºÃÁËËùÓĞinputµÄÖµºÍÊôĞÔÖ®ºóÔÙÏÔÊ¾£©
             dropPanel.show();
         };
 
-        // å®šä¹‰ update selected äº‹ä»¶
+        // ¶¨Òå update selected ÊÂ¼ş
         menu.updateSelectedEvent = function () {
             var rangeElem = editor.getRangeElem();
             rangeElem = editor.getSelfOrParentByName(rangeElem, 'a');
@@ -4805,13 +4805,13 @@ _e(function (E, $) {
             return false;
         };
 
-        // ã€å–æ¶ˆã€ æŒ‰é’®
+        // ¡ºÈ¡Ïû¡» °´Å¥
         $btnCancel.click(function (e) {
             e.preventDefault();
             menu.dropPanel.hide();
         });
 
-        // ã€ç¡®å®šã€æŒ‰é’®
+        // ¡ºÈ·¶¨¡»°´Å¥
         $btnSubmit.click(function (e) {
             e.preventDefault();
             var rangeElem = editor.getRangeElem();
@@ -4824,7 +4824,7 @@ _e(function (E, $) {
             var $oldLinks, $newLinks;
             var uniqId = 'link' + E.random();
 
-            // è·å–æ•°æ®
+            // »ñÈ¡Êı¾İ
             var url = $.trim($urlInput.val());
             var text = $.trim($textInput.val());
 
@@ -4837,24 +4837,24 @@ _e(function (E, $) {
             }
 
             if (!isRangeEmpty) {
-                // é€‰ä¸­åŒºåŸŸæœ‰å†…å®¹ï¼Œåˆ™æ‰§è¡Œé»˜è®¤å‘½ä»¤
+                // Ñ¡ÖĞÇøÓòÓĞÄÚÈİ£¬ÔòÖ´ĞĞÄ¬ÈÏÃüÁî
 
-                // è·å–ç›®å‰ txt å†…æ‰€æœ‰é“¾æ¥ï¼Œå¹¶ä¸ºå½“å‰é“¾æ¥åšä¸€ä¸ªæ ‡è®°
+                // »ñÈ¡Ä¿Ç° txt ÄÚËùÓĞÁ´½Ó£¬²¢Îªµ±Ç°Á´½Ó×öÒ»¸ö±ê¼Ç
                 $oldLinks = $txt.find('a');
                 $oldLinks.attr(uniqId, '1');
 
-                // æ‰§è¡Œå‘½ä»¤ 
+                // Ö´ĞĞÃüÁî 
                 editor.command(e, 'createLink', url);
 
-                // å»çš„æ²¡æœ‰æ ‡è®°çš„é“¾æ¥ï¼Œå³åˆšåˆšæ’å…¥çš„é“¾æ¥
+                // È¥µÄÃ»ÓĞ±ê¼ÇµÄÁ´½Ó£¬¼´¸Õ¸Õ²åÈëµÄÁ´½Ó
                 $newLinks = $txt.find('a').not('[' + uniqId + ']');
-                $newLinks.attr('target', '_blank'); // å¢åŠ  _blank
+                $newLinks.attr('target', '_blank'); // Ôö¼Ó _blank
 
-                // å»æ‰ä¹‹å‰åšçš„æ ‡è®°
+                // È¥µôÖ®Ç°×öµÄ±ê¼Ç
                 $oldLinks.removeAttr(uniqId);
 
             } else if (targetElem) {
-                // æ— é€‰ä¸­åŒºåŸŸï¼Œåœ¨ a æ ‡ç­¾ä¹‹å†…ï¼Œä¿®æ”¹è¯¥ a æ ‡ç­¾çš„å†…å®¹å’Œé“¾æ¥
+                // ÎŞÑ¡ÖĞÇøÓò£¬ÔÚ a ±êÇ©Ö®ÄÚ£¬ĞŞ¸Ä¸Ã a ±êÇ©µÄÄÚÈİºÍÁ´½Ó
                 $linkElem = $(targetElem);
                 commandFn = function () {
                     $linkElem.attr('href', url);
@@ -4864,10 +4864,10 @@ _e(function (E, $) {
                     var editor = this;
                     editor.restoreSelectionByElem(targetElem);
                 };
-                // æ‰§è¡Œå‘½ä»¤
+                // Ö´ĞĞÃüÁî
                 editor.customCommand(e, commandFn, callback);
             } else {
-                // æ— é€‰ä¸­åŒºåŸŸï¼Œä¸åœ¨ a æ ‡ç­¾ä¹‹å†…ï¼Œæ’å…¥æ–°çš„é“¾æ¥
+                // ÎŞÑ¡ÖĞÇøÓò£¬²»ÔÚ a ±êÇ©Ö®ÄÚ£¬²åÈëĞÂµÄÁ´½Ó
 
                 linkHtml = '<a href="' + url + '" target="_blank">' + text + '</a>';
                 if (E.userAgent.indexOf('Firefox') > 0) {
@@ -4878,12 +4878,12 @@ _e(function (E, $) {
 
         });
         
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// unlink èœå•
+// unlink ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -4894,7 +4894,7 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
@@ -4902,26 +4902,26 @@ _e(function (E, $) {
             commandName: 'unLink'
         });
 
-        // click äº‹ä»¶
+        // click ÊÂ¼ş
         menu.clickEvent = function  (e) {
             var isRangeEmpty = editor.isRangeEmpty();
             if (!isRangeEmpty) {
-                // æœ‰é€‰ä¸­åŒºåŸŸï¼Œæˆ–è€…IE8ï¼Œæ‰§è¡Œé»˜è®¤å‘½ä»¤
+                // ÓĞÑ¡ÖĞÇøÓò£¬»òÕßIE8£¬Ö´ĞĞÄ¬ÈÏÃüÁî
                 editor.command(e, 'unLink');
                 return;
             }
 
-            // æ— é€‰ä¸­åŒºåŸŸ...
+            // ÎŞÑ¡ÖĞÇøÓò...
 
             var rangeElem = editor.getRangeElem();
             var aElem = editor.getSelfOrParentByName(rangeElem, 'a');
             if (!aElem) {
-                // ä¸åœ¨ a ä¹‹å†…ï¼Œè¿”å›
+                // ²»ÔÚ a Ö®ÄÚ£¬·µ»Ø
                 e.preventDefault();
                 return;
             }
 
-            // åœ¨ a ä¹‹å†…
+            // ÔÚ a Ö®ÄÚ
             var $a = $(aElem);
             var $span = $('<span>' + $a.text() + '</span>');
             function commandFn() {
@@ -4933,12 +4933,12 @@ _e(function (E, $) {
             editor.customCommand(e, commandFn, callback);
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// table èœå•
+// table ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -4949,24 +4949,24 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.table
         });
 
-        // dropPanel å†…å®¹
+        // dropPanel ÄÚÈİ
         var $content = $('<div style="font-size: 14px; color: #666; text-align:right;"></div>');
         var $table = $('<table class="choose-table" style="margin-bottom:10px;margin-top:5px;">');
         var $row = $('<span>0</span>');
-        var $rowspan = $('<span> è¡Œ </span>');
+        var $rowspan = $('<span> ĞĞ </span>');
         var $col = $('<span>0</span>');
-        var $colspan = $('<span> åˆ—</span>');
+        var $colspan = $('<span> ÁĞ</span>');
         var $tr;
         var i, j;
 
-        // åˆ›å»ºä¸€ä¸ªnè¡Œnåˆ—çš„è¡¨æ ¼
+        // ´´½¨Ò»¸önĞĞnÁĞµÄ±í¸ñ
         for (i = 0; i < 15; i++) {
             $tr = $('<tr index="' + (i + 1) + '">');
             for (j = 0; j < 20; j++) {
@@ -4977,48 +4977,48 @@ _e(function (E, $) {
         $content.append($table);
         $content.append($row).append($rowspan).append($col).append($colspan);
 
-        // å®šä¹‰tableäº‹ä»¶
+        // ¶¨ÒåtableÊÂ¼ş
         $table.on('mouseenter', 'td', function (e) {
             var $currentTd = $(e.currentTarget);
             var currentTdIndex = $currentTd.attr('index');
             var $currentTr = $currentTd.parent();
             var currentTrIndex = $currentTr.attr('index');
 
-            // æ˜¾ç¤º
+            // ÏÔÊ¾
             $row.text(currentTrIndex);
             $col.text(currentTdIndex);
 
-            // éå†è®¾ç½®èƒŒæ™¯é¢œè‰²
+            // ±éÀúÉèÖÃ±³¾°ÑÕÉ«
             $table.find('tr').each(function () {
                 var $tr = $(this);
                 var trIndex = $tr.attr('index');
                 if (parseInt(trIndex, 10) <= parseInt(currentTrIndex, 10)) {
-                    // è¯¥è¡Œéœ€è¦å¯èƒ½éœ€è¦è®¾ç½®èƒŒæ™¯è‰²
+                    // ¸ÃĞĞĞèÒª¿ÉÄÜĞèÒªÉèÖÃ±³¾°É«
                     $tr.find('td').each(function () {
                         var $td = $(this);
                         var tdIndex = $td.attr('index');
                         if (parseInt(tdIndex, 10) <= parseInt(currentTdIndex, 10)) {
-                            // éœ€è¦è®¾ç½®èƒŒæ™¯è‰²
+                            // ĞèÒªÉèÖÃ±³¾°É«
                             $td.addClass('active');
                         } else {
-                            // éœ€è¦ç§»é™¤èƒŒæ™¯è‰²
+                            // ĞèÒªÒÆ³ı±³¾°É«
                             $td.removeClass('active');
                         }
                     });
                 } else {
-                    // æ”¹è¡Œä¸éœ€è¦è®¾ç½®èƒŒæ™¯è‰²
+                    // ¸ÄĞĞ²»ĞèÒªÉèÖÃ±³¾°É«
                     $tr.find('td').removeClass('active');
                 }
             });
         }).on('mouseleave', function (e) {
-            // mouseleave åˆ é™¤èƒŒæ™¯è‰²
+            // mouseleave É¾³ı±³¾°É«
             $table.find('td').removeClass('active');
 
             $row.text(0);
             $col.text(0);
         });
 
-        // æ’å…¥è¡¨æ ¼
+        // ²åÈë±í¸ñ
         $table.on('click', 'td', function (e) {
             var $currentTd = $(e.currentTarget);
             var currentTdIndex = $currentTd.attr('index');
@@ -5028,7 +5028,7 @@ _e(function (E, $) {
             var rownum = parseInt(currentTrIndex, 10);
             var colnum = parseInt(currentTdIndex, 10);
 
-            // -------- æ‹¼æ¥tabel html --------
+            // -------- Æ´½Ótabel html --------
 
             var i, j;
             var tableHtml = '<table>';
@@ -5042,22 +5042,22 @@ _e(function (E, $) {
             }
             tableHtml += '</table>';
 
-            // -------- æ‰§è¡Œå‘½ä»¤ --------
+            // -------- Ö´ĞĞÃüÁî --------
             editor.command(e, 'insertHtml', tableHtml);
         });
 
-        // åˆ›å»º panel
+        // ´´½¨ panel
         menu.dropPanel = new E.DropPanel(editor, menu, {
             $content: $content,
             width: 262
         });
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// emotion èœå•
+// emotion ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -5071,37 +5071,37 @@ _e(function (E, $) {
         var configEmotions = config.emotions;
         var emotionsShow = config.emotionsShow;
 
-        // è®°å½•æ¯ä¸€ä¸ªè¡¨æƒ…å›¾ç‰‡çš„åœ°å€
+        // ¼ÇÂ¼Ã¿Ò»¸ö±íÇéÍ¼Æ¬µÄµØÖ·
         editor.emotionUrls = [];
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.emotion
         });
 
-        // æ·»åŠ è¡¨æƒ…å›¾ç‰‡çš„å‡½æ•°
+        // Ìí¼Ó±íÇéÍ¼Æ¬µÄº¯Êı
         function insertEmotionImgs(data, $tabContent) {
-            // æ·»åŠ è¡¨æƒ…å›¾ç‰‡
+            // Ìí¼Ó±íÇéÍ¼Æ¬
             $.each(data, function (k, emotion) {
                 var src = emotion.icon || emotion.url;
                 var value = emotion.value || emotion.title;
-                // é€šè¿‡é…ç½® editor.config.emotionsShow çš„å€¼æ¥ä¿®æ”¹æ’å…¥åˆ°ç¼–è¾‘å™¨çš„å†…å®¹ï¼ˆå›¾ç‰‡/valueï¼‰
+                // Í¨¹ıÅäÖÃ editor.config.emotionsShow µÄÖµÀ´ĞŞ¸Ä²åÈëµ½±à¼­Æ÷µÄÄÚÈİ£¨Í¼Æ¬/value£©
                 var commandValue = emotionsShow === 'icon' ? src : value;
                 var $command = $('<a href="#" commandValue="' + commandValue + '"></a>');
                 var $img = $('<img>');
-                $img.attr('_src', src);  // å…ˆå°† src å¤åˆ¶åˆ° '_src' å±æ€§ï¼Œå…ˆä¸åŠ è½½
+                $img.attr('_src', src);  // ÏÈ½« src ¸´ÖÆµ½ '_src' ÊôĞÔ£¬ÏÈ²»¼ÓÔØ
 
                 $command.append($img);
                 $tabContent.append($command);
 
-                // è®°å½•ä¸‹æ¯ä¸€ä¸ªè¡¨æƒ…å›¾ç‰‡çš„åœ°å€
+                // ¼ÇÂ¼ÏÂÃ¿Ò»¸ö±íÇéÍ¼Æ¬µÄµØÖ·
                 editor.emotionUrls.push(src);
             });
         }
 
-        // æ‹¼æ¥ dropPanel å†…å®¹
+        // Æ´½Ó dropPanel ÄÚÈİ
         var $panelContent = $('<div class="panel-tab"></div>');
         var $tabContainer = $('<div class="tab-container"></div>');
         var $contentContainer = $('<div class="content-container emotion-content-container"></div>');
@@ -5109,15 +5109,15 @@ _e(function (E, $) {
             var title = emotion.title;
             var data = emotion.data;
 
-            E.log('æ­£åœ¨å¤„ç† ' + title + ' è¡¨æƒ…çš„æ•°æ®...');
+            E.log('ÕıÔÚ´¦Àí ' + title + ' ±íÇéµÄÊı¾İ...');
 
-            // å¢åŠ è¯¥ç»„è¡¨æƒ…çš„tabå’Œcontent
+            // Ôö¼Ó¸Ã×é±íÇéµÄtabºÍcontent
             var $tab = $('<a href="#">' + title +' </a>');
             $tabContainer.append($tab);
             var $tabContent = $('<div class="content"></div>');
             $contentContainer.append($tabContent);
 
-            // tab åˆ‡æ¢äº‹ä»¶
+            // tab ÇĞ»»ÊÂ¼ş
             $tab.click(function (e) {
                 $tabContainer.children().removeClass('selected');
                 $contentContainer.children().removeClass('selected');
@@ -5126,71 +5126,71 @@ _e(function (E, $) {
                 e.preventDefault();
             });
 
-            // å¤„ç†data
+            // ´¦Àídata
             if (typeof data === 'string') {
-                // url å½¢å¼ï¼Œéœ€è¦é€šè¿‡ajaxä»è¯¥urlè·å–æ•°æ®
-                E.log('å°†é€šè¿‡ ' + data + ' åœ°å€ajaxä¸‹è½½è¡¨æƒ…åŒ…');
+                // url ĞÎÊ½£¬ĞèÒªÍ¨¹ıajax´Ó¸Ãurl»ñÈ¡Êı¾İ
+                E.log('½«Í¨¹ı ' + data + ' µØÖ·ajaxÏÂÔØ±íÇé°ü');
                 $.get(data, function (result) {
                     result = $.parseJSON(result);
-                    E.log('ä¸‹è½½å®Œæ¯•ï¼Œå¾—åˆ° ' + result.length + ' ä¸ªè¡¨æƒ…');
+                    E.log('ÏÂÔØÍê±Ï£¬µÃµ½ ' + result.length + ' ¸ö±íÇé');
                     insertEmotionImgs(result, $tabContent);
                 });
                 
             } else if ( Object.prototype.toString.call(data).toLowerCase().indexOf('array') > 0 ) {
-                // æ•°ç»„ï¼Œå³ data ç›´æ¥å°±æ˜¯è¡¨æƒ…åŒ…æ•°æ®
+                // Êı×é£¬¼´ data Ö±½Ó¾ÍÊÇ±íÇé°üÊı¾İ
                 insertEmotionImgs(data, $tabContent);
             } else {
-                // å…¶ä»–æƒ…å†µï¼Œdataæ ¼å¼ä¸å¯¹
-                E.error('data æ•°æ®æ ¼å¼é”™è¯¯ï¼Œè¯·ä¿®æ”¹ä¸ºæ­£ç¡®æ ¼å¼ï¼Œå‚è€ƒæ–‡æ¡£ï¼š' + E.docsite);
+                // ÆäËûÇé¿ö£¬data¸ñÊ½²»¶Ô
+                E.error('data Êı¾İ¸ñÊ½´íÎó£¬ÇëĞŞ¸ÄÎªÕıÈ·¸ñÊ½£¬²Î¿¼ÎÄµµ£º' + E.docsite);
                 return;
             }
         });
         $panelContent.append($tabContainer).append($contentContainer);
 
-        // é»˜è®¤æ˜¾ç¤ºç¬¬ä¸€ä¸ªtab
+        // Ä¬ÈÏÏÔÊ¾µÚÒ»¸ötab
         $tabContainer.children().first().addClass('selected');
         $contentContainer.children().first().addClass('selected');
 
-        // æ’å…¥è¡¨æƒ…commandäº‹ä»¶
+        // ²åÈë±íÇécommandÊÂ¼ş
         $contentContainer.on('click', 'a[commandValue]', function (e) {
             var $a = $(e.currentTarget);
             var commandValue = $a.attr('commandValue');
             var img;
 
-            // commandValue æœ‰å¯èƒ½æ˜¯å›¾ç‰‡urlï¼Œä¹Ÿæœ‰å¯èƒ½æ˜¯è¡¨æƒ…çš„ valueï¼Œéœ€è¦åŒºåˆ«å¯¹å¾…
+            // commandValue ÓĞ¿ÉÄÜÊÇÍ¼Æ¬url£¬Ò²ÓĞ¿ÉÄÜÊÇ±íÇéµÄ value£¬ĞèÒªÇø±ğ¶Ô´ı
 
             if (emotionsShow === 'icon') {
-                // æ’å…¥å›¾ç‰‡
+                // ²åÈëÍ¼Æ¬
                 editor.command(e, 'InsertImage', commandValue);
             } else {
-                // æ’å…¥value
+                // ²åÈëvalue
                 editor.command(e, 'insertHtml', '<span>' + commandValue + '</span>');
             }
 
             e.preventDefault();
         });
 
-        // æ·»åŠ panel
+        // Ìí¼Ópanel
         menu.dropPanel = new E.DropPanel(editor, menu, {
             $content: $panelContent,
             width: 350
         });
 
-        // å®šä¹‰clickäº‹ä»¶ï¼ˆå¼‚æ­¥åŠ è½½è¡¨æƒ…å›¾ç‰‡ï¼‰
+        // ¶¨ÒåclickÊÂ¼ş£¨Òì²½¼ÓÔØ±íÇéÍ¼Æ¬£©
         menu.clickEvent = function (e) {
             var menu = this;
             var dropPanel = menu.dropPanel;
 
-            // -------------éšè—-------------
+            // -------------Òş²Ø-------------
             if (dropPanel.isShowing) {
                 dropPanel.hide();
                 return;
             }
 
-            // -------------æ˜¾ç¤º-------------
+            // -------------ÏÔÊ¾-------------
             dropPanel.show();
 
-            // å¼‚æ­¥åŠ è½½å›¾ç‰‡
+            // Òì²½¼ÓÔØÍ¼Æ¬
             if (menu.imgLoaded) {
                 return;
             }
@@ -5198,7 +5198,7 @@ _e(function (E, $) {
                 var $img = $(this);
                 var _src = $img.attr('_src');
                 $img.on('error', function () {
-                    E.error('åŠ è½½ä¸å‡ºè¡¨æƒ…å›¾ç‰‡ ' + _src);
+                    E.error('¼ÓÔØ²»³ö±íÇéÍ¼Æ¬ ' + _src);
                 });
                 $img.attr('src', _src);
                 $img.removeAttr('_src');
@@ -5206,12 +5206,12 @@ _e(function (E, $) {
             menu.imgLoaded = true;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// img èœå•
+// img ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -5222,49 +5222,49 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.img
         });
 
-        // åˆ›å»º panel content
+        // ´´½¨ panel content
         var $panelContent = $('<div class="panel-tab"></div>');
         var $tabContainer = $('<div class="tab-container"></div>');
         var $contentContainer = $('<div class="content-container"></div>');
         $panelContent.append($tabContainer).append($contentContainer);
 
         // tab
-        var $uploadTab = $('<a href="#">ä¸Šä¼ å›¾ç‰‡</a>');
-        var $linkTab = $('<a href="#">ç½‘ç»œå›¾ç‰‡</a>');
+        var $uploadTab = $('<a href="#">ÉÏ´«Í¼Æ¬</a>');
+        var $linkTab = $('<a href="#">ÍøÂçÍ¼Æ¬</a>');
         $tabContainer.append($uploadTab).append($linkTab);
 
-        // ä¸Šä¼ å›¾ç‰‡ content
+        // ÉÏ´«Í¼Æ¬ content
         var $uploadContent = $('<div class="content"></div>');
         $contentContainer.append($uploadContent);
 
-        // ç½‘ç»œå›¾ç‰‡ content
+        // ÍøÂçÍ¼Æ¬ content
         var $linkContent = $('<div class="content"></div>');
         $contentContainer.append($linkContent);
         linkContentHandler(editor, menu, $linkContent);
 
-        // æ·»åŠ panel
+        // Ìí¼Ópanel
         menu.dropPanel = new E.DropPanel(editor, menu, {
             $content: $panelContent,
             width: 400,
             onRender: function () {
-                // æ¸²æŸ“åçš„å›è°ƒäº‹ä»¶ï¼Œç”¨äºæ‰§è¡Œè‡ªå®šä¹‰ä¸Šä¼ çš„init
-                // å› ä¸ºæ¸²æŸ“ä¹‹åï¼Œä¸Šä¼ é¢æ¿çš„domæ‰ä¼šè¢«æ¸²æŸ“åˆ°é¡µé¢ï¼Œæ‰èƒ½è®©ç¬¬ä¸‰æ–¹ç©ºé—´è·å–åˆ°
+                // äÖÈ¾ºóµÄ»Øµ÷ÊÂ¼ş£¬ÓÃÓÚÖ´ĞĞ×Ô¶¨ÒåÉÏ´«µÄinit
+                // ÒòÎªäÖÈ¾Ö®ºó£¬ÉÏ´«Ãæ°åµÄdom²Å»á±»äÖÈ¾µ½Ò³Ãæ£¬²ÅÄÜÈÃµÚÈı·½¿Õ¼ä»ñÈ¡µ½
                 var init = editor.config.customUploadInit;
                 init && init.call(editor);
             }
         });
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
 
-        // tab åˆ‡æ¢äº‹ä»¶
+        // tab ÇĞ»»ÊÂ¼ş
         function tabToggle() {
             $uploadTab.click(function (e) {
                 $tabContainer.children().removeClass('selected');
@@ -5286,27 +5286,27 @@ _e(function (E, $) {
                 }
             });
 
-            // é»˜è®¤æƒ…å†µ
+            // Ä¬ÈÏÇé¿ö
             // $uploadTab.addClass('selected');
             // $uploadContent.addClass('selected');
             $uploadTab.click();
         }
 
-        // éšè—ä¸Šä¼ å›¾ç‰‡
+        // Òş²ØÉÏ´«Í¼Æ¬
         function hideUploadImg() {
             $tabContainer.remove();
             $uploadContent.remove();
             $linkContent.addClass('selected');
         }
 
-        // éšè—ç½‘ç»œå›¾ç‰‡
+        // Òş²ØÍøÂçÍ¼Æ¬
         function hideLinkImg() {
             $tabContainer.remove();
             $linkContent.remove();
             $uploadContent.addClass('selected');
         }
 
-        // åˆ¤æ–­ç”¨æˆ·æ˜¯å¦é…ç½®äº†ä¸Šä¼ å›¾ç‰‡
+        // ÅĞ¶ÏÓÃ»§ÊÇ·ñÅäÖÃÁËÉÏ´«Í¼Æ¬
         editor.ready(function () {
             var editor = this;
             var config = editor.config;
@@ -5316,24 +5316,24 @@ _e(function (E, $) {
             var $uploadImgPanel;
 
             if (uploadImgUrl || customUpload) {
-                // ç¬¬ä¸€ï¼Œæš´éœ²å‡º $uploadContent ä»¥ä¾¿ç”¨æˆ·è‡ªå®šä¹‰ ï¼ï¼ï¼é‡è¦
+                // µÚÒ»£¬±©Â¶³ö $uploadContent ÒÔ±ãÓÃ»§×Ô¶¨Òå £¡£¡£¡ÖØÒª
                 editor.$uploadContent = $uploadContent;
 
-                // ç¬¬äºŒï¼Œç»‘å®štabåˆ‡æ¢äº‹ä»¶
+                // µÚ¶ş£¬°ó¶¨tabÇĞ»»ÊÂ¼ş
                 tabToggle();
 
                 if (linkImg) {
-                    // éšè—ç½‘ç»œå›¾ç‰‡
+                    // Òş²ØÍøÂçÍ¼Æ¬
                     hideLinkImg();
                 }
             } else {
-                // æœªé…ç½®ä¸Šä¼ å›¾ç‰‡åŠŸèƒ½
+                // Î´ÅäÖÃÉÏ´«Í¼Æ¬¹¦ÄÜ
                 hideUploadImg();
             }
 
-            // ç‚¹å‡» $uploadContent ç«‹å³éšè— dropPanel
-            // ä¸ºäº†å…¼å®¹IE8ã€9çš„ä¸Šä¼ ï¼Œå› ä¸ºIE8ã€9ä½¿ç”¨ modal ä¸Šä¼ 
-            // è¿™é‡Œä½¿ç”¨å¼‚æ­¥ï¼Œä¸ºäº†ä¸å¦¨ç¢é«˜çº§æµè§ˆå™¨é€šè¿‡ç‚¹å‡» $uploadContent é€‰æ‹©æ–‡ä»¶
+            // µã»÷ $uploadContent Á¢¼´Òş²Ø dropPanel
+            // ÎªÁË¼æÈİIE8¡¢9µÄÉÏ´«£¬ÒòÎªIE8¡¢9Ê¹ÓÃ modal ÉÏ´«
+            // ÕâÀïÊ¹ÓÃÒì²½£¬ÎªÁË²»·Á°­¸ß¼¶ä¯ÀÀÆ÷Í¨¹ıµã»÷ $uploadContent Ñ¡ÔñÎÄ¼ş
             function hidePanel() {
                 menu.dropPanel.hide();
             }
@@ -5343,7 +5343,7 @@ _e(function (E, $) {
         });
     });
 
-    // --------------- å¤„ç†ç½‘ç»œå›¾ç‰‡content ---------------
+    // --------------- ´¦ÀíÍøÂçÍ¼Æ¬content ---------------
     function linkContentHandler (editor, menu, $linkContent) {
         var lang = editor.config.lang;
         var $urlContainer = $('<div style="margin:20px 10px 10px 10px;"></div>');
@@ -5354,7 +5354,7 @@ _e(function (E, $) {
 
         $linkContent.append($urlContainer).append($btnSubmit).append($btnCancel);
 
-        // å–æ¶ˆ
+        // È¡Ïû
         $btnCancel.click(function (e) {
             e.preventDefault();
             menu.dropPanel.hide();
@@ -5365,12 +5365,12 @@ _e(function (E, $) {
             $urlInput.val('');
         }
 
-        // ç¡®å®š
+        // È·¶¨
         $btnSubmit.click(function (e) {
             e.preventDefault();
             var url = $.trim($urlInput.val());
             if (!url) {
-                // æ— å†…å®¹
+                // ÎŞÄÚÈİ
                 $urlInput.focus();
                 return;
             }
@@ -5381,7 +5381,7 @@ _e(function (E, $) {
     }
 
 });
-// video èœå•
+// video ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -5391,19 +5391,19 @@ _e(function (E, $) {
         }
         var editor = this;
         var lang = editor.config.lang;
-        var reg = /^<(iframe)|(embed)/i;  // <iframe... æˆ–è€… <embed... æ ¼å¼
+        var reg = /^<(iframe)|(embed)/i;  // <iframe... »òÕß <embed... ¸ñÊ½
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.video
         });
 
-        // åˆ›å»º panel å†…å®¹
+        // ´´½¨ panel ÄÚÈİ
         var $content = $('<div></div>');
         var $linkInputContainer = $('<div style="margin:20px 10px;"></div>');
-        var $linkInput = $('<input type="text" class="block" placeholder=\'æ ¼å¼å¦‚ï¼š<iframe src="..." frameborder=0 allowfullscreen></iframe>\'/>');
+        var $linkInput = $('<input type="text" class="block" placeholder=\'¸ñÊ½Èç£º<iframe src="..." frameborder=0 allowfullscreen></iframe>\'/>');
         $linkInputContainer.append($linkInput);
         var $sizeContainer = $('<div style="margin:20px 10px;"></div>');
         var $widthInput = $('<input type="text" value="640" style="width:50px;text-align:center;"/>');
@@ -5415,20 +5415,20 @@ _e(function (E, $) {
                       .append($heightInput)
                       .append('<span> px </span>');
         var $btnContainer = $('<div></div>');
-        var $howToCopy = $('<a href="http://www.kancloud.cn/wangfupeng/wangeditor2/134973" target="_blank" style="display:inline-block;margin-top:10px;margin-left:10px;color:#999;">å¦‚ä½•å¤åˆ¶è§†é¢‘é“¾æ¥ï¼Ÿ</a>');
+        var $howToCopy = $('<a href="http://www.kancloud.cn/wangfupeng/wangeditor2/134973" target="_blank" style="display:inline-block;margin-top:10px;margin-left:10px;color:#999;">ÈçºÎ¸´ÖÆÊÓÆµÁ´½Ó£¿</a>');
         var $btnSubmit = $('<button class="right">' + lang.submit + '</button>');
         var $btnCancel = $('<button class="right gray">' + lang.cancel + '</button>');
         $btnContainer.append($howToCopy).append($btnSubmit).append($btnCancel);
         $content.append($linkInputContainer).append($sizeContainer).append($btnContainer);
 
-        // å–æ¶ˆæŒ‰é’®
+        // È¡Ïû°´Å¥
         $btnCancel.click(function (e) {
             e.preventDefault();
             $linkInput.val('');
             menu.dropPanel.hide();
         });
 
-        // ç¡®å®šæŒ‰é’®
+        // È·¶¨°´Å¥
         $btnSubmit.click(function (e) {
             e.preventDefault();
             var link = $.trim($linkInput.val());
@@ -5438,60 +5438,60 @@ _e(function (E, $) {
             var $div = $('<div>');
             var html = '<p>{content}</p>';
 
-            // éªŒè¯æ•°æ®
+            // ÑéÖ¤Êı¾İ
             if (!link) {
                 menu.dropPanel.focusFirstInput();
                 return;
             }
 
             if (!reg.test(link)) {
-                alert('è§†é¢‘é“¾æ¥æ ¼å¼é”™è¯¯ï¼');
+                alert('ÊÓÆµÁ´½Ó¸ñÊ½´íÎó£¡');
                 menu.dropPanel.focusFirstInput();
                 return;
             }
 
             if (isNaN(width) || isNaN(height)) {
-                alert('å®½åº¦æˆ–é«˜åº¦ä¸æ˜¯æ•°å­—ï¼');
+                alert('¿í¶È»ò¸ß¶È²»ÊÇÊı×Ö£¡');
                 return;
             }
 
             $link = $(link);
 
-            // è®¾ç½®é«˜åº¦å’Œå®½åº¦
+            // ÉèÖÃ¸ß¶ÈºÍ¿í¶È
             $link.attr('width', width)
                  .attr('height', height);
 
-            // æ‹¼æ¥å­—ç¬¦ä¸²
+            // Æ´½Ó×Ö·û´®
             html = html.replace('{content}', $div.append($link).html());
 
-            // æ‰§è¡Œå‘½ä»¤
+            // Ö´ĞĞÃüÁî
             editor.command(e, 'insertHtml', html);
             $linkInput.val('');
         });
 
-        // åˆ›å»ºpanel
+        // ´´½¨panel
         menu.dropPanel = new E.DropPanel(editor, menu, {
             $content: $content,
             width: 400
         });
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// location èœå•
+// location ²Ëµ¥
 _e(function (E, $) {
 
-    // åˆ¤æ–­æµè§ˆå™¨çš„ input æ˜¯å¦æ”¯æŒ keyup
+    // ÅĞ¶Ïä¯ÀÀÆ÷µÄ input ÊÇ·ñÖ§³Ö keyup
     var inputKeyup = (function (input) {
         return 'onkeyup' in input;
     })(document.createElement('input'));
 
-    // ç™¾åº¦åœ°å›¾çš„key
+    // °Ù¶ÈµØÍ¼µÄkey
     E.baiduMapAk = 'TVhjYjq1ICT2qqL5LdS8mwas';
 
-    // ä¸€ä¸ªé¡µé¢ä¸­ï¼Œå¦‚æœæœ‰å¤šä¸ªç¼–è¾‘å™¨ï¼Œåœ°å›¾ä¼šå‡ºç°é—®é¢˜ã€‚è¿™ä¸ªå‚æ•°è®°å½•ä¸€ä¸‹ï¼Œå¦‚æœè¶…è¿‡ 1 å°±æç¤º
+    // Ò»¸öÒ³ÃæÖĞ£¬Èç¹ûÓĞ¶à¸ö±à¼­Æ÷£¬µØÍ¼»á³öÏÖÎÊÌâ¡£Õâ¸ö²ÎÊı¼ÇÂ¼Ò»ÏÂ£¬Èç¹û³¬¹ı 1 ¾ÍÌáÊ¾
     E.numberOfLocation = 0;
 
     E.createMenu(function (check) {
@@ -5501,7 +5501,7 @@ _e(function (E, $) {
         }
 
         if (++E.numberOfLocation > 1) {
-            E.error('ç›®å‰ä¸æ”¯æŒåœ¨ä¸€ä¸ªé¡µé¢å¤šä¸ªç¼–è¾‘å™¨ä¸ŠåŒæ—¶ä½¿ç”¨åœ°å›¾ï¼Œå¯é€šè¿‡è‡ªå®šä¹‰èœå•é…ç½®å»æ‰åœ°å›¾èœå•');
+            E.error('Ä¿Ç°²»Ö§³ÖÔÚÒ»¸öÒ³Ãæ¶à¸ö±à¼­Æ÷ÉÏÍ¬Ê±Ê¹ÓÃµØÍ¼£¬¿ÉÍ¨¹ı×Ô¶¨Òå²Ëµ¥ÅäÖÃÈ¥µôµØÍ¼²Ëµ¥');
             return;
         }
 
@@ -5510,11 +5510,11 @@ _e(function (E, $) {
         var lang = config.lang;
         var ak = config.mapAk;
 
-        // åœ°å›¾çš„å˜é‡å­˜å‚¨åˆ°è¿™ä¸ªåœ°æ–¹
+        // µØÍ¼µÄ±äÁ¿´æ´¢µ½Õâ¸öµØ·½
         editor.mapData = {};
         var mapData = editor.mapData;
 
-        // ---------- åœ°å›¾äº‹ä»¶ ----------
+        // ---------- µØÍ¼ÊÂ¼ş ----------
         mapData.markers = [];
         mapData.mapContainerId = 'map' + E.random();
 
@@ -5525,7 +5525,7 @@ _e(function (E, $) {
             }
             map.clearOverlays();
 
-            //åŒæ—¶ï¼Œæ¸…ç©ºmarkeræ•°ç»„
+            //Í¬Ê±£¬Çå¿ÕmarkerÊı×é
             mapData.markers = [];
         };
 
@@ -5545,30 +5545,30 @@ _e(function (E, $) {
                     map.centerAndZoom(cityName, 11);
                 }
 
-                //åœ°å€è§£æ
+                //µØÖ·½âÎö
                 if(locationName && locationName !== ''){
                     myGeo = new BMap.Geocoder();
-                    // å°†åœ°å€è§£æç»“æœæ˜¾ç¤ºåœ¨åœ°å›¾ä¸Š,å¹¶è°ƒæ•´åœ°å›¾è§†é‡
+                    // ½«µØÖ·½âÎö½á¹ûÏÔÊ¾ÔÚµØÍ¼ÉÏ,²¢µ÷ÕûµØÍ¼ÊÓÒ°
                     myGeo.getPoint(locationName, function(point){
                         if (point) {
                             map.centerAndZoom(point, 13);
                             marker = new BMap.Marker(point);
                             map.addOverlay(marker);
-                            marker.enableDragging();  //å…è®¸æ‹–æ‹½
-                            mapData.markers.push(marker);  //å°†markeråŠ å…¥åˆ°æ•°ç»„ä¸­
+                            marker.enableDragging();  //ÔÊĞíÍÏ×§
+                            mapData.markers.push(marker);  //½«marker¼ÓÈëµ½Êı×éÖĞ
                         }else{
-                            // alert('æœªæ‰¾åˆ°');
-                            map.centerAndZoom(cityName, 11);  //æ‰¾ä¸åˆ°åˆ™é‡æ–°å®šä½åˆ°åŸå¸‚
+                            // alert('Î´ÕÒµ½');
+                            map.centerAndZoom(cityName, 11);  //ÕÒ²»µ½ÔòÖØĞÂ¶¨Î»µ½³ÇÊĞ
                         }
                     }, cityName);
                 }
             } // if(cityName !== '')
         };
 
-        // load script ä¹‹åçš„ callback
+        // load script Ö®ºóµÄ callback
         var hasCallback = false;
         window.baiduMapCallBack = function(){
-            // é¿å…é‡å¤åŠ è½½
+            // ±ÜÃâÖØ¸´¼ÓÔØ
             if (hasCallback) {
                 return;
             } else {
@@ -5577,29 +5577,29 @@ _e(function (E, $) {
 
             var BMap = window.BMap;
             if (!mapData.map) {
-                // åˆ›å»ºMapå®ä¾‹
+                // ´´½¨MapÊµÀı
                 mapData.map = new BMap.Map(mapData.mapContainerId);
             }
             var map = mapData.map;
 
-            map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // åˆå§‹åŒ–åœ°å›¾,è®¾ç½®ä¸­å¿ƒç‚¹åæ ‡å’Œåœ°å›¾çº§åˆ«
-            map.addControl(new BMap.MapTypeControl());   //æ·»åŠ åœ°å›¾ç±»å‹æ§ä»¶
-            map.setCurrentCity("åŒ—äº¬");          // è®¾ç½®åœ°å›¾æ˜¾ç¤ºçš„åŸå¸‚ æ­¤é¡¹æ˜¯å¿…é¡»è®¾ç½®çš„
-            map.enableScrollWheelZoom(true);     //å¼€å¯é¼ æ ‡æ»šè½®ç¼©æ”¾
+            map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // ³õÊ¼»¯µØÍ¼,ÉèÖÃÖĞĞÄµã×ø±êºÍµØÍ¼¼¶±ğ
+            map.addControl(new BMap.MapTypeControl());   //Ìí¼ÓµØÍ¼ÀàĞÍ¿Ø¼ş
+            map.setCurrentCity("±±¾©");          // ÉèÖÃµØÍ¼ÏÔÊ¾µÄ³ÇÊĞ ´ËÏîÊÇ±ØĞëÉèÖÃµÄ
+            map.enableScrollWheelZoom(true);     //¿ªÆôÊó±ê¹öÂÖËõ·Å
 
-            //æ ¹æ®IPå®šä½
+            //¸ù¾İIP¶¨Î»
             function locationFun(result){
                 var cityName = result.name;
                 map.setCenter(cityName);
 
-                // è®¾ç½®åŸå¸‚åç§°
+                // ÉèÖÃ³ÇÊĞÃû³Æ
                 $cityInput.val(cityName);
                 if (E.placeholder) {
                     $searchInput.focus();
                 }
                 var timeoutId, searchFn;
                 if (inputKeyup) {
-                   // å¹¶ç»‘å®šæœç´¢äº‹ä»¶ - input æ”¯æŒ keyup
+                   // ²¢°ó¶¨ËÑË÷ÊÂ¼ş - input Ö§³Ö keyup
                    searchFn = function (e) {
                        if (e.type === 'keyup' && e.keyCode === 13) {
                            e.preventDefault();
@@ -5612,10 +5612,10 @@ _e(function (E, $) {
                    $cityInput.on('keyup change paste', searchFn);
                    $searchInput.on('keyup change paste', searchFn); 
                 } else {
-                    // å¹¶ç»‘å®šæœç´¢äº‹ä»¶ - input ä¸æ”¯æŒ keyup
+                    // ²¢°ó¶¨ËÑË÷ÊÂ¼ş - input ²»Ö§³Ö keyup
                     searchFn = function () {
                         if (!$content.is(':visible')) {
-                            // panel ä¸æ˜¾ç¤ºäº†ï¼Œå°±ä¸ç”¨å†ç›‘æ§äº†
+                            // panel ²»ÏÔÊ¾ÁË£¬¾Í²»ÓÃÔÙ¼à¿ØÁË
                             clearTimeout(timeoutId);
                             return;
                         }
@@ -5626,59 +5626,59 @@ _e(function (E, $) {
                         var search = $searchInput.val();
 
                         if (city !== currentCity || search !== currentSearch) {
-                            // åˆšè·å–çš„æ•°æ®å’Œä¹‹å‰çš„æ•°æ®ä¸ä¸€è‡´ï¼Œæ‰§è¡ŒæŸ¥è¯¢
+                            // ¸Õ»ñÈ¡µÄÊı¾İºÍÖ®Ç°µÄÊı¾İ²»Ò»ÖÂ£¬Ö´ĞĞ²éÑ¯
                             mapData.searchMap();
-                            // æ›´æ–°æ•°æ®
+                            // ¸üĞÂÊı¾İ
                             currentCity = city;
                             currentSearch = search;
                         }
 
-                        // ç»§ç»­ç›‘æ§
+                        // ¼ÌĞø¼à¿Ø
                         if (timeoutId) {
                             clearTimeout(timeoutId);
                         }
                         timeoutId = setTimeout(searchFn, 1000);
                     };
-                    // å¼€å§‹ç›‘æ§
+                    // ¿ªÊ¼¼à¿Ø
                     timeoutId = setTimeout(searchFn, 1000);
                 }
             }
             var myCity = new BMap.LocalCity();
             myCity.get(locationFun);
 
-            //é¼ æ ‡ç‚¹å‡»ï¼Œåˆ›å»ºä½ç½®
+            //Êó±êµã»÷£¬´´½¨Î»ÖÃ
             map.addEventListener("click", function(e){
                 var marker = new BMap.Marker(new BMap.Point(e.point.lng, e.point.lat)); 
                 map.addOverlay(marker);  
                 marker.enableDragging();
-                mapData.markers.push(marker);  //åŠ å…¥åˆ°æ•°ç»„ä¸­
+                mapData.markers.push(marker);  //¼ÓÈëµ½Êı×éÖĞ
             }, false);
         };
 
         mapData.loadMapScript = function () {
             var script = document.createElement("script");
             script.type = "text/javascript";
-            script.src = "https://api.map.baidu.com/api?v=2.0&ak=" + ak + "&s=1&callback=baiduMapCallBack";  // baiduMapCallBackæ˜¯ä¸€ä¸ªæœ¬åœ°å‡½æ•°
+            script.src = "https://api.map.baidu.com/api?v=2.0&ak=" + ak + "&s=1&callback=baiduMapCallBack";  // baiduMapCallBackÊÇÒ»¸ö±¾µØº¯Êı
             try {
-                // IE10- æŠ¥é”™
+                // IE10- ±¨´í
                 document.body.appendChild(script);
             } catch (ex) {
-                E.error('åŠ è½½åœ°å›¾è¿‡ç¨‹ä¸­å‘ç”Ÿé”™è¯¯');
+                E.error('¼ÓÔØµØÍ¼¹ı³ÌÖĞ·¢Éú´íÎó');
             }
         };
 
-        // åˆå§‹åŒ–åœ°å›¾
+        // ³õÊ¼»¯µØÍ¼
         mapData.initMap = function () {
             if (window.BMap) {
-                // ä¸æ˜¯ç¬¬ä¸€æ¬¡ï¼Œç›´æ¥å¤„ç†åœ°å›¾å³å¯
+                // ²»ÊÇµÚÒ»´Î£¬Ö±½Ó´¦ÀíµØÍ¼¼´¿É
                 window.baiduMapCallBack();
             } else {
-                // ç¬¬ä¸€æ¬¡ï¼Œå…ˆåŠ è½½åœ°å›¾ scriptï¼Œå†å¤„ç†åœ°å›¾ï¼ˆscriptåŠ è½½å®Œè‡ªåŠ¨æ‰§è¡Œå¤„ç†ï¼‰
+                // µÚÒ»´Î£¬ÏÈ¼ÓÔØµØÍ¼ script£¬ÔÙ´¦ÀíµØÍ¼£¨script¼ÓÔØÍê×Ô¶¯Ö´ĞĞ´¦Àí£©
                 mapData.loadMapScript();
             }
         };
 
-        // ---------- åˆ›å»º menu å¯¹è±¡ ----------
+        // ---------- ´´½¨ menu ¶ÔÏó ----------
 
         var menu = new E.Menu({
             editor: editor,
@@ -5688,12 +5688,12 @@ _e(function (E, $) {
 
         editor.menus[menuId] = menu;
 
-        // ---------- æ„å»ºUI ----------
+        // ---------- ¹¹½¨UI ----------
 
         // panel content 
         var $content = $('<div></div>');
 
-        // æœç´¢æ¡†
+        // ËÑË÷¿ò
         var $inputContainer = $('<div style="margin:10px 0;"></div>');
         var $cityInput = $('<input type="text"/>');
         $cityInput.css({
@@ -5711,7 +5711,7 @@ _e(function (E, $) {
                        .append($searchInput);
         $content.append($inputContainer);
 
-        // æ¸…é™¤ä½ç½®æŒ‰é’®
+        // Çå³ıÎ»ÖÃ°´Å¥
         $clearBtn.click(function (e) {
             $searchInput.val('');
             $searchInput.focus();
@@ -5719,7 +5719,7 @@ _e(function (E, $) {
             e.preventDefault();
         });
 
-        // åœ°å›¾
+        // µØÍ¼
         var $map = $('<div id="' + mapData.mapContainerId + '"></div>');
         $map.css({
             height: '260px',
@@ -5740,7 +5740,7 @@ _e(function (E, $) {
         $map.append($mapLoading);
         $content.append($map);
 
-        // æŒ‰é’®
+        // °´Å¥
         var $btnContainer = $('<div style="margin:10px 0;"></div>');
         var $btnSubmit = $('<button class="right">' + lang.submit + '</button>');
         var $btnCancel = $('<button class="right gray">' + lang.cancel + '</button>');
@@ -5756,14 +5756,14 @@ _e(function (E, $) {
             $searchInput.val('');
         }
 
-        // ã€å–æ¶ˆã€æŒ‰é’®äº‹ä»¶
+        // ¡ºÈ¡Ïû¡»°´Å¥ÊÂ¼ş
         $btnCancel.click(function (e) {
             e.preventDefault();
             callback();
             menu.dropPanel.hide();
         });
 
-        // ã€ç¡®å®šã€æŒ‰é’®äº‹ä»¶
+        // ¡ºÈ·¶¨¡»°´Å¥ÊÂ¼ş
         $btnSubmit.click(function (e) {
             e.preventDefault();
             var map = mapData.map,
@@ -5785,14 +5785,14 @@ _e(function (E, $) {
                 iframe;
 
             if(isDynamic){
-                //åŠ¨æ€åœ°å€
+                //¶¯Ì¬µØÖ·
                 src = 'http://ueditor.baidu.com/ueditor/dialogs/map/show.html#';
             }else{
-                //é™æ€åœ°å€
+                //¾²Ì¬µØÖ·
                 src = 'http://api.map.baidu.com/staticimage?';
             }
 
-            //srcå‚æ•°
+            //src²ÎÊı
             src = src +'center=' + centerLng + ',' + centerLat +
                 '&zoom=' + zoom +
                 '&width=' + sizeWidth +
@@ -5800,7 +5800,7 @@ _e(function (E, $) {
             if(markers.length > 0){
                 src = src + '&markers=';
 
-                //æ·»åŠ æ‰€æœ‰çš„marker
+                //Ìí¼ÓËùÓĞµÄmarker
                 $.each(markers, function(key, value){
                     position = value.getPosition();
                     if(key > 0){
@@ -5818,46 +5818,46 @@ _e(function (E, $) {
 
                 src += '&markerStyles=l,A';
 
-                //æ’å…¥iframe
+                //²åÈëiframe
                 iframe = '<iframe class="ueditor_baidumap" src="{src}" frameborder="0" width="' + sizeWidth + '" height="' + sizeHeight + '"></iframe>';
                 iframe = iframe.replace('{src}', src);
                 editor.command(e, 'insertHtml', iframe, callback);
             }else{
-                //æ’å…¥å›¾ç‰‡
+                //²åÈëÍ¼Æ¬
                 editor.command(e, 'insertHtml', '<img style="max-width:100%;" src="' + src + '"/>', callback);
             }
         });
 
-        // æ ¹æ® UI åˆ›å»ºèœå• panel
+        // ¸ù¾İ UI ´´½¨²Ëµ¥ panel
         menu.dropPanel = new E.DropPanel(editor, menu, {
             $content: $content,
             width: 500
         });
 
-        // ---------- äº‹ä»¶ ----------
+        // ---------- ÊÂ¼ş ----------
 
-        // render æ—¶æ‰§è¡Œäº‹ä»¶
+        // render Ê±Ö´ĞĞÊÂ¼ş
         menu.onRender = function () {
             if (ak === E.baiduMapAk) {
-                E.warn('å»ºè®®åœ¨é…ç½®ä¸­è‡ªå®šä¹‰ç™¾åº¦åœ°å›¾çš„mapAkï¼Œå¦åˆ™å¯èƒ½å½±å“åœ°å›¾åŠŸèƒ½ï¼Œæ–‡æ¡£ï¼š' + E.docsite);
+                E.warn('½¨ÒéÔÚÅäÖÃÖĞ×Ô¶¨Òå°Ù¶ÈµØÍ¼µÄmapAk£¬·ñÔò¿ÉÄÜÓ°ÏìµØÍ¼¹¦ÄÜ£¬ÎÄµµ£º' + E.docsite);
             }
         };
 
-        // click äº‹ä»¶
+        // click ÊÂ¼ş
         menu.clickEvent = function (e) {
             var menu = this;
             var dropPanel = menu.dropPanel;
             var firstTime = false;
 
-            // -------------éšè—-------------
+            // -------------Òş²Ø-------------
             if (dropPanel.isShowing) {
                 dropPanel.hide();
                 return;
             }
 
-            // -------------æ˜¾ç¤º-------------
+            // -------------ÏÔÊ¾-------------
             if (!mapData.map) {
-                // ç¬¬ä¸€æ¬¡ï¼Œå…ˆåŠ è½½åœ°å›¾
+                // µÚÒ»´Î£¬ÏÈ¼ÓÔØµØÍ¼
                 firstTime = true;
             }
             
@@ -5872,17 +5872,17 @@ _e(function (E, $) {
     });
 
 });
-// insertcode èœå•
+// insertcode ²Ëµ¥
 _e(function (E, $) {
 
-    // åŠ è½½ highlightjs ä»£ç 
+    // ¼ÓÔØ highlightjs ´úÂë
     function loadHljs() {
         if (E.userAgent.indexOf('MSIE 8') > 0) {
-            // ä¸æ”¯æŒ IE8
+            // ²»Ö§³Ö IE8
             return;
         }
         if (window.hljs) {
-            // ä¸è¦é‡å¤åŠ è½½
+            // ²»ÒªÖØ¸´¼ÓÔØ
             return;
         }
         var script = document.createElement("script");
@@ -5898,7 +5898,7 @@ _e(function (E, $) {
             return;
         }
 
-        // åŠ è½½ highlightjs ä»£ç 
+        // ¼ÓÔØ highlightjs ´úÂë
         setTimeout(loadHljs, 0);
 
         var editor = this;
@@ -5906,29 +5906,29 @@ _e(function (E, $) {
         var lang = config.lang;
         var $txt = editor.txt.$txt;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.insertcode
         });
 
-        // click äº‹ä»¶
+        // click ÊÂ¼ş
         menu.clickEvent = function (e) {
             var menu = this;
             var dropPanel = menu.dropPanel;
 
-            // éšè—
+            // Òş²Ø
             if (dropPanel.isShowing) {
                 dropPanel.hide();
                 return;
             }
 
-            // æ˜¾ç¤º
+            // ÏÔÊ¾
             $textarea.val('');
             dropPanel.show();
 
-            // highlightjs è¯­è¨€åˆ—è¡¨
+            // highlightjs ÓïÑÔÁĞ±í
             var hljs = window.hljs;
             if (hljs && hljs.listLanguages) {
                 if ($langSelect.children().length !== 0) {
@@ -5953,18 +5953,18 @@ _e(function (E, $) {
             }
         };
 
-        // é€‰ä¸­çŠ¶æ€ä¸‹çš„ click äº‹ä»¶
+        // Ñ¡ÖĞ×´Ì¬ÏÂµÄ click ÊÂ¼ş
         menu.clickEventSelected = function (e) {
             var menu = this;
             var dropPanel = menu.dropPanel;
 
-            // éšè—
+            // Òş²Ø
             if (dropPanel.isShowing) {
                 dropPanel.hide();
                 return;
             }
 
-            // æ˜¾ç¤º
+            // ÏÔÊ¾
             dropPanel.show();
 
             var rangeElem = editor.getRangeElem();
@@ -5972,7 +5972,7 @@ _e(function (E, $) {
             var $targetElem;
             var className;
             if (targetElem) {
-                // ç¡®å®šæ‰¾åˆ° pre ä¹‹åï¼Œå†æ‰¾ code
+                // È·¶¨ÕÒµ½ pre Ö®ºó£¬ÔÙÕÒ code
                 targetElem = editor.getSelfOrParentByName(rangeElem, 'code');
             }
             if (!targetElem) {
@@ -5980,10 +5980,10 @@ _e(function (E, $) {
             }
             $targetElem = $(targetElem);
 
-            // èµ‹å€¼å†…å®¹
+            // ¸³ÖµÄÚÈİ
             $textarea.val($targetElem.text());
             if ($langSelect) {
-                // èµ‹å€¼è¯­è¨€
+                // ¸³ÖµÓïÑÔ
                 className = $targetElem.attr('class');
                 if (className) {
                     $langSelect.val(className.split(' ')[0]);
@@ -5991,9 +5991,9 @@ _e(function (E, $) {
             }
         };
 
-        // å®šä¹‰æ›´æ–°é€‰ä¸­çŠ¶æ€çš„äº‹ä»¶
+        // ¶¨Òå¸üĞÂÑ¡ÖĞ×´Ì¬µÄÊÂ¼ş
         menu.updateSelectedEvent = function () {
-            var self = this; //èœå•å¯¹è±¡
+            var self = this; //²Ëµ¥¶ÔÏó
             var editor = self.editor;
             var rangeElem;
 
@@ -6007,7 +6007,7 @@ _e(function (E, $) {
             return false;
         };
 
-        // åˆ›å»º panel
+        // ´´½¨ panel
         var $content = $('<div></div>');
         var $textarea = $('<textarea></textarea>');
         var $langSelect = $('<select></select>');
@@ -6017,12 +6017,12 @@ _e(function (E, $) {
             width: 500
         });
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
 
-        // ------ å¢åŠ  content å†…å®¹ ------
+        // ------ Ôö¼Ó content ÄÚÈİ ------
         function contentHandle($content) {
-            // textarea åŒºåŸŸ
+            // textarea ÇøÓò
             var $textareaContainer = $('<div></div>');
             $textareaContainer.css({
                 margin: '15px 5px 5px 5px',
@@ -6035,7 +6035,7 @@ _e(function (E, $) {
                 padding: '10px'
             });
             $textarea.on('keydown', function (e) {
-                // å–æ¶ˆ tab é”®é»˜è®¤è¡Œä¸º
+                // È¡Ïû tab ¼üÄ¬ÈÏĞĞÎª
                 if (e.keyCode === 9) {
                     e.preventDefault();
                 }
@@ -6043,7 +6043,7 @@ _e(function (E, $) {
             $textareaContainer.append($textarea);
             $content.append($textareaContainer);
 
-            // æŒ‰é’®åŒºåŸŸ
+            // °´Å¥ÇøÓò
             var $btnContainer = $('<div></div>');
             var $btnSubmit = $('<button class="right">' + lang.submit + '</button>');
             var $btnCancel = $('<button class="right gray">' + lang.cancel + '</button>');
@@ -6051,19 +6051,19 @@ _e(function (E, $) {
             $btnContainer.append($btnSubmit).append($btnCancel).append($langSelect);
             $content.append($btnContainer);
 
-            // å–æ¶ˆæŒ‰é’®
+            // È¡Ïû°´Å¥
             $btnCancel.click(function (e) {
                 e.preventDefault();
                 menu.dropPanel.hide();
             });
 
-            // ç¡®å®šæŒ‰é’®
+            // È·¶¨°´Å¥
             var codeTpl = '<pre style="max-width:100%;overflow-x:auto;"><code{#langClass}>{#content}</code></pre>';
             $btnSubmit.click(function (e) {
                 e.preventDefault();
                 var val = $textarea.val();
                 if (!val) {
-                    // æ— å†…å®¹
+                    // ÎŞÄÚÈİ
                     $textarea.focus();
                     return;
                 }
@@ -6073,45 +6073,45 @@ _e(function (E, $) {
                     codeTpl = '<p><br></p>' + codeTpl;
                 }
 
-                var lang = $langSelect ? $langSelect.val() : ''; // è·å–é«˜äº®è¯­è¨€
+                var lang = $langSelect ? $langSelect.val() : ''; // »ñÈ¡¸ßÁÁÓïÑÔ
                 var langClass = '';
                 var doHightlight = function () {
                     $txt.find('pre code').each(function (i, block) {
                         var $block = $(block);
                         if ($block.attr('codemark')) {
-                            // æœ‰ codemark æ ‡è®°çš„ä»£ç å—ï¼Œå°±ä¸å†é‡æ–°æ ¼å¼åŒ–äº†
+                            // ÓĞ codemark ±ê¼ÇµÄ´úÂë¿é£¬¾Í²»ÔÙÖØĞÂ¸ñÊ½»¯ÁË
                             return;
                         } else if (window.hljs) {
-                            // æ–°ä»£ç å—ï¼Œæ ¼å¼åŒ–ä¹‹åï¼Œç«‹å³æ ‡è®° codemark
+                            // ĞÂ´úÂë¿é£¬¸ñÊ½»¯Ö®ºó£¬Á¢¼´±ê¼Ç codemark
                             window.hljs.highlightBlock(block);
                             $block.attr('codemark', '1');
                         }
                     });
                 };
 
-                // è¯­è¨€é«˜äº®æ ·å¼
+                // ÓïÑÔ¸ßÁÁÑùÊ½
                 if (lang) {
                     langClass = ' class="' + lang + ' hljs"';
                 }
 
-                // æ›¿æ¢æ ‡ç­¾
+                // Ìæ»»±êÇ©
                 val = val.replace(/&/gm, '&amp;')
                          .replace(/</gm, '&lt;')
                          .replace(/>/gm, '&gt;');
 
-                // ---- menu æœªé€‰ä¸­çŠ¶æ€ ----
+                // ---- menu Î´Ñ¡ÖĞ×´Ì¬ ----
                 if (!menu.selected) {
-                    // æ‹¼æ¥html
+                    // Æ´½Óhtml
                     var html = codeTpl.replace('{#langClass}', langClass).replace('{#content}', val);
                     editor.command(e, 'insertHtml', html, doHightlight);
                     return;
                 }
 
-                // ---- menu é€‰ä¸­çŠ¶æ€ ----
+                // ---- menu Ñ¡ÖĞ×´Ì¬ ----
                 var targetElem = editor.getSelfOrParentByName(rangeElem, 'pre');
                 var $targetElem;
                 if (targetElem) {
-                    // ç¡®å®šæ‰¾åˆ° pre ä¹‹åï¼Œå†æ‰¾ code
+                    // È·¶¨ÕÒµ½ pre Ö®ºó£¬ÔÙÕÒ code
                     targetElem = editor.getSelfOrParentByName(rangeElem, 'code');
                 }
                 if (!targetElem) {
@@ -6137,7 +6137,7 @@ _e(function (E, $) {
             });
         }
 
-        // ------ enter æ—¶ï¼Œä¸å¦èµ·æ ‡ç­¾ï¼Œåªæ¢è¡Œ ------
+        // ------ enter Ê±£¬²»ÁíÆğ±êÇ©£¬Ö»»»ĞĞ ------
         $txt.on('keydown', function (e) {
             if (e.keyCode !== 13) {
                 return;
@@ -6151,26 +6151,26 @@ _e(function (E, $) {
             editor.command(e, 'insertHtml', '\n');
         });
 
-        // ------ ç‚¹å‡»æ—¶ï¼Œç¦ç”¨å…¶ä»–æ ‡ç­¾ ------
+        // ------ µã»÷Ê±£¬½ûÓÃÆäËû±êÇ© ------
         function updateMenu() {
             var rangeElem = editor.getRangeElem();
             var targetElem = editor.getSelfOrParentByName(rangeElem, 'code');
             if (targetElem) {
-                // åœ¨ code ä¹‹å†…ï¼Œç¦ç”¨å…¶ä»–èœå•
+                // ÔÚ code Ö®ÄÚ£¬½ûÓÃÆäËû²Ëµ¥
                 editor.disableMenusExcept('insertcode');
             } else {
-                // ä¸æ˜¯åœ¨ code ä¹‹å†…ï¼Œå¯ç”¨å…¶ä»–èœå•
+                // ²»ÊÇÔÚ code Ö®ÄÚ£¬ÆôÓÃÆäËû²Ëµ¥
                 editor.enableMenusExcept('insertcode');
             }
         }
         $txt.on('keydown click', function (e) {
-            // æ­¤å¤„å¿…é¡»ä½¿ç”¨ setTimeout å¼‚æ­¥å¤„ç†ï¼Œå¦åˆ™ä¸å¯¹
+            // ´Ë´¦±ØĞëÊ¹ÓÃ setTimeout Òì²½´¦Àí£¬·ñÔò²»¶Ô
             setTimeout(updateMenu);
         });
     });
 
 });
-// undo èœå•
+// undo ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -6181,30 +6181,30 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.undo
         });
 
-        // click äº‹ä»¶
+        // click ÊÂ¼ş
         menu.clickEvent = function (e) {
             editor.undo();
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
 
 
-        // ------------ åˆå§‹åŒ–æ—¶ã€enter æ—¶ã€æ‰“å­—ä¸­æ–­æ—¶ï¼Œåšè®°å½• ------------
-        // ------------ ctrl + z æ˜¯è°ƒç”¨è®°å½•æ’¤é”€ï¼Œè€Œä¸æ˜¯ä½¿ç”¨æµè§ˆå™¨é»˜è®¤çš„æ’¤é”€ ------------
+        // ------------ ³õÊ¼»¯Ê±¡¢enter Ê±¡¢´ò×ÖÖĞ¶ÏÊ±£¬×ö¼ÇÂ¼ ------------
+        // ------------ ctrl + z ÊÇµ÷ÓÃ¼ÇÂ¼³·Ïú£¬¶ø²»ÊÇÊ¹ÓÃä¯ÀÀÆ÷Ä¬ÈÏµÄ³·Ïú ------------
         editor.ready(function () {
             var editor = this;
             var $txt = editor.txt.$txt;
             var timeoutId;
 
-            // æ‰§è¡Œundoè®°å½•
+            // Ö´ĞĞundo¼ÇÂ¼
             function undo() {
                 editor.undoRecord();
             }
@@ -6212,17 +6212,17 @@ _e(function (E, $) {
             $txt.on('keydown', function (e) {
                 var keyCode = e.keyCode;
 
-                // æ’¤é”€ ctrl + z
+                // ³·Ïú ctrl + z
                 if (e.ctrlKey && keyCode === 90) {
                     editor.undo();
                     return;
                 }
 
                 if (keyCode === 13) {
-                    // enter åšè®°å½•
+                    // enter ×ö¼ÇÂ¼
                     undo();
                 } else {
-                    // keyup ä¹‹å 1s ä¹‹å†…ä¸æ“ä½œï¼Œåˆ™åšä¸€æ¬¡è®°å½•
+                    // keyup Ö®ºó 1s Ö®ÄÚ²»²Ù×÷£¬Ôò×öÒ»´Î¼ÇÂ¼
                     if (timeoutId) {
                         clearTimeout(timeoutId);
                     }
@@ -6230,13 +6230,13 @@ _e(function (E, $) {
                 }
             });
 
-            // åˆå§‹åŒ–åšè®°å½•
+            // ³õÊ¼»¯×ö¼ÇÂ¼
             editor.undoRecord();
         });
     });
 
 });
-// redo èœå•
+// redo ²Ëµ¥
 _e(function (E, $) {
 
     E.createMenu(function (check) {
@@ -6247,27 +6247,27 @@ _e(function (E, $) {
         var editor = this;
         var lang = editor.config.lang;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.redo
         });
 
-        // click äº‹ä»¶
+        // click ÊÂ¼ş
         menu.clickEvent = function (e) {
             editor.redo();
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// å…¨å± èœå•
+// È«ÆÁ ²Ëµ¥
 _e(function (E, $) {
 
-    // è®°å½•å…¨å±æ—¶çš„scrollTop
+    // ¼ÇÂ¼È«ÆÁÊ±µÄscrollTop
     var scrollTopWhenFullScreen;
 
     E.createMenu(function (check) {
@@ -6286,20 +6286,20 @@ _e(function (E, $) {
 
         var maxHeight;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
             editor: editor,
             id: menuId,
             title: lang.fullscreen
         });
 
-        // å®šä¹‰clickäº‹ä»¶
+        // ¶¨ÒåclickÊÂ¼ş
         menu.clickEvent = function (e) {
-            // å¢åŠ æ ·å¼
+            // Ôö¼ÓÑùÊ½
             var $editorContainer = editor.$editorContainer;
             $editorContainer.addClass('wangEditor-fullscreen');
 
-            // ï¼ˆå…ˆä¿å­˜å½“å‰çš„ï¼‰å†è®¾ç½®z-index
+            // £¨ÏÈ±£´æµ±Ç°µÄ£©ÔÙÉèÖÃz-index
             zIndex = $editorContainer.css('z-index');
             $editorContainer.css('z-index', zIndexConfig);
 
@@ -6308,79 +6308,79 @@ _e(function (E, $) {
             var txtOuterHeight = $txt.outerHeight();
 
             if (editor.useMaxHeight) {
-                // è®°å½• max-heightï¼Œå¹¶æš‚æ—¶å»æ‰maxheight
+                // ¼ÇÂ¼ max-height£¬²¢ÔİÊ±È¥µômaxheight
                 maxHeight = $txt.css('max-height');
                 $txt.css('max-height', 'none');
 
-                // å¦‚æœä½¿ç”¨äº†maxHeightï¼Œ å°†$txtä»å®ƒçš„çˆ¶å…ƒç´ ä¸­ç§»å‡ºæ¥
+                // Èç¹ûÊ¹ÓÃÁËmaxHeight£¬ ½«$txt´ÓËüµÄ¸¸ÔªËØÖĞÒÆ³öÀ´
                 $wrapper = $txt.parent();
                 $wrapper.after($txt);
                 $wrapper.remove();
                 $txt.css('overflow-y', 'auto');
             }
 
-            // è®¾ç½®é«˜åº¦åˆ°å…¨å±
+            // ÉèÖÃ¸ß¶Èµ½È«ÆÁ
             var menuContainer = editor.menuContainer;
             $txt.height(
                 E.$window.height() - 
                 menuContainer.height() - 
-                (txtOuterHeight - txtHeight)  // å»æ‰å†…è¾¹è·å’Œå¤–è¾¹è·
+                (txtOuterHeight - txtHeight)  // È¥µôÄÚ±ß¾àºÍÍâ±ß¾à
             );
 
-            // å–æ¶ˆmenuContainerçš„å†…è”æ ·å¼ï¼ˆmenuå¸é¡¶æ—¶ï¼Œä¼šä¸º menuContainer è®¾ç½®ä¸€äº›å†…è”æ ·å¼ï¼‰
+            // È¡ÏûmenuContainerµÄÄÚÁªÑùÊ½£¨menuÎü¶¥Ê±£¬»áÎª menuContainer ÉèÖÃÒ»Ğ©ÄÚÁªÑùÊ½£©
             editor.menuContainer.$menuContainer.attr('style', '');
 
-            // ä¿å­˜çŠ¶æ€
+            // ±£´æ×´Ì¬
             isSelected = true;
 
-            // è®°å½•ç¼–è¾‘å™¨æ˜¯å¦å…¨å±
+            // ¼ÇÂ¼±à¼­Æ÷ÊÇ·ñÈ«ÆÁ
             editor.isFullScreen = true;
 
-            // è®°å½•è®¾ç½®å…¨å±æ—¶çš„é«˜åº¦
+            // ¼ÇÂ¼ÉèÖÃÈ«ÆÁÊ±µÄ¸ß¶È
             scrollTopWhenFullScreen = E.$window.scrollTop();
         };
 
-        // å®šä¹‰é€‰ä¸­çŠ¶æ€çš„ click äº‹ä»¶
+        // ¶¨ÒåÑ¡ÖĞ×´Ì¬µÄ click ÊÂ¼ş
         menu.clickEventSelected = function (e) {
-            // å–æ¶ˆæ ·å¼
+            // È¡ÏûÑùÊ½
             var $editorContainer = editor.$editorContainer;
             $editorContainer.removeClass('wangEditor-fullscreen');
             $editorContainer.css('z-index', zIndex);
 
-            // è¿˜åŸheight
+            // »¹Ô­height
             if (editor.useMaxHeight) {
                 $txt.css('max-height', maxHeight);
             } else {
-                // editor.valueContainerHeight åœ¨ editor.txt.initHeight() ä¸­äº‹å…ˆä¿å­˜äº†
+                // editor.valueContainerHeight ÔÚ editor.txt.initHeight() ÖĞÊÂÏÈ±£´æÁË
                 editor.$valueContainer.css('height', editor.valueContainerHeight);
             }
 
-            // é‡æ–°è®¡ç®—é«˜åº¦
+            // ÖØĞÂ¼ÆËã¸ß¶È
             editor.txt.initHeight();
 
-            // ä¿å­˜çŠ¶æ€
+            // ±£´æ×´Ì¬
             isSelected = false;
 
-            // è®°å½•ç¼–è¾‘å™¨æ˜¯å¦å…¨å±
+            // ¼ÇÂ¼±à¼­Æ÷ÊÇ·ñÈ«ÆÁ
             editor.isFullScreen = false;
 
-            // è¿˜åŸscrollTop
+            // »¹Ô­scrollTop
             if (scrollTopWhenFullScreen != null) {
                 E.$window.scrollTop(scrollTopWhenFullScreen);
             }
         };
 
-        // å®šä¹‰é€‰ä¸­äº‹ä»¶
+        // ¶¨ÒåÑ¡ÖĞÊÂ¼ş
         menu.updateSelectedEvent = function (e) {
             return isSelected;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// æ¸²æŸ“menus
+// äÖÈ¾menus
 _e(function (E, $) {
 
     E.fn.renderMenus = function () {
@@ -6406,7 +6406,7 @@ _e(function (E, $) {
     };
 
 });
-// æ¸²æŸ“menus
+// äÖÈ¾menus
 _e(function (E, $) {
 
     E.fn.renderMenuContainer = function () {
@@ -6420,7 +6420,7 @@ _e(function (E, $) {
     };
 
 });
-// æ¸²æŸ“ txt
+// äÖÈ¾ txt
 _e(function (E, $) {
 
     E.fn.renderTxt = function () {
@@ -6430,14 +6430,14 @@ _e(function (E, $) {
 
         txt.render();
 
-        // ready æ—¶å€™ï¼Œè®¡ç®—txtçš„é«˜åº¦
+        // ready Ê±ºò£¬¼ÆËãtxtµÄ¸ß¶È
         editor.ready(function () {
             txt.initHeight();
         });
     };
 
 });
-// æ¸²æŸ“ container
+// äÖÈ¾ container
 _e(function (E, $) {
 
     E.fn.renderEditorContainer = function () {
@@ -6448,16 +6448,16 @@ _e(function (E, $) {
         var $txt = editor.txt.$txt;
         var $prev, $parent;
 
-        // å°†ç¼–è¾‘å™¨æ¸²æŸ“åˆ°é¡µé¢ä¸­
+        // ½«±à¼­Æ÷äÖÈ¾µ½Ò³ÃæÖĞ
         if ($valueContainer === $txt) {
             $prev = editor.$prev;
             $parent = editor.$parent;
 
             if ($prev && $prev.length) {
-                // æœ‰å‰ç½®èŠ‚ç‚¹ï¼Œå°±æ’å…¥åˆ°å‰ç½®èŠ‚ç‚¹çš„åé¢
+                // ÓĞÇ°ÖÃ½Úµã£¬¾Í²åÈëµ½Ç°ÖÃ½ÚµãµÄºóÃæ
                 $prev.after($editorContainer);
             } else {
-                // æ²¡æœ‰å‰ç½®èŠ‚ç‚¹ï¼Œå°±ç›´æ¥æ’å…¥åˆ°çˆ¶å…ƒç´ 
+                // Ã»ÓĞÇ°ÖÃ½Úµã£¬¾ÍÖ±½Ó²åÈëµ½¸¸ÔªËØ
                 $parent.prepend($editorContainer);
             }
 
@@ -6466,20 +6466,20 @@ _e(function (E, $) {
             $valueContainer.hide();
         }
 
-        // è®¾ç½®å®½åº¦ï¼ˆè¿™æ ·è®¾ç½®å®½åº¦æœ‰é—®é¢˜ï¼‰
+        // ÉèÖÃ¿í¶È£¨ÕâÑùÉèÖÃ¿í¶ÈÓĞÎÊÌâ£©
         // $editorContainer.css('width', $valueContainer.css('width'));
     };
 
 });
-// èœå•äº‹ä»¶
+// ²Ëµ¥ÊÂ¼ş
 _e(function (E, $) {
 
-    // ç»‘å®šæ¯ä¸ªèœå•çš„clickäº‹ä»¶
+    // °ó¶¨Ã¿¸ö²Ëµ¥µÄclickÊÂ¼ş
     E.fn.eventMenus = function () {
 
         var menus = this.menus;
 
-        // ç»‘å®šèœå•çš„ç‚¹å‡»äº‹ä»¶
+        // °ó¶¨²Ëµ¥µÄµã»÷ÊÂ¼ş
         $.each(menus, function (k, v) {
             v.bindEvent();
         });
@@ -6487,7 +6487,7 @@ _e(function (E, $) {
     };
 
 });
-// èœå•containeräº‹ä»¶
+// ²Ëµ¥containerÊÂ¼ş
 _e(function (E, $) {
 
     E.fn.eventMenuContainer = function () {
@@ -6495,62 +6495,62 @@ _e(function (E, $) {
     };
 
 });
-// ç¼–è¾‘åŒºåŸŸäº‹ä»¶
+// ±à¼­ÇøÓòÊÂ¼ş
 _e(function (E, $) {
 
     E.fn.eventTxt = function () {
 
         var txt = this.txt;
 
-        // txtå†…å®¹å˜åŒ–æ—¶ï¼Œä¿å­˜é€‰åŒº
+        // txtÄÚÈİ±ä»¯Ê±£¬±£´æÑ¡Çø
         txt.saveSelectionEvent();
 
-        // txtå†…å®¹å˜åŒ–æ—¶ï¼Œéšæ—¶æ›´æ–° value
+        // txtÄÚÈİ±ä»¯Ê±£¬ËæÊ±¸üĞÂ value
         txt.updateValueEvent();
 
-        // txtå†…å®¹å˜åŒ–æ—¶ï¼Œéšæ—¶æ›´æ–° menu style
+        // txtÄÚÈİ±ä»¯Ê±£¬ËæÊ±¸üĞÂ menu style
         txt.updateMenuStyleEvent();
 
-        // // é¼ æ ‡hoveræ—¶ï¼Œæ˜¾ç¤º p head é«˜åº¦ï¼ˆæš‚æ—¶å…³é—­è¿™ä¸ªåŠŸèƒ½ï¼‰
+        // // Êó±êhoverÊ±£¬ÏÔÊ¾ p head ¸ß¶È£¨ÔİÊ±¹Ø±ÕÕâ¸ö¹¦ÄÜ£©
         // if (!/ie/i.test(E.userAgent)) {
-        //     // æš‚æ—¶ä¸æ”¯æŒIE
+        //     // ÔİÊ±²»Ö§³ÖIE
         //     txt.showHeightOnHover();
         // }
     };
 
 });
-// ä¸Šä¼ å›¾ç‰‡äº‹ä»¶
+// ÉÏ´«Í¼Æ¬ÊÂ¼ş
 _e(function (E, $) {
 
     E.plugin(function () {
         var editor = this;
-        var fns = editor.config.uploadImgFns; // editor.config.uploadImgFns = {} åœ¨configæ–‡ä»¶ä¸­å®šä¹‰äº†
+        var fns = editor.config.uploadImgFns; // editor.config.uploadImgFns = {} ÔÚconfigÎÄ¼şÖĞ¶¨ÒåÁË
 
-        // -------- å®šä¹‰loadå‡½æ•° --------
+        // -------- ¶¨Òåloadº¯Êı --------
         fns.onload || (fns.onload = function (resultText, xhr) {
-            E.log('ä¸Šä¼ ç»“æŸï¼Œè¿”å›ç»“æœä¸º ' + resultText);
+            E.log('ÉÏ´«½áÊø£¬·µ»Ø½á¹ûÎª ' + resultText);
 
             var editor = this;
-            var originalName = editor.uploadImgOriginalName || '';  // ä¸Šä¼ å›¾ç‰‡æ—¶ï¼Œå·²ç»å°†å›¾ç‰‡çš„åå­—å­˜åœ¨ editor.uploadImgOriginalName
+            var originalName = editor.uploadImgOriginalName || '';  // ÉÏ´«Í¼Æ¬Ê±£¬ÒÑ¾­½«Í¼Æ¬µÄÃû×Ö´æÔÚ editor.uploadImgOriginalName
             var img;
             if (resultText.indexOf('error|') === 0) {
-                // æç¤ºé”™è¯¯
-                E.warn('ä¸Šä¼ å¤±è´¥ï¼š' + resultText.split('|')[1]);
+                // ÌáÊ¾´íÎó
+                E.warn('ÉÏ´«Ê§°Ü£º' + resultText.split('|')[1]);
                 alert(resultText.split('|')[1]);
             } else {
-                E.log('ä¸Šä¼ æˆåŠŸï¼Œå³å°†æ’å…¥ç¼–è¾‘åŒºåŸŸï¼Œç»“æœä¸ºï¼š' + resultText);
+                E.log('ÉÏ´«³É¹¦£¬¼´½«²åÈë±à¼­ÇøÓò£¬½á¹ûÎª£º' + resultText);
 
-                // å°†ç»“æœæ’å…¥ç¼–è¾‘å™¨
+                // ½«½á¹û²åÈë±à¼­Æ÷
                 img = document.createElement('img');
                 img.onload = function () {
                     var html = '<img src="' + resultText + '" alt="' + originalName + '" style="max-width:100%;"/>';
                     editor.command(null, 'insertHtml', html);
 
-                    E.log('å·²æ’å…¥å›¾ç‰‡ï¼Œåœ°å€ ' + resultText);
+                    E.log('ÒÑ²åÈëÍ¼Æ¬£¬µØÖ· ' + resultText);
                     img = null;
                 };
                 img.onerror = function () {
-                    E.error('ä½¿ç”¨è¿”å›çš„ç»“æœè·å–å›¾ç‰‡ï¼Œå‘ç”Ÿé”™è¯¯ã€‚è¯·ç¡®è®¤ä»¥ä¸‹ç»“æœæ˜¯å¦æ­£ç¡®ï¼š' + resultText);
+                    E.error('Ê¹ÓÃ·µ»ØµÄ½á¹û»ñÈ¡Í¼Æ¬£¬·¢Éú´íÎó¡£ÇëÈ·ÈÏÒÔÏÂ½á¹ûÊÇ·ñÕıÈ·£º' + resultText);
                     img = null;
                 };
                 img.src = resultText;
@@ -6558,25 +6558,25 @@ _e(function (E, $) {
 
         });
 
-        // -------- å®šä¹‰tiemoutå‡½æ•° --------
+        // -------- ¶¨Òåtiemoutº¯Êı --------
         fns.ontimeout || (fns.ontimeout = function (xhr) {
-            E.error('ä¸Šä¼ å›¾ç‰‡è¶…æ—¶');
-            alert('ä¸Šä¼ å›¾ç‰‡è¶…æ—¶');
+            E.error('ÉÏ´«Í¼Æ¬³¬Ê±');
+            alert('ÉÏ´«Í¼Æ¬³¬Ê±');
         });
 
-        // -------- å®šä¹‰errorå‡½æ•° --------
+        // -------- ¶¨Òåerrorº¯Êı --------
         fns.onerror || (fns.onerror = function (xhr) {
-            E.error('ä¸Šä¼ ä¸Šå›¾ç‰‡å‘ç”Ÿé”™è¯¯');
-            alert('ä¸Šä¼ ä¸Šå›¾ç‰‡å‘ç”Ÿé”™è¯¯');
+            E.error('ÉÏ´«ÉÏÍ¼Æ¬·¢Éú´íÎó');
+            alert('ÉÏ´«ÉÏÍ¼Æ¬·¢Éú´íÎó');
         });
 
     });
 });
-// xhr ä¸Šä¼ å›¾ç‰‡
+// xhr ÉÏ´«Í¼Æ¬
 _e(function (E, $) {
 
     if (!window.FileReader || !window.FormData) {
-        // å¦‚æœä¸æ”¯æŒhtml5çš„æ–‡æ¡£æ“ä½œï¼Œç›´æ¥è¿”å›
+        // Èç¹û²»Ö§³Öhtml5µÄÎÄµµ²Ù×÷£¬Ö±½Ó·µ»Ø
         return;
     }
 
@@ -6587,7 +6587,7 @@ _e(function (E, $) {
         var uploadImgUrl = config.uploadImgUrl;
         var uploadTimeout = config.uploadTimeout;
 
-        // è·å–é…ç½®ä¸­çš„ä¸Šä¼ äº‹ä»¶
+        // »ñÈ¡ÅäÖÃÖĞµÄÉÏ´«ÊÂ¼ş
         var uploadImgFns = config.uploadImgFns;
         var onload = uploadImgFns.onload;
         var ontimeout = uploadImgFns.ontimeout;
@@ -6597,12 +6597,12 @@ _e(function (E, $) {
             return;
         }
 
-        // -------- å°†ä»¥base64çš„å›¾ç‰‡urlæ•°æ®è½¬æ¢ä¸ºBlob --------
+        // -------- ½«ÒÔbase64µÄÍ¼Æ¬urlÊı¾İ×ª»»ÎªBlob --------
         function convertBase64UrlToBlob(urlData, filetype){
-            //å»æ‰urlçš„å¤´ï¼Œå¹¶è½¬æ¢ä¸ºbyte
+            //È¥µôurlµÄÍ·£¬²¢×ª»»Îªbyte
             var bytes = window.atob(urlData.split(',')[1]);
             
-            //å¤„ç†å¼‚å¸¸,å°†asciiç å°äº0çš„è½¬æ¢ä¸ºå¤§äº0
+            //´¦ÀíÒì³£,½«asciiÂëĞ¡ÓÚ0µÄ×ª»»Îª´óÓÚ0
             var ab = new ArrayBuffer(bytes.length);
             var ia = new Uint8Array(ab);
             var i;
@@ -6613,24 +6613,24 @@ _e(function (E, $) {
             return new Blob([ab], {type : filetype});
         }
 
-        // -------- æ’å…¥å›¾ç‰‡çš„æ–¹æ³• --------
+        // -------- ²åÈëÍ¼Æ¬µÄ·½·¨ --------
         function insertImg(src, event) {
             var img = document.createElement('img');
             img.onload = function () {
                 var html = '<img src="' + src + '" style="max-width:100%;"/>';
                 editor.command(event, 'insertHtml', html);
 
-                E.log('å·²æ’å…¥å›¾ç‰‡ï¼Œåœ°å€ ' + src);
+                E.log('ÒÑ²åÈëÍ¼Æ¬£¬µØÖ· ' + src);
                 img = null;
             };
             img.onerror = function () {
-                E.error('ä½¿ç”¨è¿”å›çš„ç»“æœè·å–å›¾ç‰‡ï¼Œå‘ç”Ÿé”™è¯¯ã€‚è¯·ç¡®è®¤ä»¥ä¸‹ç»“æœæ˜¯å¦æ­£ç¡®ï¼š' + src);
+                E.error('Ê¹ÓÃ·µ»ØµÄ½á¹û»ñÈ¡Í¼Æ¬£¬·¢Éú´íÎó¡£ÇëÈ·ÈÏÒÔÏÂ½á¹ûÊÇ·ñÕıÈ·£º' + src);
                 img = null;
             };
             img.src = src;
         }
 
-        // -------- onprogress äº‹ä»¶ --------
+        // -------- onprogress ÊÂ¼ş --------
         function updateProgress(e) {
             if (e.lengthComputable) {
                 var percentComplete = e.loaded / e.total;
@@ -6638,49 +6638,49 @@ _e(function (E, $) {
             }
         }
 
-        // -------- xhr ä¸Šä¼ å›¾ç‰‡ --------
+        // -------- xhr ÉÏ´«Í¼Æ¬ --------
         editor.xhrUploadImg = function (opt) {
-            // opt æ•°æ®
+            // opt Êı¾İ
             var event = opt.event;
             var fileName = opt.filename || '';
             var base64 = opt.base64;
-            var fileType = opt.fileType || 'image/png'; // æ— æ‰©å±•ååˆ™é»˜è®¤ä½¿ç”¨ png
+            var fileType = opt.fileType || 'image/png'; // ÎŞÀ©Õ¹ÃûÔòÄ¬ÈÏÊ¹ÓÃ png
             var name = opt.name || 'wangEditor_upload_file';
             var loadfn = opt.loadfn || onload;
             var errorfn = opt.errorfn || onerror;
             var timeoutfn = opt.timeoutfn || ontimeout;
 
-            // ä¸Šä¼ å‚æ•°ï¼ˆå¦‚ tokenï¼‰
+            // ÉÏ´«²ÎÊı£¨Èç token£©
             var params = editor.config.uploadParams || {};
 
             // headers
             var headers = editor.config.uploadHeaders || {};
 
-            // è·å–æ–‡ä»¶æ‰©å±•å
-            var fileExt = 'png';  // é»˜è®¤ä¸º png
+            // »ñÈ¡ÎÄ¼şÀ©Õ¹Ãû
+            var fileExt = 'png';  // Ä¬ÈÏÎª png
             if (fileName.indexOf('.') > 0) {
-                // åŸæ¥çš„æ–‡ä»¶åæœ‰æ‰©å±•å
+                // Ô­À´µÄÎÄ¼şÃûÓĞÀ©Õ¹Ãû
                 fileExt = fileName.slice(fileName.lastIndexOf('.') - fileName.length + 1);
             } else if (fileType.indexOf('/') > 0 && fileType.split('/')[1]) {
-                // æ–‡ä»¶åæ²¡æœ‰æ‰©å±•åï¼Œé€šè¿‡ç±»å‹è·å–ï¼Œå¦‚ä» 'image/png' å– 'png'
+                // ÎÄ¼şÃûÃ»ÓĞÀ©Õ¹Ãû£¬Í¨¹ıÀàĞÍ»ñÈ¡£¬Èç´Ó 'image/png' È¡ 'png'
                 fileExt = fileType.split('/')[1];
             }
 
-            // ------------ begin é¢„è§ˆæ¨¡æ‹Ÿä¸Šä¼  ------------
+            // ------------ begin Ô¤ÀÀÄ£ÄâÉÏ´« ------------
             if (E.isOnWebsite) {
-                E.log('é¢„è§ˆæ¨¡æ‹Ÿä¸Šä¼ ');
+                E.log('Ô¤ÀÀÄ£ÄâÉÏ´«');
                 insertImg(base64, event);
                 return;
             }
-            // ------------ end é¢„è§ˆæ¨¡æ‹Ÿä¸Šä¼  ------------
+            // ------------ end Ô¤ÀÀÄ£ÄâÉÏ´« ------------
 
-            // å˜é‡å£°æ˜
+            // ±äÁ¿ÉùÃ÷
             var xhr = new XMLHttpRequest();
             var timeoutId;
             var src;
             var formData = new FormData();
 
-            // è¶…æ—¶å¤„ç†
+            // ³¬Ê±´¦Àí
             function timeoutCallback() {
                 if (timeoutId) {
                     clearTimeout(timeoutId);
@@ -6689,13 +6689,13 @@ _e(function (E, $) {
                     xhr.abort();
                 }
 
-                // è¶…æ—¶äº†å°±é˜»æ­¢é»˜è®¤è¡Œä¸º
+                // ³¬Ê±ÁË¾Í×èÖ¹Ä¬ÈÏĞĞÎª
                 event.preventDefault();
 
-                // æ‰§è¡Œå›è°ƒå‡½æ•°ï¼Œæç¤ºä»€ä¹ˆå†…å®¹ï¼Œéƒ½åº”è¯¥åœ¨å›è°ƒå‡½æ•°ä¸­å®šä¹‰
+                // Ö´ĞĞ»Øµ÷º¯Êı£¬ÌáÊ¾Ê²Ã´ÄÚÈİ£¬¶¼Ó¦¸ÃÔÚ»Øµ÷º¯ÊıÖĞ¶¨Òå
                 timeoutfn && timeoutfn.call(editor, xhr);
 
-                // éšè—è¿›åº¦æ¡
+                // Òş²Ø½ø¶ÈÌõ
                 editor.hideUploadProgress();
             }
 
@@ -6704,16 +6704,16 @@ _e(function (E, $) {
                     clearTimeout(timeoutId);
                 }
 
-                // è®°å½•æ–‡ä»¶ååˆ° editor.uploadImgOriginalName ï¼Œæ’å…¥å›¾ç‰‡æ—¶ï¼Œå¯åš alt å±æ€§ç”¨
+                // ¼ÇÂ¼ÎÄ¼şÃûµ½ editor.uploadImgOriginalName £¬²åÈëÍ¼Æ¬Ê±£¬¿É×ö alt ÊôĞÔÓÃ
                 editor.uploadImgOriginalName = fileName;
                 if (fileName.indexOf('.') > 0) {
                     editor.uploadImgOriginalName = fileName.split('.')[0];
                 }
 
-                // æ‰§è¡Œloadå‡½æ•°ï¼Œä»»ä½•æ“ä½œï¼Œéƒ½åº”è¯¥åœ¨loadå‡½æ•°ä¸­å®šä¹‰
+                // Ö´ĞĞloadº¯Êı£¬ÈÎºÎ²Ù×÷£¬¶¼Ó¦¸ÃÔÚloadº¯ÊıÖĞ¶¨Òå
                 loadfn && loadfn.call(editor, xhr.responseText, xhr);
 
-                // éšè—è¿›åº¦æ¡
+                // Òş²Ø½ø¶ÈÌõ
                 editor.hideUploadProgress();
             };
             xhr.onerror = function () {
@@ -6721,47 +6721,47 @@ _e(function (E, $) {
                     clearTimeout(timeoutId);
                 }
 
-                // è¶…æ—¶äº†å°±é˜»æ­¢é»˜è®¤è¡Œä¸º
+                // ³¬Ê±ÁË¾Í×èÖ¹Ä¬ÈÏĞĞÎª
                 event.preventDefault();
 
-                // æ‰§è¡Œerrorå‡½æ•°ï¼Œé”™è¯¯æç¤ºï¼Œåº”è¯¥åœ¨errorå‡½æ•°ä¸­å®šä¹‰
+                // Ö´ĞĞerrorº¯Êı£¬´íÎóÌáÊ¾£¬Ó¦¸ÃÔÚerrorº¯ÊıÖĞ¶¨Òå
                 errorfn && errorfn.call(editor, xhr);
 
-                // éšè—è¿›åº¦æ¡
+                // Òş²Ø½ø¶ÈÌõ
                 editor.hideUploadProgress();
             };
             // xhr.onprogress = updateProgress;
             xhr.upload.onprogress = updateProgress;
 
-            // å¡«å……æ•°æ®
+            // Ìî³äÊı¾İ
             formData.append(name, convertBase64UrlToBlob(base64, fileType), E.random() + '.' + fileExt);
 
-            // æ·»åŠ å‚æ•°
+            // Ìí¼Ó²ÎÊı
             $.each(params, function (key, value) {
                 formData.append(key, value);
             });
 
-            // å¼€å§‹ä¸Šä¼ 
+            // ¿ªÊ¼ÉÏ´«
             xhr.open('POST', uploadImgUrl, true);
-            // xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");  // å°†å‚æ•°è§£ææˆä¼ ç»Ÿformçš„æ–¹å¼ä¸Šä¼ 
+            // xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");  // ½«²ÎÊı½âÎö³É´«Í³formµÄ·½Ê½ÉÏ´«
 
-            // ä¿®æ”¹è‡ªå®šä¹‰é…ç½®çš„headers
+            // ĞŞ¸Ä×Ô¶¨ÒåÅäÖÃµÄheaders
             $.each(headers, function (key, value) {
                 xhr.setRequestHeader(key, value);
             });
 
-            // è·¨åŸŸä¸Šä¼ æ—¶ï¼Œä¼ cookie
+            // ¿çÓòÉÏ´«Ê±£¬´«cookie
             xhr.withCredentials = true;
 
-            // å‘é€æ•°æ®
+            // ·¢ËÍÊı¾İ
             xhr.send(formData);
             timeoutId = setTimeout(timeoutCallback, uploadTimeout);
 
-            E.log('å¼€å§‹ä¸Šä¼ ...å¹¶å¼€å§‹è¶…æ—¶è®¡ç®—');
+            E.log('¿ªÊ¼ÉÏ´«...²¢¿ªÊ¼³¬Ê±¼ÆËã');
         };
     });
 });
-// è¿›åº¦æ¡
+// ½ø¶ÈÌõ
 _e(function (E, $) {
 
     E.plugin(function () {
@@ -6773,7 +6773,7 @@ _e(function (E, $) {
         var width = $editorContainer.width();
         var $progress = $('<div class="wangEditor-upload-progress"></div>');
 
-        // æ¸²æŸ“äº‹ä»¶
+        // äÖÈ¾ÊÂ¼ş
         var isRender = false;
         function render() {
             if (isRender) {
@@ -6787,20 +6787,20 @@ _e(function (E, $) {
             $editorContainer.append($progress);
         }
 
-        // ------ æ˜¾ç¤ºè¿›åº¦ ------
+        // ------ ÏÔÊ¾½ø¶È ------
         editor.showUploadProgress = function (progress) {
             if (timeoutId) {
                 clearTimeout(timeoutId);
             }
 
-            // æ˜¾ç¤ºä¹‹å‰ï¼Œå…ˆåˆ¤æ–­æ˜¯å¦æ¸²æŸ“
+            // ÏÔÊ¾Ö®Ç°£¬ÏÈÅĞ¶ÏÊÇ·ñäÖÈ¾
             render();
 
             $progress.show();
             $progress.width(progress * width / 100);
         };
 
-        // ------ éšè—è¿›åº¦æ¡ ------
+        // ------ Òş²Ø½ø¶ÈÌõ ------
         var timeoutId;
         function hideProgress() {
             $progress.hide();
@@ -6815,7 +6815,7 @@ _e(function (E, $) {
         };
     });
 });
-// upload img æ’ä»¶
+// upload img ²å¼ş
 _e(function (E, $) {
 
     E.plugin(function () {
@@ -6829,40 +6829,40 @@ _e(function (E, $) {
             return;
         }
 
-        // è·å–editorçš„ä¸Šä¼ dom
+        // »ñÈ¡editorµÄÉÏ´«dom
         var $uploadContent = editor.$uploadContent;
         if (!$uploadContent) {
             return;
         }
 
-        // è‡ªå®šä¹‰UIï¼Œå¹¶æ·»åŠ åˆ°ä¸Šä¼ domèŠ‚ç‚¹ä¸Š
+        // ×Ô¶¨ÒåUI£¬²¢Ìí¼Óµ½ÉÏ´«dom½ÚµãÉÏ
         var $uploadIcon = $('<div class="upload-icon-container"><i class="wangeditor-menu-img-upload"></i></div>');
         $uploadContent.append($uploadIcon);
 
-        // ---------- æ„å»ºä¸Šä¼ å¯¹è±¡ ----------
+        // ---------- ¹¹½¨ÉÏ´«¶ÔÏó ----------
         var upfile = new E.UploadFile({
             editor: editor,
             uploadUrl: uploadImgUrl,
             timeout: uploadTimeout,
-            fileAccept: 'image/jpg,image/jpeg,image/png,image/gif,image/bmp'    // åªå…è®¸é€‰æ‹©å›¾ç‰‡ 
+            fileAccept: 'image/jpg,image/jpeg,image/png,image/gif,image/bmp'    // Ö»ÔÊĞíÑ¡ÔñÍ¼Æ¬ 
         });
 
-        // é€‰æ‹©æœ¬åœ°æ–‡ä»¶ï¼Œä¸Šä¼ 
+        // Ñ¡Ôñ±¾µØÎÄ¼ş£¬ÉÏ´«
         $uploadIcon.click(function (e) {
             event = e;
             upfile.selectFiles();
         });
     });
 });
-// h5 æ–¹å¼ä¸Šä¼ å›¾ç‰‡
+// h5 ·½Ê½ÉÏ´«Í¼Æ¬
 _e(function (E, $) {
 
     if (!window.FileReader || !window.FormData) {
-        // å¦‚æœä¸æ”¯æŒhtml5çš„æ–‡æ¡£æ“ä½œï¼Œç›´æ¥è¿”å›
+        // Èç¹û²»Ö§³Öhtml5µÄÎÄµµ²Ù×÷£¬Ö±½Ó·µ»Ø
         return;
     }
 
-    // æ„é€ å‡½æ•°
+    // ¹¹Ôìº¯Êı
     var UploadFile = function (opt) {
         this.editor = opt.editor;
         this.uploadUrl = opt.uploadUrl;
@@ -6876,18 +6876,18 @@ _e(function (E, $) {
     // clear
     UploadFile.fn.clear = function () {
         this.$input.val('');
-        E.log('input value å·²æ¸…ç©º');
+        E.log('input value ÒÑÇå¿Õ');
     };
 
-    // æ¸²æŸ“
+    // äÖÈ¾
     UploadFile.fn.render = function () {
         var self = this;
         if (self._hasRender) {
-            // ä¸è¦é‡å¤æ¸²æŸ“
+            // ²»ÒªÖØ¸´äÖÈ¾
             return;
         }
 
-        E.log('æ¸²æŸ“dom');
+        E.log('äÖÈ¾dom');
 
         var fileAccept = self.fileAccept;
         var acceptTpl = fileAccept ? 'accept="' + fileAccept + '"' : '';
@@ -6899,33 +6899,33 @@ _e(function (E, $) {
         $container.append($input);
         E.$body.append($container);
 
-        // onchange äº‹ä»¶
+        // onchange ÊÂ¼ş
         $input.on('change', function (e) {
             self.selected(e, $input.get(0));
         });
 
-        // è®°å½•å¯¹è±¡æ•°æ®
+        // ¼ÇÂ¼¶ÔÏóÊı¾İ
         self.$input = $input;
 
-        // è®°å½•
+        // ¼ÇÂ¼
         self._hasRender = true;
     };
 
-    // é€‰æ‹©
+    // Ñ¡Ôñ
     UploadFile.fn.selectFiles = function () {
         var self = this;
 
-        E.log('ä½¿ç”¨ html5 æ–¹å¼ä¸Šä¼ ');
+        E.log('Ê¹ÓÃ html5 ·½Ê½ÉÏ´«');
 
-        // å…ˆæ¸²æŸ“
+        // ÏÈäÖÈ¾
         self.render();
 
-        // é€‰æ‹©
-        E.log('é€‰æ‹©æ–‡ä»¶');
+        // Ñ¡Ôñ
+        E.log('Ñ¡ÔñÎÄ¼ş');
         self.$input.click();
     };
 
-    // é€‰ä¸­æ–‡ä»¶ä¹‹å
+    // Ñ¡ÖĞÎÄ¼şÖ®ºó
     UploadFile.fn.selected = function (e, input) {
         var self = this;
         var files = input.files || [];
@@ -6933,15 +6933,15 @@ _e(function (E, $) {
             return;
         }
 
-        E.log('é€‰ä¸­ ' + files.length + ' ä¸ªæ–‡ä»¶');
+        E.log('Ñ¡ÖĞ ' + files.length + ' ¸öÎÄ¼ş');
 
-        // éå†é€‰ä¸­çš„æ–‡ä»¶ï¼Œé¢„è§ˆã€ä¸Šä¼ 
+        // ±éÀúÑ¡ÖĞµÄÎÄ¼ş£¬Ô¤ÀÀ¡¢ÉÏ´«
         $.each(files, function (key, value) {
             self.upload(value);
         });
     };
 
-    // ä¸Šä¼ å•ä¸ªæ–‡ä»¶
+    // ÉÏ´«µ¥¸öÎÄ¼ş
     UploadFile.fn.upload = function (file) {
         var self = this;
         var editor = self.editor;
@@ -6955,21 +6955,21 @@ _e(function (E, $) {
         var reader = new FileReader();
 
         if (!onload || !ontimeout || !onerror) {
-            E.error('è¯·ä¸ºç¼–è¾‘å™¨é…ç½®ä¸Šä¼ å›¾ç‰‡çš„ onload ontimeout onerror å›è°ƒäº‹ä»¶');
+            E.error('ÇëÎª±à¼­Æ÷ÅäÖÃÉÏ´«Í¼Æ¬µÄ onload ontimeout onerror »Øµ÷ÊÂ¼ş');
             return;
         }
 
 
-        E.log('å¼€å§‹æ‰§è¡Œ ' + filename + ' æ–‡ä»¶çš„ä¸Šä¼ ');
+        E.log('¿ªÊ¼Ö´ĞĞ ' + filename + ' ÎÄ¼şµÄÉÏ´«');
 
-        // æ¸…ç©º input æ•°æ®
+        // Çå¿Õ input Êı¾İ
         function clearInput() {
             self.clear();
         }
 
-        // onloadäº‹ä»¶
+        // onloadÊÂ¼ş
         reader.onload = function (e) {
-            E.log('å·²è¯»å–' + filename + 'æ–‡ä»¶');
+            E.log('ÒÑ¶ÁÈ¡' + filename + 'ÎÄ¼ş');
 
             var base64 = e.target.result || this.result;
             editor.xhrUploadImg({
@@ -6980,48 +6980,48 @@ _e(function (E, $) {
                 name: uploadFileName,
                 loadfn: function (resultText, xhr) {
                     clearInput();
-                    // æ‰§è¡Œé…ç½®ä¸­çš„æ–¹æ³•
+                    // Ö´ĞĞÅäÖÃÖĞµÄ·½·¨
                     var editor = this;
                     onload.call(editor, resultText, xhr);
                 },
                 errorfn: function (xhr) {
                     clearInput();
                     if (E.isOnWebsite) {
-                        alert('wangEditorå®˜ç½‘æš‚æ—¶æ²¡æœ‰æœåŠ¡ç«¯ï¼Œå› æ­¤æŠ¥é”™ã€‚å®é™…é¡¹ç›®ä¸­ä¸ä¼šå‘ç”Ÿ');
+                        alert('wangEditor¹ÙÍøÔİÊ±Ã»ÓĞ·şÎñ¶Ë£¬Òò´Ë±¨´í¡£Êµ¼ÊÏîÄ¿ÖĞ²»»á·¢Éú');
                     }
-                    // æ‰§è¡Œé…ç½®ä¸­çš„æ–¹æ³•
+                    // Ö´ĞĞÅäÖÃÖĞµÄ·½·¨
                     var editor = this;
                     onerror.call(editor, xhr);
                 },
                 timeoutfn: function (xhr) {
                     clearInput();
                     if (E.isOnWebsite) {
-                        alert('wangEditorå®˜ç½‘æš‚æ—¶æ²¡æœ‰æœåŠ¡ç«¯ï¼Œå› æ­¤è¶…æ—¶ã€‚å®é™…é¡¹ç›®ä¸­ä¸ä¼šå‘ç”Ÿ');
+                        alert('wangEditor¹ÙÍøÔİÊ±Ã»ÓĞ·şÎñ¶Ë£¬Òò´Ë³¬Ê±¡£Êµ¼ÊÏîÄ¿ÖĞ²»»á·¢Éú');
                     }
-                    // æ‰§è¡Œé…ç½®ä¸­çš„æ–¹æ³•
+                    // Ö´ĞĞÅäÖÃÖĞµÄ·½·¨
                     var editor = this;
                     ontimeout(editor, xhr);
                 }
             });
         };
 
-        // å¼€å§‹å–æ–‡ä»¶
+        // ¿ªÊ¼È¡ÎÄ¼ş
         reader.readAsDataURL(file);
     };
 
-    // æš´éœ²ç»™ E
+    // ±©Â¶¸ø E
     E.UploadFile = UploadFile;
 
 });
-// formæ–¹å¼ä¸Šä¼ å›¾ç‰‡
+// form·½Ê½ÉÏ´«Í¼Æ¬
 _e(function (E, $) {
 
     if (window.FileReader && window.FormData) {
-        // å¦‚æœæ”¯æŒ html5 ä¸Šä¼ ï¼Œåˆ™è¿”å›
+        // Èç¹ûÖ§³Ö html5 ÉÏ´«£¬Ôò·µ»Ø
         return;
     }
     
-    // æ„é€ å‡½æ•°
+    // ¹¹Ôìº¯Êı
     var UploadFile = function (opt) {
         this.editor = opt.editor;
         this.uploadUrl = opt.uploadUrl;
@@ -7035,43 +7035,43 @@ _e(function (E, $) {
     // clear
     UploadFile.fn.clear = function () {
         this.$input.val('');
-        E.log('input value å·²æ¸…ç©º');
+        E.log('input value ÒÑÇå¿Õ');
     };
 
-    // éšè—modal
+    // Òş²Ømodal
     UploadFile.fn.hideModal = function () {
         this.modal.hide();
     };
 
-    // æ¸²æŸ“
+    // äÖÈ¾
     UploadFile.fn.render = function () {
         var self = this;
         var editor = self.editor;
         var uploadFileName = editor.config.uploadImgFileName || 'wangEditorFormFile';
         if (self._hasRender) {
-            // ä¸è¦é‡å¤æ¸²æŸ“
+            // ²»ÒªÖØ¸´äÖÈ¾
             return;
         }
 
-        // æœåŠ¡å™¨ç«¯è·¯å¾„
+        // ·şÎñÆ÷¶ËÂ·¾¶
         var uploadUrl = self.uploadUrl;
 
-        E.log('æ¸²æŸ“dom');
+        E.log('äÖÈ¾dom');
 
-        // åˆ›å»º form å’Œ iframe
+        // ´´½¨ form ºÍ iframe
         var iframeId = 'iframe' + E.random();
         var $iframe = $('<iframe name="' + iframeId + '" id="' + iframeId + '" frameborder="0" width="0" height="0"></iframe>');
         var multiple = self.multiple;
         var multipleTpl = multiple ? 'multiple="multiple"' : '';
-        var $p = $('<p>é€‰æ‹©å›¾ç‰‡å¹¶ä¸Šä¼ </p>');
+        var $p = $('<p>Ñ¡ÔñÍ¼Æ¬²¢ÉÏ´«</p>');
         var $input = $('<input type="file" ' + multipleTpl + ' name="' + uploadFileName + '"/>');
-        var $btn = $('<input type="submit" value="ä¸Šä¼ "/>');
+        var $btn = $('<input type="submit" value="ÉÏ´«"/>');
         var $form = $('<form enctype="multipart/form-data" method="post" action="' + uploadUrl + '" target="' + iframeId + '"></form>');
         var $container = $('<div style="margin:10px 20px;"></div>');
 
         $form.append($p).append($input).append($btn);
 
-        // å¢åŠ ç”¨æˆ·é…ç½®çš„å‚æ•°ï¼Œå¦‚ token
+        // Ôö¼ÓÓÃ»§ÅäÖÃµÄ²ÎÊı£¬Èç token
         $.each(editor.config.uploadParams, function (key, value) {
             $form.append( $('<input type="hidden" name="' + key + '" value="' + value + '"/>') );
         });
@@ -7082,21 +7082,21 @@ _e(function (E, $) {
         self.$input = $input;
         self.$iframe = $iframe;
 
-        // ç”Ÿæˆ modal
+        // Éú³É modal
         var modal = new E.Modal(editor, undefined, {
             $content: $container
         });
         self.modal = modal;
 
-        // è®°å½•
+        // ¼ÇÂ¼
         self._hasRender = true;
     };
 
-    // ç»‘å®š iframe load äº‹ä»¶
+    // °ó¶¨ iframe load ÊÂ¼ş
     UploadFile.fn.bindLoadEvent = function () {
         var self = this;
         if (self._hasBindLoad) {
-            // ä¸è¦é‡å¤ç»‘å®š
+            // ²»ÒªÖØ¸´°ó¶¨
             return;
         }
 
@@ -7106,46 +7106,46 @@ _e(function (E, $) {
         var iframeWindow = iframe.contentWindow;
         var onload = editor.config.uploadImgFns.onload;
 
-        // å®šä¹‰loadäº‹ä»¶
+        // ¶¨ÒåloadÊÂ¼ş
         function onloadFn() {
             var resultText = $.trim(iframeWindow.document.body.innerHTML);
             if (!resultText) {
                 return;
             }
 
-            // è·å–æ–‡ä»¶å
-            var fileFullName = self.$input.val();  // ç»“æœå¦‚ C:\folder\abc.png æ ¼å¼
+            // »ñÈ¡ÎÄ¼şÃû
+            var fileFullName = self.$input.val();  // ½á¹ûÈç C:\folder\abc.png ¸ñÊ½
             var fileOriginalName = fileFullName;
             if (fileFullName.lastIndexOf('\\') >= 0) {
-                // è·å– abc.png æ ¼å¼
+                // »ñÈ¡ abc.png ¸ñÊ½
                 fileOriginalName = fileFullName.slice(fileFullName.lastIndexOf('\\') + 1);
                 if (fileOriginalName.indexOf('.') > 0) {
-                    // è·å– abc ï¼ˆå³ä¸å¸¦æ‰©å±•åçš„æ–‡ä»¶åï¼‰
+                    // »ñÈ¡ abc £¨¼´²»´øÀ©Õ¹ÃûµÄÎÄ¼şÃû£©
                     fileOriginalName = fileOriginalName.split('.')[0];
                 }
             }
 
-            // å°†æ–‡ä»¶åæš‚å­˜åˆ° editor.uploadImgOriginalName ï¼Œæ’å…¥å›¾ç‰‡æ—¶ï¼Œå¯ä½œä¸º alt å±æ€§æ¥ç”¨
+            // ½«ÎÄ¼şÃûÔİ´æµ½ editor.uploadImgOriginalName £¬²åÈëÍ¼Æ¬Ê±£¬¿É×÷Îª alt ÊôĞÔÀ´ÓÃ
             editor.uploadImgOriginalName = fileOriginalName;
 
-            // æ‰§è¡Œloadå‡½æ•°ï¼Œæ’å…¥å›¾ç‰‡çš„æ“ä½œï¼Œåº”è¯¥åœ¨loadå‡½æ•°ä¸­æ‰§è¡Œ
+            // Ö´ĞĞloadº¯Êı£¬²åÈëÍ¼Æ¬µÄ²Ù×÷£¬Ó¦¸ÃÔÚloadº¯ÊıÖĞÖ´ĞĞ
             onload.call(editor, resultText);
 
-            // æ¸…ç©º input æ•°æ®
+            // Çå¿Õ input Êı¾İ
             self.clear();
 
-            // éšè—modal
+            // Òş²Ømodal
             self.hideModal();
         }
 
-        // ç»‘å®š load äº‹ä»¶
+        // °ó¶¨ load ÊÂ¼ş
         if (iframe.attachEvent) {
             iframe.attachEvent('onload', onloadFn);
         } else {
             iframe.onload = onloadFn;
         }
 
-        // è®°å½•
+        // ¼ÇÂ¼
         self._hasBindLoad = true;
     };
 
@@ -7160,27 +7160,27 @@ _e(function (E, $) {
         setTimeout(show);
     };
 
-    // é€‰æ‹©
+    // Ñ¡Ôñ
     UploadFile.fn.selectFiles = function () {
         var self = this;
 
-        E.log('ä½¿ç”¨ form æ–¹å¼ä¸Šä¼ ');
+        E.log('Ê¹ÓÃ form ·½Ê½ÉÏ´«');
 
-        // å…ˆæ¸²æŸ“
+        // ÏÈäÖÈ¾
         self.render();
 
-        // å…ˆæ¸…ç©º
+        // ÏÈÇå¿Õ
         self.clear();
 
-        // æ˜¾ç¤º
+        // ÏÔÊ¾
         self.show();
     };
 
-    // æš´éœ²ç»™ E
+    // ±©Â¶¸ø E
     E.UploadFile = UploadFile;
 
 });
-// upload img æ’ä»¶ ç²˜è´´å›¾ç‰‡
+// upload img ²å¼ş Õ³ÌùÍ¼Æ¬
 _e(function (E, $) {
     
     E.plugin(function () {
@@ -7193,17 +7193,17 @@ _e(function (E, $) {
         var pasteEvent;
         var $imgsBeforePaste;
 
-        // æœªé…ç½®ä¸Šä¼ å›¾ç‰‡urlï¼Œåˆ™å¿½ç•¥
+        // Î´ÅäÖÃÉÏ´«Í¼Æ¬url£¬ÔòºöÂÔ
         if (!uploadImgUrl) {
             return;
         }
 
-        // -------- é chrome ä¸‹ï¼Œé€šè¿‡æŸ¥æ‰¾ç²˜è´´çš„å›¾ç‰‡çš„æ–¹å¼ä¸Šä¼  --------
+        // -------- ·Ç chrome ÏÂ£¬Í¨¹ı²éÕÒÕ³ÌùµÄÍ¼Æ¬µÄ·½Ê½ÉÏ´« --------
         function findPasteImgAndUpload() {
             var reg = /^data:(image\/\w+);base64/;
             var $imgs = $txt.find('img');
 
-            E.log('ç²˜è´´åï¼Œæ£€æŸ¥åˆ°ç¼–è¾‘å™¨æœ‰' + $imgs.length + 'ä¸ªå›¾ç‰‡ã€‚å¼€å§‹éå†å›¾ç‰‡ï¼Œè¯•å›¾æ‰¾åˆ°åˆšåˆšç²˜è´´è¿‡æ¥çš„å›¾ç‰‡');
+            E.log('Õ³Ìùºó£¬¼ì²éµ½±à¼­Æ÷ÓĞ' + $imgs.length + '¸öÍ¼Æ¬¡£¿ªÊ¼±éÀúÍ¼Æ¬£¬ÊÔÍ¼ÕÒµ½¸Õ¸ÕÕ³Ìù¹ıÀ´µÄÍ¼Æ¬');
 
             $.each($imgs, function () {
                 var img = this;
@@ -7212,25 +7212,25 @@ _e(function (E, $) {
                 var base64 = $img.attr('src');
                 var type;
 
-                // åˆ¤æ–­å½“å‰å›¾ç‰‡æ˜¯å¦æ˜¯ç²˜è´´ä¹‹å‰çš„
+                // ÅĞ¶Ïµ±Ç°Í¼Æ¬ÊÇ·ñÊÇÕ³ÌùÖ®Ç°µÄ
                 $imgsBeforePaste.each(function () {
                     if (img === this) {
-                        // å½“å‰å›¾ç‰‡æ˜¯ç²˜è´´ä¹‹å‰çš„
+                        // µ±Ç°Í¼Æ¬ÊÇÕ³ÌùÖ®Ç°µÄ
                         flag = true;
                         return false;
                     }
                 });
 
-                // å½“å‰å›¾ç‰‡æ˜¯ç²˜è´´ä¹‹å‰çš„ï¼Œåˆ™å¿½ç•¥
+                // µ±Ç°Í¼Æ¬ÊÇÕ³ÌùÖ®Ç°µÄ£¬ÔòºöÂÔ
                 if (flag) {
                     return;
                 }
 
-                E.log('æ‰¾åˆ°ä¸€ä¸ªç²˜è´´è¿‡æ¥çš„å›¾ç‰‡');
+                E.log('ÕÒµ½Ò»¸öÕ³Ìù¹ıÀ´µÄÍ¼Æ¬');
 
                 if (reg.test(base64)) {
-                    // å¾—åˆ°çš„ç²˜è´´çš„å›¾ç‰‡æ˜¯ base64 æ ¼å¼ï¼Œç¬¦åˆè¦æ±‚
-                    E.log('src æ˜¯ base64 æ ¼å¼ï¼Œå¯ä»¥ä¸Šä¼ ');
+                    // µÃµ½µÄÕ³ÌùµÄÍ¼Æ¬ÊÇ base64 ¸ñÊ½£¬·ûºÏÒªÇó
+                    E.log('src ÊÇ base64 ¸ñÊ½£¬¿ÉÒÔÉÏ´«');
                     type = base64.match(reg)[1];
                     editor.xhrUploadImg({
                         event: pasteEvent,
@@ -7239,24 +7239,24 @@ _e(function (E, $) {
                         name: uploadFileName
                     });
                 } else {
-                    E.log('src ä¸º ' + base64 + ' ï¼Œä¸æ˜¯ base64 æ ¼å¼ï¼Œæš‚æ—¶ä¸æ”¯æŒä¸Šä¼ ');
+                    E.log('src Îª ' + base64 + ' £¬²»ÊÇ base64 ¸ñÊ½£¬ÔİÊ±²»Ö§³ÖÉÏ´«');
                 }
 
-                // æœ€ç»ˆç§»é™¤åŸå›¾ç‰‡
+                // ×îÖÕÒÆ³ıÔ­Í¼Æ¬
                 $img.remove();
             });
 
-            E.log('éå†ç»“æŸ');
+            E.log('±éÀú½áÊø');
         }
 
-        // å¼€å§‹ç›‘æ§ç²˜è´´äº‹ä»¶
+        // ¿ªÊ¼¼à¿ØÕ³ÌùÊÂ¼ş
         $txt.on('paste', function (e) {
             pasteEvent = e;
             var data = pasteEvent.clipboardData || pasteEvent.originalEvent.clipboardData;
             var text;
             var items;
 
-            // -------- è¯•å›¾è·å–å‰ªåˆ‡æ¿ä¸­çš„æ–‡å­—ï¼Œæœ‰æ–‡å­—çš„æƒ…å†µä¸‹ï¼Œå°±ä¸å¤„ç†å›¾ç‰‡ç²˜è´´ --------
+            // -------- ÊÔÍ¼»ñÈ¡¼ôÇĞ°åÖĞµÄÎÄ×Ö£¬ÓĞÎÄ×ÖµÄÇé¿öÏÂ£¬¾Í²»´¦ÀíÍ¼Æ¬Õ³Ìù --------
             if (data == null) {
                 text = window.clipboardData && window.clipboardData.getData('text');
             } else {
@@ -7268,25 +7268,25 @@ _e(function (E, $) {
 
             items = data && data.items;
             if (items) {
-                // -------- chrome å¯ä»¥ç”¨ data.items å–å‡ºå›¾ç‰‡ -----
-                E.log('é€šè¿‡ data.items å¾—åˆ°äº†æ•°æ®');
+                // -------- chrome ¿ÉÒÔÓÃ data.items È¡³öÍ¼Æ¬ -----
+                E.log('Í¨¹ı data.items µÃµ½ÁËÊı¾İ');
 
                 $.each(items, function (key, value) {
                     var fileType = value.type || '';
                     if(fileType.indexOf('image') < 0) {
-                        // ä¸æ˜¯å›¾ç‰‡
+                        // ²»ÊÇÍ¼Æ¬
                         return;
                     }
 
                     var file = value.getAsFile();
                     var reader = new FileReader();
 
-                    E.log('å¾—åˆ°ä¸€ä¸ªç²˜è´´å›¾ç‰‡');
+                    E.log('µÃµ½Ò»¸öÕ³ÌùÍ¼Æ¬');
 
                     reader.onload = function (e) {
-                        E.log('è¯»å–åˆ°ç²˜è´´çš„å›¾ç‰‡');
+                        E.log('¶ÁÈ¡µ½Õ³ÌùµÄÍ¼Æ¬');
 
-                        // æ‰§è¡Œä¸Šä¼ 
+                        // Ö´ĞĞÉÏ´«
                         var base64 = e.target.result || this.result;
                         editor.xhrUploadImg({
                             event: pasteEvent,
@@ -7296,26 +7296,26 @@ _e(function (E, $) {
                         });
                     };
 
-                    //è¯»å–ç²˜è´´çš„æ–‡ä»¶
+                    //¶ÁÈ¡Õ³ÌùµÄÎÄ¼ş
                     reader.readAsDataURL(file);
                 });
             } else {
-                // -------- é chrome ä¸èƒ½ç”¨ data.items å–å›¾ç‰‡ -----
+                // -------- ·Ç chrome ²»ÄÜÓÃ data.items È¡Í¼Æ¬ -----
 
-                E.log('æœªä» data.items å¾—åˆ°æ•°æ®ï¼Œä½¿ç”¨æ£€æµ‹ç²˜è´´å›¾ç‰‡çš„æ–¹å¼');
+                E.log('Î´´Ó data.items µÃµ½Êı¾İ£¬Ê¹ÓÃ¼ì²âÕ³ÌùÍ¼Æ¬µÄ·½Ê½');
 
-                // è·å–
+                // »ñÈ¡
                 $imgsBeforePaste = $txt.find('img');
-                E.log('ç²˜è´´å‰ï¼Œæ£€æŸ¥åˆ°ç¼–è¾‘å™¨æœ‰' + $imgsBeforePaste.length + 'ä¸ªå›¾ç‰‡');
+                E.log('Õ³ÌùÇ°£¬¼ì²éµ½±à¼­Æ÷ÓĞ' + $imgsBeforePaste.length + '¸öÍ¼Æ¬');
 
-                // å¼‚æ­¥ä¸Šä¼ æ‰¾åˆ°çš„å›¾ç‰‡
+                // Òì²½ÉÏ´«ÕÒµ½µÄÍ¼Æ¬
                 setTimeout(findPasteImgAndUpload, 0);
             }
         });
 
     });
 });
-// æ‹–æ‹½ä¸Šä¼ å›¾ç‰‡ æ’ä»¶ 
+// ÍÏ×§ÉÏ´«Í¼Æ¬ ²å¼ş 
 _e(function (E, $) {
 
     E.plugin(function () {
@@ -7327,17 +7327,17 @@ _e(function (E, $) {
         var uploadImgUrl = config.uploadImgUrl;
         var uploadFileName = config.uploadImgFileName || 'wangEditorDragFile';
 
-        // æœªé…ç½®ä¸Šä¼ å›¾ç‰‡urlï¼Œåˆ™å¿½ç•¥
+        // Î´ÅäÖÃÉÏ´«Í¼Æ¬url£¬ÔòºöÂÔ
         if (!uploadImgUrl) {
             return;
         }
 
-        // é˜»æ­¢æµè§ˆå™¨é»˜è®¤è¡Œä¸º
+        // ×èÖ¹ä¯ÀÀÆ÷Ä¬ÈÏĞĞÎª
         E.$document.on('dragleave drop dragenter dragover', function (e) {
             e.preventDefault();
         });
 
-        // ç›‘æ§ $txt drop äº‹ä»¶
+        // ¼à¿Ø $txt drop ÊÂ¼ş
         $txt.on('drop', function (dragEvent) {
             dragEvent.preventDefault();
 
@@ -7353,17 +7353,17 @@ _e(function (E, $) {
                 var name = file.name;
 
                 if (type.indexOf('image/') < 0) {
-                    // åªæ¥æ”¶å›¾ç‰‡
+                    // Ö»½ÓÊÕÍ¼Æ¬
                     return;
                 }
 
-                E.log('å¾—åˆ°å›¾ç‰‡ ' + name);
+                E.log('µÃµ½Í¼Æ¬ ' + name);
 
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    E.log('è¯»å–åˆ°å›¾ç‰‡ ' + name);
+                    E.log('¶ÁÈ¡µ½Í¼Æ¬ ' + name);
 
-                    // æ‰§è¡Œä¸Šä¼ 
+                    // Ö´ĞĞÉÏ´«
                     var base64 = e.target.result || this.result;
                     editor.xhrUploadImg({
                         event: dragEvent,
@@ -7373,7 +7373,7 @@ _e(function (E, $) {
                     });
                 };
 
-                //è¯»å–ç²˜è´´çš„æ–‡ä»¶
+                //¶ÁÈ¡Õ³ÌùµÄÎÄ¼ş
                 reader.readAsDataURL(file);
 
             });
@@ -7381,7 +7381,7 @@ _e(function (E, $) {
     });
 
 });
-// ç¼–è¾‘å™¨åŒºåŸŸ table toolbar
+// ±à¼­Æ÷ÇøÓò table toolbar
 _e(function (E, $) {
 
     E.plugin(function () {
@@ -7389,11 +7389,11 @@ _e(function (E, $) {
         var txt = editor.txt;
         var $txt = txt.$txt;
         var html = '';
-        // è¯´æ˜ï¼šè®¾ç½®äº† max-height ä¹‹åï¼Œ$txt.parent() è´Ÿè´£æ»šåŠ¨å¤„ç†
+        // ËµÃ÷£ºÉèÖÃÁË max-height Ö®ºó£¬$txt.parent() ¸ºÔğ¹ö¶¯´¦Àí
         var $currentTxt = editor.useMaxHeight ? $txt.parent() : $txt;
         var $currentTable;
 
-        // ç”¨åˆ°çš„domèŠ‚ç‚¹
+        // ÓÃµ½µÄdom½Úµã
         var isRendered = false;
         var $toolbar = $('<div class="txt-toolbar"></div>');
         var $triangle = $('<div class="tip-triangle"></div>');
@@ -7401,16 +7401,16 @@ _e(function (E, $) {
         var $zoomSmall = $('<a href="#"><i class="wangeditor-menu-img-search-minus"></i></a>');
         var $zoomBig = $('<a href="#"><i class="wangeditor-menu-img-search-plus"></i></a>');
 
-        // æ¸²æŸ“åˆ°é¡µé¢
+        // äÖÈ¾µ½Ò³Ãæ
         function render() {
             if (isRendered) {
                 return;
             }
             
-            // ç»‘å®šäº‹ä»¶
+            // °ó¶¨ÊÂ¼ş
             bindEvent();
 
-            // æ‹¼æ¥ æ¸²æŸ“åˆ°é¡µé¢ä¸Š
+            // Æ´½Ó äÖÈ¾µ½Ò³ÃæÉÏ
             $toolbar.append($triangle)
                     .append($delete)
                     .append($zoomSmall)
@@ -7419,14 +7419,14 @@ _e(function (E, $) {
             isRendered = true;
         }
 
-        // ç»‘å®šäº‹ä»¶
+        // °ó¶¨ÊÂ¼ş
         function bindEvent() {
-            // ç»Ÿä¸€æ‰§è¡Œå‘½ä»¤çš„æ–¹æ³•
+            // Í³Ò»Ö´ĞĞÃüÁîµÄ·½·¨
             var commandFn;
             function command(e, callback) {
-                // æ‰§è¡Œå‘½ä»¤ä¹‹å‰ï¼Œå…ˆå­˜å‚¨htmlå†…å®¹
+                // Ö´ĞĞÃüÁîÖ®Ç°£¬ÏÈ´æ´¢htmlÄÚÈİ
                 html = $txt.html();
-                // ç›‘æ§å†…å®¹å˜åŒ–
+                // ¼à¿ØÄÚÈİ±ä»¯
                 var cb = function  () {
                     if (callback) {
                         callback();
@@ -7435,13 +7435,13 @@ _e(function (E, $) {
                         $txt.change();
                     }
                 };
-                // æ‰§è¡Œå‘½ä»¤
+                // Ö´ĞĞÃüÁî
                 if (commandFn) {
                     editor.customCommand(e, commandFn, cb);
                 }
             }
 
-            // åˆ é™¤
+            // É¾³ı
             $delete.click(function (e) {
                 commandFn = function () {
                     $currentTable.remove();
@@ -7451,7 +7451,7 @@ _e(function (E, $) {
                 });
             });
 
-            // æ”¾å¤§
+            // ·Å´ó
             $zoomBig.click(function (e) {
                 commandFn = function () {
                     $currentTable.css({
@@ -7463,7 +7463,7 @@ _e(function (E, $) {
                 });
             });
 
-            // ç¼©å°
+            // ËõĞ¡
             $zoomSmall.click(function (e) {
                 commandFn = function () {
                     $currentTable.css({
@@ -7476,10 +7476,10 @@ _e(function (E, $) {
             });
         }
 
-        // æ˜¾ç¤º toolbar
+        // ÏÔÊ¾ toolbar
         function show() {
             if (editor._disabled) {
-                // ç¼–è¾‘å™¨å·²ç»è¢«ç¦ç”¨ï¼Œåˆ™ä¸è®©æ˜¾ç¤º
+                // ±à¼­Æ÷ÒÑ¾­±»½ûÓÃ£¬Ôò²»ÈÃÏÔÊ¾
                 return;
             }
             if ($currentTable == null) {
@@ -7492,9 +7492,9 @@ _e(function (E, $) {
             var tableHeight = $currentTable.outerHeight();
             var tableWidth = $currentTable.outerWidth();
 
-            // --- å®šä½ toolbar ---
+            // --- ¶¨Î» toolbar ---
 
-            // è®¡ç®—åˆæ­¥ç»“æœ
+            // ¼ÆËã³õ²½½á¹û
             var top = tableTop + tableHeight;
             var left = tableLeft;
             var marginLeft = 0;
@@ -7502,26 +7502,26 @@ _e(function (E, $) {
             var txtTop = $currentTxt.position().top;
             var txtHeight = $currentTxt.outerHeight();
             if (top > (txtTop + txtHeight)) {
-                // top ä¸å¾—è¶…å‡ºç¼–è¾‘èŒƒå›´
+                // top ²»µÃ³¬³ö±à¼­·¶Î§
                 top = txtTop + txtHeight;
             }
 
-            // æ˜¾ç¤ºï¼ˆæ–¹ä¾¿è®¡ç®— marginï¼‰
+            // ÏÔÊ¾£¨·½±ã¼ÆËã margin£©
             $toolbar.show();
 
-            // è®¡ç®— margin
+            // ¼ÆËã margin
             var width = $toolbar.outerWidth();
             marginLeft = tableWidth / 2 - width / 2;
 
-            // å®šä½
+            // ¶¨Î»
             $toolbar.css({
                 top: top + 5,
                 left: left,
                 'margin-left': marginLeft
             });
-            // å¦‚æœå®šä½å¤ªé å·¦äº†
+            // Èç¹û¶¨Î»Ì«¿¿×óÁË
             if (marginLeft < 0) {
-                // å¾—åˆ°ä¸‰è§’å½¢çš„margin-left
+                // µÃµ½Èı½ÇĞÎµÄmargin-left
                 $toolbar.css('margin-left', '0');
                 $triangle.hide();
             } else {
@@ -7529,7 +7529,7 @@ _e(function (E, $) {
             }
         }
         
-        // éšè— toolbar
+        // Òş²Ø toolbar
         function hide() {
             if ($currentTable == null) {
                 return;
@@ -7539,11 +7539,11 @@ _e(function (E, $) {
             $toolbar.hide();
         }
 
-        // click table äº‹ä»¶
+        // click table ÊÂ¼ş
         $currentTxt.on('click', 'table', function (e) {
             var $table = $(e.currentTarget);
 
-            // æ¸²æŸ“
+            // äÖÈ¾
             render();
 
             if ($currentTable && ($currentTable.get(0) === $table.get(0))) {
@@ -7551,11 +7551,11 @@ _e(function (E, $) {
                 return;
             }
 
-            // æ˜¾ç¤º toolbar
+            // ÏÔÊ¾ toolbar
             $currentTable = $table;
             show();
 
-            // é˜»æ­¢å†’æ³¡
+            // ×èÖ¹Ã°Åİ
             e.preventDefault();
             e.stopPropagation();
             
@@ -7568,7 +7568,7 @@ _e(function (E, $) {
     });
 
 });
-// ç¼–è¾‘å™¨åŒºåŸŸ img toolbar
+// ±à¼­Æ÷ÇøÓò img toolbar
 _e(function (E, $) {
 
     if (E.userAgent.indexOf('MSIE 8') > 0) {
@@ -7581,13 +7581,13 @@ _e(function (E, $) {
         var txt = editor.txt;
         var $txt = txt.$txt;
         var html = '';
-        // è¯´æ˜ï¼šè®¾ç½®äº† max-height ä¹‹åï¼Œ$txt.parent() è´Ÿè´£æ»šåŠ¨å¤„ç†
+        // ËµÃ÷£ºÉèÖÃÁË max-height Ö®ºó£¬$txt.parent() ¸ºÔğ¹ö¶¯´¦Àí
         var $currentTxt = editor.useMaxHeight ? $txt.parent() : $txt;
         var $editorContainer = editor.$editorContainer;
         var $currentImg;
         var currentLink = '';
 
-        // ç”¨åˆ°çš„domèŠ‚ç‚¹
+        // ÓÃµ½µÄdom½Úµã
         var isRendered = false;
         var $dragPoint = $('<div class="img-drag-point"></div>');
 
@@ -7612,17 +7612,17 @@ _e(function (E, $) {
         var $linkBtnSubmit = $('<button class="right">' + lang.submit + '</button>');
         var $linkBtnCancel = $('<button class="right gray">' + lang.cancel + '</button>');
 
-        // è®°å½•æ˜¯å¦æ­£åœ¨æ‹–æ‹½
+        // ¼ÇÂ¼ÊÇ·ñÕıÔÚÍÏ×§
         var isOnDrag = false;
 
-        // è·å– / è®¾ç½® é“¾æ¥
+        // »ñÈ¡ / ÉèÖÃ Á´½Ó
         function imgLink(e, url) {
             if (!$currentImg) {
                 return;
             }
             var commandFn;
             var callback = function () {
-                // åŠæ—¶ä¿å­˜currentLink
+                // ¼°Ê±±£´æcurrentLink
                 if (url != null) {
                     currentLink = url;
                 }
@@ -7634,26 +7634,26 @@ _e(function (E, $) {
             var inLink = false;
             var $parent = $currentImg.parent();
             if ($parent.get(0).nodeName.toLowerCase() === 'a') {
-                // çˆ¶å…ƒç´ å°±æ˜¯å›¾ç‰‡é“¾æ¥
+                // ¸¸ÔªËØ¾ÍÊÇÍ¼Æ¬Á´½Ó
                 $link = $parent;
                 inLink = true;
             } else {
-                // çˆ¶å…ƒç´ ä¸æ˜¯å›¾ç‰‡é“¾æ¥ï¼Œåˆ™é‡æ–°åˆ›å»ºä¸€ä¸ªé“¾æ¥
+                // ¸¸ÔªËØ²»ÊÇÍ¼Æ¬Á´½Ó£¬ÔòÖØĞÂ´´½¨Ò»¸öÁ´½Ó
                 $link = $('<a target="_blank"></a>');
             }
 
             if (url == null) {
-                // url æ— å€¼ï¼Œæ˜¯è·å–é“¾æ¥
+                // url ÎŞÖµ£¬ÊÇ»ñÈ¡Á´½Ó
                 return $link.attr('href') || '';
             } else if (url === '') {
-                // url æ˜¯ç©ºå­—ç¬¦ä¸²ï¼Œæ˜¯å–æ¶ˆé“¾æ¥
+                // url ÊÇ¿Õ×Ö·û´®£¬ÊÇÈ¡ÏûÁ´½Ó
                 if (inLink) {
                     commandFn = function () {
                         $currentImg.unwrap();
                     };
                 }
             } else {
-                // url æœ‰å€¼ï¼Œæ˜¯è®¾ç½®é“¾æ¥
+                // url ÓĞÖµ£¬ÊÇÉèÖÃÁ´½Ó
                 if (url === currentLink) {
                     return;
                 }
@@ -7661,32 +7661,32 @@ _e(function (E, $) {
                     $link.attr('href', url);
 
                     if (!inLink) {
-                        // å½“å‰å›¾ç‰‡æœªåŒ…å«åœ¨é“¾æ¥ä¸­ï¼Œåˆ™åŒ…å«è¿›æ¥
+                        // µ±Ç°Í¼Æ¬Î´°üº¬ÔÚÁ´½ÓÖĞ£¬Ôò°üº¬½øÀ´
                         $currentImg.wrap($link);
                     }
                 };
             }
 
-            // æ‰§è¡Œå‘½ä»¤
+            // Ö´ĞĞÃüÁî
             if (commandFn) {
-                // è®°å½•ä¸‹æ‰§è¡Œå‘½ä»¤ä¹‹å‰çš„htmlå†…å®¹
+                // ¼ÇÂ¼ÏÂÖ´ĞĞÃüÁîÖ®Ç°µÄhtmlÄÚÈİ
                 html = $txt.html();
-                // æ‰§è¡Œå‘½ä»¤
+                // Ö´ĞĞÃüÁî
                 editor.customCommand(e, commandFn, callback);
             }
         }
 
-        // æ¸²æŸ“åˆ°é¡µé¢
+        // äÖÈ¾µ½Ò³Ãæ
         function render() {
             if (isRendered) {
                 return;
             }
             
-            // ç»‘å®šäº‹ä»¶
+            // °ó¶¨ÊÂ¼ş
             bindToolbarEvent();
             bindDragEvent();
 
-            // èœå•æ”¾å…¥ container
+            // ²Ëµ¥·ÅÈë container
             $menuContainer.append($delete)
                             .append($zoomSmall)
                             .append($zoomBig)
@@ -7699,12 +7699,12 @@ _e(function (E, $) {
                             .append($link)
                             .append($unLink);
 
-            // é“¾æ¥inputæ”¾å…¥container
+            // Á´½Óinput·ÅÈëcontainer
             $linkInputContainer.append($linkInput)
                                .append($linkBtnCancel)
                                .append($linkBtnSubmit);
 
-            // æ‹¼æ¥ æ¸²æŸ“åˆ°é¡µé¢ä¸Š
+            // Æ´½Ó äÖÈ¾µ½Ò³ÃæÉÏ
             $toolbar.append($triangle)
                     .append($menuContainer)
                     .append($linkInputContainer);
@@ -7713,13 +7713,13 @@ _e(function (E, $) {
             isRendered = true;
         }
 
-        // ç»‘å®štoolbaräº‹ä»¶
+        // °ó¶¨toolbarÊÂ¼ş
         function bindToolbarEvent() {
-            // ç»Ÿä¸€æ‰§è¡Œå‘½ä»¤çš„æ–¹æ³•
+            // Í³Ò»Ö´ĞĞÃüÁîµÄ·½·¨
             var commandFn;
             function customCommand(e, callback) {
                 var cb;
-                // è®°å½•ä¸‹æ‰§è¡Œå‘½ä»¤ä¹‹å‰çš„htmlå†…å®¹
+                // ¼ÇÂ¼ÏÂÖ´ĞĞÃüÁîÖ®Ç°µÄhtmlÄÚÈİ
                 html = $txt.html();
                 cb = function () {
                     if (callback) {
@@ -7729,18 +7729,18 @@ _e(function (E, $) {
                         $txt.change();
                     }
                 };
-                // æ‰§è¡Œå‘½ä»¤
+                // Ö´ĞĞÃüÁî
                 if (commandFn) {
                     editor.customCommand(e, commandFn, cb);
                 }
             }
 
-            // åˆ é™¤
+            // É¾³ı
             $delete.click(function (e) {
-                // åˆ é™¤ä¹‹å‰å…ˆunlink
+                // É¾³ıÖ®Ç°ÏÈunlink
                 imgLink(e, '');
 
-                // åˆ é™¤å›¾ç‰‡
+                // É¾³ıÍ¼Æ¬
                 commandFn = function () {
                     $currentImg.remove();
                 };
@@ -7749,7 +7749,7 @@ _e(function (E, $) {
                 });
             });
 
-            // æ”¾å¤§
+            // ·Å´ó
             $zoomBig.click(function (e) {
                 commandFn = function () {
                     var img = $currentImg.get(0);
@@ -7768,7 +7768,7 @@ _e(function (E, $) {
                 });
             });
 
-            // ç¼©å°
+            // ËõĞ¡
             $zoomSmall.click(function (e) {
                 commandFn = function () {
                     var img = $currentImg.get(0);
@@ -7787,7 +7787,7 @@ _e(function (E, $) {
                 });
             });
 
-            // // å·¦æµ®åŠ¨
+            // // ×ó¸¡¶¯
             // $floatLeft.click(function (e) {
             //     commandFn = function () {
             //         $currentImg.css({
@@ -7802,7 +7802,7 @@ _e(function (E, $) {
             // alignLeft
             $alignLeft.click(function (e) {
                 commandFn = function () {
-                    // å¦‚æœ img å¢åŠ äº†é“¾æ¥ï¼Œé‚£ä¹ˆ img.parent() å°±æ˜¯ a æ ‡ç­¾ï¼Œè®¾ç½® align æ²¡ç”¨çš„ï¼Œå› æ­¤å¿…é¡»æ‰¾åˆ° P çˆ¶èŠ‚ç‚¹æ¥è®¾ç½® align
+                    // Èç¹û img Ôö¼ÓÁËÁ´½Ó£¬ÄÇÃ´ img.parent() ¾ÍÊÇ a ±êÇ©£¬ÉèÖÃ align Ã»ÓÃµÄ£¬Òò´Ë±ØĞëÕÒµ½ P ¸¸½ÚµãÀ´ÉèÖÃ align
                     $currentImg.parents('p').css({
                         'text-align': 'left'
                     }).attr('align', 'left');
@@ -7812,7 +7812,7 @@ _e(function (E, $) {
                 });
             });
 
-            // // å³æµ®åŠ¨
+            // // ÓÒ¸¡¶¯
             // $floatRight.click(function (e) {
             //     commandFn = function () {
             //         $currentImg.css({
@@ -7827,7 +7827,7 @@ _e(function (E, $) {
             // alignRight
             $alignRight.click(function (e) {
                 commandFn = function () {
-                    // å¦‚æœ img å¢åŠ äº†é“¾æ¥ï¼Œé‚£ä¹ˆ img.parent() å°±æ˜¯ a æ ‡ç­¾ï¼Œè®¾ç½® align æ²¡ç”¨çš„ï¼Œå› æ­¤å¿…é¡»æ‰¾åˆ° P çˆ¶èŠ‚ç‚¹æ¥è®¾ç½® align
+                    // Èç¹û img Ôö¼ÓÁËÁ´½Ó£¬ÄÇÃ´ img.parent() ¾ÍÊÇ a ±êÇ©£¬ÉèÖÃ align Ã»ÓÃµÄ£¬Òò´Ë±ØĞëÕÒµ½ P ¸¸½ÚµãÀ´ÉèÖÃ align
                     $currentImg.parents('p').css({
                         'text-align': 'right'
                     }).attr('align', 'right');
@@ -7837,7 +7837,7 @@ _e(function (E, $) {
                 });
             });
 
-            // // æ— æµ®åŠ¨
+            // // ÎŞ¸¡¶¯
             // $noFloat.click(function (e) {
             //     commandFn = function () {
             //         $currentImg.css({
@@ -7852,7 +7852,7 @@ _e(function (E, $) {
             // alignCenter
             $alignCenter.click(function (e) {
                 commandFn = function () {
-                    // å¦‚æœ img å¢åŠ äº†é“¾æ¥ï¼Œé‚£ä¹ˆ img.parent() å°±æ˜¯ a æ ‡ç­¾ï¼Œè®¾ç½® align æ²¡ç”¨çš„ï¼Œå› æ­¤å¿…é¡»æ‰¾åˆ° P çˆ¶èŠ‚ç‚¹æ¥è®¾ç½® align
+                    // Èç¹û img Ôö¼ÓÁËÁ´½Ó£¬ÄÇÃ´ img.parent() ¾ÍÊÇ a ±êÇ©£¬ÉèÖÃ align Ã»ÓÃµÄ£¬Òò´Ë±ØĞëÕÒµ½ P ¸¸½ÚµãÀ´ÉèÖÃ align
                     $currentImg.parents('p').css({
                         'text-align': 'center'
                     }).attr('align', 'center');
@@ -7863,35 +7863,35 @@ _e(function (E, $) {
             });
 
             // link
-            // æ˜¾ç¤ºé“¾æ¥input
+            // ÏÔÊ¾Á´½Óinput
             $link.click(function (e) {
                 e.preventDefault();
 
-                // è·å–å½“å‰é“¾æ¥ï¼Œå¹¶æ˜¾ç¤º
+                // »ñÈ¡µ±Ç°Á´½Ó£¬²¢ÏÔÊ¾
                 currentLink = imgLink(e);
                 $linkInput.val(currentLink);
 
                 $menuContainer.hide();
                 $linkInputContainer.show();
             });
-            // è®¾ç½®é“¾æ¥
+            // ÉèÖÃÁ´½Ó
             $linkBtnSubmit.click(function (e) {
                 e.preventDefault();
 
                 var url = $.trim($linkInput.val());
                 if (url) {
-                    // è®¾ç½®é“¾æ¥ï¼ŒåŒæ—¶ä¼šè‡ªåŠ¨æ›´æ–° currentLink çš„å€¼
+                    // ÉèÖÃÁ´½Ó£¬Í¬Ê±»á×Ô¶¯¸üĞÂ currentLink µÄÖµ
                     imgLink(e, url);
                 }
 
-                // éšè— toolbar
+                // Òş²Ø toolbar
                 setTimeout(hide);
             });
-            // å–æ¶ˆè®¾ç½®é“¾æ¥
+            // È¡ÏûÉèÖÃÁ´½Ó
             $linkBtnCancel.click(function (e) {
                 e.preventDefault();
 
-                // é‡ç½®é“¾æ¥ input
+                // ÖØÖÃÁ´½Ó input
                 $linkInput.val(currentLink);
 
                 $menuContainer.show();
@@ -7902,15 +7902,15 @@ _e(function (E, $) {
             $unLink.click(function (e) {
                 e.preventDefault();
 
-                // æ‰§è¡Œ unlink
+                // Ö´ĞĞ unlink
                 imgLink(e, '');
 
-                // éšè— toolbar
+                // Òş²Ø toolbar
                 setTimeout(hide);
             });
         }
 
-        // ç»‘å®šdragäº‹ä»¶
+        // °ó¶¨dragÊÂ¼ş
         function bindDragEvent() {
             var _x, _y;
             var dragMarginLeft, dragMarginTop;
@@ -7919,11 +7919,11 @@ _e(function (E, $) {
             function mousemove (e) {
                 var diffX, diffY;
 
-                // è®¡ç®—å·®é¢
+                // ¼ÆËã²î¶î
                 diffX = e.pageX - _x;
                 diffY = e.pageY - _y;
 
-                // --------- è®¡ç®—æ‹–æ‹½ç‚¹çš„ä½ç½® ---------
+                // --------- ¼ÆËãÍÏ×§µãµÄÎ»ÖÃ ---------
                 var currentDragMarginLeft = dragMarginLeft + diffX;
                 var currentDragMarginTop = dragMarginTop + diffY;
                 $dragPoint.css({
@@ -7931,7 +7931,7 @@ _e(function (E, $) {
                     'margin-top': currentDragMarginTop
                 });
 
-                // --------- è®¡ç®—å›¾ç‰‡çš„å¤§å° ---------
+                // --------- ¼ÆËãÍ¼Æ¬µÄ´óĞ¡ ---------
                 var currentImgWidth = imgWidth + diffX;
                 var currentImggHeight = imgHeight + diffY;
                 $currentImg && $currentImg.css({
@@ -7944,48 +7944,48 @@ _e(function (E, $) {
                 if (!$currentImg) {
                     return;
                 }
-                // å½“å‰é¼ æ ‡ä½ç½®
+                // µ±Ç°Êó±êÎ»ÖÃ
                 _x = e.pageX;
                 _y = e.pageY;
 
-                // å½“å‰æ‹–æ‹½ç‚¹çš„ä½ç½®
+                // µ±Ç°ÍÏ×§µãµÄÎ»ÖÃ
                 dragMarginLeft = parseFloat($dragPoint.css('margin-left'), 10);
                 dragMarginTop = parseFloat($dragPoint.css('margin-top'), 10);
 
-                // å½“å‰å›¾ç‰‡çš„å¤§å°
+                // µ±Ç°Í¼Æ¬µÄ´óĞ¡
                 imgWidth = $currentImg.width();
                 imgHeight = $currentImg.height();
 
-                // éšè— $toolbar
+                // Òş²Ø $toolbar
                 $toolbar.hide();
 
-                // ç»‘å®šè®¡ç®—äº‹ä»¶
+                // °ó¶¨¼ÆËãÊÂ¼ş
                 E.$document.on('mousemove._dragResizeImg', mousemove);
                 E.$document.on('mouseup._dragResizeImg', function (e) {
-                    // å–æ¶ˆç»‘å®š
+                    // È¡Ïû°ó¶¨
                     E.$document.off('mousemove._dragResizeImg');
                     E.$document.off('mouseup._dragResizeImg');
 
-                    // éšè—ï¼Œå¹¶è¿˜åŸæ‹–æ‹½ç‚¹çš„ä½ç½®
+                    // Òş²Ø£¬²¢»¹Ô­ÍÏ×§µãµÄÎ»ÖÃ
                     hide();
                     $dragPoint.css({
                         'margin-left': dragMarginLeft,
                         'margin-top': dragMarginTop
                     });
 
-                    // è®°å½•
+                    // ¼ÇÂ¼
                     isOnDrag = false;
                 });
 
-                // è®°å½•
+                // ¼ÇÂ¼
                 isOnDrag = true;
             });
         }
 
-        // æ˜¾ç¤º toolbar
+        // ÏÔÊ¾ toolbar
         function show() {
             if (editor._disabled) {
-                // ç¼–è¾‘å™¨å·²ç»è¢«ç¦ç”¨ï¼Œåˆ™ä¸è®©æ˜¾ç¤º
+                // ±à¼­Æ÷ÒÑ¾­±»½ûÓÃ£¬Ôò²»ÈÃÏÔÊ¾
                 return;
             }
             if ($currentImg == null) {
@@ -7999,15 +7999,15 @@ _e(function (E, $) {
             var imgWidth = $currentImg.outerWidth();
 
 
-            // --- å®šä½ dragpoint ---
+            // --- ¶¨Î» dragpoint ---
             $dragPoint.css({
                 top: imgTop + imgHeight,
                 left: imgLeft + imgWidth
             });
 
-            // --- å®šä½ toolbar ---
+            // --- ¶¨Î» toolbar ---
 
-            // è®¡ç®—åˆæ­¥ç»“æœ
+            // ¼ÆËã³õ²½½á¹û
             var top = imgTop + imgHeight;
             var left = imgLeft;
             var marginLeft = 0;
@@ -8015,40 +8015,40 @@ _e(function (E, $) {
             var txtTop = $currentTxt.position().top;
             var txtHeight = $currentTxt.outerHeight();
             if (top > (txtTop + txtHeight)) {
-                // top ä¸å¾—è¶…å‡ºç¼–è¾‘èŒƒå›´
+                // top ²»µÃ³¬³ö±à¼­·¶Î§
                 top = txtTop + txtHeight;
             } else {
-                // top è¶…å‡ºç¼–è¾‘èŒƒå›´ï¼ŒdragPointå°±ä¸æ˜¾ç¤ºäº†
+                // top ³¬³ö±à¼­·¶Î§£¬dragPoint¾Í²»ÏÔÊ¾ÁË
                 $dragPoint.show();
             }
 
-            // æ˜¾ç¤ºï¼ˆæ–¹ä¾¿è®¡ç®— marginï¼‰
+            // ÏÔÊ¾£¨·½±ã¼ÆËã margin£©
             $toolbar.show();
 
-            // è®¡ç®— margin
+            // ¼ÆËã margin
             var width = $toolbar.outerWidth();
             marginLeft = imgWidth / 2 - width / 2;
 
-            // å®šä½
+            // ¶¨Î»
             $toolbar.css({
                 top: top + 5,
                 left: left,
                 'margin-left': marginLeft
             });
-            // å¦‚æœå®šä½å¤ªé å·¦äº†
+            // Èç¹û¶¨Î»Ì«¿¿×óÁË
             if (marginLeft < 0) {
-                // å¾—åˆ°ä¸‰è§’å½¢çš„margin-left
+                // µÃµ½Èı½ÇĞÎµÄmargin-left
                 $toolbar.css('margin-left', '0');
                 $triangle.hide();
             } else {
                 $triangle.show();
             }
 
-            // disable èœå•
+            // disable ²Ëµ¥
             editor.disableMenusExcept();
         }
         
-        // éšè— toolbar
+        // Òş²Ø toolbar
         function hide() {
             if ($currentImg == null) {
                 return;
@@ -8059,11 +8059,11 @@ _e(function (E, $) {
             $toolbar.hide();
             $dragPoint.hide();
 
-            // enable èœå•
+            // enable ²Ëµ¥
             editor.enableMenusExcept();
         }
 
-        // åˆ¤æ–­imgæ˜¯å¦æ˜¯ä¸€ä¸ªè¡¨æƒ…
+        // ÅĞ¶ÏimgÊÇ·ñÊÇÒ»¸ö±íÇé
         function isEmotion(imgSrc) {
             var result = false;
             if (!editor.emotionUrls) {
@@ -8076,13 +8076,13 @@ _e(function (E, $) {
                     flag = true;
                 }
                 if (flag) {
-                    return false;  // break å¾ªç¯
+                    return false;  // break Ñ­»·
                 }
             });
             return result;
         }
 
-        // click img äº‹ä»¶
+        // click img ÊÂ¼ş
         $currentTxt.on('mousedown', 'img', function (e) {
             e.preventDefault();
         }).on('click', 'img', function (e) {
@@ -8090,13 +8090,13 @@ _e(function (E, $) {
             var src = $img.attr('src');
 
             if (!src || isEmotion(src)) {
-                // æ˜¯ä¸€ä¸ªè¡¨æƒ…å›¾æ ‡
+                // ÊÇÒ»¸ö±íÇéÍ¼±ê
                 return;
             }
 
-            // ---------- ä¸æ˜¯è¡¨æƒ…å›¾æ ‡ ---------- 
+            // ---------- ²»ÊÇ±íÇéÍ¼±ê ---------- 
 
-            // æ¸²æŸ“
+            // äÖÈ¾
             render();
 
             if ($currentImg && ($currentImg.get(0) === $img.get(0))) {
@@ -8104,15 +8104,15 @@ _e(function (E, $) {
                 return;
             }
 
-            // æ˜¾ç¤º toolbar
+            // ÏÔÊ¾ toolbar
             $currentImg = $img;
             show();
 
-            // é»˜è®¤æ˜¾ç¤ºmenuContainerï¼Œå…¶ä»–é»˜è®¤éšè—
+            // Ä¬ÈÏÏÔÊ¾menuContainer£¬ÆäËûÄ¬ÈÏÒş²Ø
             $menuContainer.show();
             $linkInputContainer.hide();
 
-            // é˜»æ­¢å†’æ³¡
+            // ×èÖ¹Ã°Åİ
             e.preventDefault();
             e.stopPropagation();
             
@@ -8125,14 +8125,14 @@ _e(function (E, $) {
     });
 
 });
-// ç¼–è¾‘åŒºåŸŸ link toolbar
+// ±à¼­ÇøÓò link toolbar
 _e(function (E, $) {
     E.plugin(function () {
         var editor = this;
         var lang = editor.config.lang;
         var $txt = editor.txt.$txt;
 
-        // å½“å‰å‘½ä¸­çš„é“¾æ¥
+        // µ±Ç°ÃüÖĞµÄÁ´½Ó
         var $currentLink;
 
         var $toolbar = $('<div class="txt-toolbar"></div>');
@@ -8140,13 +8140,13 @@ _e(function (E, $) {
         var $triggerLink = $('<a href="#" target="_blank"><i class="wangeditor-menu-img-link"></i> ' + lang.openLink + '</a>');
         var isRendered;
 
-        // è®°å½•å½“å‰çš„æ˜¾ç¤º/éšè—çŠ¶æ€
+        // ¼ÇÂ¼µ±Ç°µÄÏÔÊ¾/Òş²Ø×´Ì¬
         var isShow = false;
 
         var showTimeoutId, hideTimeoutId;
         var showTimeoutIdByToolbar, hideTimeoutIdByToolbar;
 
-        // æ¸²æŸ“ dom
+        // äÖÈ¾ dom
         function render() {
             if (isRendered) {
                 return;
@@ -8160,7 +8160,7 @@ _e(function (E, $) {
             isRendered = true;
         }
 
-        // å®šä½
+        // ¶¨Î»
         function setPosition() {
             if (!$currentLink) {
                 return;
@@ -8171,24 +8171,24 @@ _e(function (E, $) {
             var top = position.top;
             var height = $currentLink.height();
 
-            // åˆæ­¥è®¡ç®—topå€¼
+            // ³õ²½¼ÆËãtopÖµ
             var topResult = top + height + 5;
 
-            // åˆ¤æ–­ toolbar æ˜¯å¦è¶…è¿‡äº†ç¼–è¾‘å™¨åŒºåŸŸçš„ä¸‹è¾¹ç•Œ
+            // ÅĞ¶Ï toolbar ÊÇ·ñ³¬¹ıÁË±à¼­Æ÷ÇøÓòµÄÏÂ±ß½ç
             var menuHeight = editor.menuContainer.height();
             var txtHeight = editor.txt.$txt.outerHeight();
             if (topResult > menuHeight + txtHeight) {
                 topResult = menuHeight + txtHeight + 5;
             }
 
-            // æœ€ç»ˆè®¾ç½®
+            // ×îÖÕÉèÖÃ
             $toolbar.css({
                 top: topResult,
                 left: left
             });
         }
 
-        // æ˜¾ç¤º toolbar
+        // ÏÔÊ¾ toolbar
         function show() {
             if (isShow) {
                 return;
@@ -8202,17 +8202,17 @@ _e(function (E, $) {
 
             $toolbar.show();
 
-            // è®¾ç½®é“¾æ¥
+            // ÉèÖÃÁ´½Ó
             var href = $currentLink.attr('href');
             $triggerLink.attr('href', href);
 
-            // å®šä½
+            // ¶¨Î»
             setPosition();
 
             isShow = true;
         }
 
-        // éšè— toolbar
+        // Òş²Ø toolbar
         function hide() {
             if (!isShow) {
                 return;
@@ -8226,9 +8226,9 @@ _e(function (E, $) {
             isShow = false;
         }
 
-        // $txt ç»‘å®šäº‹ä»¶
+        // $txt °ó¶¨ÊÂ¼ş
         $txt.on('mouseenter', 'a', function (e) {
-            // å»¶æ—¶ 500ms æ˜¾ç¤ºtoolbar
+            // ÑÓÊ± 500ms ÏÔÊ¾toolbar
             if (showTimeoutId) {
                 clearTimeout(showTimeoutId);
             }
@@ -8239,24 +8239,24 @@ _e(function (E, $) {
 
                 var $img = $a.children('img');
                 if ($img.length) {
-                    // è¯¥é“¾æ¥ä¸‹åŒ…å«ä¸€ä¸ªå›¾ç‰‡
+                    // ¸ÃÁ´½ÓÏÂ°üº¬Ò»¸öÍ¼Æ¬
 
-                    // å›¾ç‰‡ç‚¹å‡»æ—¶ï¼Œéšè—toolbar
+                    // Í¼Æ¬µã»÷Ê±£¬Òş²Øtoolbar
                     $img.click(function (e) {
                         hide();
                     });
 
                     if ($img.hasClass('clicked')) {
-                        // å›¾ç‰‡è¿˜å¤„äºclickedçŠ¶æ€ï¼Œåˆ™ä¸æ˜¾ç¤ºtoolbar
+                        // Í¼Æ¬»¹´¦ÓÚclicked×´Ì¬£¬Ôò²»ÏÔÊ¾toolbar
                         return;
                     }
                 }
 
-                // æ˜¾ç¤ºtoolbar
+                // ÏÔÊ¾toolbar
                 show();
             }, 500);
         }).on('mouseleave', 'a', function (e) {
-            // å»¶æ—¶ 500ms éšè—toolbar
+            // ÑÓÊ± 500ms Òş²Øtoolbar
             if (hideTimeoutId) {
                 clearTimeout(hideTimeoutId);
             }
@@ -8264,14 +8264,14 @@ _e(function (E, $) {
         }).on('click keydown scroll', function (e) {
             setTimeout(hide, 100);
         });
-        // $toolbar ç»‘å®šäº‹ä»¶
+        // $toolbar °ó¶¨ÊÂ¼ş
         $toolbar.on('mouseenter', function (e) {
-            // å…ˆä¸­æ–­æ‰ $txt.mouseleave å¯¼è‡´çš„éšè—
+            // ÏÈÖĞ¶Ïµô $txt.mouseleave µ¼ÖÂµÄÒş²Ø
             if (hideTimeoutId) {
                 clearTimeout(hideTimeoutId);
             }
         }).on('mouseleave', function (e) {
-            // å»¶æ—¶ 500ms æ˜¾ç¤ºtoolbar
+            // ÑÓÊ± 500ms ÏÔÊ¾toolbar
             if (showTimeoutIdByToolbar) {
                 clearTimeout(showTimeoutIdByToolbar);
             }
@@ -8279,14 +8279,14 @@ _e(function (E, $) {
         });
     });
 });
-// menuå¸é¡¶
+// menuÎü¶¥
 _e(function (E, $) {
 
     E.plugin(function () {
         var editor = this;
         var menuFixed = editor.config.menuFixed;
         if (menuFixed === false || typeof menuFixed !== 'number') {
-            // æ²¡æœ‰é…ç½®èœå•å¸é¡¶
+            // Ã»ÓĞÅäÖÃ²Ëµ¥Îü¶¥
             return;
         }
         var bodyMarginTop = parseFloat(E.$body.css('margin-top'), 10);
@@ -8307,17 +8307,17 @@ _e(function (E, $) {
         var $txt = editor.txt.$txt;
 
         E.$window.scroll(function () {
-            //å…¨å±æ¨¡å¼ä¸æ”¯æŒ
+            //È«ÆÁÄ£Ê½²»Ö§³Ö
             if (editor.isFullScreen) {
                 return;
             }
 
             var sTop = E.$window.scrollTop();
 
-            // éœ€è¦é‡æ–°è®¡ç®—å®½åº¦ï¼Œå› ä¸ºæµè§ˆå™¨å¯èƒ½æ­¤æ—¶å‡ºç°æ»šåŠ¨æ¡
+            // ĞèÒªÖØĞÂ¼ÆËã¿í¶È£¬ÒòÎªä¯ÀÀÆ÷¿ÉÄÜ´ËÊ±³öÏÖ¹ö¶¯Ìõ
             var menuWidth = $menuContainer.width();
 
-            // å¦‚æœ menuTop === 0 è¯´æ˜æ­¤å‰ç¼–è¾‘å™¨ä¸€ç›´éšè—ï¼Œåæ¥æ˜¾ç¤ºå‡ºæ¥äº†ï¼Œè¦é‡æ–°è®¡ç®—ç›¸å…³æ•°æ®
+            // Èç¹û menuTop === 0 ËµÃ÷´ËÇ°±à¼­Æ÷Ò»Ö±Òş²Ø£¬ºóÀ´ÏÔÊ¾³öÀ´ÁË£¬ÒªÖØĞÂ¼ÆËãÏà¹ØÊı¾İ
             if (menuTop === 0) {
                 menuTop = $menuContainer.offset().top;
                 editorTop = $editorContainer.offset().top;
@@ -8326,40 +8326,40 @@ _e(function (E, $) {
             }
 
             if (sTop >= menuTop && sTop + menuFixed + menuHeight + 30 < editorTop + editorHeight) {
-                // å¸é¡¶
+                // Îü¶¥
                 $menuContainer.css({
                     position: 'fixed',
                     top: menuFixed
                 });
 
-                // å›ºå®šå®½åº¦
+                // ¹Ì¶¨¿í¶È
                 $menuContainer.width(menuWidth);
 
-                // å¢åŠ body margin-top
+                // Ôö¼Óbody margin-top
                 E.$body.css({
                     'margin-top': bodyMarginTop + menuHeight
                 });
 
-                // è®°å½•
+                // ¼ÇÂ¼
                 if (!editor._isMenufixed) {
                     editor._isMenufixed = true;
                 }
             } else {
-                // å–æ¶ˆå¸é¡¶
+                // È¡ÏûÎü¶¥
                 $menuContainer.css({
                     position: menuCssPosition,
                     top: menuCssTop
                 });
 
-                // å–æ¶ˆå®½åº¦å›ºå®š
+                // È¡Ïû¿í¶È¹Ì¶¨
                 $menuContainer.css('width', '100%');
 
-                // è¿˜åŸ body margin-top
+                // »¹Ô­ body margin-top
                 E.$body.css({
                     'margin-top': bodyMarginTop
                 });
 
-                // æ’¤é”€è®°å½•
+                // ³·Ïú¼ÇÂ¼
                 if (editor._isMenufixed) {
                     editor._isMenufixed = false;
                 }
@@ -8368,119 +8368,119 @@ _e(function (E, $) {
     });
 
 });
-// ç¼©è¿› èœå•æ’ä»¶
+// Ëõ½ø ²Ëµ¥²å¼ş
 _e(function (E, $) {
 
-    // ç”¨ createMenu æ–¹æ³•åˆ›å»ºèœå•
+    // ÓÃ createMenu ·½·¨´´½¨²Ëµ¥
     E.createMenu(function (check) {
 
-        // å®šä¹‰èœå•idï¼Œä¸è¦å’Œå…¶ä»–èœå•idé‡å¤ã€‚ç¼–è¾‘å™¨è‡ªå¸¦çš„æ‰€æœ‰èœå•idï¼Œå¯é€šè¿‡ã€å‚æ•°é…ç½®-è‡ªå®šä¹‰èœå•ã€ä¸€èŠ‚æŸ¥çœ‹
+        // ¶¨Òå²Ëµ¥id£¬²»ÒªºÍÆäËû²Ëµ¥idÖØ¸´¡£±à¼­Æ÷×Ô´øµÄËùÓĞ²Ëµ¥id£¬¿ÉÍ¨¹ı¡º²ÎÊıÅäÖÃ-×Ô¶¨Òå²Ëµ¥¡»Ò»½Ú²é¿´
         var menuId = 'indent';
 
-        // checkå°†æ£€æŸ¥èœå•é…ç½®ï¼ˆã€å‚æ•°é…ç½®-è‡ªå®šä¹‰èœå•ã€ä¸€èŠ‚æè¿°ï¼‰ä¸­æ˜¯å¦è¯¥èœå•idï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™å¿½ç•¥ä¸‹é¢çš„ä»£ç ã€‚
+        // check½«¼ì²é²Ëµ¥ÅäÖÃ£¨¡º²ÎÊıÅäÖÃ-×Ô¶¨Òå²Ëµ¥¡»Ò»½ÚÃèÊö£©ÖĞÊÇ·ñ¸Ã²Ëµ¥id£¬Èç¹ûÃ»ÓĞ£¬ÔòºöÂÔÏÂÃæµÄ´úÂë¡£
         if (!check(menuId)) {
             return;
         }
 
-        // this æŒ‡å‘ editor å¯¹è±¡è‡ªèº«
+        // this Ö¸Ïò editor ¶ÔÏó×ÔÉí
         var editor = this;
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
-            editor: editor,  // ç¼–è¾‘å™¨å¯¹è±¡
-            id: menuId,  // èœå•id
-            title: 'ç¼©è¿›', // èœå•æ ‡é¢˜
+            editor: editor,  // ±à¼­Æ÷¶ÔÏó
+            id: menuId,  // ²Ëµ¥id
+            title: 'Ëõ½ø', // ²Ëµ¥±êÌâ
 
-            // æ­£å¸¸çŠ¶æ€å’Œé€‰ä¸­è£…ä¸‹çš„domå¯¹è±¡ï¼Œæ ·å¼éœ€è¦è‡ªå®šä¹‰
+            // Õı³£×´Ì¬ºÍÑ¡ÖĞ×°ÏÂµÄdom¶ÔÏó£¬ÑùÊ½ĞèÒª×Ô¶¨Òå
             $domNormal: $('<a href="#" tabindex="-1"><i class="wangeditor-menu-img-indent-left"></i></a>'),
             $domSelected: $('<a href="#" tabindex="-1" class="selected"><i class="wangeditor-menu-img-indent-left"></i></a>')
         });
 
-        // èœå•æ­£å¸¸çŠ¶æ€ä¸‹ï¼Œç‚¹å‡»å°†è§¦å‘è¯¥äº‹ä»¶
+        // ²Ëµ¥Õı³£×´Ì¬ÏÂ£¬µã»÷½«´¥·¢¸ÃÊÂ¼ş
         menu.clickEvent = function (e) {
             var elem = editor.getRangeElem();
             var p = editor.getSelfOrParentByName(elem, 'p');
             var $p;
 
             if (!p) {
-                // æœªæ‰¾åˆ° p å…ƒç´ ï¼Œåˆ™å¿½ç•¥
+                // Î´ÕÒµ½ p ÔªËØ£¬ÔòºöÂÔ
                 return e.preventDefault();
             }
             $p = $(p);
 
-            // ä½¿ç”¨è‡ªå®šä¹‰å‘½ä»¤
+            // Ê¹ÓÃ×Ô¶¨ÒåÃüÁî
             function commandFn() {
                 $p.css('text-indent', '2em');
             }
             editor.customCommand(e, commandFn);
         };
 
-        // èœå•é€‰ä¸­çŠ¶æ€ä¸‹ï¼Œç‚¹å‡»å°†è§¦å‘è¯¥äº‹ä»¶
+        // ²Ëµ¥Ñ¡ÖĞ×´Ì¬ÏÂ£¬µã»÷½«´¥·¢¸ÃÊÂ¼ş
         menu.clickEventSelected = function (e) {
             var elem = editor.getRangeElem();
             var p = editor.getSelfOrParentByName(elem, 'p');
             var $p;
 
             if (!p) {
-                // æœªæ‰¾åˆ° p å…ƒç´ ï¼Œåˆ™å¿½ç•¥
+                // Î´ÕÒµ½ p ÔªËØ£¬ÔòºöÂÔ
                 return e.preventDefault();
             }
             $p = $(p);
 
-            // ä½¿ç”¨è‡ªå®šä¹‰å‘½ä»¤
+            // Ê¹ÓÃ×Ô¶¨ÒåÃüÁî
             function commandFn() {
                 $p.css('text-indent', '0');
             }
             editor.customCommand(e, commandFn);
         };
 
-        // æ ¹æ®å½“å‰é€‰åŒºï¼Œè‡ªå®šä¹‰æ›´æ–°èœå•çš„é€‰ä¸­çŠ¶æ€æˆ–è€…æ­£å¸¸çŠ¶æ€
+        // ¸ù¾İµ±Ç°Ñ¡Çø£¬×Ô¶¨Òå¸üĞÂ²Ëµ¥µÄÑ¡ÖĞ×´Ì¬»òÕßÕı³£×´Ì¬
         menu.updateSelectedEvent = function () {
-            // è·å–å½“å‰é€‰åŒºæ‰€åœ¨çš„çˆ¶å…ƒç´ 
+            // »ñÈ¡µ±Ç°Ñ¡ÇøËùÔÚµÄ¸¸ÔªËØ
             var elem = editor.getRangeElem();
             var p = editor.getSelfOrParentByName(elem, 'p');
             var $p;
             var indent;
 
             if (!p) {
-                // æœªæ‰¾åˆ° p å…ƒç´ ï¼Œåˆ™æ ‡è®°ä¸ºæœªå¤„äºé€‰ä¸­çŠ¶æ€
+                // Î´ÕÒµ½ p ÔªËØ£¬Ôò±ê¼ÇÎªÎ´´¦ÓÚÑ¡ÖĞ×´Ì¬
                 return false;
             }
             $p = $(p);
             indent = $p.css('text-indent');
 
             if (!indent || indent === '0px') {
-                // å¾—åˆ°çš„pï¼Œtext-indent å±æ€§æ˜¯ 0ï¼Œåˆ™æ ‡è®°ä¸ºæœªå¤„äºé€‰ä¸­çŠ¶æ€
+                // µÃµ½µÄp£¬text-indent ÊôĞÔÊÇ 0£¬Ôò±ê¼ÇÎªÎ´´¦ÓÚÑ¡ÖĞ×´Ì¬
                 return false;
             }
 
-            // æ‰¾åˆ° p å…ƒç´ ï¼Œå¹¶ä¸” text-indent ä¸æ˜¯ 0ï¼Œåˆ™æ ‡è®°ä¸ºé€‰ä¸­çŠ¶æ€
+            // ÕÒµ½ p ÔªËØ£¬²¢ÇÒ text-indent ²»ÊÇ 0£¬Ôò±ê¼ÇÎªÑ¡ÖĞ×´Ì¬
             return true;
         };
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
     });
 
 });
-// è¡Œé«˜ èœå•æ’ä»¶
+// ĞĞ¸ß ²Ëµ¥²å¼ş
 _e(function (E, $) {
 
-    // ç”¨ createMenu æ–¹æ³•åˆ›å»ºèœå•
+    // ÓÃ createMenu ·½·¨´´½¨²Ëµ¥
     E.createMenu(function (check) {
 
-        // å®šä¹‰èœå•idï¼Œä¸è¦å’Œå…¶ä»–èœå•idé‡å¤ã€‚ç¼–è¾‘å™¨è‡ªå¸¦çš„æ‰€æœ‰èœå•idï¼Œå¯é€šè¿‡ã€å‚æ•°é…ç½®-è‡ªå®šä¹‰èœå•ã€ä¸€èŠ‚æŸ¥çœ‹
+        // ¶¨Òå²Ëµ¥id£¬²»ÒªºÍÆäËû²Ëµ¥idÖØ¸´¡£±à¼­Æ÷×Ô´øµÄËùÓĞ²Ëµ¥id£¬¿ÉÍ¨¹ı¡º²ÎÊıÅäÖÃ-×Ô¶¨Òå²Ëµ¥¡»Ò»½Ú²é¿´
         var menuId = 'lineheight';
 
-        // checkå°†æ£€æŸ¥èœå•é…ç½®ï¼ˆã€å‚æ•°é…ç½®-è‡ªå®šä¹‰èœå•ã€ä¸€èŠ‚æè¿°ï¼‰ä¸­æ˜¯å¦è¯¥èœå•idï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™å¿½ç•¥ä¸‹é¢çš„ä»£ç ã€‚
+        // check½«¼ì²é²Ëµ¥ÅäÖÃ£¨¡º²ÎÊıÅäÖÃ-×Ô¶¨Òå²Ëµ¥¡»Ò»½ÚÃèÊö£©ÖĞÊÇ·ñ¸Ã²Ëµ¥id£¬Èç¹ûÃ»ÓĞ£¬ÔòºöÂÔÏÂÃæµÄ´úÂë¡£
         if (!check(menuId)) {
             return;
         }
 
-        // this æŒ‡å‘ editor å¯¹è±¡è‡ªèº«
+        // this Ö¸Ïò editor ¶ÔÏó×ÔÉí
         var editor = this;
 
-        // ç”±äºæµè§ˆå™¨è‡ªèº«ä¸æ”¯æŒ lineHeight å‘½ä»¤ï¼Œå› æ­¤è¦åšä¸€ä¸ªhook
+        // ÓÉÓÚä¯ÀÀÆ÷×ÔÉí²»Ö§³Ö lineHeight ÃüÁî£¬Òò´ËÒª×öÒ»¸öhook
         editor.commandHooks.lineHeight = function (value) {
             var rangeElem = editor.getRangeElem();
             var targetElem = editor.getSelfOrParentByName(rangeElem, 'p,h1,h2,h3,h4,h5,pre');
@@ -8490,43 +8490,43 @@ _e(function (E, $) {
             $(targetElem).css('line-height', value + '');
         };
 
-        // åˆ›å»º menu å¯¹è±¡
+        // ´´½¨ menu ¶ÔÏó
         var menu = new E.Menu({
-            editor: editor,  // ç¼–è¾‘å™¨å¯¹è±¡
-            id: menuId,  // èœå•id
-            title: 'è¡Œé«˜', // èœå•æ ‡é¢˜
-            commandName: 'lineHeight', // å‘½ä»¤åç§°
+            editor: editor,  // ±à¼­Æ÷¶ÔÏó
+            id: menuId,  // ²Ëµ¥id
+            title: 'ĞĞ¸ß', // ²Ëµ¥±êÌâ
+            commandName: 'lineHeight', // ÃüÁîÃû³Æ
 
-            // æ­£å¸¸çŠ¶æ€å’Œé€‰ä¸­è£…ä¸‹çš„domå¯¹è±¡ï¼Œæ ·å¼éœ€è¦è‡ªå®šä¹‰
+            // Õı³£×´Ì¬ºÍÑ¡ÖĞ×°ÏÂµÄdom¶ÔÏó£¬ÑùÊ½ĞèÒª×Ô¶¨Òå
             $domNormal: $('<a href="#" tabindex="-1"><i class="wangeditor-menu-img-arrows-v"></i></a>'),
             $domSelected: $('<a href="#" tabindex="-1" class="selected"><i class="wangeditor-menu-img-arrows-v"></i></a>')
         });
 
-        // æ•°æ®æº
+        // Êı¾İÔ´
         var data  = {
-            // æ ¼å¼ï¼š 'value' : 'title'
-            '1.0': '1.0å€',
-            '1.5': '1.5å€',
-            '1.8': '1.8å€',
-            '2.0': '2.0å€',
-            '2.5': '2.5å€',
-            '3.0': '3.0å€'
+            // ¸ñÊ½£º 'value' : 'title'
+            '1.0': '1.0±¶',
+            '1.5': '1.5±¶',
+            '1.8': '1.8±¶',
+            '2.0': '2.0±¶',
+            '2.5': '2.5±¶',
+            '3.0': '3.0±¶'
         };
 
-        // ä¸ºmenuåˆ›å»ºdroplistå¯¹è±¡
+        // Îªmenu´´½¨droplist¶ÔÏó
         var tpl = '<span style="line-height:{#commandValue}">{#title}</span>';
         menu.dropList = new E.DropList(editor, menu, {
-            data: data,  // ä¼ å…¥æ•°æ®æº
-            tpl: tpl  // ä¼ å…¥æ¨¡æ¿
+            data: data,  // ´«ÈëÊı¾İÔ´
+            tpl: tpl  // ´«ÈëÄ£°å
         });
 
-        // å¢åŠ åˆ°editorå¯¹è±¡ä¸­
+        // Ôö¼Óµ½editor¶ÔÏóÖĞ
         editor.menus[menuId] = menu;
 
     });
 
 });
-// è‡ªå®šä¹‰ä¸Šä¼ 
+// ×Ô¶¨ÒåÉÏ´«
 _e(function (E, $) {
 
     E.plugin(function () {
@@ -8536,21 +8536,21 @@ _e(function (E, $) {
         if (!customUpload) {
             return;
         } else if (editor.config.uploadImgUrl) {
-            alert('è‡ªå®šä¹‰ä¸Šä¼ æ— æ•ˆï¼Œè¯¦çœ‹æµè§ˆå™¨æ—¥å¿—console.log');
-            E.error('å·²ç»é…ç½®äº† uploadImgUrl ï¼Œå°±ä¸èƒ½å†é…ç½® customUpload ï¼Œä¸¤è€…å†²çªã€‚å°†å¯¼è‡´è‡ªå®šä¹‰ä¸Šä¼ æ— æ•ˆã€‚');
+            alert('×Ô¶¨ÒåÉÏ´«ÎŞĞ§£¬Ïê¿´ä¯ÀÀÆ÷ÈÕÖ¾console.log');
+            E.error('ÒÑ¾­ÅäÖÃÁË uploadImgUrl £¬¾Í²»ÄÜÔÙÅäÖÃ customUpload £¬Á½Õß³åÍ»¡£½«µ¼ÖÂ×Ô¶¨ÒåÉÏ´«ÎŞĞ§¡£');
             return;
         }
 
         var $uploadContent = editor.$uploadContent;
         if (!$uploadContent) {
-            E.error('è‡ªå®šä¹‰ä¸Šä¼ ï¼Œæ— æ³•è·å– editor.$uploadContent');
+            E.error('×Ô¶¨ÒåÉÏ´«£¬ÎŞ·¨»ñÈ¡ editor.$uploadContent');
         }
 
         // UI
         var $uploadIcon = $('<div class="upload-icon-container"><i class="wangeditor-menu-img-upload"></i></div>');
         $uploadContent.append($uploadIcon);
 
-        // è®¾ç½®idï¼Œå¹¶æš´éœ²
+        // ÉèÖÃid£¬²¢±©Â¶
         var btnId = 'upload' + E.random();
         var containerId = 'upload' + E.random();
         $uploadIcon.attr('id', btnId);
@@ -8561,11 +8561,11 @@ _e(function (E, $) {
     });
 
 });
-// ç‰ˆæƒæç¤º
+// °æÈ¨ÌáÊ¾
 _e(function (E, $) {
-    E.info('æœ¬é¡µé¢å¯Œæ–‡æœ¬ç¼–è¾‘å™¨ç”± wangEditor æä¾› http://wangeditor.github.io/ ');
+    E.info('±¾Ò³Ãæ¸»ÎÄ±¾±à¼­Æ÷ÓÉ wangEditor Ìá¹© http://wangeditor.github.io/ ');
 });
     
-    // æœ€ç»ˆè¿”å›wangEditoræ„é€ å‡½æ•°
+    // ×îÖÕ·µ»ØwangEditor¹¹Ôìº¯Êı
     return window.wangEditor;
 });

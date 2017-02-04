@@ -13,6 +13,7 @@ import sonn.util.PageInfo;
 * @author sonne
 * @date 2016-4-22
 *       2016-11-27 order
+*       2017-02-02 updates
 * @version 1.0
 * @param <T>
  */
@@ -54,6 +55,15 @@ public interface BaseService<T>
 	 * @return 实体对象
 	 */
 	T update(T entity);
+	
+	/**
+	 * 更新实体对象集合
+	 * 
+	 * @param entities
+	 *            实体对象集合
+	 * @return 实体对象集合
+	 */
+	List<T> updates(List<T> entities);
 	
 	/**
 	* @Title: find 

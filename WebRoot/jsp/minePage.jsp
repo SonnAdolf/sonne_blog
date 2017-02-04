@@ -55,20 +55,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <c:when test="${empty msg.sender.username}">
                           <c:choose> 
                                <c:when test="${msg.is_read eq Not_Read}">
-                                                                                                           一名游客在${fn:substring(msg.date,0,16)}评论了你的文章<a style="color:red" href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                                                                                                           一名游客在${fn:substring(msg.date,0,16)}评论了你的文章<a style="color:red" href="/RiXiang_blog/msg/show.form?article_id=${msg.article.id}">${msg.article.title}</a><br>
                                </c:when>
                                <c:otherwise>
-                                                                                                           一名游客在${fn:substring(msg.date,0,16)}评论了你的文章<a href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                                                                                                           一名游客在${fn:substring(msg.date,0,16)}评论了你的文章<a href="/RiXiang_blog/msg/show.form?article_id=${msg.article.id}">${msg.article.title}</a><br>
                                </c:otherwise>
                           </c:choose>
                     </c:when>
                     <c:otherwise>
                           <c:choose> 
                                <c:when test="${msg.is_read eq Not_Read}">
-                                                                                                                用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}评论了你的文章<a style="color:red" href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                                                                                                                用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}评论了你的文章<a style="color:red" href="/RiXiang_blog/msg/show.form?article_id=${msg.article.id}">${msg.article.title}</a><br>
                                </c:when>
                                <c:otherwise>
-                                                                                                              用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}评论了你的文章<a href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                                                                                                              用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}评论了你的文章<a href="/RiXiang_blog/msg/show.form?article_id=${msg.article.id}">${msg.article.title}</a><br>
                                </c:otherwise>
                           </c:choose>
                     </c:otherwise>
@@ -96,10 +96,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                      -->
                           <c:choose> 
                                <c:when test="${msg.is_read eq Not_Read}">
-                                                                                                                用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}回复了你<a style="color:red" href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                                                                                                                用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}回复了你<a style="color:red" href="/RiXiang_blog/msg/show.form?article_id=${msg.article.id}">${msg.article.title}</a><br>
                                </c:when>
                                <c:otherwise>
-                                                                                                              用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}回复了你<a href="/RiXiang_blog/msg/show.form?id=${msg.id}">${msg.article.title}</a><br>
+                                                                                                              用户 ${msg.sender.username}在${fn:substring(msg.date,0,16)}回复了你<a href="/RiXiang_blog/msg/show.form?article_id=${msg.article.id}">${msg.article.title}</a><br>
                                </c:otherwise>
                           </c:choose>
                  <!-- 目前游客评论已关闭 -->

@@ -31,8 +31,9 @@ import sonn.util.PageUtils;
 * @ClassName: BaseDaoImpl 
 * @Description: dao base class
 * @author sonne
-* @date 2016-4-22  2016-05-21findPage logical error fix
-*                  2016-11-27 order
+* @date 2016-4-22  
+*       2016-05-21findPage logical error fix
+*       2016-11-27 order
 * @version 1.0
 * @param <T>
  */

@@ -14,6 +14,7 @@ import sonn.util.PageInfo;
 * @Description: the service interface of message
 * @author sonne
 * @date 2016-12-23 21:16:46 
+*       2017-02-02 findMsgsByArticle
 * @version 1.0
  */
 public interface MessageService extends BaseService<Message> {
@@ -26,6 +27,16 @@ public interface MessageService extends BaseService<Message> {
 	* @throws
 	 */
 	Page<Message> getMessagesByUsrId(User reciever,  List<Order> orders, PageInfo pageInfo );
+	
+	/**
+	* @Title: findMsgsByArticle 
+	* @Description: find messages of a article
+	* @param @param article
+	* @param @return    articles 
+	* @return List<Message>    ∑µªÿ¿‡–Õ 
+	* @throws
+	 */
+	List<Message> findMsgsByArticle(Article article);
 	
 	boolean hasMsg(User reciever);
 	

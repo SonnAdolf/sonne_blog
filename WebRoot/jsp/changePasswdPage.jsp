@@ -34,9 +34,9 @@ String imgPath = basePath + "image/";
             		<div class="navbar-collapse">
                 		<ul class="nav navbar-nav">
                     		<li class="active"><a href="#">修改密码</a></li>
-                    		<li><a href ="/RiXiang_blog/space/list.form">个人主页</a></li>
-                    		<li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-                    		<li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
+                    		<li><a href ="/RiXiang_blog/space/list.form">文章管理</a></li>
+                    		<li><a href ="/RiXiang_blog/game/snake.form">游戏</a></li>
+                    		<li><a href ="/RiXiang_blog/sonne/blog.form">日向技术</a></li>
                 		</ul>
             		</div>
         		</nav>

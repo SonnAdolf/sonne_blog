@@ -22,13 +22,13 @@ String imgPath = basePath + "image/";
 		                 <li><font>日   向  博  客&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</font></li>
 		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
 		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
-		                 <li><a href ="">主页</a></li>
+		                 <li><a href ="/RiXiang_blog/article/list.form?currentPage=1">主页</a></li>
 		         		 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li></c:if>
-		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">个人主页</a></li></c:if>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">文章管理</a></li></c:if>
 		                 <c:if test="${!empty userName}">
 		                      <li>
 		                             <a href ="/RiXiang_blog/mine/show.form">
-		                                                                                               个人空间
+		                                  ${userName}                                                             
 		                                  <c:if test="${!empty has_new_msg}">
 		                 	                   <span id="new_msg_txt">【新消息】</span>
 		                 	             </c:if>
@@ -52,6 +52,8 @@ String imgPath = basePath + "image/";
 							  我是否该写一首哀怨的歌<br>
 							  在你伤心的时候唱给你听<br>
 				  </p>
+				  <input id="search"></input><br>
+				  <button id="search_btn">找找看</button>
 			 </div>
               <div id = "article_list">
                           <c:forEach items="${page.content}" var="article" >

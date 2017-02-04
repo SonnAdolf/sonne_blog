@@ -14,6 +14,7 @@ import sonn.util.PageInfo;
 * @Description: dao interface of message
 * @author sonne
 * @date 2016-12-23 20:34:10 
+*       2017-02-02 findMsgsByArticle
 * @version 1.0
  */
 public interface MessageDao extends BaseDao<Message>{
@@ -27,6 +28,16 @@ public interface MessageDao extends BaseDao<Message>{
 	 */
 	Page<Message> getMessagesByUsrId(User reciever,  List<Order> orders, PageInfo pageInfo );
 
+	/**
+	* @Title: findMsgsByArticle 
+	* @Description: find messages of a article
+	* @param @param article
+	* @param @return    articles 
+	* @return List<Message>    ∑µªÿ¿‡–Õ 
+	* @throws
+	 */
+	List<Message> findMsgsByArticle(Article article);
+	
 	long hasMsg(User reciever);
 	
 	/**

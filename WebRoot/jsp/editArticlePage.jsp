@@ -44,9 +44,9 @@ String imgPath = basePath + "image/";
                           <h2>主页导航</h2>
                           <ul>
                               <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
-                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/space/list.form">个人空间 - ${userName}</a></c:if></li>
-                              <li><a href ="/RiXiang_blog/game/snake.form">贪吃蛇</a></li>
-                              <li><a href ="/RiXiang_blog/sonne/blog.form">作者-博客开发记录</a></li>
+                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/space/list.form">文章管理</a></c:if></li>
+                              <li><a href ="/RiXiang_blog/game/snake.form">游戏</a></li>
+                              <li><a href ="/RiXiang_blog/sonne/blog.form">日向技术</a></li>
                           </ul>
                     </div>
               </div>

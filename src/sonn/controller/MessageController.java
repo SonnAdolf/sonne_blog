@@ -14,6 +14,7 @@ import sonn.entity.Article;
 import sonn.entity.Comment;
 import sonn.entity.Message;
 import sonn.enums.MsgIsRead;
+import sonn.service.ArticleService;
 import sonn.service.CommentService;
 import sonn.service.LoginService;
 import sonn.service.MessageService;
@@ -30,6 +31,7 @@ import sonn.util.StringUtils;
 * @author sonne
 * @date 2016-12
 *       2017-01-21 before some operations, check if has logged in first.
+*       2017-02-02 set a article's messages readn when this article's link clicked.
 * @version 1.0
  */
 @Controller
@@ -47,13 +49,18 @@ public class MessageController {
 	@Resource(name = "loginServiceImpl")
 	private LoginService loginService;
 	
+	@Resource(name = "articleServiceImpl")
+	private ArticleService articleService;
+	
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public String show(HttpServletRequest request, int id,
+	public String show(HttpServletRequest request, int article_id,
 		                                	Model model) throws Exception {
-		Message msg = messageService.find(id, Message.class);
-		msg.setIs_read(MsgIsRead.Yes);
-		messageService.update(msg);
-		Article article = msg.getArticle();
+		Article article = articleService.find(article_id,Article.class);
+		List<Message> msgs = messageService.findMsgsByArticle(article);
+		for(Message msg:msgs) {
+			msg.setIs_read(MsgIsRead.Yes);
+		}
+		messageService.updates(msgs);
 		article = getArticleOfContentByUrl(article);
 		// sort the comments
 		List<Comment> comments = commentService.sort(article.getComments());
@@ -65,7 +72,7 @@ public class MessageController {
 		}
 		model.addAttribute("article", article);
 		model.addAttribute("username", username);
-		model.addAttribute("article_id", id);
+		model.addAttribute("article_id", article.getId());
 		
 		int totalSize = comments.size();
 		final int CURRENT_PAGE = 1;
