@@ -11,6 +11,7 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向博客</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+             <link rel="shortcut icon" type="image/x-icon" href="http://118.89.29.170/RiXiang_blog/favicon.ico">
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/myspace.css" media="all" /> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/xcConfirm/xcConfirm.css" media="all"/>
       </head>
@@ -65,8 +66,8 @@ String imgPath = basePath + "image/";
 						            <div id="article_block" class="article_block">
                                         <span id = "article_title"><a href = "/RiXiang_blog/article/show.form?id=${article.id}">${article.title}</a></span>
                                         <div id="button">
-                                               <a href="javascript:void(0)" id=${article.id} onclick="button_Click_2(this)">编辑</a>
-                                               <a href="javascript:void(0)" id=${article.id} onclick="button_Click_1(this)">删除</a><br> 
+                                               <a href="javascript:void(0)" id=${article.id} onclick="button_Click_2(this)">【编辑】</a>
+                                               <a href="javascript:void(0)" id=${article.id} onclick="button_Click_1(this)">【删除】</a><br> 
                                                <!-- <p>文章内容： ${article.content}</p> -->   
 									    </div>
 							        </div>

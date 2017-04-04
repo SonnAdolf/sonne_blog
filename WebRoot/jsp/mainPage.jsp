@@ -11,7 +11,7 @@ String imgPath = basePath + "image/";
       <head>
              <title>日向博客</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-             <link rel="icon" href="http://118.89.29.170/RiXiang_blog/favicon.ico">
+             <link rel="shortcut icon" type="image/x-icon" href="http://118.89.29.170/RiXiang_blog/favicon.ico">
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/sonn.css" media="all" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/xcConfirm/xcConfirm.css" media="all" />
       </head>

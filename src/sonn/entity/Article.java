@@ -25,6 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  *       2016-11-25 check by annotation
  *       2016-11-28 add date
  *       2016-12-27 read_time
+ *       2017-03-25 title's length should be 1-20,not 1-40
  * @description:article entity class
  */
 @Entity
@@ -37,7 +38,7 @@ public class Article
 	
 	/*title*/
 	@NotNull
-	@Length(min=1, max=40)
+	@Length(min=1, max=20)
 	private String title;
 	
 	/*article path*/

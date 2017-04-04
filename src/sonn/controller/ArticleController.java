@@ -63,6 +63,7 @@ import com.alibaba.fastjson.JSONObject;
  *                     delete all the messages before deleting the article.
  *       2017-01-21 before some operations, check if has logged in first.
  *       2017-02-02 & replace.
+ *       2017-04-03 new writing page.
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
@@ -129,7 +130,7 @@ public class ArticleController {
 			return "loginPage";
 		}
 		model.addAttribute("userName", username);
-		return "writeArticlePage";
+		return "writingPage";
 	}
 
 	/*

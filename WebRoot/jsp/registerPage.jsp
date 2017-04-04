@@ -15,6 +15,7 @@ String imgPath = basePath + "image/";
              <meta name="apple-mobile-web-app-status-bar-style" content="black">
              <meta name="format-detection" content="telephone=no">
              
+             <link rel="shortcut icon" type="image/x-icon" href="http://118.89.29.170/RiXiang_blog/favicon.ico">
              <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/register.css" media="all" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/toastr.min.css" media="all" />

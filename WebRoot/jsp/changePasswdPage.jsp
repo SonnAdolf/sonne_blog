@@ -12,6 +12,7 @@ String imgPath = basePath + "image/";
              <meta http-equiv="X-UA-Compatible" content="IE=edge">
              <meta name="viewport" content="width=device-width, initial-scale=1">
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+             <link rel="shortcut icon" type="image/x-icon" href="http://118.89.29.170/RiXiang_blog/favicon.ico">
              <link rel="stylesheet" href="<%=basePath %>bootstrap-3.3.0-dist/dist/css/bootstrap.min.css"/> 
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/passwd.css" media="all" />
              <link type="text/css" rel="stylesheet" href="<%=basePath %>css/toastr.min.css" media="all" />

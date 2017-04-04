@@ -10,6 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
     <title>日向博客</title>
     <link rel="stylesheet" type="text/css" media="screen" href="<%=basePath %>css/basic.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://118.89.29.170/RiXiang_blog/favicon.ico">
   </head>
   
 <body>

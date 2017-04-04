@@ -9,6 +9,7 @@ String imgPath = basePath + "image/";
 <head>
     <title>日向贪吃蛇</title>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://118.89.29.170/RiXiang_blog/favicon.ico">
     <style>
        body{
           font-size:9pt;

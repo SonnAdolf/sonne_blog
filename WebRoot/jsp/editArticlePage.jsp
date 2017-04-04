@@ -8,16 +8,40 @@ String imgPath = basePath + "image/";
 <!DOCTYPE html>
 <html>
       <head>
-             <title>日向博客</title>
+             <title>日向blog</title>
              <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/fixed_background.css" media="all" />
-             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/xcConfirm/xcConfirm.css" media="all" />
-             <link rel="stylesheet" type="text/css" href="<%=basePath %>wangEditor/dist/css/wangEditor.min.css">
+             <link rel="shortcut icon" type="image/x-icon" href="http://118.89.29.170/RiXiang_blog/favicon.ico">
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/writing.css" media="all" />
+             <link rel="stylesheet" type="text/css" href="<%=basePath %>wangEditor/dist/css/wangEditor.min.css"/>
+             <link type="text/css" rel="stylesheet" href="<%=basePath %>css/xcConfirm/xcConfirm.css" media="all"/>
       </head>
       <body>
-             <div id="scene"> 
-                  <img src="<%=imgPath%>mainPageBanner.png" ALT=""/> 
-             </div>
+		    <div id="header">
+		      	 <div id="navigator">
+		      		<ul id="navList">
+		                 <li><font>日   向  博  客&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</font></li>
+		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/login/show.form">登录</a></li></c:if>
+		                 <c:if test="${empty userName}"><li><a href ="/RiXiang_blog/register/show.form">注册</a></li></c:if>
+		                 <li><a href ="/RiXiang_blog/article/list.form?currentPage=1">主页</a></li>
+		         		 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/passwd/show.form">修改密码</a></li></c:if>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/space/list.form">文章管理</a></li></c:if>
+		                 <c:if test="${!empty userName}">
+		                      <li>
+		                             <a href ="/RiXiang_blog/mine/show.form">
+		                                  ${userName}                                                             
+		                                  <c:if test="${!empty has_new_msg}">
+		                 	                   <span id="new_msg_txt">【新消息】</span>
+		                 	             </c:if>
+		                            </a>
+		                 	 </li>
+		                </c:if>
+		                 <c:if test="${!empty userName}"><li><a href ="/RiXiang_blog/article/writeArticlePage.form">写博客</a></li></c:if>
+		                 <li><a href ="/RiXiang_blog/game/snake.form">游戏</a></li>
+		                 <li><a href ="/RiXiang_blog/sonne/blog.form">日向技术</a></li>
+		                 <c:if test="${!empty userName}"><li><a href="javascript:void(0)" onclick="logout()">退出</a></li></c:if>
+		           	</ul>
+		         </div>
+		     </div>
               <div id = "article_list">
                    <br>
                    <form id="articleForm" action="edit.form" method="post">
@@ -39,21 +63,11 @@ String imgPath = basePath + "image/";
                   </form>
 			  </div>
 
-              <div id="col_right">
-                    <div id="menu">
-                          <h2>主页导航</h2>
-                          <ul>
-                              <li><a href ="/RiXiang_blog/article/list.form">主页</a></li>
-                              <li><c:if test="${!empty userName}"><a href ="/RiXiang_blog/space/list.form">文章管理</a></c:if></li>
-                              <li><a href ="/RiXiang_blog/game/snake.form">游戏</a></li>
-                              <li><a href ="/RiXiang_blog/sonne/blog.form">日向技术</a></li>
-                          </ul>
-                    </div>
-              </div>
-             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
-             <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>   
+
+              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-2.2.3.min.js"></script>
+              <script type="text/javascript" src="<%=basePath %>Jquery/jquery-form.js"></script>   
              <script type="text/javascript" src="<%=basePath %>wangEditor/dist/js/wangEditor.js"></script>
-             <script type="text/javascript" src="<%=basePath %>Jquery/xcConfirm/js/xcConfirm.js"></script>
+             <script type="text/javascript" src="<%=basePath %>Jquery/xcConfirm/js/xcConfirm.js"></script> 
              <script type="text/javascript">
  			  $(document).ready(function() { 
 				  $('#articleForm').ajaxForm({ 
