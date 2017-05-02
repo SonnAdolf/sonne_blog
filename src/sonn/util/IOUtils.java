@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ClassName: IOUtill
@@ -158,7 +160,7 @@ public final class IOUtils {
 			String filePath = folderPath;
 			filePath = filePath.toString();
 			java.io.File myFilePath = new java.io.File(filePath);
-			myFilePath.delete(); // É¾³ı¿ÕÎÄ¼ş¼Ğ
+			myFilePath.delete(); // åˆ é™¤ç©ºæ–‡ä»¶å¤¹
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -200,20 +202,35 @@ public final class IOUtils {
 	 * rename the file
 	 */
 	public static void renameFile(String path, String oldname, String newname) {
-		if (!oldname.equals(newname)) {// ĞÂµÄÎÄ¼şÃûºÍÒÔÇ°ÎÄ¼şÃû²»Í¬Ê±,²ÅÓĞ±ØÒª½øĞĞÖØÃüÃû
+		if (!oldname.equals(newname)) {// æ–°çš„æ–‡ä»¶åå’Œä»¥å‰æ–‡ä»¶åä¸åŒæ—¶,æ‰æœ‰å¿…è¦è¿›è¡Œé‡å‘½å
 			File oldfile = new File(path + "/" + oldname);
 			File newfile = new File(path + "/" + newname);
 			if (!oldfile.exists()) {
-				return;// ÖØÃüÃûÎÄ¼ş²»´æÔÚ
+				return;// é‡å‘½åæ–‡ä»¶ä¸å­˜åœ¨
 			}
-			if (newfile.exists())// ÈôÔÚ¸ÃÄ¿Â¼ÏÂÒÑ¾­ÓĞÒ»¸öÎÄ¼şºÍĞÂÎÄ¼şÃûÏàÍ¬£¬Ôò²»ÔÊĞíÖØÃüÃû
-				System.out.println(newname + "ÒÑ¾­´æÔÚ£¡");
+			if (newfile.exists())// è‹¥åœ¨è¯¥ç›®å½•ä¸‹å·²ç»æœ‰ä¸€ä¸ªæ–‡ä»¶å’Œæ–°æ–‡ä»¶åç›¸åŒï¼Œåˆ™ä¸å…è®¸é‡å‘½å
+				System.out.println(newname + "å·²ç»å­˜åœ¨ï¼");
 			else {
 				oldfile.renameTo(newfile);
 			}
 		} else {
-			System.out.println("ĞÂÎÄ¼şÃûºÍ¾ÉÎÄ¼şÃûÏàÍ¬...");
+			System.out.println("æ–°æ–‡ä»¶åå’Œæ—§æ–‡ä»¶åç›¸åŒ...");
 		}
+	}
+	
+	/*
+	 * get the list of names of a folder.
+	 */
+	public static List<String> getFileListOfFolder(String path) {
+		List<String> lst = new ArrayList<String>();
+		File file = new File(path);
+		File[] tempList = file.listFiles();
+		for (int i = 0; i < tempList.length; i++) {
+			if (tempList[i].isFile()) {
+				lst.add(tempList[i].getName());
+			}
+		}
+		return lst;
 	}
 
 }
