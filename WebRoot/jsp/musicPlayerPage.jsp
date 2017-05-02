@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </head>
    <body>
          <c:forEach items="${music_lst}" var="music" >
-         	 <a href="<%=basePath %>radio/player.form?path=/root/music/${music}" target="_blank">${music} </a><br>
+         		${music}<br>
          </c:forEach>    
    </body>
 </html>

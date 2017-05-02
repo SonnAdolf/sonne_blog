@@ -1,6 +1,5 @@
 package sonn.controller;
 
-import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import sonn.util.IOUtils;
-import sonn.util.PageInfo;
 
 /**
 * @ClassName: MusicRadioController 
@@ -28,16 +26,20 @@ public class MusicRadioController {
 	
 	/*
 	 * song list page.
-	 * 
-	 * @param HttpServletRequest request, Model model
-	 * 
-	 * @return the jsp page
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(HttpServletRequest request, PageInfo pageInfo,
-			Model model) throws Exception {
+	public String list(HttpServletRequest request, Model model) throws Exception {
 		List<String> file_lst = IOUtils.getFileListOfFolder(music_path);
 		model.addAttribute("music_lst", file_lst);
 		return "radioPage";
+	}
+	
+	/*
+	 * music player page.
+	 */
+	@RequestMapping(value = "/player", method = RequestMethod.GET)
+	public String player(String path, HttpServletRequest request, Model model) throws Exception {
+		model.addAttribute("path", path);
+		return "musicPlayerPage";
 	}
 }
